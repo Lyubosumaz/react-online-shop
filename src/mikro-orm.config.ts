@@ -1,11 +1,12 @@
 import { __prod__ } from './constants';
-import { Item } from './entities/Post';
+import { Item } from './entities/Item';
 import { MikroORM } from '@mikro-orm/core';
+import path from 'path';
 
 export default {
     migrations: {
-        path: './migrations', // path to the folder with migrations
-        pattern: /^[\w-]+\d+\.ts$/, // regex pattern for the migration files
+        path: path.join(__dirname, './migrations'),
+        pattern: /^[\w-]+\d+\.[tj]s$/,
     },
     entities: [Item],
     dbName: 'test',
