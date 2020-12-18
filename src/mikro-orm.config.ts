@@ -1,5 +1,5 @@
 import { __prod__ } from './constants';
-import { Item } from './entities/Item';
+import { Items } from './entities/Items';
 import { MikroORM } from '@mikro-orm/core';
 import path from 'path';
 
@@ -8,7 +8,7 @@ export default {
         path: path.join(__dirname, './migrations'),
         pattern: /^[\w-]+\d+\.[tj]s$/,
     },
-    entities: [Item],
+    entities: [Items],
     dbName: 'test',
     user: 'root',
     password: 'root',

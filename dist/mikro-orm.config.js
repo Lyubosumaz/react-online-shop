@@ -4,14 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const constants_1 = require("./constants");
-const Item_1 = require("./entities/Item");
+const Items_1 = require("./entities/Items");
 const path_1 = __importDefault(require("path"));
 exports.default = {
     migrations: {
         path: path_1.default.join(__dirname, './migrations'),
         pattern: /^[\w-]+\d+\.[tj]s$/,
     },
-    entities: [Item_1.Item],
+    entities: [Items_1.Items],
     dbName: 'test',
     user: 'root',
     password: 'root',
