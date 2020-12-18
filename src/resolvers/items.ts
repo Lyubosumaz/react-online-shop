@@ -11,7 +11,7 @@ export class ItemsResolver {
 
     @Query(() => Items, { nullable: true })
     item(
-        @Arg('id', () => Int) id: number, 
+        @Arg('id', () => Int) id: number,
         @Ctx() { em }: MyContest
     ): Promise<Items | null> {
         return em.findOne(Items, { id });
@@ -19,7 +19,7 @@ export class ItemsResolver {
 
     @Mutation(() => Items)
     async createItem(
-        @Arg('title', () => String) title: string, 
+        @Arg('title', () => String) title: string,
         @Ctx() { em }: MyContest
     ): Promise<Items> {
         const post = em.create(Items, { title });
@@ -29,8 +29,8 @@ export class ItemsResolver {
 
     @Mutation(() => Items, { nullable: true })
     async updateItem(
-        @Arg('id', () => Int) id: number, 
-        @Arg('title', () => String, { nullable: true }) title: string, 
+        @Arg('id', () => Int) id: number,
+        @Arg('title', () => String, { nullable: true }) title: string,
         @Ctx() { em }: MyContest
     ): Promise<Items | null> {
         const post = await em.findOne(Items, { id });
@@ -48,7 +48,7 @@ export class ItemsResolver {
 
     @Mutation(() => Boolean)
     async deleteItem(
-        @Arg('id', () => Int) id: number, 
+        @Arg('id', () => Int) id: number,
         @Ctx() { em }: MyContest
     ): Promise<boolean> {
         try {
