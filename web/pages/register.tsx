@@ -1,14 +1,56 @@
 import React from 'react';
-import Form from '~/components/Test';
+import { Field, withTypes } from 'react-final-form';
+
+type MyValues = {
+    username: string;
+    password: string;
+};
+const { Form } = withTypes<MyValues>();
+
+const onSubmit = async (values: MyValues) => {
+    if (values.username && values.password) {
+        console.log('+++++++++++++++++++');
+    }
+};
+
+const required = (value: any) => (value ? undefined : 'Required');
+// const composeValidators = (...validators) => (value) => validators.reduce((error, validator) => error || validator(value), undefined);
 
 interface registerProps {}
 
 const Register: React.FC<registerProps> = ({}) => {
     return (
         <>
-            <div>here</div>
-            <Form />
-            <div>here</div>
+            <Form
+                onSubmit={onSubmit}
+                render={({ handleSubmit }) => (
+                    <form onSubmit={handleSubmit}>
+                        <Field name="username" validate={required}>
+                            {({ input, meta }) => (
+                                <div>
+                                    <label>Username</label>
+                                    <input {...input} type="text" placeholder="username" />
+                                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                                </div>
+                            )}
+                        </Field>
+
+                        <Field name="password" validate={required}>
+                            {({ input, meta }) => (
+                                <div>
+                                    <label>Password</label>
+                                    <input {...input} type="password" placeholder="password" />
+                                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                                </div>
+                            )}
+                        </Field>
+
+                        <div className="buttons">
+                            <button type="submit">Submit</button>
+                        </div>
+                    </form>
+                )}
+            />
         </>
     );
 };
