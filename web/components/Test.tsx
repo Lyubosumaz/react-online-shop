@@ -6,25 +6,43 @@ type MyValues = {
 };
 const { Form } = withTypes<MyValues>();
 
-const onSubmit = async (values: any) => {
-    console.log(values);
+const onSubmit = async (values: MyValues) => {
+    if (values.username && values.password) {
+        console.log('+++++++++++++++++++');
+    }
 };
+
+const required = (value: any) => (value ? undefined : 'Required');
+// const composeValidators = (...validators) => (value) => validators.reduce((error, validator) => error || validator(value), undefined);
 
 export default function MyForm() {
     return (
         <Form
             onSubmit={onSubmit}
-            render={({ handleSubmit, form, submitting, pristine, values }) => (
+            render={({ handleSubmit }) => (
                 <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>First Name</label>
-                        <Field name="firstName" component="input" type="text" placeholder="First Name" />
-                    </div>
+                    <Field name="username" validate={required}>
+                        {({ input, meta }) => (
+                            <div>
+                                <label>Username</label>
+                                <input {...input} type="text" placeholder="username" />
+                                {meta.error && meta.touched && <span>{meta.error}</span>}
+                            </div>
+                        )}
+                    </Field>
+
+                    <Field name="password" validate={required}>
+                        {({ input, meta }) => (
+                            <div>
+                                <label>Password</label>
+                                <input {...input} type="password" placeholder="password" />
+                                {meta.error && meta.touched && <span>{meta.error}</span>}
+                            </div>
+                        )}
+                    </Field>
 
                     <div className="buttons">
-                        <button type="submit" disabled={submitting || pristine}>
-                            Submit
-                        </button>
+                        <button type="submit">Submit</button>
                     </div>
                 </form>
             )}
