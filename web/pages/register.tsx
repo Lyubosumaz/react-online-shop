@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, withTypes } from 'react-final-form';
+import { useMutation } from 'urql';
 import stylesSpinner from '~/styles/Spinner.module.scss';
 
 type MyValues = {
@@ -7,12 +8,23 @@ type MyValues = {
     password: string;
 };
 const { Form } = withTypes<MyValues>();
-
-const onSubmit = async (values: MyValues) => {
-    if (values.username && values.password) {
-        console.log('+++++++++++++++++++');
+const REGISTER_MUTATION = `
+mutation Register($username: String!, $password: String!) {
+    register(options: { username: $username, password: $password}) {
+        errors {
+            field
+            message
+        }
+        user {
+            id
+            username
+        }
     }
-};
+}
+`;
+
+// const onSubmit = async (values: MyValues) => {
+// };
 
 const required = (value: any) => (value ? undefined : 'Required');
 // const composeValidators = (...validators) => (value) => validators.reduce((error, validator) => error || validator(value), undefined);
@@ -20,10 +32,15 @@ const required = (value: any) => (value ? undefined : 'Required');
 interface registerProps {}
 
 const Register: React.FC<registerProps> = ({}) => {
+    const [, register] = useMutation(REGISTER_MUTATION);
     return (
         <>
             <Form
-                onSubmit={onSubmit}
+                onSubmit={async (values: MyValues) => {
+                    if (values.username && values.password) {
+                        return register(values);
+                    }
+                }}
                 render={({ handleSubmit, validating }) => (
                     <form onSubmit={handleSubmit}>
                         <Field name="username" validate={required}>

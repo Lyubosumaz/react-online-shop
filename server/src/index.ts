@@ -13,6 +13,7 @@ import redis from 'redis';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
 import { MyContest } from './types';
+import corn from 'cors';
 
 const main = async () => {
     const orm = await MikroORM.init(mikroConfig);
@@ -22,6 +23,13 @@ const main = async () => {
 
     const RedisStore = connectRedis(session);
     const redisClient = redis.createClient();
+
+    app.use(
+        corn({
+            origin: 'http://localhost:3000',
+            credentials: true,
+        })
+    );
 
     app.use(
         session({
@@ -50,7 +58,10 @@ const main = async () => {
         context: ({ req, res }): MyContest => ({ em: orm.em, req, res }),
     });
 
-    apolloServer.applyMiddleware({ app });
+    apolloServer.applyMiddleware({
+        app,
+        cors: false,
+    });
 
     app.get('/', (_, res) => {
         res.send('hello');
