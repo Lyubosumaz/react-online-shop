@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, withTypes } from 'react-final-form';
+import stylesSpinner from '~/styles/Spinner.module.scss';
 
 type MyValues = {
     username: string;
@@ -23,7 +24,7 @@ const Register: React.FC<registerProps> = ({}) => {
         <>
             <Form
                 onSubmit={onSubmit}
-                render={({ handleSubmit }) => (
+                render={({ handleSubmit, validating }) => (
                     <form onSubmit={handleSubmit}>
                         <Field name="username" validate={required}>
                             {({ input, meta }) => (
@@ -31,6 +32,7 @@ const Register: React.FC<registerProps> = ({}) => {
                                     <label>Username</label>
                                     <input {...input} type="text" placeholder="username" />
                                     {meta.error && meta.touched && <span>{meta.error}</span>}
+                                    {meta.validating && <div className={stylesSpinner.div}></div>}
                                 </div>
                             )}
                         </Field>
