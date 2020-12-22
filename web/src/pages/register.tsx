@@ -23,9 +23,6 @@ mutation Register($username: String!, $password: String!) {
 }
 `;
 
-// const onSubmit = async (values: MyValues) => {
-// };
-
 const required = (value: any) => (value ? undefined : 'Required');
 // const composeValidators = (...validators) => (value) => validators.reduce((error, validator) => error || validator(value), undefined);
 
