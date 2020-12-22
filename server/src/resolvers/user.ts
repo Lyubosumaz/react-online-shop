@@ -3,6 +3,7 @@ import { MyContest } from '../types';
 import { Arg, Ctx, Field, InputType, Mutation, ObjectType, Query, Resolver } from 'type-graphql';
 import argon2 from 'argon2';
 import { EntityManager } from '@mikro-orm/postgresql';
+import { COOKIE_NAME } from 'src/constants';
 
 @InputType()
 class UsernamePasswordInput {
@@ -32,9 +33,7 @@ class UserResponse {
 @Resolver()
 export class UserResolver {
     @Query(() => User, { nullable: true })
-    async me(
-            @Ctx() { em, req }: MyContest
-        ): Promise<User | null> {
+    async me(@Ctx() { em, req }: MyContest): Promise<User | null> {
         // you are not logged
         if (!req.session.userId) {
             return null;
@@ -45,10 +44,7 @@ export class UserResolver {
     }
 
     @Mutation(() => UserResponse)
-    async register(
-            @Arg('options', () => UsernamePasswordInput) options: UsernamePasswordInput,
-            @Ctx() { em }: MyContest
-        ): Promise<UserResponse> {
+    async register(@Arg('options', () => UsernamePasswordInput) options: UsernamePasswordInput, @Ctx() { em }: MyContest): Promise<UserResponse> {
         if (options.username.length <= 2) {
             return {
                 errors: [
@@ -106,10 +102,7 @@ export class UserResolver {
     }
 
     @Mutation(() => UserResponse)
-    async login(
-            @Arg('options', () => UsernamePasswordInput) options: UsernamePasswordInput,
-            @Ctx() { em, req }: MyContest
-        ): Promise<UserResponse> {
+    async login(@Arg('options', () => UsernamePasswordInput) options: UsernamePasswordInput, @Ctx() { em, req }: MyContest): Promise<UserResponse> {
         const user = await em.findOne(User, { username: options.username });
         if (!user) {
             return {
@@ -139,5 +132,21 @@ export class UserResolver {
         return {
             user,
         };
+    }
+
+    @Mutation(() => Boolean)
+    logout(@Ctx() { req, res }: MyContest) {
+        return new Promise((resolve) =>
+            req.session.destroy((err: any) => {
+                res.clearCookie(COOKIE_NAME);
+                if (err) {
+                    console.log(err);
+                    resolve(false);
+                    return;
+                }
+
+                resolve(true);
+            })
+        );
     }
 }

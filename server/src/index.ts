@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { MikroORM } from '@mikro-orm/core';
-import { __prod__ } from './constants';
+import { COOKIE_NAME, __prod__ } from './constants';
 // import { Items } from './entities/Items';
 import mikroConfig from './mikro-orm.config';
 import express from 'express';
@@ -33,7 +33,7 @@ const main = async () => {
 
     app.use(
         session({
-            name: 'qid',
+            name: COOKIE_NAME,
             store: new RedisStore({
                 client: redisClient,
                 disableTouch: true,
@@ -70,14 +70,6 @@ const main = async () => {
     app.listen(4000, () => {
         console.log('server started on localhost:4000');
     });
-
-    // const post = orm.em.create(Items, { title: 'my first post' });
-    // await orm.em.persistAndFlush(post);
-    // console.log('--------------------sql 2-----------------');
-    // await orm.em.nativeInsert(Item, { title: 'my first post' });
-
-    // const items = await orm.em.find(Items, {});
-    // console.log(items);
 };
 
 main().catch((err) => {
