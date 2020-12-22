@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Field, withTypes } from 'react-final-form';
-import { useRegisterMutation } from '../generated/graphql';
+import { useLoginMutation } from '../generated/graphql';
 import stylesSpinner from '../styles/Spinner.module.scss';
 import { toErrorMap } from '../utils/toErrorMap';
 import { useRouter } from 'next/router';
@@ -18,11 +18,9 @@ const { Form } = withTypes<MyValues>();
 const required = (value: any) => (value ? undefined : 'Required');
 // const composeValidators = (...validators) => (value) => validators.reduce((error, validator) => error || validator(value), undefined);
 
-interface registerProps {}
-
-const Register: React.FC<registerProps> = ({}) => {
+const Login: React.FC<{}> = ({}) => {
     const router = useRouter();
-    const [, register] = useRegisterMutation();
+    const [, login] = useLoginMutation();
     const [errors, setErrors] = useState({} as ErrType);
 
     return (
@@ -30,10 +28,10 @@ const Register: React.FC<registerProps> = ({}) => {
             <Form
                 onSubmit={async (values: MyValues) => {
                     if (values.username && values.password) {
-                        const response = await register(values);
-                        if (response.data?.register.errors) {
-                            setErrors(toErrorMap(response.data.register.errors));
-                        } else if (response.data?.register.user) {
+                        const response = await login({ options: values });
+                        if (response.data?.login.errors) {
+                            setErrors(toErrorMap(response.data.login.errors));
+                        } else if (response.data?.login.user) {
                             setErrors({});
                             router.push('/');
                         }
@@ -66,7 +64,7 @@ const Register: React.FC<registerProps> = ({}) => {
                         </Field>
 
                         <div className="buttons">
-                            <button type="submit">Register</button>
+                            <button type="submit">Login</button>
                         </div>
                     </form>
                 )}
@@ -75,4 +73,4 @@ const Register: React.FC<registerProps> = ({}) => {
     );
 };
 
-export default Register;
+export default Login;
