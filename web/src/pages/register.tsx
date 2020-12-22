@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, withTypes } from 'react-final-form';
 import { useMutation } from 'urql';
-import stylesSpinner from '~/styles/Spinner.module.scss';
+import stylesSpinner from '../styles/Spinner.module.scss';
 
 type MyValues = {
     username: string;
@@ -38,7 +38,7 @@ const Register: React.FC<registerProps> = ({}) => {
             <Form
                 onSubmit={async (values: MyValues) => {
                     if (values.username && values.password) {
-                        return register(values);
+                        const response = await register(values);
                     }
                 }}
                 render={({ handleSubmit, validating }) => (

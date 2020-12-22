@@ -9,10 +9,7 @@ const witchTsconfigPathsPlugin = (nextConfig = {}) => ({
                 ...config,
                 resolve: {
                     ...config.resolve,
-                    plugins: [
-                        ...(config.resolve && config.resolve.plugins),
-                        new TsconfigPathsPlugin()
-                    ],
+                    plugins: [...(config.resolve && config.resolve.plugins), new TsconfigPathsPlugin()],
                 },
             };
 
@@ -25,8 +22,12 @@ const witchTsconfigPathsPlugin = (nextConfig = {}) => ({
     },
 });
 
-module.exports = witchTsconfigPathsPlugin(
-    withSass({
-        cssModules: true,
-    })
-);
+// module.exports = witchTsconfigPathsPlugin(
+//     withSass({
+//         cssModules: true,
+//     })
+// );
+
+module.exports = withSass({
+    cssModules: true,
+});

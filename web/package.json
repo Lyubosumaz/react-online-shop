@@ -5,7 +5,8 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "start": "next start"
+        "start": "next start",
+        "gen": "graphql-codegen --config codegen.yml"
     },
     "dependencies": {
         "final-form": "^4.20.1",
@@ -17,6 +18,10 @@
         "urql": "^1.11.4"
     },
     "devDependencies": {
+        "@graphql-codegen/cli": "1.19.4",
+        "@graphql-codegen/typescript": "1.19.0",
+        "@graphql-codegen/typescript-operations": "1.17.12",
+        "@graphql-codegen/typescript-urql": "^2.0.3",
         "@types/node": "13.7.7",
         "@types/react": "16.9.23",
         "@types/react-dom": "16.9.5",
