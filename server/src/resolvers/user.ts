@@ -1,16 +1,8 @@
 import { User } from '../entities/User';
 import { MyContest } from '../types';
-import {
-    Arg,
-    Ctx,
-    Field,
-    InputType,
-    Mutation,
-    ObjectType,
-    Query,
-    Resolver
-} from 'type-graphql';
+import { Arg, Ctx, Field, InputType, Mutation, ObjectType, Query, Resolver } from 'type-graphql';
 import argon2 from 'argon2';
+import { EntityManager } from '@mikro-orm/postgresql';
 
 @InputType()
 class UsernamePasswordInput {
@@ -41,23 +33,22 @@ class UserResponse {
 export class UserResolver {
     @Query(() => User, { nullable: true })
     async me(
-        @Ctx() { em, req }: MyContest 
-    ): Promise<User | null>{
+            @Ctx() { em, req }: MyContest
+        ): Promise<User | null> {
         // you are not logged
         if (!req.session.userId) {
-            return null
+            return null;
         }
 
         const user = await em.findOne(User, { id: req.session.userId });
         return user;
     }
 
-
     @Mutation(() => UserResponse)
     async register(
-        @Arg('options', () => UsernamePasswordInput) options: UsernamePasswordInput,
-        @Ctx() { em }: MyContest
-    ): Promise<UserResponse> {
+            @Arg('options', () => UsernamePasswordInput) options: UsernamePasswordInput,
+            @Ctx() { em }: MyContest
+        ): Promise<UserResponse> {
         if (options.username.length <= 2) {
             return {
                 errors: [
@@ -81,14 +72,22 @@ export class UserResolver {
         }
 
         const hashedPassword = await argon2.hash(options.password);
-        const user = em.create(User, {
-            username: options.username,
-            password: hashedPassword,
-        });
-
+        let user;
         try {
-            await em.persistAndFlush(user);
+            const result = await (em as EntityManager)
+                .createQueryBuilder(User)
+                .getKnexQuery()
+                .insert({
+                    username: options.username,
+                    password: hashedPassword,
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                })
+                .returning('*');
+            user = result[0];
         } catch (err) {
+            // duplicate username error
+            // if (err.detail.include('already exists')) {
             if (err.code === '23505') {
                 return {
                     errors: [
@@ -108,9 +107,9 @@ export class UserResolver {
 
     @Mutation(() => UserResponse)
     async login(
-        @Arg('options', () => UsernamePasswordInput) options: UsernamePasswordInput,
-        @Ctx() { em, req }: MyContest
-    ): Promise<UserResponse> {
+            @Arg('options', () => UsernamePasswordInput) options: UsernamePasswordInput,
+            @Ctx() { em, req }: MyContest
+        ): Promise<UserResponse> {
         const user = await em.findOne(User, { username: options.username });
         if (!user) {
             return {
