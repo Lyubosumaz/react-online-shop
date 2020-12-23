@@ -13,12 +13,10 @@ import session from 'express-session';
 import connectRedis from 'connect-redis';
 import { MyContest } from './types';
 import corn from 'cors';
-// import { User } from './entities/User';
 
 const main = async () => {
     const orm = await MikroORM.init(mikroConfig);
-    // remove all users
-    // await orm.em.nativeDelete(User, {});
+
     await orm.getMigrator().up();
 
     const app = express();
