@@ -1,7 +1,9 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.scss';
+import { withUrqlClient } from 'next-urql';
+import { createUrqlClient } from '../utils/createUrqlClient';
 
-export default function Home() {
+const Home = () => {
     return (
         <div className={styles.container}>
             <Head>
@@ -14,4 +16,6 @@ export default function Home() {
             <footer className={styles.footer}></footer>
         </div>
     );
-}
+};
+
+export default withUrqlClient(createUrqlClient)(Home);

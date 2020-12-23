@@ -1,10 +1,11 @@
 import React from 'react';
 import NextLink from 'next/link';
-import { useMeQuery } from '../../generated/graphql';
+import { useLogoutMutation, useMeQuery } from '../../generated/graphql';
 
 interface NavBarProps {}
 
 const NavBar: React.FC<NavBarProps> = ({}) => {
+    const [{ fetching: LogoutFetching }, logout] = useLogoutMutation();
     const [{ data, fetching }] = useMeQuery();
     let body = null;
 
@@ -24,7 +25,7 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
         body = (
             <>
                 <div>{data.me.username}</div>
-                <button>Logout</button>
+                <button onClick={() => logout()}>Logout</button>
             </>
         );
     }
