@@ -32,6 +32,13 @@ class UserResponse {
 
 @Resolver()
 export class UserResolver {
+    @Mutation(() => Boolean)
+    async forgottenPassword(@Arg('email') email: string, @Ctx() { req }: MyContest) {
+        // const user = await email.findOne(User, { email });
+        console.log(email, req);
+        return true;
+    }
+
     @Query(() => User, { nullable: true })
     async me(@Ctx() { em, req }: MyContest): Promise<User | null> {
         // you are not logged

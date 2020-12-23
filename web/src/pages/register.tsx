@@ -4,6 +4,8 @@ import { useRegisterMutation } from '../generated/graphql';
 import stylesSpinner from '../styles/Spinner.module.scss';
 import { toErrorMap } from '../utils/toErrorMap';
 import { useRouter } from 'next/router';
+import { withUrqlClient } from 'next-urql';
+import { createUrqlClient } from '../utils/createUrqlClient';
 
 interface ErrType {
     [key: string]: string;
@@ -75,4 +77,4 @@ const Register: React.FC<registerProps> = ({}) => {
     );
 };
 
-export default Register;
+export default withUrqlClient(createUrqlClient, { ssr: false })(Register);

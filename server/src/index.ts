@@ -1,7 +1,6 @@
 import 'reflect-metadata';
 import { MikroORM } from '@mikro-orm/core';
 import { COOKIE_NAME, __prod__ } from './constants';
-// import { Items } from './entities/Items';
 import mikroConfig from './mikro-orm.config';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
@@ -14,9 +13,12 @@ import session from 'express-session';
 import connectRedis from 'connect-redis';
 import { MyContest } from './types';
 import corn from 'cors';
+// import { User } from './entities/User';
 
 const main = async () => {
     const orm = await MikroORM.init(mikroConfig);
+    // remove all users
+    // await orm.em.nativeDelete(User, {});
     await orm.getMigrator().up();
 
     const app = express();
