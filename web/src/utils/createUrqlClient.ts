@@ -2,6 +2,7 @@ import { dedupExchange, fetchExchange } from 'urql';
 import { cacheExchange } from '@urql/exchange-graphcache';
 import { MeQuery, MeDocument, LogoutMutation, LoginMutation, RegisterMutation } from '../generated/graphql';
 import { betterUpdateQuery } from './betterUpdateQuery';
+import 'isomorphic-unfetch';
 
 export const createUrqlClient = (ssrExchange: any) => ({
     url: 'http://localhost:4000/graphql',

@@ -1,0 +1,8 @@
+query Items {
+    items {
+        id
+        createdAt
+        updatedAt
+        title
+    }
+}

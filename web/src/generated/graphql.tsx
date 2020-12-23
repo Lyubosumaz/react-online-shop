@@ -148,6 +148,17 @@ export type RegisterMutation = (
   ) }
 );
 
+export type ItemsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ItemsQuery = (
+  { __typename?: 'Query' }
+  & { items: Array<(
+    { __typename?: 'Items' }
+    & Pick<Items, 'id' | 'createdAt' | 'updatedAt' | 'title'>
+  )> }
+);
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -207,6 +218,20 @@ export const RegisterDocument = gql`
 
 export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
+};
+export const ItemsDocument = gql`
+    query Items {
+  items {
+    id
+    createdAt
+    updatedAt
+    title
+  }
+}
+    `;
+
+export function useItemsQuery(options: Omit<Urql.UseQueryArgs<ItemsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<ItemsQuery>({ query: ItemsDocument, ...options });
 };
 export const MeDocument = gql`
     query Me {
