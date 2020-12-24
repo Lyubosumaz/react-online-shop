@@ -12,7 +12,7 @@ interface ErrType {
 }
 
 type MyValues = {
-    username: string;
+    usernameOrEmail: string;
     password: string;
 };
 
@@ -29,8 +29,8 @@ const Login: React.FC<{}> = ({}) => {
         <>
             <Form
                 onSubmit={async (values: MyValues) => {
-                    if (values.username && values.password) {
-                        const response = await login({ options: values });
+                    if (values.usernameOrEmail && values.password) {
+                        const response = await login(values);
                         if (response.data?.login.errors) {
                             setErrors(toErrorMap(response.data.login.errors));
                         } else if (response.data?.login.user) {
@@ -41,13 +41,13 @@ const Login: React.FC<{}> = ({}) => {
                 }}
                 render={({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
-                        <Field name="username" validate={required}>
+                        <Field name="usernameOrEmail" validate={required}>
                             {({ input, meta }) => (
                                 <div>
-                                    <label>Username</label>
-                                    <input {...input} type="text" placeholder="username" />
+                                    <label>Username or Email</label>
+                                    <input {...input} type="text" placeholder="Username or Email" />
                                     {meta.error && meta.touched && <span>{meta.error}</span>}
-                                    {errors['username'] ? <div>{errors['username']}</div> : <div>123</div>}
+                                    {errors['usernameOrEmail'] ? <div>{errors['usernameOrEmail']}</div> : <div>123</div>}
                                     {meta.validating && <div className={stylesSpinner.div}></div>}
                                 </div>
                             )}

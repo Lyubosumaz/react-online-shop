@@ -12,7 +12,7 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
     });
     let body = null;
 
-    console.log(data);
+    // console.log(data);
 
     if (fetching) {
         // data is loading
