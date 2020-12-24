@@ -22,8 +22,8 @@ export const validateRegister = (options: UsernamePasswordInput) => {
     if (!options.email.includes('@')) {
         return [
             {
-                field: `username`,
-                message: `length must be greater then 2`,
+                field: `email`,
+                message: `invalid email`,
             },
         ];
     }

@@ -120,7 +120,7 @@ let UserResolver = class UserResolver {
                     errors: [
                         {
                             field: `usernameOrEmail`,
-                            message: `that username doesn't exist`,
+                            message: `invalid username or email`,
                         },
                     ],
                 };
