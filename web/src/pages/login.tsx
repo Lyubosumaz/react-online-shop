@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Field, withTypes } from 'react-final-form';
 import { useLoginMutation } from '../generated/graphql';
-import stylesSpinner from '../styles/Spinner.module.scss';
 import { toErrorMap } from '../utils/toErrorMap';
 import { useRouter } from 'next/router';
 import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../utils/createUrqlClient';
+import stylesSpinner from '../styles/Spinner.module.scss';
 
 interface ErrType {
     [key: string]: string;
