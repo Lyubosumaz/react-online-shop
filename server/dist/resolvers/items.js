@@ -72,33 +72,28 @@ __decorate([
 ], ItemsResolver.prototype, "items", null);
 __decorate([
     type_graphql_1.Query(() => Items_1.Items, { nullable: true }),
-    __param(0, type_graphql_1.Arg('id', () => type_graphql_1.Int)),
-    __param(1, type_graphql_1.Ctx()),
+    __param(0, type_graphql_1.Arg('id', () => type_graphql_1.Int)), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], ItemsResolver.prototype, "item", null);
 __decorate([
     type_graphql_1.Mutation(() => Items_1.Items),
-    __param(0, type_graphql_1.Arg('title', () => String)),
-    __param(1, type_graphql_1.Ctx()),
+    __param(0, type_graphql_1.Arg('title', () => String)), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], ItemsResolver.prototype, "createItem", null);
 __decorate([
     type_graphql_1.Mutation(() => Items_1.Items, { nullable: true }),
-    __param(0, type_graphql_1.Arg('id', () => type_graphql_1.Int)),
-    __param(1, type_graphql_1.Arg('title', () => String, { nullable: true })),
-    __param(2, type_graphql_1.Ctx()),
+    __param(0, type_graphql_1.Arg('id', () => type_graphql_1.Int)), __param(1, type_graphql_1.Arg('title', () => String, { nullable: true })), __param(2, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, String, Object]),
     __metadata("design:returntype", Promise)
 ], ItemsResolver.prototype, "updateItem", null);
 __decorate([
     type_graphql_1.Mutation(() => Boolean),
-    __param(0, type_graphql_1.Arg('id', () => type_graphql_1.Int)),
-    __param(1, type_graphql_1.Ctx()),
+    __param(0, type_graphql_1.Arg('id', () => type_graphql_1.Int)), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)

@@ -1,5 +1,5 @@
 import { User } from '../entities/User';
-import { MyContest } from '../types';
+import { MyContext } from '../types';
 import { Arg, Ctx, Field, Mutation, ObjectType, Query, Resolver } from 'type-graphql';
 import argon2 from 'argon2';
 import { EntityManager } from '@mikro-orm/postgresql';
@@ -29,7 +29,7 @@ class UserResponse {
 @Resolver()
 export class UserResolver {
     @Mutation(() => UserResponse)
-    async changePassword(@Arg('token') token: string, @Arg('newPassword') newPassword: string, @Ctx() { em, req, redis }: MyContest): Promise<UserResponse> {
+    async changePassword(@Arg('token') token: string, @Arg('newPassword') newPassword: string, @Ctx() { em, req, redis }: MyContext): Promise<UserResponse> {
         if (newPassword.length <= 2) {
             return {
                 errors: [
@@ -77,7 +77,7 @@ export class UserResolver {
     }
 
     @Mutation(() => Boolean)
-    async forgottenPassword(@Arg('email') email: string, @Ctx() { em, redis }: MyContest) {
+    async forgottenPassword(@Arg('email') email: string, @Ctx() { em, redis }: MyContext) {
         console.log(email);
         const user = await em.findOne(User, { email });
         console.log(user);
@@ -96,7 +96,7 @@ export class UserResolver {
     }
 
     @Query(() => User, { nullable: true })
-    async me(@Ctx() { em, req }: MyContest): Promise<User | null> {
+    async me(@Ctx() { em, req }: MyContext): Promise<User | null> {
         // you are not logged
         if (!req.session.userId) {
             return null;
@@ -107,7 +107,7 @@ export class UserResolver {
     }
 
     @Mutation(() => UserResponse)
-    async register(@Arg('options', () => UsernamePasswordInput) options: UsernamePasswordInput, @Ctx() { em, req }: MyContest): Promise<UserResponse> {
+    async register(@Arg('options', () => UsernamePasswordInput) options: UsernamePasswordInput, @Ctx() { em, req }: MyContext): Promise<UserResponse> {
         const errors = validateRegister(options);
         if (errors) {
             return { errors };
@@ -152,7 +152,7 @@ export class UserResolver {
     }
 
     @Mutation(() => UserResponse)
-    async login(@Arg('usernameOrEmail') usernameOrEmail: string, @Arg('password') password: string, @Ctx() { em, req }: MyContest): Promise<UserResponse> {
+    async login(@Arg('usernameOrEmail') usernameOrEmail: string, @Arg('password') password: string, @Ctx() { em, req }: MyContext): Promise<UserResponse> {
         const user = await em.findOne(User, usernameOrEmail.includes('@') ? { email: usernameOrEmail } : { username: usernameOrEmail });
         if (!user) {
             return {
@@ -185,7 +185,7 @@ export class UserResolver {
     }
 
     @Mutation(() => Boolean)
-    logout(@Ctx() { req, res }: MyContest) {
+    logout(@Ctx() { req, res }: MyContext) {
         return new Promise((resolve) =>
             req.session.destroy((err: any) => {
                 if (err) {

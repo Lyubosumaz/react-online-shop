@@ -11,7 +11,7 @@ import { UserResolver } from './resolvers/user';
 import Redis from 'ioredis';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
-import { MyContest } from './types';
+import { MyContext } from './types';
 import corn from 'cors';
 
 const main = async () => {
@@ -55,7 +55,7 @@ const main = async () => {
             resolvers: [HelloResolver, ItemsResolver, UserResolver],
             validate: false,
         }),
-        context: ({ req, res }): MyContest => ({ em: orm.em, req, res, redis }),
+        context: ({ req, res }): MyContext => ({ em: orm.em, req, res, redis }),
     });
 
     apolloServer.applyMiddleware({
