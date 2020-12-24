@@ -13,6 +13,7 @@ interface ErrType {
 
 type MyValues = {
     username: string;
+    email: string;
     password: string;
 };
 
@@ -32,7 +33,7 @@ const Register: React.FC<registerProps> = ({}) => {
             <Form
                 onSubmit={async (values: MyValues) => {
                     if (values.username && values.password) {
-                        const response = await register(values);
+                        const response = await register({ options: values });
                         if (response.data?.register.errors) {
                             setErrors(toErrorMap(response.data.register.errors));
                         } else if (response.data?.register.user) {
@@ -50,6 +51,18 @@ const Register: React.FC<registerProps> = ({}) => {
                                     <input {...input} type="text" placeholder="username" />
                                     {meta.error && meta.touched && <span>{meta.error}</span>}
                                     {errors['username'] ? <div>{errors['username']}</div> : <div>123</div>}
+                                    {meta.validating && <div className={stylesSpinner.div}></div>}
+                                </div>
+                            )}
+                        </Field>
+
+                        <Field name="email" validate={required}>
+                            {({ input, meta }) => (
+                                <div>
+                                    <label>Email</label>
+                                    <input {...input} type="text" placeholder="email" />
+                                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                                    {errors['email'] ? <div>{errors['email']}</div> : <div>123</div>}
                                     {meta.validating && <div className={stylesSpinner.div}></div>}
                                 </div>
                             )}

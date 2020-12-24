@@ -2,6 +2,8 @@ import React from 'react';
 import NextLink from 'next/link';
 import { useLogoutMutation, useMeQuery } from '../../generated/graphql';
 import { isServer } from '../../utils/isServer';
+import { withUrqlClient } from 'next-urql';
+import { createUrqlClient } from '../../utils/createUrqlClient';
 
 interface NavBarProps {}
 
@@ -12,7 +14,7 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
     });
     let body = null;
 
-    // console.log(data);
+    console.log(data);
 
     if (fetching) {
         // data is loading
@@ -38,4 +40,4 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
     return <div>{body}</div>;
 };
 
-export default NavBar;
+export default withUrqlClient(createUrqlClient, { ssr: false })(NavBar);
