@@ -63,6 +63,7 @@ const ChangePassword: NextPage<{ token: string }> = ({ token }) => {
 
                         <div className="buttons">
                             <button type="submit">Change Password</button>
+                            {errors['token'] ? <div>{errors['token']}</div> : <div>123</div>}
                         </div>
                     </form>
                 )}

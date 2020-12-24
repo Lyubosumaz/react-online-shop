@@ -28,6 +28,54 @@ class UserResponse {
 
 @Resolver()
 export class UserResolver {
+    @Mutation(() => UserResponse)
+    async changePassword(@Arg('token') token: string, @Arg('newPassword') newPassword: string, @Ctx() { em, req, redis }: MyContest): Promise<UserResponse> {
+        if (newPassword.length <= 2) {
+            return {
+                errors: [
+                    {
+                        field: `newPassword`,
+                        message: `length must be greater then 2`,
+                    },
+                ],
+            };
+        }
+
+        const userId = await redis.get(FORGOTTEN_PASSWORD_PREFIX + token);
+
+        if (!userId) {
+            return {
+                errors: [
+                    {
+                        field: `token`,
+                        message: `token expired`,
+                    },
+                ],
+            };
+        }
+
+        const user = await em.findOne(User, { id: parseInt(userId) });
+
+        if (!user) {
+            return {
+                errors: [
+                    {
+                        field: `token`,
+                        message: `user no longer exists`,
+                    },
+                ],
+            };
+        }
+
+        user.password = await argon2.hash(newPassword);
+        await em.persistAndFlush(user);
+
+        // log in user after change password
+        req.session = user.id;
+
+        return { user };
+    }
+
     @Mutation(() => Boolean)
     async forgottenPassword(@Arg('email') email: string, @Ctx() { em, redis }: MyContest) {
         console.log(email);
@@ -59,7 +107,7 @@ export class UserResolver {
     }
 
     @Mutation(() => UserResponse)
-    async register(@Arg('options', () => UsernamePasswordInput) options: UsernamePasswordInput, @Ctx() { em }: MyContest): Promise<UserResponse> {
+    async register(@Arg('options', () => UsernamePasswordInput) options: UsernamePasswordInput, @Ctx() { em, req }: MyContest): Promise<UserResponse> {
         const errors = validateRegister(options);
         if (errors) {
             return { errors };
@@ -94,6 +142,9 @@ export class UserResolver {
                 };
             }
         }
+
+        // log in with newly created user
+        req.session.userId = user.id;
 
         return {
             user,
