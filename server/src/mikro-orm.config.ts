@@ -10,7 +10,7 @@ export default {
         pattern: /^[\w-]+\d+\.[tj]s$/,
     },
     entities: [Items, User],
-    dbName: 'test',
+    dbName: 'online-shop',
     user: 'root',
     password: 'root',
     type: 'postgresql',

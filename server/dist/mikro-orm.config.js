@@ -13,7 +13,7 @@ exports.default = {
         pattern: /^[\w-]+\d+\.[tj]s$/,
     },
     entities: [Items_1.Items, User_1.User],
-    dbName: 'test',
+    dbName: 'online-shop',
     user: 'root',
     password: 'root',
     type: 'postgresql',
