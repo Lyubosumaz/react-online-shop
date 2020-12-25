@@ -74,16 +74,15 @@ export class UserResolver {
         await redis.del(key);
 
         // log in user after change password
-        req.session = user.id;
+        // req.session = user.id;
+        console.log(req.session); // TODO req.session doesn't work
 
         return { user };
     }
 
     @Mutation(() => Boolean)
     async forgottenPassword(@Arg('email') email: string, @Ctx() { em, redis }: MyContext) {
-        console.log(email);
         const user = await em.findOne(User, { email });
-        console.log(user);
         if (!user) {
             // email is not in the db
             return true;

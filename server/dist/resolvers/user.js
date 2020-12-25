@@ -98,15 +98,13 @@ let UserResolver = class UserResolver {
             user.password = yield argon2_1.default.hash(newPassword);
             yield em.persistAndFlush(user);
             yield redis.del(key);
-            req.session = user.id;
+            console.log(req.session);
             return { user };
         });
     }
     forgottenPassword(email, { em, redis }) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(email);
             const user = yield em.findOne(User_1.User, { email });
-            console.log(user);
             if (!user) {
                 return true;
             }
