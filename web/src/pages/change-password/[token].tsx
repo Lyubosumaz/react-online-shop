@@ -1,10 +1,12 @@
 import { NextPage } from 'next';
-import router from 'next/dist/next-server/lib/router/router';
 import React, { useState } from 'react';
 import { withTypes, Field } from 'react-final-form';
 import { toErrorMap } from '../../utils/toErrorMap';
-import login from '../login';
 import stylesSpinner from '../../styles/Spinner.module.scss';
+import { useChangePasswordMutation } from '../../generated/graphql';
+import { useRouter } from 'next/router';
+import { withUrqlClient } from 'next-urql';
+import { createUrqlClient } from '../../utils/createUrqlClient';
 
 interface ErrType {
     [key: string]: string;
@@ -19,6 +21,8 @@ const { Form } = withTypes<MyValues>();
 const required = (value: any) => (value ? undefined : 'Required');
 
 const ChangePassword: NextPage<{ token: string }> = ({ token }) => {
+    const router = useRouter();
+    const [, changePassword] = useChangePasswordMutation();
     const [errors, setErrors] = useState({} as ErrType);
 
     return (
@@ -26,13 +30,13 @@ const ChangePassword: NextPage<{ token: string }> = ({ token }) => {
             <Form
                 onSubmit={async (values: MyValues) => {
                     if (values.newPassword && values.repPassword && values.newPassword === values.repPassword) {
-                        // const response = await login(values);
-                        // if (response.data?.login.errors) {
-                        //     setErrors(toErrorMap(response.data.login.errors));
-                        // } else if (response.data?.login.user) {
-                        //     setErrors({});
-                        //     router.push('/');
-                        // }
+                        const response = await changePassword({ token, newPassword: values.newPassword });
+                        if (response.data?.changePassword.errors) {
+                            setErrors(toErrorMap(response.data.changePassword.errors));
+                        } else if (response.data?.changePassword.user) {
+                            setErrors({});
+                            router.push('/');
+                        }
                     }
                 }}
                 render={({ handleSubmit }) => (
@@ -78,4 +82,4 @@ ChangePassword.getInitialProps = ({ query }) => {
     };
 };
 
-export default ChangePassword;
+export default withUrqlClient(createUrqlClient, { ssr: false })(ChangePassword as any);
