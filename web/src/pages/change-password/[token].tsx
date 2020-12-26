@@ -7,6 +7,7 @@ import { useChangePasswordMutation } from '../../generated/graphql';
 import { useRouter } from 'next/router';
 import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../../utils/createUrqlClient';
+import NextLink from 'next/link';
 
 interface ErrType {
     [key: string]: string;
@@ -67,6 +68,7 @@ const ChangePassword: NextPage<{ token: string }> = ({ token }) => {
 
                         <div className="buttons">
                             <button type="submit">Change Password</button>
+                            <NextLink href="/forgotten-password">forgot password?</NextLink>
                             {errors['token'] ? <div>{errors['token']}</div> : <div>123</div>}
                         </div>
                     </form>
