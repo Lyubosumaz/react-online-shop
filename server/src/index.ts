@@ -18,7 +18,7 @@ import { Items } from './entities/Items';
 const main = async () => {
     const conn = await createConnection({
         type: 'postgres',
-        database: 'online-shop',
+        database: 'react_online_shop',
         username: 'root',
         password: 'root',
         logging: true,

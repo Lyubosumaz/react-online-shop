@@ -30,7 +30,7 @@ const Items_1 = require("./entities/Items");
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const conn = yield typeorm_1.createConnection({
         type: 'postgres',
-        database: 'online-shop',
+        database: 'react_online_shop',
         username: 'root',
         password: 'root',
         logging: true,
