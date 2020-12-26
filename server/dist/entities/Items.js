@@ -12,10 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Items = void 0;
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
-let Items = class Items {
-    constructor() {
-        this.updatedAt = new Date();
-    }
+let Items = class Items extends typeorm_1.BaseEntity {
 };
 __decorate([
     type_graphql_1.Field(() => type_graphql_1.Int),
@@ -30,11 +27,11 @@ __decorate([
 __decorate([
     type_graphql_1.Field(() => String),
     typeorm_1.UpdateDateColumn(),
-    __metadata("design:type", Object)
+    __metadata("design:type", Date)
 ], Items.prototype, "updatedAt", void 0);
 __decorate([
     type_graphql_1.Field(),
-    typeorm_1.Column({ type: 'text' }),
+    typeorm_1.Column(),
     __metadata("design:type", String)
 ], Items.prototype, "title", void 0);
 Items = __decorate([

@@ -1,9 +1,9 @@
 import { Field, Int, ObjectType } from 'type-graphql';
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @ObjectType()
 @Entity()
-export class Items {
+export class Items extends BaseEntity {
     @Field(() => Int)
     @PrimaryGeneratedColumn()
     id!: number;
@@ -14,8 +14,9 @@ export class Items {
 
     @Field(() => String)
     @UpdateDateColumn()
-    updatedAt = new Date();
+    updatedAt: Date;
+
     @Field()
-    @Column({ type: 'text' })
+    @Column()
     title!: string;
 }

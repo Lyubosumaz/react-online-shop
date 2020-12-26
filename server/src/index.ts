@@ -1,7 +1,5 @@
 import 'reflect-metadata';
-import { MikroORM } from '@mikro-orm/core';
 import { COOKIE_NAME, __prod__ } from './constants';
-import mikroConfig from './mikro-orm.config';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
@@ -15,6 +13,7 @@ import { MyContext } from './types';
 import corn from 'cors';
 import { createConnection } from 'typeorm';
 import { User } from './entities/User';
+import { Items } from './entities/Items';
 
 const main = async () => {
     const conn = await createConnection({
@@ -24,12 +23,8 @@ const main = async () => {
         password: 'root',
         logging: true,
         synchronize: true,
-        entities: [User],
+        entities: [Items, User],
     });
-
-    const orm = await MikroORM.init(mikroConfig);
-
-    await orm.getMigrator().up();
 
     const app = express();
 
@@ -67,7 +62,7 @@ const main = async () => {
             resolvers: [HelloResolver, ItemsResolver, UserResolver],
             validate: false,
         }),
-        context: ({ req, res }): MyContext => ({ em: orm.em, req, res, redis }),
+        context: ({ req, res }): MyContext => ({ req, res, redis }),
     });
 
     apolloServer.applyMiddleware({

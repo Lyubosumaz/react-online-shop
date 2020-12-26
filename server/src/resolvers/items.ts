@@ -1,45 +1,42 @@
 import { Items } from '../entities/Items';
-import { MyContext } from '../types';
-import { Arg, Ctx, Int, Mutation, Query, Resolver } from 'type-graphql';
+import { Arg, Mutation, Query, Resolver } from 'type-graphql';
 
 @Resolver()
 export class ItemsResolver {
     @Query(() => [Items])
-    items(@Ctx() { em }: MyContext): Promise<Items[]> {
-        return em.find(Items, {});
+    async items(): Promise<Items[]> {
+        return Items.find();
     }
 
     @Query(() => Items, { nullable: true })
-    item(@Arg('id', () => Int) id: number, @Ctx() { em }: MyContext): Promise<Items | null> {
-        return em.findOne(Items, { id });
+    async item(@Arg('id') id: number): Promise<Items | undefined> {
+        return Items.findOne(id);
     }
 
     @Mutation(() => Items)
-    async createItem(@Arg('title', () => String) title: string, @Ctx() { em }: MyContext): Promise<Items> {
-        const post = em.create(Items, { title });
-        await em.persistAndFlush(post);
-        return post;
+    async createItem(@Arg('title') title: string): Promise<Items> {
+        // 2 sql queries
+        return Items.create({ title }).save();
     }
 
     @Mutation(() => Items, { nullable: true })
-    async updateItem(@Arg('id', () => Int) id: number, @Arg('title', () => String, { nullable: true }) title: string, @Ctx() { em }: MyContext): Promise<Items | null> {
-        const post = await em.findOne(Items, { id });
-        if (!post) {
+    async updateItem(@Arg('id') id: number, @Arg('title', () => String, { nullable: true }) title: string): Promise<Items | null> {
+        const item = await Items.findOne(id);
+        if (!item) {
             return null;
         }
 
         if (typeof title !== 'undefined') {
-            post.title = title;
-            await em.persistAndFlush(post);
+            await Items.update({ id }, { title });
         }
 
-        return post;
+        return item;
     }
 
     @Mutation(() => Boolean)
-    async deleteItem(@Arg('id', () => Int) id: number, @Ctx() { em }: MyContext): Promise<boolean> {
+    async deleteItem(@Arg('id') id: number): Promise<boolean> {
         try {
-            await em.nativeDelete(Items, { id });
+            await Items.delete(id);
             return true;
         } catch {
             return false;

@@ -25,36 +25,37 @@ exports.ItemsResolver = void 0;
 const Items_1 = require("../entities/Items");
 const type_graphql_1 = require("type-graphql");
 let ItemsResolver = class ItemsResolver {
-    items({ em }) {
-        return em.find(Items_1.Items, {});
-    }
-    item(id, { em }) {
-        return em.findOne(Items_1.Items, { id });
-    }
-    createItem(title, { em }) {
+    items() {
         return __awaiter(this, void 0, void 0, function* () {
-            const post = em.create(Items_1.Items, { title });
-            yield em.persistAndFlush(post);
-            return post;
+            return Items_1.Items.find();
         });
     }
-    updateItem(id, title, { em }) {
+    item(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const post = yield em.findOne(Items_1.Items, { id });
-            if (!post) {
+            return Items_1.Items.findOne(id);
+        });
+    }
+    createItem(title) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return Items_1.Items.create({ title }).save();
+        });
+    }
+    updateItem(id, title) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const item = yield Items_1.Items.findOne(id);
+            if (!item) {
                 return null;
             }
             if (typeof title !== 'undefined') {
-                post.title = title;
-                yield em.persistAndFlush(post);
+                yield Items_1.Items.update({ id }, { title });
             }
-            return post;
+            return item;
         });
     }
-    deleteItem(id, { em }) {
+    deleteItem(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield em.nativeDelete(Items_1.Items, { id });
+                yield Items_1.Items.delete(id);
                 return true;
             }
             catch (_a) {
@@ -65,37 +66,36 @@ let ItemsResolver = class ItemsResolver {
 };
 __decorate([
     type_graphql_1.Query(() => [Items_1.Items]),
-    __param(0, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], ItemsResolver.prototype, "items", null);
 __decorate([
     type_graphql_1.Query(() => Items_1.Items, { nullable: true }),
-    __param(0, type_graphql_1.Arg('id', () => type_graphql_1.Int)), __param(1, type_graphql_1.Ctx()),
+    __param(0, type_graphql_1.Arg('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Object]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], ItemsResolver.prototype, "item", null);
 __decorate([
     type_graphql_1.Mutation(() => Items_1.Items),
-    __param(0, type_graphql_1.Arg('title', () => String)), __param(1, type_graphql_1.Ctx()),
+    __param(0, type_graphql_1.Arg('title')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], ItemsResolver.prototype, "createItem", null);
 __decorate([
     type_graphql_1.Mutation(() => Items_1.Items, { nullable: true }),
-    __param(0, type_graphql_1.Arg('id', () => type_graphql_1.Int)), __param(1, type_graphql_1.Arg('title', () => String, { nullable: true })), __param(2, type_graphql_1.Ctx()),
+    __param(0, type_graphql_1.Arg('id')), __param(1, type_graphql_1.Arg('title', () => String, { nullable: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, String, Object]),
+    __metadata("design:paramtypes", [Number, String]),
     __metadata("design:returntype", Promise)
 ], ItemsResolver.prototype, "updateItem", null);
 __decorate([
     type_graphql_1.Mutation(() => Boolean),
-    __param(0, type_graphql_1.Arg('id', () => type_graphql_1.Int)), __param(1, type_graphql_1.Ctx()),
+    __param(0, type_graphql_1.Arg('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Object]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], ItemsResolver.prototype, "deleteItem", null);
 ItemsResolver = __decorate([
