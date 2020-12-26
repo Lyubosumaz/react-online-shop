@@ -29,7 +29,7 @@ class UserResponse {
 @Resolver()
 export class UserResolver {
     @Mutation(() => UserResponse)
-    async changePassword(@Arg('token') token: string, @Arg('newPassword') newPassword: string, @Ctx() { em, req, redis }: MyContext): Promise<UserResponse> {
+    async changePassword(@Arg('token') token: string, @Arg('newPassword') newPassword: string, @Ctx() { em, redis }: MyContext): Promise<UserResponse> {
         if (newPassword.length <= 2) {
             return {
                 errors: [
@@ -75,7 +75,7 @@ export class UserResolver {
 
         // log in user after change password
         // req.session = user.id;
-        console.log(req.session); // TODO req.session doesn't work
+        // console.log(req.session); // TODO req.session doesn't work
 
         return { user };
     }
