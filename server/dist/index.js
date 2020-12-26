@@ -26,7 +26,18 @@ const ioredis_1 = __importDefault(require("ioredis"));
 const express_session_1 = __importDefault(require("express-session"));
 const connect_redis_1 = __importDefault(require("connect-redis"));
 const cors_1 = __importDefault(require("cors"));
+const typeorm_1 = require("typeorm");
+const User_1 = require("./entities/User");
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
+    const conn = yield typeorm_1.createConnection({
+        type: 'postgres',
+        database: 'online-shop',
+        username: 'root',
+        password: 'root',
+        logging: true,
+        synchronize: true,
+        entities: [User_1.User],
+    });
     const orm = yield core_1.MikroORM.init(mikro_orm_config_1.default);
     yield orm.getMigrator().up();
     const app = express_1.default();

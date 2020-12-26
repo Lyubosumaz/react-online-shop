@@ -13,8 +13,20 @@ import session from 'express-session';
 import connectRedis from 'connect-redis';
 import { MyContext } from './types';
 import corn from 'cors';
+import { createConnection } from 'typeorm';
+import { User } from './entities/User';
 
 const main = async () => {
+    const conn = await createConnection({
+        type: 'postgres',
+        database: 'online-shop',
+        username: 'root',
+        password: 'root',
+        logging: true,
+        synchronize: true,
+        entities: [User],
+    });
+
     const orm = await MikroORM.init(mikroConfig);
 
     await orm.getMigrator().up();

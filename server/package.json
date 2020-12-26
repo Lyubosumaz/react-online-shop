@@ -55,6 +55,7 @@
         "nodemailer": "^6.4.17",
         "pq": "^0.0.3",
         "type-graphql": "^1.1.1",
+        "typeorm": "^0.2.29",
         "uuid": "^8.3.2"
     },
     "mikro-orm": {
