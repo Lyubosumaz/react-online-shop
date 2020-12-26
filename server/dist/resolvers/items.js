@@ -24,6 +24,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ItemsResolver = void 0;
 const Items_1 = require("../entities/Items");
 const type_graphql_1 = require("type-graphql");
+let ItemsInput = class ItemsInput {
+};
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], ItemsInput.prototype, "title", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], ItemsInput.prototype, "description", void 0);
+ItemsInput = __decorate([
+    type_graphql_1.InputType()
+], ItemsInput);
 let ItemsResolver = class ItemsResolver {
     items() {
         return __awaiter(this, void 0, void 0, function* () {

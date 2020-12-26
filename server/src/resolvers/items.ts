@@ -1,5 +1,13 @@
 import { Items } from '../entities/Items';
-import { Arg, Mutation, Query, Resolver } from 'type-graphql';
+import { Arg, Field, InputType, Mutation, Query, Resolver } from 'type-graphql';
+
+@InputType()
+class ItemsInput {
+    @Field()
+    title: string;
+    @Field()
+    description: string;
+}
 
 @Resolver()
 export class ItemsResolver {
@@ -15,7 +23,6 @@ export class ItemsResolver {
 
     @Mutation(() => Items)
     async createItem(@Arg('title') title: string): Promise<Items> {
-        // 2 sql queries
         return Items.create({ title }).save();
     }
 

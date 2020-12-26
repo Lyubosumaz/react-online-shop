@@ -26,6 +26,8 @@ const main = async () => {
         entities: [Items, User],
     });
 
+    // await Items.delete({});
+
     const app = express();
 
     const RedisStore = connectRedis(session);
