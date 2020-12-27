@@ -1,0 +1,30 @@
+$navBorder: 0.75em solid #efe4d1;
+
+.nav {
+    padding: 0.5em 0;
+    background-color: #7c2c0c;
+    border-top: $navBorder;
+    border-bottom: $navBorder;
+}
+
+.list {
+    display: flex;
+    border-radius: 0.3em;
+    border: 0.1em solid transparent;
+
+    a {
+        padding: 0.3em 1em;
+        text-transform: uppercase;
+        color: #efe4d1;
+    }
+
+    &:focus,
+    &:hover {
+        background-color: #aaa;
+        // border-color: #efe4d1;
+    }
+}
+
+li > ul > li + li {
+    margin-left: 0.5em;
+}

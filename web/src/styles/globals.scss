@@ -1,19 +1,33 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
 html {
+    box-sizing: border-box;
+    font: 20px/1.5 Helvetica, sans-serif;
 }
 
 body {
     background: #a55;
-    /* padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
 }
 
-/* a {
-    color: inherit;
+li {
+    list-style: none outside;
+}
+
+a {
     text-decoration: none;
 }
 
-* {
-    box-sizing: border-box;
-} */
+// NavBar
+nav {
+}
+
+ul {
+    display: flex;
+    justify-content: space-between;
+}

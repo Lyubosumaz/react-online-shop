@@ -1,11 +1,19 @@
+import Head from 'next/head';
 import NavBar from '../components/navigation/NavBar';
 import '../styles/globals.scss';
 
 function MyApp({ Component, pageProps }: any) {
     return (
         <>
+            <Head>
+                <title>React-Online-Shop</title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <NavBar />
-            <Component {...pageProps} />
+            <main>
+                <Component {...pageProps} />
+            </main>
+            <footer>Footer</footer>
         </>
     );
 }

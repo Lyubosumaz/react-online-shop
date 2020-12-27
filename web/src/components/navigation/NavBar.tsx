@@ -4,6 +4,8 @@ import { useLogoutMutation, useMeQuery } from '../../generated/graphql';
 import { isServer } from '../../utils/isServer';
 import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../../utils/createUrqlClient';
+import Wrapper from '../../components/site/Wrapper';
+import styles from '../../styles/NavBar.module.scss';
 
 interface NavBarProps {}
 
@@ -20,9 +22,29 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
         // user not logged in
         body = (
             <>
-                <NextLink href="/">Home</NextLink>
-                <NextLink href="/login">Login</NextLink>
-                <NextLink href="/register">Register</NextLink>
+                <li className={`nav-items site`}>
+                    <ul>
+                        <li className={styles.list}>
+                            <NextLink href="/">
+                                <a>Home</a>
+                            </NextLink>
+                        </li>
+                    </ul>
+                </li>
+                <li className={`nav-items user`}>
+                    <ul>
+                        <li className={styles.list}>
+                            <NextLink href="/login">
+                                <a>Login</a>
+                            </NextLink>
+                        </li>
+                        <li className={styles.list}>
+                            <NextLink href="/register">
+                                <a>Register</a>
+                            </NextLink>
+                        </li>
+                    </ul>
+                </li>
             </>
         );
     } else {
@@ -35,7 +57,13 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
         );
     }
 
-    return <div>{body}</div>;
+    return (
+        <nav className={styles.nav}>
+            <Wrapper>
+                <ul>{body}</ul>
+            </Wrapper>
+        </nav>
+    );
 };
 
 export default withUrqlClient(createUrqlClient, { ssr: false })(NavBar);

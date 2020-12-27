@@ -1,3 +1,11 @@
+.contact-us {
+    display: flex;
+}
+
+.column {
+    flex-basis: 50%;
+}
+
 // .container {
 //     min-height: 100vh;
 //     padding: 0 0.5rem;
@@ -65,7 +73,7 @@
 //     flex-basis: 45%;
 //     padding: 1.5rem;
 //     text-align: left;
-//     color: inherit;
+//     color: inherit;contact-us
 //     text-decoration: none;
 //     border: 1px solid #eaeaea;
 //     border-radius: 10px;
