@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import styles from '../../styles/ContactUs.module.scss';
-import Wrapper from './Wrapper';
+import Wrapper from '../site/Wrapper';
 
 const ContactUs: React.FC<{}> = ({}) => {
     return (

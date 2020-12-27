@@ -2,7 +2,8 @@ import styles from '../styles/Home.module.scss';
 import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../utils/createUrqlClient';
 import { useItemsQuery } from '../generated/graphql';
-import ContactUs from '../components/site/ContactUs';
+import ContactUs from '../components/index/ContactUs';
+import AboutUs from '../components/index/AboutUs';
 
 const Home = () => {
     const [{ data }] = useItemsQuery();
@@ -10,6 +11,7 @@ const Home = () => {
     return (
         <div className={styles.container}>
             <ContactUs />
+            <AboutUs />
             <div className={styles.main}>{!data ? <div>doesn't fetch anything</div> : data.items.map((p) => <div key={p.id}>{p.title}</div>)}</div>
         </div>
     );
