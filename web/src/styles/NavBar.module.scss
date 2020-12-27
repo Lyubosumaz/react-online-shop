@@ -1,4 +1,4 @@
-$navBorder: 0.75em solid #efe4d1;
+@import './variables.scss';
 
 .nav {
     padding: 0.5em 0;
@@ -19,13 +19,13 @@ $navBorder: 0.75em solid #efe4d1;
     a {
         padding: 0.3em 1em;
         text-transform: uppercase;
-        color: #efe4d1;
+        color: $secondaryLighterColor;
     }
 
     &:focus,
     &:hover {
-        background-color: #aaa;
-        // border-color: #efe4d1;
+        background-color: $secondaryLighterColor;
+        // border-color: $secondaryLighterColor;
     }
 }
 
