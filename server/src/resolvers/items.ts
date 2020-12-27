@@ -22,8 +22,10 @@ export class ItemsResolver {
     }
 
     @Mutation(() => Items)
-    async createItem(@Arg('title') title: string): Promise<Items> {
-        return Items.create({ title }).save();
+    async createItem(@Arg('input') input: ItemsInput): Promise<Items> {
+        return Items.create({
+            ...input,
+        }).save();
     }
 
     @Mutation(() => Items, { nullable: true })
