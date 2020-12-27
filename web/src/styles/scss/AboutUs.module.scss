@@ -1,5 +1,66 @@
 @import '../variables.scss';
+$borderPlace: -1.5em;
 
-.column {
-    flex-basis: 50%;
+.about-us {
+    padding: 4em 0;
+    background-color: #fff;
+}
+
+.image-wrapper {
+    padding: 2em;
+
+    div {
+        position: relative;
+        margin: 0 auto;
+        width: 230px;
+        height: 530px;
+        background-color: #bbb;
+        border: $mainElementBorder;
+
+        &::before,
+        &::after {
+            display: block;
+            content: '';
+            width: 5em;
+            height: 5em;
+            position: absolute;
+        }
+
+        &::before {
+            top: $borderPlace;
+            left: $borderPlace;
+            border-top: 0.5em solid $mainColor;
+            border-left: 0.5em solid $mainColor;
+        }
+
+        &::after {
+            right: $borderPlace;
+            bottom: $borderPlace;
+            border-right: 0.5em solid $mainColor;
+            border-bottom: 0.5em solid $mainColor;
+        }
+    }
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h5 {
+        padding-bottom: 0.5rem;
+        color: $mainColor;
+    }
+
+    p {
+        padding-bottom: 1.5rem;
+        font-weight: 300;
+    }
+
+    a {
+        display: inline-block;
+        padding: 0.75em 2em;
+        border: $mainElementBorder;
+        color: $mainColor;
+    }
 }

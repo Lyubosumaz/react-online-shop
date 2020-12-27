@@ -8,10 +8,6 @@
     box-shadow: 0 0.3em 1em -0.3em rgba(0, 0, 0, 0.75);
 }
 
-.column {
-    flex-basis: 50%;
-}
-
 .description {
     h2,
     p {
@@ -34,7 +30,7 @@
     a {
         display: inline-block;
         padding: 0.75em 2em;
-        border: 0.05em solid $mainColor;
+        border: $mainElementBorder;
         color: $mainColor;
     }
 }

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
 *,
 *::before,
 *::after {
@@ -8,11 +10,11 @@
 
 html {
     box-sizing: border-box;
-    font: 20px/1.5 Helvetica, sans-serif;
+    font: 20px/1.5 'Poppins', sans-serif;
 }
 
 body {
-    background: #a55;
+    background: #A55;
 }
 
 h1 { font-size: 3em; }
