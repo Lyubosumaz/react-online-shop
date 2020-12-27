@@ -5,6 +5,10 @@ $navBorder: 0.75em solid #efe4d1;
     background-color: #7c2c0c;
     border-top: $navBorder;
     border-bottom: $navBorder;
+
+    & > div > ul {
+        flex-basis: 100%;
+    }
 }
 
 .list {

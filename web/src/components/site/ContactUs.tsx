@@ -8,14 +8,20 @@ const ContactUs: React.FC<{}> = ({}) => {
         <>
             <div className={styles['contact-us']}>
                 <Wrapper>
-                    <div className={styles.column}>
-                        <h1>Best Design of Furniture</h1>
+                    <div className={[styles.column, styles.description].join(' ')}>
+                        <h2>
+                            <span>Best</span>
+                            <span>Design</span>
+                            <span>of Furniture</span>
+                        </h2>
                         <p>Is is a long established fact that a reader will be distracted by the readable content of</p>
-                        <Link href="/login">
-                            <a>Login</a>
+                        <Link href="/">
+                            <a>Contact us</a>
                         </Link>
                     </div>
-                    <div className={styles.column}>Image</div>
+                    <div className={[styles.column, styles.image].join(' ')}>
+                        <span>Image</span>
+                    </div>
                 </Wrapper>
             </div>
         </>
