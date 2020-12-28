@@ -6,6 +6,8 @@ import { useRouter } from 'next/router';
 import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../utils/createUrqlClient';
 import stylesSpinner from '../styles/Spinner.module.scss';
+import Wrapper from '../components/site/Wrapper';
+import styles from '../styles/scss/Forms.module.scss';
 
 interface ErrType {
     [key: string]: string;
@@ -41,34 +43,36 @@ const Login: React.FC<{}> = ({}) => {
                     }
                 }}
                 render={({ handleSubmit }) => (
-                    <form onSubmit={handleSubmit}>
-                        <Field name="usernameOrEmail" validate={required}>
-                            {({ input, meta }) => (
-                                <div>
-                                    <label>Username or Email</label>
-                                    <input {...input} type="text" placeholder="Username or Email" />
-                                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                                    {errors['usernameOrEmail'] ? <div>{errors['usernameOrEmail']}</div> : <div>123</div>}
-                                    {meta.validating && <div className={stylesSpinner.div}></div>}
-                                </div>
-                            )}
-                        </Field>
+                    <form className={styles['site-form']} onSubmit={handleSubmit}>
+                        <Wrapper>
+                            <Field name="usernameOrEmail" validate={required}>
+                                {({ input, meta }) => (
+                                    <div>
+                                        <label>Username or Email</label>
+                                        <input {...input} type="text" placeholder="Username or Email" />
+                                        {meta.error && meta.touched && <span>{meta.error}</span>}
+                                        {errors['usernameOrEmail'] ? <div>{errors['usernameOrEmail']}</div> : <div>123</div>}
+                                        {meta.validating && <div className={stylesSpinner.div}></div>}
+                                    </div>
+                                )}
+                            </Field>
 
-                        <Field name="password" validate={required}>
-                            {({ input, meta }) => (
-                                <div>
-                                    <label>Password</label>
-                                    <input {...input} type="password" placeholder="password" />
-                                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                                    {errors['password'] ? <div>{errors['password']}</div> : <div>123</div>}
-                                    {meta.validating && <div className={stylesSpinner.div}></div>}
-                                </div>
-                            )}
-                        </Field>
+                            <Field name="password" validate={required}>
+                                {({ input, meta }) => (
+                                    <div>
+                                        <label>Password</label>
+                                        <input {...input} type="password" placeholder="password" />
+                                        {meta.error && meta.touched && <span>{meta.error}</span>}
+                                        {errors['password'] ? <div>{errors['password']}</div> : <div>123</div>}
+                                        {meta.validating && <div className={stylesSpinner.div}></div>}
+                                    </div>
+                                )}
+                            </Field>
 
-                        <div className="buttons">
-                            <button type="submit">Login</button>
-                        </div>
+                            <div className={styles[`button-wrapper`]}>
+                                <button type="submit">Login</button>
+                            </div>
+                        </Wrapper>
                     </form>
                 )}
             />
