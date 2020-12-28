@@ -12,16 +12,58 @@ $fieldsWidth: 100%;
         margin-bottom: 1em;
 
         label {
+            position: relative;
             flex-basis: $fieldsWidth;
             line-height: 1;
+            color: $mainColor;
+
+            &::after {
+                display: block;
+                content: '';
+                width: 3em;
+                height: 3em;
+                position: absolute;
+                right: -1.5em;
+                bottom: -1.5em;
+                border-top: 0.5em solid $mainColor;
+                border-right: 0.5em solid $mainColor;
+            }
         }
 
         input {
+            padding: 0.75em 0.5em;
             flex-basis: $fieldsWidth;
+            border: $mainInputBorder;
+            border-radius: 0.2em;
+            outline: none;
+
+            &:focus {
+                border-color: $mainColor;
+            }
         }
 
         div {
             flex-basis: $fieldsWidth;
+        }
+    }
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+
+    button {
+        padding: 0.4em 1.5em;
+        border: 0.2em solid transparent;
+        border-radius: 0.5em;
+        color: $secondaryLighterColor;
+        background-color: $mainColor;
+        text-transform: uppercase;
+
+        &:hover {
+            border-color: $secondaryLighterColor;
+            color: $mainColor;
+            background-color: $secondaryLighterColor;
         }
     }
 }

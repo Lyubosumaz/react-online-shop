@@ -51,7 +51,7 @@ const Register: React.FC<registerProps> = ({}) => {
                                 {({ input, meta }) => (
                                     <div>
                                         <label>Username:</label>
-                                        <input {...input} type="text" placeholder="username" />
+                                        <input {...input} type="text" placeholder="John Doe" />
                                         {meta.error && meta.touched && <span>{meta.error}</span>}
                                         {errors['username'] ? <div>{errors['username']}</div> : <div>123</div>}
                                         {meta.validating && <div className={stylesSpinner.div}></div>}
@@ -63,7 +63,7 @@ const Register: React.FC<registerProps> = ({}) => {
                                 {({ input, meta }) => (
                                     <div>
                                         <label>Email:</label>
-                                        <input {...input} type="text" placeholder="email" />
+                                        <input {...input} type="text" placeholder="john@doe.com" />
                                         {meta.error && meta.touched && <span>{meta.error}</span>}
                                         {errors['email'] ? <div>{errors['email']}</div> : <div>123</div>}
                                         {meta.validating && <div className={stylesSpinner.div}></div>}
@@ -75,7 +75,7 @@ const Register: React.FC<registerProps> = ({}) => {
                                 {({ input, meta }) => (
                                     <div>
                                         <label>Password:</label>
-                                        <input {...input} type="password" placeholder="password" />
+                                        <input {...input} type="password" placeholder="********" />
                                         {meta.error && meta.touched && <span>{meta.error}</span>}
                                         {errors['password'] ? <div>{errors['password']}</div> : <div>123</div>}
                                         {meta.validating && <div className={stylesSpinner.div}></div>}
@@ -83,7 +83,7 @@ const Register: React.FC<registerProps> = ({}) => {
                                 )}
                             </Field>
 
-                            <div className="buttons">
+                            <div className={styles[`button-wrapper`]}>
                                 <button type="submit">Register</button>
                             </div>
                         </Wrapper>
