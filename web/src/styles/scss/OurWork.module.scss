@@ -1,0 +1,81 @@
+@import '../variables.scss';
+
+.our-work {
+    background-color: #fff;
+}
+
+.container {
+    flex-basis: 100%;
+    margin-bottom: 5em;
+
+    header {
+        padding-bottom: 3rem;
+        text-align: center;
+
+        h3 {
+            padding-bottom: 1.5rem;
+            color: $mainColor;
+        }
+
+        p {
+            font-weight: 300;
+        }
+    }
+
+    ul {
+        padding-bottom: 4rem;
+        display: flex;
+        justify-content: space-between;
+
+        li {
+            padding: 2em 1em;
+            flex: 0 1 18em;
+            text-align: center;
+            border: $mainElementBorder;
+            color: $mainColor;
+
+            div {
+                width: 170px;
+                height: 270px;
+                margin: 0 auto;
+                background-color: #bbb;
+            }
+
+            h6,
+            div {
+                margin-bottom: 2rem;
+            }
+
+            button {
+                padding: 0.4em 1.5em;
+                border: 0.2em solid transparent;
+                border-radius: 0.5em;
+                color: $secondaryLighterColor;
+                background-color: $mainColor;
+                text-transform: uppercase;
+
+                &:hover {
+                    border-color: $secondaryLighterColor;
+                    color: $mainColor;
+                    background-color: $secondaryLighterColor;
+                }
+            }
+        }
+
+        li + li {
+            margin-left: 1em;
+        }
+    }
+
+    a {
+        display: inline-block;
+        padding: 0.75em 2em;
+        border: $mainElementBorder;
+        color: $mainColor;
+    }
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+}

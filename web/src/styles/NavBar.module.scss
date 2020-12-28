@@ -2,7 +2,7 @@
 
 .nav {
     padding: 0.5em 0;
-    background-color: #7c2c0c;
+    background-color: $mainColor;
     border-top: $navBorder;
     border-bottom: $navBorder;
 
@@ -26,6 +26,10 @@
     &:hover {
         background-color: $secondaryLighterColor;
         // border-color: $secondaryLighterColor;
+
+        a {
+            color: $mainColor;
+        }
     }
 }
 

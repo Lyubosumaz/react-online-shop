@@ -1,7 +1,7 @@
 import NextLink from 'next/link';
 import React from 'react';
 import site from '../../styles/scss/Site.module.scss';
-import styles from '../../styles/ContactUs.module.scss';
+import styles from '../../styles/scss/ContactUs.module.scss';
 
 import Wrapper from '../site/Wrapper';
 
