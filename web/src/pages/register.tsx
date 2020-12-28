@@ -6,6 +6,8 @@ import { toErrorMap } from '../utils/toErrorMap';
 import { useRouter } from 'next/router';
 import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../utils/createUrqlClient';
+import styles from '../styles/scss/Forms.module.scss';
+import Wrapper from '../components/site/Wrapper';
 
 interface ErrType {
     [key: string]: string;
@@ -43,46 +45,48 @@ const Register: React.FC<registerProps> = ({}) => {
                     }
                 }}
                 render={({ handleSubmit }) => (
-                    <form onSubmit={handleSubmit}>
-                        <Field name="username" validate={required}>
-                            {({ input, meta }) => (
-                                <div>
-                                    <label>Username</label>
-                                    <input {...input} type="text" placeholder="username" />
-                                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                                    {errors['username'] ? <div>{errors['username']}</div> : <div>123</div>}
-                                    {meta.validating && <div className={stylesSpinner.div}></div>}
-                                </div>
-                            )}
-                        </Field>
+                    <form className={styles['site-form']} onSubmit={handleSubmit}>
+                        <Wrapper>
+                            <Field name="username" validate={required}>
+                                {({ input, meta }) => (
+                                    <div>
+                                        <label>Username:</label>
+                                        <input {...input} type="text" placeholder="username" />
+                                        {meta.error && meta.touched && <span>{meta.error}</span>}
+                                        {errors['username'] ? <div>{errors['username']}</div> : <div>123</div>}
+                                        {meta.validating && <div className={stylesSpinner.div}></div>}
+                                    </div>
+                                )}
+                            </Field>
 
-                        <Field name="email" validate={required}>
-                            {({ input, meta }) => (
-                                <div>
-                                    <label>Email</label>
-                                    <input {...input} type="text" placeholder="email" />
-                                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                                    {errors['email'] ? <div>{errors['email']}</div> : <div>123</div>}
-                                    {meta.validating && <div className={stylesSpinner.div}></div>}
-                                </div>
-                            )}
-                        </Field>
+                            <Field name="email" validate={required}>
+                                {({ input, meta }) => (
+                                    <div>
+                                        <label>Email:</label>
+                                        <input {...input} type="text" placeholder="email" />
+                                        {meta.error && meta.touched && <span>{meta.error}</span>}
+                                        {errors['email'] ? <div>{errors['email']}</div> : <div>123</div>}
+                                        {meta.validating && <div className={stylesSpinner.div}></div>}
+                                    </div>
+                                )}
+                            </Field>
 
-                        <Field name="password" validate={required}>
-                            {({ input, meta }) => (
-                                <div>
-                                    <label>Password</label>
-                                    <input {...input} type="password" placeholder="password" />
-                                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                                    {errors['password'] ? <div>{errors['password']}</div> : <div>123</div>}
-                                    {meta.validating && <div className={stylesSpinner.div}></div>}
-                                </div>
-                            )}
-                        </Field>
+                            <Field name="password" validate={required}>
+                                {({ input, meta }) => (
+                                    <div>
+                                        <label>Password:</label>
+                                        <input {...input} type="password" placeholder="password" />
+                                        {meta.error && meta.touched && <span>{meta.error}</span>}
+                                        {errors['password'] ? <div>{errors['password']}</div> : <div>123</div>}
+                                        {meta.validating && <div className={stylesSpinner.div}></div>}
+                                    </div>
+                                )}
+                            </Field>
 
-                        <div className="buttons">
-                            <button type="submit">Register</button>
-                        </div>
+                            <div className="buttons">
+                                <button type="submit">Register</button>
+                            </div>
+                        </Wrapper>
                     </form>
                 )}
             />

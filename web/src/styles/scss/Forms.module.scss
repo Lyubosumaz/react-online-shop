@@ -1,0 +1,27 @@
+@import '../variables.scss';
+$fieldsWidth: 100%;
+
+.site-form {
+    padding: 2em 0;
+    background-color: #fff;
+
+    div {
+        max-width: 20em;
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 1em;
+
+        label {
+            flex-basis: $fieldsWidth;
+            line-height: 1;
+        }
+
+        input {
+            flex-basis: $fieldsWidth;
+        }
+
+        div {
+            flex-basis: $fieldsWidth;
+        }
+    }
+}
