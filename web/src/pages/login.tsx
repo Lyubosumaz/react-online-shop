@@ -49,7 +49,7 @@ const Login: React.FC<{}> = ({}) => {
                                 {({ input, meta }) => (
                                     <div>
                                         <label>Username or Email</label>
-                                        <input {...input} type="text" placeholder="Username or Email" />
+                                        <input {...input} type="text" placeholder="John Doe or john@doe.com" />
                                         {meta.error && meta.touched && <span>{meta.error}</span>}
                                         {errors['usernameOrEmail'] ? <div>{errors['usernameOrEmail']}</div> : <div>123</div>}
                                         {meta.validating && <div className={stylesSpinner.div}></div>}
@@ -61,7 +61,7 @@ const Login: React.FC<{}> = ({}) => {
                                 {({ input, meta }) => (
                                     <div>
                                         <label>Password</label>
-                                        <input {...input} type="password" placeholder="password" />
+                                        <input {...input} type="password" placeholder="********" />
                                         {meta.error && meta.touched && <span>{meta.error}</span>}
                                         {errors['password'] ? <div>{errors['password']}</div> : <div>123</div>}
                                         {meta.validating && <div className={stylesSpinner.div}></div>}
