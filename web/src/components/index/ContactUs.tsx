@@ -16,11 +16,16 @@ const ContactUs: React.FC<{}> = ({}) => {
                             <span>Design</span>
                             <span>of Furniture</span>
                         </h2>
+
                         <p>Is is a long established fact that a reader will be distracted by the readable content of</p>
-                        <NextLink href="/">
-                            <a>Contact us</a>
-                        </NextLink>
+
+                        <div className={`button-wrapper`}>
+                            <NextLink href="/">
+                                <a>Contact us</a>
+                            </NextLink>
+                        </div>
                     </div>
+
                     <div className={[site.column, styles.image].join(' ')}>
                         <span>Image</span>
                     </div>
