@@ -3,7 +3,7 @@ $fieldsWidth: 100%;
 
 .site-form {
     padding: 3em 0;
-    background-color: #fff;
+    background-color: $mainBackgroundColor;
 
     div:not(:last-child) {
         margin-bottom: 3em;

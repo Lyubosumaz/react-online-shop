@@ -1,7 +1,9 @@
 import React from 'react';
-import Wrapper from '../site/Wrapper';
-import styles from '../../styles/scss/3-components/OurWork.module.scss';
 import NextLink from 'next/link';
+import Wrapper from '../site/Wrapper';
+import site from '../../styles/scss/2-basics/Site.module.scss';
+import buttons from '../../styles/scss/2-basics/Buttons.module.scss';
+import styles from '../../styles/scss/3-components/OurWork.module.scss';
 
 const OurWork: React.FC<{}> = ({}) => {
     return (
@@ -16,30 +18,45 @@ const OurWork: React.FC<{}> = ({}) => {
 
                         <ul>
                             <li>
-                                <h6>Chair 1</h6>
-                                <div className="actual-image"></div>
+                                <h6>Chair 01</h6>
+
+                                <div className={site[`image`]}>
+                                    <span>Image</span>
+                                </div>
+
                                 <h6>Price $100</h6>
-                                <button>Buy Now</button>
+
+                                <button className={buttons[`main-btn`]}>Buy Now</button>
                             </li>
 
                             <li>
-                                <h6>Chair 1</h6>
-                                <div className="actual-image"></div>
-                                <h6>Price $100</h6>
-                                <button>Buy Now</button>
+                                <h6>Chair 02</h6>
+
+                                <div className={site[`image`]}>
+                                    <span>Image</span>
+                                </div>
+
+                                <h6>Price $120</h6>
+
+                                <button className={buttons[`main-btn`]}>Buy Now</button>
                             </li>
 
                             <li>
-                                <h6>Chair 1</h6>
-                                <div className="actual-image"></div>
-                                <h6>Price $100</h6>
-                                <button>Buy Now</button>
+                                <h6>Table</h6>
+
+                                <div className={site[`image`]}>
+                                    <span>Image</span>
+                                </div>
+
+                                <h6>Price $240</h6>
+
+                                <button className={buttons[`main-btn`]}>Buy Now</button>
                             </li>
                         </ul>
 
-                        <div className={styles[`button-wrapper`]}>
+                        <div className={buttons[`button-wrapper`]}>
                             <NextLink href="/">
-                                <a>Read More</a>
+                                <a className={buttons[`seconders-btn`]}>Read More</a>
                             </NextLink>
                         </div>
                     </div>

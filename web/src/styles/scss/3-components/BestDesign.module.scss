@@ -5,7 +5,6 @@
     display: flex;
     background-color: $secondaryColor;
     color: $mainColor;
-    box-shadow: 0 0.3em 1em -0.3em rgba(0, 0, 0, 0.75);
 }
 
 .description {
@@ -25,12 +24,5 @@
 
     p {
         max-width: 20em;
-    }
-
-    a {
-        display: inline-block;
-        padding: 0.75em 2em;
-        border: $mainElementBorder;
-        color: $mainColor;
     }
 }
