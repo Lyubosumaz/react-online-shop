@@ -1,32 +1,10 @@
 @import '../1-utilities/variables';
 
-.hidden {
-    display: none;
-}
-
-.column {
-    flex-basis: 50%;
-}
-
-.center {
-    position: relative;
-
-    span {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-}
-
-.site-logo {
-    color: #fff;
-}
-
 .button-wrapper {
     display: flex;
     justify-content: center;
 }
+
 .main-btn {
     padding: 0.4em 1.5em;
     border: 0.2em solid transparent;

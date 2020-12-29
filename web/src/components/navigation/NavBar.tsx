@@ -7,7 +7,6 @@ import { createUrqlClient } from '../../utils/createUrqlClient';
 import Wrapper from '../../components/site/Wrapper';
 import styles from '../../styles/scss/3-components/NavBar.module.scss';
 import site from '../../styles/scss/2-basics/Site.module.scss';
-import '../../styles/scss/2-basics/_buttons.scss';
 
 interface NavBarProps {}
 
@@ -61,7 +60,7 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
 
                 <li>
                     <div className={styles[`button-wrapper`]}>
-                        <button className="btn" onClick={() => logout()}>
+                        <button className={site['main-btn']} onClick={() => logout()}>
                             Logout
                         </button>
                     </div>
