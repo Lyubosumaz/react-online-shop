@@ -1,6 +1,6 @@
 import React from 'react';
 import Wrapper from '../site/Wrapper';
-import styles from '../../styles/scss/OurWork.module.scss';
+import styles from '../../styles/scss/3-components/OurWork.module.scss';
 import NextLink from 'next/link';
 
 const OurWork: React.FC<{}> = ({}) => {

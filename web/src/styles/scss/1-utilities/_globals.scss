@@ -14,7 +14,7 @@ html {
 }
 
 body {
-    background: #A55;
+    background: #a55;
 }
 
 input,
@@ -22,14 +22,31 @@ button {
     font-size: inherit;
 }
 
-h1 { font-size: 3em; }
-h2 { font-size: 2.6em; }
-h3 { font-size: 2.2em; }
-h4 { font-size: 2.0em; }
-h5 { font-size: 1.6em; }
-h6 { font-size: 1.2em; }
+h1 {
+    font-size: 3em;
+}
+h2 {
+    font-size: 2.6em;
+}
+h3 {
+    font-size: 2.2em;
+}
+h4 {
+    font-size: 2em;
+}
+h5 {
+    font-size: 1.6em;
+}
+h6 {
+    font-size: 1.2em;
+}
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     line-height: 1.1;
 }
 
@@ -42,8 +59,6 @@ a {
 }
 
 // NavBar
-nav {
-}
 
 ul {
     display: flex;

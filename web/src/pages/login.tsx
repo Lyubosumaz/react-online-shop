@@ -5,9 +5,9 @@ import { toErrorMap } from '../utils/toErrorMap';
 import { useRouter } from 'next/router';
 import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../utils/createUrqlClient';
-import stylesSpinner from '../styles/Spinner.module.scss';
+import stylesSpinner from '../styles/scss/3-components/Spinner.module.scss';
 import Wrapper from '../components/site/Wrapper';
-import styles from '../styles/scss/Forms.module.scss';
+import styles from '../styles/scss/4-pages/Forms.module.scss';
 
 interface ErrType {
     [key: string]: string;
@@ -48,7 +48,7 @@ const Login: React.FC<{}> = ({}) => {
                             <Field name="usernameOrEmail" validate={required}>
                                 {({ input, meta }) => (
                                     <div>
-                                        <label>Username or Email</label>
+                                        <label>Username or Email:</label>
                                         <input {...input} type="text" placeholder="John Doe or john@doe.com" />
                                         {meta.error && meta.touched && <span>{meta.error}</span>}
                                         {errors['usernameOrEmail'] ? <div>{errors['usernameOrEmail']}</div> : <div>123</div>}
@@ -60,7 +60,7 @@ const Login: React.FC<{}> = ({}) => {
                             <Field name="password" validate={required}>
                                 {({ input, meta }) => (
                                     <div>
-                                        <label>Password</label>
+                                        <label>Password:</label>
                                         <input {...input} type="password" placeholder="********" />
                                         {meta.error && meta.touched && <span>{meta.error}</span>}
                                         {errors['password'] ? <div>{errors['password']}</div> : <div>123</div>}

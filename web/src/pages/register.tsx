@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Field, withTypes } from 'react-final-form';
 import { useRegisterMutation } from '../generated/graphql';
-import stylesSpinner from '../styles/Spinner.module.scss';
+import stylesSpinner from '../styles/scss/3-components/Spinner.module.scss';
 import { toErrorMap } from '../utils/toErrorMap';
 import { useRouter } from 'next/router';
 import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../utils/createUrqlClient';
-import styles from '../styles/scss/Forms.module.scss';
+import styles from '../styles/scss/4-pages/Forms.module.scss';
 import Wrapper from '../components/site/Wrapper';
 
 interface ErrType {

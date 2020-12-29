@@ -1,4 +1,4 @@
-import styles from '../styles/scss/Home.module.scss';
+import styles from '../styles/scss/4-pages/Home.module.scss';
 import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../utils/createUrqlClient';
 import { useItemsQuery } from '../generated/graphql';

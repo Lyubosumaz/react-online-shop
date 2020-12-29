@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import React, { useState } from 'react';
 import { withTypes, Field } from 'react-final-form';
 import { toErrorMap } from '../../utils/toErrorMap';
-import stylesSpinner from '../../styles/Spinner.module.scss';
+import stylesSpinner from '../../styles/scss/3-components/Spinner.module.scss';
 import { useChangePasswordMutation } from '../../generated/graphql';
 import { useRouter } from 'next/router';
 import { withUrqlClient } from 'next-urql';

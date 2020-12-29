@@ -1,0 +1,14 @@
+button {
+    padding: 0.4em 1.5em;
+    border: 0.2em solid transparent;
+    border-radius: 0.5em;
+    color: $secondaryLighterColor;
+    background-color: $mainColor;
+    text-transform: uppercase;
+
+    &:hover {
+        border-color: $secondaryLighterColor;
+        color: $mainColor;
+        background-color: $secondaryLighterColor;
+    }
+}

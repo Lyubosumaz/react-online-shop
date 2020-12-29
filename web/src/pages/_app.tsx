@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import NavBar from '../components/navigation/NavBar';
-import '../styles/globals.scss';
+import '../styles/scss/styles.scss';
 
 function MyApp({ Component, pageProps }: any) {
     return (

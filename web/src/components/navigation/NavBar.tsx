@@ -5,7 +5,7 @@ import { isServer } from '../../utils/isServer';
 import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../../utils/createUrqlClient';
 import Wrapper from '../../components/site/Wrapper';
-import styles from '../../styles/NavBar.module.scss';
+import styles from '../../styles/scss/3-components/NavBar.module.scss';
 
 interface NavBarProps {}
 

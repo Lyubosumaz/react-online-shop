@@ -1,6 +1,6 @@
 import React from 'react';
-import site from '../../styles/scss/Site.module.scss';
-import styles from '../../styles/scss/AboutUs.module.scss';
+import site from '../../styles/scss/2-basics/Site.module.scss';
+import styles from '../../styles/scss/3-components/AboutUs.module.scss';
 import Wrapper from '../site/Wrapper';
 import NextLink from 'next/link';
 
