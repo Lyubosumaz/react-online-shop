@@ -5,7 +5,7 @@ import styles from '../../styles/scss/3-components/ContactUs.module.scss';
 
 import Wrapper from '../site/Wrapper';
 
-const ContactUs: React.FC<{}> = ({}) => {
+const BestDesign: React.FC<{}> = ({}) => {
     return (
         <>
             <div className={styles['contact-us']}>
@@ -35,4 +35,4 @@ const ContactUs: React.FC<{}> = ({}) => {
     );
 };
 
-export default ContactUs;
+export default BestDesign;
