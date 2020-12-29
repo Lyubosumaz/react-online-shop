@@ -6,11 +6,13 @@ import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../../utils/createUrqlClient';
 import Wrapper from '../../components/site/Wrapper';
 import styles from '../../styles/scss/3-components/NavBar.module.scss';
+import site from '../../styles/scss/2-basics/Site.module.scss';
+import '../../styles/scss/2-basics/_buttons.scss';
 
 interface NavBarProps {}
 
 const NavBar: React.FC<NavBarProps> = ({}) => {
-    const [{ fetching: LogoutFetching }, logout] = useLogoutMutation();
+    const [, logout] = useLogoutMutation();
     const [{ data, fetching }] = useMeQuery({
         pause: isServer(),
     });
@@ -51,8 +53,19 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
         // user is logged in
         body = (
             <>
-                <div>{data.me.username}</div>
-                <button onClick={() => logout()}>Logout</button>
+                <li>
+                    <div className={`user-welcome`}>
+                        <span>Welcome {data.me.username}!</span>
+                    </div>
+                </li>
+
+                <li>
+                    <div className={styles[`button-wrapper`]}>
+                        <button className="btn" onClick={() => logout()}>
+                            Logout
+                        </button>
+                    </div>
+                </li>
             </>
         );
     }
@@ -60,6 +73,7 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
     return (
         <nav className={styles.nav}>
             <Wrapper>
+                <p className={site[`site-logo`]}>ROS</p>
                 <ul>{body}</ul>
             </Wrapper>
         </nav>
