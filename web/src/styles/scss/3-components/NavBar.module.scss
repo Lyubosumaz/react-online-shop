@@ -5,10 +5,15 @@
     background-color: $mainColor;
     border-top: $navBorder;
     border-bottom: $navBorder;
+    color: $secondaryLighterColor;
 
     & > div > ul {
         flex-basis: 100%;
     }
+}
+
+.logo-wrapper {
+    margin-right: 2em;
 }
 
 .list {

@@ -7,6 +7,7 @@ import { createUrqlClient } from '../../utils/createUrqlClient';
 import Wrapper from '../../components/site/Wrapper';
 import styles from '../../styles/scss/3-components/NavBar.module.scss';
 import site from '../../styles/scss/2-basics/Site.module.scss';
+import buttons from '../../styles/scss/2-basics/Buttons.module.scss';
 
 interface NavBarProps {}
 
@@ -52,18 +53,14 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
         // user is logged in
         body = (
             <>
-                <li>
-                    <div className={`user-welcome`}>
-                        <span>Welcome {data.me.username}!</span>
-                    </div>
+                <li className={site[`vertical-wrapper`]}>
+                    <span>Welcome {data.me.username}!</span>
                 </li>
 
                 <li>
-                    <div className={styles[`button-wrapper`]}>
-                        <button className={site['main-btn']} onClick={() => logout()}>
-                            Logout
-                        </button>
-                    </div>
+                    <button className={buttons[`main-btn`]} onClick={() => logout()}>
+                        Logout
+                    </button>
                 </li>
             </>
         );
@@ -72,7 +69,9 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
     return (
         <nav className={styles.nav}>
             <Wrapper>
-                <p className={site[`site-logo`]}>ROS</p>
+                <div className={[site[`vertical-wrapper`], styles[`logo-wrapper`]].join(' ')}>
+                    <p className={styles[`site-logo`]}>ROS</p>
+                </div>
                 <ul>{body}</ul>
             </Wrapper>
         </nav>

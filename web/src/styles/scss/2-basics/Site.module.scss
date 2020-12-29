@@ -8,6 +8,11 @@
     flex-basis: 50%;
 }
 
+.vertical-wrapper {
+    display: flex;
+    align-items: center;
+}
+
 .center {
     position: relative;
 
@@ -16,28 +21,5 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-    }
-}
-
-.site-logo {
-    color: #fff;
-}
-
-.button-wrapper {
-    display: flex;
-    justify-content: center;
-}
-.main-btn {
-    padding: 0.4em 1.5em;
-    border: 0.2em solid transparent;
-    border-radius: 0.5em;
-    color: $secondaryLighterColor;
-    background-color: $mainColor;
-    text-transform: uppercase;
-
-    &:hover {
-        border-color: $secondaryLighterColor;
-        color: $mainColor;
-        background-color: $secondaryLighterColor;
     }
 }
