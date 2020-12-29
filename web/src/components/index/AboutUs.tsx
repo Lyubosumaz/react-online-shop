@@ -12,7 +12,9 @@ const AboutUs: React.FC<{}> = ({}) => {
                 <Wrapper>
                     <div className={[site.column].join(' ')}>
                         <div className={styles[`image-wrapper`]}>
-                            <div className="actual-image"></div>
+                            <div className={site[`image`]}>
+                                <span>Image</span>
+                            </div>
                         </div>
                     </div>
 

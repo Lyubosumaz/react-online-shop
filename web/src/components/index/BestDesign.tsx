@@ -1,7 +1,7 @@
 import NextLink from 'next/link';
 import React from 'react';
 import site from '../../styles/scss/2-basics/Site.module.scss';
-import styles from '../../styles/scss/3-components/ContactUs.module.scss';
+import styles from '../../styles/scss/3-components/BestDesign.module.scss';
 
 import Wrapper from '../site/Wrapper';
 
@@ -26,7 +26,7 @@ const BestDesign: React.FC<{}> = ({}) => {
                         </div>
                     </div>
 
-                    <div className={[site.column, styles.image].join(' ')}>
+                    <div className={[site.column, site.image].join(' ')}>
                         <span>Image</span>
                     </div>
                 </Wrapper>

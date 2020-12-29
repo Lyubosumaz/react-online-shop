@@ -1,5 +1,20 @@
 @import '../1-utilities/variables';
 
+// TODO:
+// after adding actual images delete this style
+.image {
+    position: relative;
+    background-color: #bbb;
+
+    span {
+        position: absolute;
+        color: $mainColor;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
 .hidden {
     display: none;
 }
@@ -11,15 +26,4 @@
 .vertical-wrapper {
     display: flex;
     align-items: center;
-}
-
-.center {
-    position: relative;
-
-    span {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
 }
