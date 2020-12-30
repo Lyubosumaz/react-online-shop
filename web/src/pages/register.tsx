@@ -7,6 +7,7 @@ import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../utils/createUrqlClient';
 import styles from '../styles/scss/4-pages/Forms.module.scss';
 import stylesSpinner from '../styles/scss/3-components/Spinner.module.scss';
+import buttons from '../styles/scss/2-basics/Buttons.module.scss';
 import Wrapper from '../components/site/Wrapper';
 
 interface ErrType {
@@ -84,7 +85,9 @@ const Register: React.FC<registerProps> = ({}) => {
                             </Field>
 
                             <div className={styles[`button-wrapper`]}>
-                                <button type="submit">Register</button>
+                                <button className={buttons[`main-btn`]} type="submit">
+                                    Register
+                                </button>
                             </div>
                         </Wrapper>
                     </form>

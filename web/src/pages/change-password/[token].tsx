@@ -2,12 +2,13 @@ import { NextPage } from 'next';
 import React, { useState } from 'react';
 import { withTypes, Field } from 'react-final-form';
 import { toErrorMap } from '../../utils/toErrorMap';
-import stylesSpinner from '../../styles/scss/3-components/Spinner.module.scss';
 import { useChangePasswordMutation } from '../../generated/graphql';
 import { useRouter } from 'next/router';
 import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../../utils/createUrqlClient';
 import NextLink from 'next/link';
+import stylesSpinner from '../../styles/scss/3-components/Spinner.module.scss';
+import buttons from '../../styles/scss/2-basics/Buttons.module.scss';
 
 interface ErrType {
     [key: string]: string;
@@ -67,7 +68,9 @@ const ChangePassword: NextPage<{ token: string }> = ({ token }) => {
                         </Field>
 
                         <div className="buttons">
-                            <button type="submit">Change Password</button>
+                            <button className={buttons[`main-btn`]} type="submit">
+                                Change Password
+                            </button>
                             <NextLink href="/forgotten-password">forgot password?</NextLink>
                             {errors['token'] ? <div>{errors['token']}</div> : <div>123</div>}
                         </div>

@@ -8,6 +8,7 @@ import { createUrqlClient } from '../utils/createUrqlClient';
 import stylesSpinner from '../styles/scss/3-components/Spinner.module.scss';
 import Wrapper from '../components/site/Wrapper';
 import styles from '../styles/scss/4-pages/Forms.module.scss';
+import buttons from '../styles/scss/2-basics/Buttons.module.scss';
 
 interface ErrType {
     [key: string]: string;
@@ -70,7 +71,9 @@ const Login: React.FC<{}> = ({}) => {
                             </Field>
 
                             <div className={styles[`button-wrapper`]}>
-                                <button type="submit">Login</button>
+                                <button className={buttons[`main-btn`]} type="submit">
+                                    Login
+                                </button>
                             </div>
                         </Wrapper>
                     </form>
