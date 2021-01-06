@@ -48,9 +48,12 @@ let ItemsResolver = class ItemsResolver {
             return Items_1.Items.findOne(id);
         });
     }
-    createItem(input) {
+    createItem(input, { req }) {
         return __awaiter(this, void 0, void 0, function* () {
-            return Items_1.Items.create(Object.assign({}, input)).save();
+            if (!req.session.userId) {
+                throw new Error('not authenticated');
+            }
+            return Items_1.Items.create(Object.assign(Object.assign({}, input), { customerId: req.session.userId })).save();
         });
     }
     updateItem(id, title) {
@@ -92,9 +95,9 @@ __decorate([
 ], ItemsResolver.prototype, "item", null);
 __decorate([
     type_graphql_1.Mutation(() => Items_1.Items),
-    __param(0, type_graphql_1.Arg('input')),
+    __param(0, type_graphql_1.Arg('input')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [ItemsInput]),
+    __metadata("design:paramtypes", [ItemsInput, Object]),
     __metadata("design:returntype", Promise)
 ], ItemsResolver.prototype, "createItem", null);
 __decorate([

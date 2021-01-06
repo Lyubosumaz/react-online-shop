@@ -1,5 +1,6 @@
 import { Items } from '../entities/Items';
-import { Arg, Field, InputType, Mutation, Query, Resolver } from 'type-graphql';
+import { Arg, Ctx, Field, InputType, Mutation, Query, Resolver } from 'type-graphql';
+import { MyContext } from 'src/types';
 
 @InputType()
 class ItemsInput {
@@ -22,9 +23,15 @@ export class ItemsResolver {
     }
 
     @Mutation(() => Items)
-    async createItem(@Arg('input') input: ItemsInput): Promise<Items> {
+    async createItem(@Arg('input') input: ItemsInput, @Ctx() { req }: MyContext): Promise<Items> {
+        // if (true) {
+        if (!req.session.userId) {
+            throw new Error('not authenticated');
+        }
+
         return Items.create({
             ...input,
+            customerId: req.session.userId,
         }).save();
     }
 
