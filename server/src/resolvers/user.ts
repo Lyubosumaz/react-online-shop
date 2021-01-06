@@ -186,6 +186,7 @@ export class UserResolver {
             };
         }
 
+        // TODO have problems with redis session
         console.log(req.session);
         req.session.userId = user.id;
 

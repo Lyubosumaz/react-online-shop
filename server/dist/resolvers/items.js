@@ -51,10 +51,7 @@ let ItemsResolver = class ItemsResolver {
     createItem(input, { req }) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(req.session);
-            if (!req.session.userId) {
-                throw new Error('not authenticated');
-            }
-            return Items_1.Items.create(Object.assign(Object.assign({}, input), { customerId: req.session.userId })).save();
+            return Items_1.Items.create(Object.assign(Object.assign({}, input), { customerId: 1 })).save();
         });
     }
     updateItem(id, title) {

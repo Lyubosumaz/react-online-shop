@@ -24,15 +24,16 @@ export class ItemsResolver {
 
     @Mutation(() => Items)
     async createItem(@Arg('input') input: ItemsInput, @Ctx() { req }: MyContext): Promise<Items> {
-        // if (true) {
+        // TODO have problem with redis session, this validation check is user is logged to create
         console.log(req.session);
-        if (!req.session.userId) {
-            throw new Error('not authenticated');
-        }
+        // if (!req.session.userId) {
+        //     throw new Error('not authenticated');
+        // }
 
         return Items.create({
             ...input,
-            customerId: req.session.userId,
+            // customerId: req.session.userId,
+            customerId: 1,
         }).save();
     }
 
