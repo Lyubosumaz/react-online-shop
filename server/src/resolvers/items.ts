@@ -1,6 +1,7 @@
 import { Items } from '../entities/Items';
-import { Arg, Ctx, Field, InputType, Mutation, Query, Resolver } from 'type-graphql';
-import { MyContext } from 'src/types';
+import { Arg, Ctx, Field, InputType, Mutation, Query, Resolver, UseMiddleware } from 'type-graphql';
+import { MyContext } from '../types';
+import { isAuth } from '../middleware/isAuth';
 
 @InputType()
 class ItemsInput {
@@ -23,6 +24,8 @@ export class ItemsResolver {
     }
 
     @Mutation(() => Items)
+    // TODO that is graphql validation that is not working because of redis
+    // @UseMiddleware(isAuth)
     async createItem(@Arg('input') input: ItemsInput, @Ctx() { req }: MyContext): Promise<Items> {
         // TODO have problem with redis session, this validation check is user is logged to create
         console.log(req.session);
