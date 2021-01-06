@@ -25,6 +25,7 @@ export class ItemsResolver {
     @Mutation(() => Items)
     async createItem(@Arg('input') input: ItemsInput, @Ctx() { req }: MyContext): Promise<Items> {
         // if (true) {
+        console.log(req.session);
         if (!req.session.userId) {
             throw new Error('not authenticated');
         }
