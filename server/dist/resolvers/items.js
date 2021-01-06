@@ -24,6 +24,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ItemsResolver = void 0;
 const Items_1 = require("../entities/Items");
 const type_graphql_1 = require("type-graphql");
+const isAuth_1 = require("../middleware/isAuth");
 let ItemsInput = class ItemsInput {
 };
 __decorate([
@@ -50,8 +51,7 @@ let ItemsResolver = class ItemsResolver {
     }
     createItem(input, { req }) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(req.session);
-            return Items_1.Items.create(Object.assign(Object.assign({}, input), { customerId: 1 })).save();
+            return Items_1.Items.create(Object.assign(Object.assign({}, input), { customerId: req.session.userId })).save();
         });
     }
     updateItem(id, title) {
@@ -93,6 +93,7 @@ __decorate([
 ], ItemsResolver.prototype, "item", null);
 __decorate([
     type_graphql_1.Mutation(() => Items_1.Items),
+    type_graphql_1.UseMiddleware(isAuth_1.isAuth),
     __param(0, type_graphql_1.Arg('input')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [ItemsInput, Object]),

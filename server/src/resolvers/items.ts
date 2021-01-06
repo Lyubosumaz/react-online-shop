@@ -24,19 +24,11 @@ export class ItemsResolver {
     }
 
     @Mutation(() => Items)
-    // TODO that is graphql validation that is not working because of redis
-    // @UseMiddleware(isAuth)
+    @UseMiddleware(isAuth)
     async createItem(@Arg('input') input: ItemsInput, @Ctx() { req }: MyContext): Promise<Items> {
-        // TODO have problem with redis session, this validation check is user is logged to create
-        console.log(req.session);
-        // if (!req.session.userId) {
-        //     throw new Error('not authenticated');
-        // }
-
         return Items.create({
             ...input,
-            // customerId: req.session.userId,
-            customerId: 1,
+            customerId: req.session.userId,
         }).save();
     }
 
