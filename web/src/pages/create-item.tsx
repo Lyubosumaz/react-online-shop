@@ -1,13 +1,14 @@
 import { withUrqlClient } from 'next-urql';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Field, withTypes } from 'react-final-form';
 import Wrapper from '../components/site/Wrapper';
-import { useCreateItemMutation, useMeQuery } from '../generated/graphql';
+import { useCreateItemMutation } from '../generated/graphql';
 import buttons from '../styles/scss/2-basics/Buttons.module.scss';
 import stylesSpinner from '../styles/scss/3-components/Spinner.module.scss';
 import styles from '../styles/scss/4-pages/Forms.module.scss';
 import { createUrqlClient } from '../utils/createUrqlClient';
+import { useIsAuth } from '../utils/useIsAuth';
 
 interface ErrType {
     [key: string]: string;
@@ -21,13 +22,8 @@ const { Form } = withTypes<MyValues>();
 const required = (value: any) => (value ? undefined : 'Required');
 
 const CreateItem: React.FC<{}> = ({}) => {
-    const [{ data, fetching }] = useMeQuery();
     const router = useRouter();
-    useEffect(() => {
-        if (!fetching && !data?.me) {
-            router.replace('/login');
-        }
-    }, [data, fetching, router]);
+    useIsAuth();
     const [, createItem] = useCreateItemMutation();
     const [errors, setErrors] = useState({} as ErrType);
 

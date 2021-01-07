@@ -31,6 +31,11 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
                                 <a>Home</a>
                             </NextLink>
                         </li>
+                        <li className={styles.list}>
+                            <NextLink href="/create-item">
+                                <a>Create Item</a>
+                            </NextLink>
+                        </li>
                     </ul>
                 </li>
                 <li className={`nav-items user`}>
@@ -53,6 +58,12 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
         // user is logged in
         body = (
             <>
+                <li className={styles.list}>
+                    <NextLink href="/create-item">
+                        <a>Create Item</a>
+                    </NextLink>
+                </li>
+
                 <li className={site[`vertical-wrapper`]}>
                     <span>Welcome {data.me.username}!</span>
                 </li>
