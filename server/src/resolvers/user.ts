@@ -1,13 +1,12 @@
+import argon2 from 'argon2';
+import { Arg, Ctx, Field, Mutation, ObjectType, Query, Resolver } from 'type-graphql';
+import { v4 } from 'uuid';
+import { COOKIE_NAME, FORGOTTEN_PASSWORD_PREFIX } from '../constants';
 import { User } from '../entities/User';
 import { MyContext } from '../types';
-import { Arg, Ctx, Field, Mutation, ObjectType, Query, Resolver } from 'type-graphql';
-import argon2 from 'argon2';
-import { COOKIE_NAME, FORGOTTEN_PASSWORD_PREFIX } from '../constants';
-import { UsernamePasswordInput } from './UsernamePasswordInput';
-import { validateRegister } from '../utils/validateRegister';
 import { sendEmail } from '../utils/sendEmail';
-import { v4 } from 'uuid';
-import { getConnection } from 'typeorm';
+import { validateRegister } from '../utils/validateRegister';
+import { UsernamePasswordInput } from './UsernamePasswordInput';
 
 @ObjectType()
 class FieldError {

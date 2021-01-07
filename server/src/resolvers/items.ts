@@ -1,7 +1,7 @@
-import { Items } from '../entities/Items';
 import { Arg, Ctx, Field, InputType, Mutation, Query, Resolver, UseMiddleware } from 'type-graphql';
-import { MyContext } from '../types';
+import { Items } from '../entities/Items';
 import { isAuth } from '../middleware/isAuth';
+import { MyContext } from '../types';
 
 @InputType()
 class ItemsInput {

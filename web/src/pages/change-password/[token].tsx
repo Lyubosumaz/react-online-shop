@@ -1,14 +1,14 @@
 import { NextPage } from 'next';
-import React, { useState } from 'react';
-import { withTypes, Field } from 'react-final-form';
-import { toErrorMap } from '../../utils/toErrorMap';
-import { useChangePasswordMutation } from '../../generated/graphql';
-import { useRouter } from 'next/router';
 import { withUrqlClient } from 'next-urql';
-import { createUrqlClient } from '../../utils/createUrqlClient';
 import NextLink from 'next/link';
-import stylesSpinner from '../../styles/scss/3-components/Spinner.module.scss';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import { Field, withTypes } from 'react-final-form';
+import { useChangePasswordMutation } from '../../generated/graphql';
 import buttons from '../../styles/scss/2-basics/Buttons.module.scss';
+import stylesSpinner from '../../styles/scss/3-components/Spinner.module.scss';
+import { createUrqlClient } from '../../utils/createUrqlClient';
+import { toErrorMap } from '../../utils/toErrorMap';
 
 interface ErrType {
     [key: string]: string;

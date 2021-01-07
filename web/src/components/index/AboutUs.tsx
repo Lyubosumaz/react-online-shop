@@ -1,9 +1,9 @@
-import React from 'react';
 import NextLink from 'next/link';
-import Wrapper from '../site/Wrapper';
-import site from '../../styles/scss/2-basics/Site.module.scss';
+import React from 'react';
 import buttons from '../../styles/scss/2-basics/Buttons.module.scss';
+import site from '../../styles/scss/2-basics/Site.module.scss';
 import styles from '../../styles/scss/3-components/AboutUs.module.scss';
+import Wrapper from '../site/Wrapper';
 
 const AboutUs: React.FC<{}> = ({}) => {
     return (

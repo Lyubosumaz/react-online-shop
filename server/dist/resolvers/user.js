@@ -25,14 +25,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserResolver = void 0;
-const User_1 = require("../entities/User");
-const type_graphql_1 = require("type-graphql");
 const argon2_1 = __importDefault(require("argon2"));
-const constants_1 = require("../constants");
-const UsernamePasswordInput_1 = require("./UsernamePasswordInput");
-const validateRegister_1 = require("../utils/validateRegister");
-const sendEmail_1 = require("../utils/sendEmail");
+const type_graphql_1 = require("type-graphql");
 const uuid_1 = require("uuid");
+const constants_1 = require("../constants");
+const User_1 = require("../entities/User");
+const sendEmail_1 = require("../utils/sendEmail");
+const validateRegister_1 = require("../utils/validateRegister");
+const UsernamePasswordInput_1 = require("./UsernamePasswordInput");
 let FieldError = class FieldError {
 };
 __decorate([

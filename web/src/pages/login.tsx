@@ -1,14 +1,14 @@
+import { withUrqlClient } from 'next-urql';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { Field, withTypes } from 'react-final-form';
-import { useLoginMutation } from '../generated/graphql';
-import { toErrorMap } from '../utils/toErrorMap';
-import { useRouter } from 'next/router';
-import { withUrqlClient } from 'next-urql';
-import { createUrqlClient } from '../utils/createUrqlClient';
 import Wrapper from '../components/site/Wrapper';
+import { useLoginMutation } from '../generated/graphql';
+import buttons from '../styles/scss/2-basics/Buttons.module.scss';
 import stylesSpinner from '../styles/scss/3-components/Spinner.module.scss';
 import styles from '../styles/scss/4-pages/Forms.module.scss';
-import buttons from '../styles/scss/2-basics/Buttons.module.scss';
+import { createUrqlClient } from '../utils/createUrqlClient';
+import { toErrorMap } from '../utils/toErrorMap';
 
 interface ErrType {
     [key: string]: string;

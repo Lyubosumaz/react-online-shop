@@ -1,10 +1,10 @@
-import styles from '../styles/scss/4-pages/Home.module.scss';
 import { withUrqlClient } from 'next-urql';
-import { createUrqlClient } from '../utils/createUrqlClient';
-import { useItemsQuery } from '../generated/graphql';
-import BestDesign from '../components/index/BestDesign';
 import AboutUs from '../components/index/AboutUs';
+import BestDesign from '../components/index/BestDesign';
 import OurWork from '../components/index/OurWork';
+import { useItemsQuery } from '../generated/graphql';
+import styles from '../styles/scss/4-pages/Home.module.scss';
+import { createUrqlClient } from '../utils/createUrqlClient';
 
 const Home = () => {
     const [{ data }] = useItemsQuery();

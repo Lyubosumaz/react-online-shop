@@ -1,13 +1,13 @@
-import React from 'react';
-import NextLink from 'next/link';
-import { useLogoutMutation, useMeQuery } from '../../generated/graphql';
-import { isServer } from '../../utils/isServer';
 import { withUrqlClient } from 'next-urql';
-import { createUrqlClient } from '../../utils/createUrqlClient';
+import NextLink from 'next/link';
+import React from 'react';
 import Wrapper from '../../components/site/Wrapper';
-import styles from '../../styles/scss/3-components/NavBar.module.scss';
-import site from '../../styles/scss/2-basics/Site.module.scss';
+import { useLogoutMutation, useMeQuery } from '../../generated/graphql';
 import buttons from '../../styles/scss/2-basics/Buttons.module.scss';
+import site from '../../styles/scss/2-basics/Site.module.scss';
+import styles from '../../styles/scss/3-components/NavBar.module.scss';
+import { createUrqlClient } from '../../utils/createUrqlClient';
+import { isServer } from '../../utils/isServer';
 
 interface NavBarProps {}
 

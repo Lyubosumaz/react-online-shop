@@ -1,9 +1,8 @@
 import NextLink from 'next/link';
 import React from 'react';
-import site from '../../styles/scss/2-basics/Site.module.scss';
 import buttons from '../../styles/scss/2-basics/Buttons.module.scss';
+import site from '../../styles/scss/2-basics/Site.module.scss';
 import styles from '../../styles/scss/3-components/BestDesign.module.scss';
-
 import Wrapper from '../site/Wrapper';
 
 const BestDesign: React.FC<{}> = ({}) => {

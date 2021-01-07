@@ -1,19 +1,19 @@
-import 'reflect-metadata';
-import { COOKIE_NAME, __prod__ } from './constants';
-import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
+import connectRedis from 'connect-redis';
+import corn from 'cors';
+import express from 'express';
+import session from 'express-session';
+import Redis from 'ioredis';
+import 'reflect-metadata';
 import { buildSchema } from 'type-graphql';
+import { createConnection } from 'typeorm';
+import { COOKIE_NAME, __prod__ } from './constants';
+import { Items } from './entities/Items';
+import { User } from './entities/User';
 import { HelloResolver } from './resolvers/hello';
 import { ItemsResolver } from './resolvers/items';
 import { UserResolver } from './resolvers/user';
-import Redis from 'ioredis';
-import session from 'express-session';
-import connectRedis from 'connect-redis';
 import { MyContext } from './types';
-import corn from 'cors';
-import { createConnection } from 'typeorm';
-import { User } from './entities/User';
-import { Items } from './entities/Items';
 
 const main = async () => {
     const conn = await createConnection({
