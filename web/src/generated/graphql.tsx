@@ -24,24 +24,28 @@ export type Query = {
 
 
 export type QueryItemArgs = {
-  id: Scalars['Int'];
+  id: Scalars['Float'];
 };
 
 export type Items = {
   __typename?: 'Items';
   id: Scalars['Int'];
+  title: Scalars['String'];
+  stars: Scalars['Float'];
+  description: Scalars['String'];
+  price: Scalars['Float'];
+  customerId: Scalars['Float'];
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
-  title: Scalars['String'];
 };
 
 export type User = {
   __typename?: 'User';
   id: Scalars['Int'];
-  createdAt: Scalars['String'];
-  updatedAt: Scalars['String'];
   username: Scalars['String'];
   email: Scalars['String'];
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
 };
 
 export type Mutation = {
@@ -58,18 +62,18 @@ export type Mutation = {
 
 
 export type MutationCreateItemArgs = {
-  title: Scalars['String'];
+  input: ItemsInput;
 };
 
 
 export type MutationUpdateItemArgs = {
   title?: Maybe<Scalars['String']>;
-  id: Scalars['Int'];
+  id: Scalars['Float'];
 };
 
 
 export type MutationDeleteItemArgs = {
-  id: Scalars['Int'];
+  id: Scalars['Float'];
 };
 
 
@@ -92,6 +96,11 @@ export type MutationRegisterArgs = {
 export type MutationLoginArgs = {
   password: Scalars['String'];
   usernameOrEmail: Scalars['String'];
+};
+
+export type ItemsInput = {
+  title: Scalars['String'];
+  description: Scalars['String'];
 };
 
 export type UserResponse = {
@@ -144,6 +153,19 @@ export type ChangePasswordMutation = (
   & { changePassword: (
     { __typename?: 'UserResponse' }
     & RegularUserResponseFragment
+  ) }
+);
+
+export type CreateItemMutationVariables = Exact<{
+  input: ItemsInput;
+}>;
+
+
+export type CreateItemMutation = (
+  { __typename?: 'Mutation' }
+  & { createItem: (
+    { __typename?: 'Items' }
+    & Pick<Items, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'description' | 'stars' | 'customerId'>
   ) }
 );
 
@@ -247,6 +269,23 @@ export const ChangePasswordDocument = gql`
 
 export function useChangePasswordMutation() {
   return Urql.useMutation<ChangePasswordMutation, ChangePasswordMutationVariables>(ChangePasswordDocument);
+};
+export const CreateItemDocument = gql`
+    mutation CreateItem($input: ItemsInput!) {
+  createItem(input: $input) {
+    id
+    createdAt
+    updatedAt
+    title
+    description
+    stars
+    customerId
+  }
+}
+    `;
+
+export function useCreateItemMutation() {
+  return Urql.useMutation<CreateItemMutation, CreateItemMutationVariables>(CreateItemDocument);
 };
 export const ForgottenPasswordDocument = gql`
     mutation ForgottenPassword($email: String!) {

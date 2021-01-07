@@ -1,70 +1,68 @@
-import React, { useState } from 'react';
-import { Field, withTypes } from 'react-final-form';
-import { useLoginMutation } from '../generated/graphql';
-import { toErrorMap } from '../utils/toErrorMap';
-import { useRouter } from 'next/router';
 import { withUrqlClient } from 'next-urql';
-import { createUrqlClient } from '../utils/createUrqlClient';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { Field, withTypes } from 'react-final-form';
 import Wrapper from '../components/site/Wrapper';
+import { useCreateItemMutation, useMeQuery } from '../generated/graphql';
+import buttons from '../styles/scss/2-basics/Buttons.module.scss';
 import stylesSpinner from '../styles/scss/3-components/Spinner.module.scss';
 import styles from '../styles/scss/4-pages/Forms.module.scss';
-import buttons from '../styles/scss/2-basics/Buttons.module.scss';
+import { createUrqlClient } from '../utils/createUrqlClient';
 
 interface ErrType {
     [key: string]: string;
 }
-
 type MyValues = {
-    usernameOrEmail: string;
-    password: string;
+    title: string;
+    description: string;
 };
 
 const { Form } = withTypes<MyValues>();
 const required = (value: any) => (value ? undefined : 'Required');
-// const composeValidators = (...validators) => (value) => validators.reduce((error, validator) => error || validator(value), undefined);
 
-const Login: React.FC<{}> = ({}) => {
+const CreateItem: React.FC<{}> = ({}) => {
+    const [{ data, fetching }] = useMeQuery();
     const router = useRouter();
-    const [, login] = useLoginMutation();
+    useEffect(() => {
+        if (!fetching && !data?.me) {
+            router.replace('/login');
+        }
+    }, [data, fetching, router]);
+    const [, createItem] = useCreateItemMutation();
     const [errors, setErrors] = useState({} as ErrType);
 
     return (
         <>
             <Form
                 onSubmit={async (values: MyValues) => {
-                    if (values.usernameOrEmail && values.password) {
-                        const response = await login(values);
+                    const { error } = await createItem({ input: values });
 
-                        if (response.data?.login.errors) {
-                            setErrors(toErrorMap(response.data.login.errors));
-                        } else if (response.data?.login.user) {
-                            setErrors({});
-                            router.push('/');
-                        }
+                    if (!error) {
+                        router.push('/');
                     }
                 }}
                 render={({ handleSubmit }) => (
                     <form className={styles['site-form']} onSubmit={handleSubmit}>
                         <Wrapper>
-                            <Field name="usernameOrEmail" validate={required}>
+                            <Field name="title" validate={required}>
                                 {({ input, meta }) => (
                                     <div>
-                                        <label>Username or Email:</label>
-                                        <input {...input} type="text" placeholder="John Doe or john@doe.com" />
+                                        <label>Title:</label>
+                                        <input {...input} type="text" />
                                         {meta.error && meta.touched && <span>{meta.error}</span>}
-                                        {errors['usernameOrEmail'] ? <div>{errors['usernameOrEmail']}</div> : <div>123</div>}
+                                        {errors['title'] ? <div>{errors['title']}</div> : <div>123</div>}
                                         {meta.validating && <div className={stylesSpinner.div}></div>}
                                     </div>
                                 )}
                             </Field>
 
-                            <Field name="password" validate={required}>
+                            <Field name="description" validate={required}>
                                 {({ input, meta }) => (
                                     <div>
-                                        <label>Password:</label>
-                                        <input {...input} type="password" placeholder="********" />
+                                        <label>Description:</label>
+                                        <input {...input} type="text" />
                                         {meta.error && meta.touched && <span>{meta.error}</span>}
-                                        {errors['password'] ? <div>{errors['password']}</div> : <div>123</div>}
+                                        {errors['description'] ? <div>{errors['description']}</div> : <div>123</div>}
                                         {meta.validating && <div className={stylesSpinner.div}></div>}
                                     </div>
                                 )}
@@ -72,7 +70,7 @@ const Login: React.FC<{}> = ({}) => {
 
                             <div className={styles[`button-wrapper`]}>
                                 <button className={buttons[`main-btn`]} type="submit">
-                                    Login
+                                    Create Item
                                 </button>
                             </div>
                         </Wrapper>
@@ -83,4 +81,4 @@ const Login: React.FC<{}> = ({}) => {
     );
 };
 
-export default withUrqlClient(createUrqlClient, { ssr: false })(Login);
+export default withUrqlClient(createUrqlClient, { ssr: false })(CreateItem);
