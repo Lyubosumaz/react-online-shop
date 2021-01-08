@@ -1,4 +1,4 @@
-import { NextPage } from 'next';
+// import { NextPage } from 'next';
 import { withUrqlClient } from 'next-urql';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
@@ -22,7 +22,7 @@ type MyValues = {
 const { Form } = withTypes<MyValues>();
 const required = (value: any) => (value ? undefined : 'Required');
 
-const ChangePassword: NextPage<{ token: string }> = ({ token }) => {
+const ChangePassword: React.FC<{}> = () => {
     const router = useRouter();
     const [, changePassword] = useChangePasswordMutation();
     const [errors, setErrors] = useState({} as ErrType);
@@ -32,7 +32,10 @@ const ChangePassword: NextPage<{ token: string }> = ({ token }) => {
             <Form
                 onSubmit={async (values: MyValues) => {
                     if (values.newPassword && values.repPassword && values.newPassword === values.repPassword) {
-                        const response = await changePassword({ token, newPassword: values.newPassword });
+                        const response = await changePassword({
+                            newPassword: values.newPassword,
+                            token: typeof router.query.token === 'string' ? router.query.token : '',
+                        });
                         if (response.data?.changePassword.errors) {
                             setErrors(toErrorMap(response.data.changePassword.errors));
                         } else if (response.data?.changePassword.user) {
@@ -81,10 +84,4 @@ const ChangePassword: NextPage<{ token: string }> = ({ token }) => {
     );
 };
 
-ChangePassword.getInitialProps = ({ query }) => {
-    return {
-        token: query.token as string,
-    };
-};
-
-export default withUrqlClient(createUrqlClient, { ssr: false })(ChangePassword as any);
+export default withUrqlClient(createUrqlClient, { ssr: false })(ChangePassword);
