@@ -1,5 +1,5 @@
-query Items {
-    items {
+query Items($limit: Int!, $cursor: String) {
+    items(limit: $limit, cursor: $cursor) {
         id
         createdAt
         updatedAt

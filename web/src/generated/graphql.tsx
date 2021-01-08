@@ -23,6 +23,12 @@ export type Query = {
 };
 
 
+export type QueryItemsArgs = {
+  cursor?: Maybe<Scalars['String']>;
+  limit: Scalars['Int'];
+};
+
+
 export type QueryItemArgs = {
   id: Scalars['Float'];
 };
@@ -214,7 +220,10 @@ export type RegisterMutation = (
   ) }
 );
 
-export type ItemsQueryVariables = Exact<{ [key: string]: never; }>;
+export type ItemsQueryVariables = Exact<{
+  limit: Scalars['Int'];
+  cursor?: Maybe<Scalars['String']>;
+}>;
 
 
 export type ItemsQuery = (
@@ -328,8 +337,8 @@ export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
 };
 export const ItemsDocument = gql`
-    query Items {
-  items {
+    query Items($limit: Int!, $cursor: String) {
+  items(limit: $limit, cursor: $cursor) {
     id
     createdAt
     updatedAt

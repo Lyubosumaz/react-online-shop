@@ -4,6 +4,7 @@ import corn from 'cors';
 import express from 'express';
 import session from 'express-session';
 import Redis from 'ioredis';
+import path from 'path';
 import 'reflect-metadata';
 import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
@@ -23,8 +24,11 @@ const main = async () => {
         password: 'root',
         logging: true,
         synchronize: true,
+        migrations: [path.join(__dirname, './migrations/*')],
         entities: [Items, User],
     });
+
+    // await conn.runMigrations();
 
     // await Items.delete({});
 

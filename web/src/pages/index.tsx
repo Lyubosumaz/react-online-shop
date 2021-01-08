@@ -7,7 +7,11 @@ import styles from '../styles/scss/4-pages/Home.module.scss';
 import { createUrqlClient } from '../utils/createUrqlClient';
 
 const Home = () => {
-    const [{ data }] = useItemsQuery();
+    const [{ data }] = useItemsQuery({
+        variables: {
+            limit: 10,
+        },
+    });
 
     return (
         <div className={styles.container}>

@@ -18,6 +18,7 @@ const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
 const express_session_1 = __importDefault(require("express-session"));
 const ioredis_1 = __importDefault(require("ioredis"));
+const path_1 = __importDefault(require("path"));
 require("reflect-metadata");
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
@@ -35,6 +36,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         password: 'root',
         logging: true,
         synchronize: true,
+        migrations: [path_1.default.join(__dirname, './migrations/*')],
         entities: [Items_1.Items, User_1.User],
     });
     const app = express_1.default();

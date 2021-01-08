@@ -23,6 +23,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ItemsResolver = void 0;
 const type_graphql_1 = require("type-graphql");
+const typeorm_1 = require("typeorm");
 const Items_1 = require("../entities/Items");
 const isAuth_1 = require("../middleware/isAuth");
 let ItemsInput = class ItemsInput {
@@ -39,9 +40,14 @@ ItemsInput = __decorate([
     type_graphql_1.InputType()
 ], ItemsInput);
 let ItemsResolver = class ItemsResolver {
-    items() {
+    items(limit, cursor) {
         return __awaiter(this, void 0, void 0, function* () {
-            return Items_1.Items.find();
+            const realLimit = Math.min(50, limit);
+            const qb = typeorm_1.getConnection().getRepository(Items_1.Items).createQueryBuilder('i').orderBy('"createdAt"', 'DESC').take(realLimit);
+            if (cursor) {
+                qb.where('"createdAt" < :cursor', { cursor: new Date(parseInt(cursor)) });
+            }
+            return qb.getMany();
         });
     }
     item(id) {
@@ -80,8 +86,9 @@ let ItemsResolver = class ItemsResolver {
 };
 __decorate([
     type_graphql_1.Query(() => [Items_1.Items]),
+    __param(0, type_graphql_1.Arg('limit', () => type_graphql_1.Int)), __param(1, type_graphql_1.Arg('cursor', () => String, { nullable: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], ItemsResolver.prototype, "items", null);
 __decorate([
