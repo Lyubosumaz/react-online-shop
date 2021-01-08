@@ -1,4 +1,4 @@
-import { Arg, Ctx, Field, InputType, Int, Mutation, Query, Resolver, UseMiddleware } from 'type-graphql';
+import { Arg, Ctx, Field, FieldResolver, InputType, Int, Mutation, Query, Resolver, Root, UseMiddleware } from 'type-graphql';
 import { getConnection } from 'typeorm';
 import { Items } from '../entities/Items';
 import { isAuth } from '../middleware/isAuth';
@@ -12,8 +12,13 @@ class ItemsInput {
     description: string;
 }
 
-@Resolver()
+@Resolver(Items)
 export class ItemsResolver {
+    @FieldResolver(() => String)
+    textSnippet(@Root() root: Items) {
+        return root.description.slice(0, 50);
+    }
+
     @Query(() => [Items])
     async items(@Arg('limit', () => Int) limit: number, @Arg('cursor', () => String, { nullable: true }) cursor: string | null): Promise<Items[]> {
         const realLimit = Math.min(50, limit);

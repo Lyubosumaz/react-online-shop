@@ -4,5 +4,7 @@ query Items($limit: Int!, $cursor: String) {
         createdAt
         updatedAt
         title
+        description
+        textSnippet
     }
 }

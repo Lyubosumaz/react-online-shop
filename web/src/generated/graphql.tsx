@@ -43,6 +43,7 @@ export type Items = {
   customerId: Scalars['Float'];
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
+  textSnippet: Scalars['String'];
 };
 
 export type User = {
@@ -230,7 +231,7 @@ export type ItemsQuery = (
   { __typename?: 'Query' }
   & { items: Array<(
     { __typename?: 'Items' }
-    & Pick<Items, 'id' | 'createdAt' | 'updatedAt' | 'title'>
+    & Pick<Items, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'description' | 'textSnippet'>
   )> }
 );
 
@@ -343,6 +344,8 @@ export const ItemsDocument = gql`
     createdAt
     updatedAt
     title
+    description
+    textSnippet
   }
 }
     `;

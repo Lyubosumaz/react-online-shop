@@ -40,6 +40,9 @@ ItemsInput = __decorate([
     type_graphql_1.InputType()
 ], ItemsInput);
 let ItemsResolver = class ItemsResolver {
+    textSnippet(root) {
+        return root.description.slice(0, 50);
+    }
     items(limit, cursor) {
         return __awaiter(this, void 0, void 0, function* () {
             const realLimit = Math.min(50, limit);
@@ -85,6 +88,13 @@ let ItemsResolver = class ItemsResolver {
     }
 };
 __decorate([
+    type_graphql_1.FieldResolver(() => String),
+    __param(0, type_graphql_1.Root()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Items_1.Items]),
+    __metadata("design:returntype", void 0)
+], ItemsResolver.prototype, "textSnippet", null);
+__decorate([
     type_graphql_1.Query(() => [Items_1.Items]),
     __param(0, type_graphql_1.Arg('limit', () => type_graphql_1.Int)), __param(1, type_graphql_1.Arg('cursor', () => String, { nullable: true })),
     __metadata("design:type", Function),
@@ -121,7 +131,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ItemsResolver.prototype, "deleteItem", null);
 ItemsResolver = __decorate([
-    type_graphql_1.Resolver()
+    type_graphql_1.Resolver(Items_1.Items)
 ], ItemsResolver);
 exports.ItemsResolver = ItemsResolver;
 //# sourceMappingURL=items.js.map

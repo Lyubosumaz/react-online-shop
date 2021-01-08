@@ -1,4 +1,5 @@
 import { withUrqlClient } from 'next-urql';
+import { useState } from 'react';
 import AboutUs from '../components/index/AboutUs';
 import BestDesign from '../components/index/BestDesign';
 import OurWork from '../components/index/OurWork';
@@ -7,11 +8,16 @@ import styles from '../styles/scss/4-pages/Home.module.scss';
 import { createUrqlClient } from '../utils/createUrqlClient';
 
 const Home = () => {
-    const [{ data }] = useItemsQuery({
-        variables: {
-            limit: 10,
-        },
+    const [variables, setVariables] = useState({ limit: 10, cursor: null as string | null });
+    const [{ data, fetching }] = useItemsQuery({
+        variables,
     });
+
+    if (!fetching && !data) {
+        return <div>you got query failed for some reason</div>;
+    }
+    if (!fetching && !data) {
+    }
 
     return (
         <div className={styles.container}>
@@ -21,7 +27,30 @@ const Home = () => {
 
             <OurWork />
 
-            <div className={styles.main}>{!data ? <div>doesn't fetch anything</div> : data.items.map((p) => <div key={p.id}>{p.title}</div>)}</div>
+            {!data && fetching ? (
+                <div>Loading...</div>
+            ) : (
+                data!.items.map((item) => (
+                    <div key={item.id}>
+                        <h5>{item.title}</h5>
+                        <p>{item.description}</p>
+                        <p>{item.textSnippet}</p>
+                    </div>
+                ))
+            )}
+
+            {data ? (
+                <button
+                    onClick={() => {
+                        setVariables({
+                            limit: variables.limit,
+                            cursor: data.items[data.items.length - 1].createdAt,
+                        });
+                    }}
+                >
+                    Load more
+                </button>
+            ) : null}
         </div>
     );
 };
