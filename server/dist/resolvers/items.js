@@ -39,6 +39,19 @@ __decorate([
 ItemsInput = __decorate([
     type_graphql_1.InputType()
 ], ItemsInput);
+let PaginationItems = class PaginationItems {
+};
+__decorate([
+    type_graphql_1.Field(() => [Items_1.Items]),
+    __metadata("design:type", Array)
+], PaginationItems.prototype, "items", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", Boolean)
+], PaginationItems.prototype, "hasMore", void 0);
+PaginationItems = __decorate([
+    type_graphql_1.ObjectType()
+], PaginationItems);
 let ItemsResolver = class ItemsResolver {
     textSnippet(root) {
         return root.description.slice(0, 50);
@@ -46,11 +59,16 @@ let ItemsResolver = class ItemsResolver {
     items(limit, cursor) {
         return __awaiter(this, void 0, void 0, function* () {
             const realLimit = Math.min(50, limit);
-            const qb = typeorm_1.getConnection().getRepository(Items_1.Items).createQueryBuilder('i').orderBy('"createdAt"', 'DESC').take(realLimit);
+            const realLimitPlusOne = realLimit + 1;
+            const qb = typeorm_1.getConnection().getRepository(Items_1.Items).createQueryBuilder('i').orderBy('"createdAt"', 'DESC').take(realLimitPlusOne);
             if (cursor) {
                 qb.where('"createdAt" < :cursor', { cursor: new Date(parseInt(cursor)) });
             }
-            return qb.getMany();
+            const items = yield qb.getMany();
+            return {
+                items: items.slice(0, realLimit),
+                hasMore: items.length === realLimitPlusOne,
+            };
         });
     }
     item(id) {
@@ -95,8 +113,9 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ItemsResolver.prototype, "textSnippet", null);
 __decorate([
-    type_graphql_1.Query(() => [Items_1.Items]),
-    __param(0, type_graphql_1.Arg('limit', () => type_graphql_1.Int)), __param(1, type_graphql_1.Arg('cursor', () => String, { nullable: true })),
+    type_graphql_1.Query(() => PaginationItems),
+    __param(0, type_graphql_1.Arg('limit', () => type_graphql_1.Int)),
+    __param(1, type_graphql_1.Arg('cursor', () => String, { nullable: true })),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)

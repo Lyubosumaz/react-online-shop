@@ -1,4 +1,4 @@
-import { Arg, Ctx, Field, FieldResolver, InputType, Int, Mutation, Query, Resolver, Root, UseMiddleware } from 'type-graphql';
+import { Arg, Ctx, Field, FieldResolver, InputType, Int, Mutation, ObjectType, Query, Resolver, Root, UseMiddleware } from 'type-graphql';
 import { getConnection } from 'typeorm';
 import { Items } from '../entities/Items';
 import { isAuth } from '../middleware/isAuth';
@@ -12,23 +12,45 @@ class ItemsInput {
     description: string;
 }
 
+@ObjectType()
+class PaginationItems {
+    @Field(() => [Items])
+    items: Items[];
+    @Field()
+    hasMore: boolean;
+}
+
 @Resolver(Items)
 export class ItemsResolver {
     @FieldResolver(() => String)
-    textSnippet(@Root() root: Items) {
+    textSnippet(
+        @Root()
+        root: Items
+    ) {
         return root.description.slice(0, 50);
     }
 
-    @Query(() => [Items])
-    async items(@Arg('limit', () => Int) limit: number, @Arg('cursor', () => String, { nullable: true }) cursor: string | null): Promise<Items[]> {
+    @Query(() => PaginationItems)
+    async items(
+        @Arg('limit', () => Int)
+        limit: number,
+        @Arg('cursor', () => String, { nullable: true })
+        cursor: string | null
+    ): Promise<PaginationItems> {
         const realLimit = Math.min(50, limit);
-        const qb = getConnection().getRepository(Items).createQueryBuilder('i').orderBy('"createdAt"', 'DESC').take(realLimit);
+        const realLimitPlusOne = realLimit + 1;
+        const qb = getConnection().getRepository(Items).createQueryBuilder('i').orderBy('"createdAt"', 'DESC').take(realLimitPlusOne);
 
         if (cursor) {
             qb.where('"createdAt" < :cursor', { cursor: new Date(parseInt(cursor)) });
         }
 
-        return qb.getMany();
+        const items = await qb.getMany();
+
+        return {
+            items: items.slice(0, realLimit),
+            hasMore: items.length === realLimitPlusOne,
+        };
     }
 
     @Query(() => Items, { nullable: true })

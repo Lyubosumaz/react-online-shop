@@ -1,10 +1,13 @@
 query Items($limit: Int!, $cursor: String) {
     items(limit: $limit, cursor: $cursor) {
-        id
-        createdAt
-        updatedAt
-        title
-        description
-        textSnippet
+        hasMore
+        items {
+            id
+            createdAt
+            updatedAt
+            title
+            description
+            textSnippet
+        }
     }
 }

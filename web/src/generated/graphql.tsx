@@ -17,7 +17,7 @@ export type Scalars = {
 export type Query = {
   __typename?: 'Query';
   hello: Scalars['String'];
-  items: Array<Items>;
+  items: PaginationItems;
   item?: Maybe<Items>;
   me?: Maybe<User>;
 };
@@ -31,6 +31,12 @@ export type QueryItemsArgs = {
 
 export type QueryItemArgs = {
   id: Scalars['Float'];
+};
+
+export type PaginationItems = {
+  __typename?: 'PaginationItems';
+  items: Array<Items>;
+  hasMore: Scalars['Boolean'];
 };
 
 export type Items = {
@@ -229,10 +235,14 @@ export type ItemsQueryVariables = Exact<{
 
 export type ItemsQuery = (
   { __typename?: 'Query' }
-  & { items: Array<(
-    { __typename?: 'Items' }
-    & Pick<Items, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'description' | 'textSnippet'>
-  )> }
+  & { items: (
+    { __typename?: 'PaginationItems' }
+    & Pick<PaginationItems, 'hasMore'>
+    & { items: Array<(
+      { __typename?: 'Items' }
+      & Pick<Items, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'description' | 'textSnippet'>
+    )> }
+  ) }
 );
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
@@ -340,12 +350,15 @@ export function useRegisterMutation() {
 export const ItemsDocument = gql`
     query Items($limit: Int!, $cursor: String) {
   items(limit: $limit, cursor: $cursor) {
-    id
-    createdAt
-    updatedAt
-    title
-    description
-    textSnippet
+    hasMore
+    items {
+      id
+      createdAt
+      updatedAt
+      title
+      description
+      textSnippet
+    }
   }
 }
     `;

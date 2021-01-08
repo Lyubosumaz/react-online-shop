@@ -8,7 +8,10 @@ import styles from '../styles/scss/4-pages/Home.module.scss';
 import { createUrqlClient } from '../utils/createUrqlClient';
 
 const Home = () => {
-    const [variables, setVariables] = useState({ limit: 10, cursor: null as string | null });
+    const [variables, setVariables] = useState({
+        limit: 33,
+        cursor: null as string | null,
+    });
     const [{ data, fetching }] = useItemsQuery({
         variables,
     });
@@ -30,7 +33,7 @@ const Home = () => {
             {!data && fetching ? (
                 <div>Loading...</div>
             ) : (
-                data!.items.map((item) => (
+                data!.items.items.map((item) => (
                     <div key={item.id}>
                         <h5>{item.title}</h5>
                         <p>{item.description}</p>
@@ -39,12 +42,12 @@ const Home = () => {
                 ))
             )}
 
-            {data ? (
+            {data && data.items.hasMore ? (
                 <button
                     onClick={() => {
                         setVariables({
                             limit: variables.limit,
-                            cursor: data.items[data.items.length - 1].createdAt,
+                            cursor: data.items.items[data.items.items.length - 1].createdAt,
                         });
                     }}
                 >
