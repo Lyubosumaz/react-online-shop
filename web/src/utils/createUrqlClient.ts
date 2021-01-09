@@ -43,7 +43,6 @@ const cursorPagination = (): Resolver => {
             results.push(...data);
         });
 
-        console.log('here');
         return {
             __typename: 'PaginationItems',
             hasMore: true,

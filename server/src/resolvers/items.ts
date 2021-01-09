@@ -39,7 +39,7 @@ export class ItemsResolver {
     ): Promise<PaginationItems> {
         const realLimit = Math.min(50, limit);
         const realLimitPlusOne = realLimit + 1;
-        const qb = getConnection().getRepository(Items).createQueryBuilder('i').orderBy('"createdAt"', 'DESC').take(realLimitPlusOne);
+        const qb = getConnection().getRepository(Items).createQueryBuilder('i').innerJoinAndSelect('i.cart', 'u', 'u.id = i."cart"').orderBy('"createdAt"', 'DESC').take(realLimitPlusOne);
 
         if (cursor) {
             qb.where('"createdAt" < :cursor', { cursor: new Date(parseInt(cursor)) });

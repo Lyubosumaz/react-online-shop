@@ -60,7 +60,7 @@ let ItemsResolver = class ItemsResolver {
         return __awaiter(this, void 0, void 0, function* () {
             const realLimit = Math.min(50, limit);
             const realLimitPlusOne = realLimit + 1;
-            const qb = typeorm_1.getConnection().getRepository(Items_1.Items).createQueryBuilder('i').orderBy('"createdAt"', 'DESC').take(realLimitPlusOne);
+            const qb = typeorm_1.getConnection().getRepository(Items_1.Items).createQueryBuilder('i').innerJoinAndSelect('i.cart', 'u', 'u.id = i."cart"').orderBy('"createdAt"', 'DESC').take(realLimitPlusOne);
             if (cursor) {
                 qb.where('"createdAt" < :cursor', { cursor: new Date(parseInt(cursor)) });
             }
