@@ -28,6 +28,8 @@ export class Items extends BaseEntity {
     @Field()
     @Column()
     customerId: number;
+
+    @Field()
     @ManyToOne(() => User, (user) => user.products)
     cart: Items;
 

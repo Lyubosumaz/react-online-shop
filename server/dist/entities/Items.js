@@ -46,6 +46,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Items.prototype, "customerId", void 0);
 __decorate([
+    type_graphql_1.Field(),
     typeorm_1.ManyToOne(() => User_1.User, (user) => user.products),
     __metadata("design:type", Items)
 ], Items.prototype, "cart", void 0);
