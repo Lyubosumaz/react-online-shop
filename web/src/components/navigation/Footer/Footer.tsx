@@ -1,6 +1,6 @@
 import { withUrqlClient } from 'next-urql';
 import React from 'react';
-import { createUrqlClient } from '../../utils/createUrqlClient';
+import { createUrqlClient } from '../../../utils/createUrqlClient';
 
 
 const Footer: React.FC<{}> = ({}) => {

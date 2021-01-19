@@ -14,7 +14,7 @@ html {
 }
 
 body {
-    background: #a55;
+    background: var(--test-test);
 }
 
 input,
@@ -56,11 +56,4 @@ li {
 
 a {
     text-decoration: none;
-}
-
-// NavBar
-
-ul {
-    display: flex;
-    justify-content: space-between;
 }
