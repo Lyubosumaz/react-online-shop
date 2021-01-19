@@ -1,9 +1,9 @@
 import NextLink from 'next/link';
 import React from 'react';
-import Wrapper from '../../layouts/MainWrapper/MainWrapper';
-import buttons from '../../styles/scss/2-basics/Buttons.module.scss';
-import site from '../../styles/scss/2-basics/Site.module.scss';
-import styles from '../../styles/scss/3-components/AboutUs.module.scss';
+import Wrapper from '../../../layouts/MainWrapper/MainWrapper';
+import buttons from '../../../styles/scss/2-basics/Buttons.module.scss';
+import site from '../../../styles/scss/2-basics/Site.module.scss';
+import styles from '../../../styles/scss/3-components/AboutUs.module.scss';
 
 const AboutUs: React.FC<{}> = ({}) => {
     return (

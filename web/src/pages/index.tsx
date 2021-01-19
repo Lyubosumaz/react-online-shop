@@ -1,8 +1,8 @@
 import { withUrqlClient } from 'next-urql';
 import { useState } from 'react';
-import AboutUs from '../components/index/AboutUs';
+import AboutUs from '../components/index/AboutUs/AboutUs';
 import BestDesign from '../components/index/BestDesign/BestDesign';
-import OurWork from '../components/index/OurWork';
+import OurWork from '../components/index/OurWork/OurWork';
 import { useItemsQuery } from '../generated/graphql';
 import styles from '../styles/scss/4-pages/Home.module.scss';
 import { createUrqlClient } from '../utils/createUrqlClient';
