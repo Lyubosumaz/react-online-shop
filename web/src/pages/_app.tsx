@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Footer from '../components/navigation/Footer';
 import NavBar from '../components/navigation/NavBar';
 import '../styles/scss/styles.scss';
 
@@ -13,7 +14,7 @@ function MyApp({ Component, pageProps }: any) {
             <main>
                 <Component {...pageProps} />
             </main>
-            <footer>Footer</footer>
+            <Footer />
         </>
     );
 }
