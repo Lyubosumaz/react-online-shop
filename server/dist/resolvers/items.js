@@ -60,16 +60,20 @@ let ItemsResolver = class ItemsResolver {
         return __awaiter(this, void 0, void 0, function* () {
             const realLimit = Math.min(50, limit);
             const realLimitPlusOne = realLimit + 1;
-            const qb = typeorm_1.getConnection()
-                .getRepository(Items_1.Items)
-                .createQueryBuilder('i')
-                .innerJoinAndSelect('i.cart', 'u', 'u.id = i."createdAt"')
-                .orderBy('i."createdAt"', 'DESC')
-                .take(realLimitPlusOne);
+            const replacements = [realLimitPlusOne];
             if (cursor) {
-                qb.where('i."createdAt" < :cursor', { cursor: new Date(parseInt(cursor)) });
+                replacements.push(new Date(parseInt(cursor)));
             }
-            const items = yield qb.getMany();
+            const items = yield typeorm_1.getConnection().query(`
+            select i.*,
+            json_build_object('title', i.title) products
+            from items i
+            inner join public.user u on u.id = i."customerId"
+            ${cursor ? `where i."createdAt" < $2` : ''}
+            order by i."createdAt" DESC
+            limit $1
+
+            `, replacements);
             return {
                 items: items.slice(0, realLimit),
                 hasMore: items.length === realLimitPlusOne,

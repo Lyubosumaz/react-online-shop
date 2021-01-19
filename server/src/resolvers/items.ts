@@ -40,18 +40,44 @@ export class ItemsResolver {
         const realLimit = Math.min(50, limit);
         const realLimitPlusOne = realLimit + 1;
 
-        const qb = getConnection()
-            .getRepository(Items)
-            .createQueryBuilder('i')
-            .innerJoinAndSelect('i.cart', 'u', 'u.id = i."createdAt"')
-            .orderBy('i."createdAt"', 'DESC')
-            .take(realLimitPlusOne);
+        const replacements: any[] = [realLimitPlusOne];
 
         if (cursor) {
-            qb.where('i."createdAt" < :cursor', { cursor: new Date(parseInt(cursor)) });
+            replacements.push(new Date(parseInt(cursor)));
         }
 
-        const items = await qb.getMany();
+        // const items = await getConnection().query(
+        //     `
+        //     select i.* from items i
+        //     ${cursor ? `where i."createdAt" < $2` : ''}
+        //     order by i."createdAt" DESC
+        //     limit $1
+
+        //     `,
+        //     replacements
+        // );
+
+        const items = await getConnection().query(
+            `
+            select i.*,
+            json_build_object('title', i.title) products
+            from items i
+            inner join public.user u on u.id = i."customerId"
+            ${cursor ? `where i."createdAt" < $2` : ''}
+            order by i."createdAt" DESC
+            limit $1
+
+            `,
+            replacements
+        );
+
+        // const qb = getConnection().getRepository(Items).createQueryBuilder('i').innerJoinAndSelect('i.cart', 'u', 'u.id = i."createdAt"').orderBy('i."createdAt"', 'DESC').take(realLimitPlusOne);
+
+        // if (cursor) {
+        //     qb.where('i."createdAt" < :cursor', { cursor: new Date(parseInt(cursor)) });
+        // }
+
+        // const items = await qb.getMany();
 
         return {
             items: items.slice(0, realLimit),
