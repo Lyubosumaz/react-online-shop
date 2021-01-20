@@ -1,7 +1,7 @@
-query Items($limit: Int!, $cursor: String) {
-    items(limit: $limit, cursor: $cursor) {
+query Item($limit: Int!, $cursor: String) {
+    item(limit: $limit, cursor: $cursor) {
         hasMore
-        items {
+        item {
             id
             createdAt
             updatedAt
