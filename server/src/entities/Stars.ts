@@ -14,7 +14,7 @@ export class Stars extends BaseEntity {
     @PrimaryColumn()
     userId: number;
 
-    @Field()
+    @Field(() => User)
     @ManyToOne(() => User, (user) => user.stars)
     user: User;
 
@@ -22,7 +22,7 @@ export class Stars extends BaseEntity {
     @Column()
     postId: number;
 
-    @Field()
+    @Field(() => Item)
     @ManyToOne(() => Item, (item) => item.stars)
     item: Item;
 }

@@ -1,3 +1,4 @@
+import { Stars } from 'src/entities/Stars';
 import { Arg, Ctx, Field, FieldResolver, InputType, Int, Mutation, ObjectType, Query, Resolver, Root, UseMiddleware } from 'type-graphql';
 import { getConnection } from 'typeorm';
 import { Item } from '../entities/Item';
@@ -28,6 +29,33 @@ export class ItemResolver {
         root: Item
     ) {
         return root.description.slice(0, 50);
+    }
+
+    @Mutation(() => Boolean)
+    @UseMiddleware(isAuth)
+    async rate(
+        @Arg('postId', () => Int)
+        postId: number,
+        @Arg('value', () => Int)
+        value: number,
+        @Ctx() { req }: MyContext
+    ) {
+        const isUpVote = value !== -1;
+        const realValue = isUpVote ? 1 : -1;
+        const { userId } = req.session;
+
+        await Stars.insert({ userId, postId, value: realValue });
+
+        await getConnection().query(
+            `
+        update item
+        set i.stars = i.stars + $1
+        where i.id = $2
+        `,
+            [realValue, postId]
+        );
+
+        return true;
     }
 
     @Query(() => PaginationItems)
