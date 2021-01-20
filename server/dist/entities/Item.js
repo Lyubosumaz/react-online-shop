@@ -28,11 +28,6 @@ __decorate([
 ], Item.prototype, "title", void 0);
 __decorate([
     type_graphql_1.Field(),
-    typeorm_1.Column({ type: 'int', default: 0 }),
-    __metadata("design:type", Number)
-], Item.prototype, "rating", void 0);
-__decorate([
-    type_graphql_1.Field(),
     typeorm_1.Column(),
     __metadata("design:type", String)
 ], Item.prototype, "description", void 0);

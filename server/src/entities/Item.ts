@@ -15,10 +15,6 @@ export class Item extends BaseEntity {
     title!: string;
 
     @Field()
-    @Column({ type: 'int', default: 0 })
-    rating!: number;
-
-    @Field()
     @Column()
     description!: string;
 
