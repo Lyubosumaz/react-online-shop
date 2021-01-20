@@ -21,10 +21,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ItemsResolver = void 0;
+exports.ItemResolver = void 0;
+const Stars_1 = require("src/entities/Stars");
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
-const Items_1 = require("../entities/Items");
+const Item_1 = require("../entities/Item");
 const isAuth_1 = require("../middleware/isAuth");
 let ItemsInput = class ItemsInput {
 };
@@ -42,7 +43,7 @@ ItemsInput = __decorate([
 let PaginationItems = class PaginationItems {
 };
 __decorate([
-    type_graphql_1.Field(() => [Items_1.Items]),
+    type_graphql_1.Field(() => [Item_1.Item]),
     __metadata("design:type", Array)
 ], PaginationItems.prototype, "items", void 0);
 __decorate([
@@ -52,9 +53,23 @@ __decorate([
 PaginationItems = __decorate([
     type_graphql_1.ObjectType()
 ], PaginationItems);
-let ItemsResolver = class ItemsResolver {
+let ItemResolver = class ItemResolver {
     textSnippet(root) {
         return root.description.slice(0, 50);
+    }
+    rate(postId, value, { req }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const isUpVote = value !== -1;
+            const realValue = isUpVote ? 1 : -1;
+            const { userId } = req.session;
+            yield Stars_1.Stars.insert({ userId, postId, value: realValue });
+            yield typeorm_1.getConnection().query(`
+        update item
+        set i.stars = i.stars + $1
+        where i.id = $2
+        `, [realValue, postId]);
+            return true;
+        });
     }
     items(limit, cursor) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -65,14 +80,10 @@ let ItemsResolver = class ItemsResolver {
                 replacements.push(new Date(parseInt(cursor)));
             }
             const items = yield typeorm_1.getConnection().query(`
-            select i.*,
-            json_build_object('title', i.title) products
-            from items i
-            inner join public.user u on u.id = i."customerId"
+            select i.* from items i
             ${cursor ? `where i."createdAt" < $2` : ''}
             order by i."createdAt" DESC
             limit $1
-
             `, replacements);
             return {
                 items: items.slice(0, realLimit),
@@ -82,22 +93,22 @@ let ItemsResolver = class ItemsResolver {
     }
     item(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return Items_1.Items.findOne(id);
+            return Item_1.Item.findOne(id);
         });
     }
     createItem(input, { req }) {
         return __awaiter(this, void 0, void 0, function* () {
-            return Items_1.Items.create(Object.assign(Object.assign({}, input), { customerId: req.session.userId })).save();
+            return Item_1.Item.create(Object.assign(Object.assign({}, input), { customerId: req.session.userId })).save();
         });
     }
     updateItem(id, title) {
         return __awaiter(this, void 0, void 0, function* () {
-            const item = yield Items_1.Items.findOne(id);
+            const item = yield Item_1.Item.findOne(id);
             if (!item) {
                 return null;
             }
             if (typeof title !== 'undefined') {
-                yield Items_1.Items.update({ id }, { title });
+                yield Item_1.Item.update({ id }, { title });
             }
             return item;
         });
@@ -105,7 +116,7 @@ let ItemsResolver = class ItemsResolver {
     deleteItem(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield Items_1.Items.delete(id);
+                yield Item_1.Item.delete(id);
                 return true;
             }
             catch (_a) {
@@ -118,9 +129,19 @@ __decorate([
     type_graphql_1.FieldResolver(() => String),
     __param(0, type_graphql_1.Root()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Items_1.Items]),
+    __metadata("design:paramtypes", [Item_1.Item]),
     __metadata("design:returntype", void 0)
-], ItemsResolver.prototype, "textSnippet", null);
+], ItemResolver.prototype, "textSnippet", null);
+__decorate([
+    type_graphql_1.Mutation(() => Boolean),
+    type_graphql_1.UseMiddleware(isAuth_1.isAuth),
+    __param(0, type_graphql_1.Arg('postId', () => type_graphql_1.Int)),
+    __param(1, type_graphql_1.Arg('value', () => type_graphql_1.Int)),
+    __param(2, type_graphql_1.Ctx()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Number, Object]),
+    __metadata("design:returntype", Promise)
+], ItemResolver.prototype, "rate", null);
 __decorate([
     type_graphql_1.Query(() => PaginationItems),
     __param(0, type_graphql_1.Arg('limit', () => type_graphql_1.Int)),
@@ -128,38 +149,40 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
-], ItemsResolver.prototype, "items", null);
+], ItemResolver.prototype, "items", null);
 __decorate([
-    type_graphql_1.Query(() => Items_1.Items, { nullable: true }),
+    type_graphql_1.Query(() => Item_1.Item, { nullable: true }),
     __param(0, type_graphql_1.Arg('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], ItemsResolver.prototype, "item", null);
+], ItemResolver.prototype, "item", null);
 __decorate([
-    type_graphql_1.Mutation(() => Items_1.Items),
+    type_graphql_1.Mutation(() => Item_1.Item),
     type_graphql_1.UseMiddleware(isAuth_1.isAuth),
-    __param(0, type_graphql_1.Arg('input')), __param(1, type_graphql_1.Ctx()),
+    __param(0, type_graphql_1.Arg('input')),
+    __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [ItemsInput, Object]),
     __metadata("design:returntype", Promise)
-], ItemsResolver.prototype, "createItem", null);
+], ItemResolver.prototype, "createItem", null);
 __decorate([
-    type_graphql_1.Mutation(() => Items_1.Items, { nullable: true }),
-    __param(0, type_graphql_1.Arg('id')), __param(1, type_graphql_1.Arg('title', () => String, { nullable: true })),
+    type_graphql_1.Mutation(() => Item_1.Item, { nullable: true }),
+    __param(0, type_graphql_1.Arg('id')),
+    __param(1, type_graphql_1.Arg('title', () => String, { nullable: true })),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, String]),
     __metadata("design:returntype", Promise)
-], ItemsResolver.prototype, "updateItem", null);
+], ItemResolver.prototype, "updateItem", null);
 __decorate([
     type_graphql_1.Mutation(() => Boolean),
     __param(0, type_graphql_1.Arg('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], ItemsResolver.prototype, "deleteItem", null);
-ItemsResolver = __decorate([
-    type_graphql_1.Resolver(Items_1.Items)
-], ItemsResolver);
-exports.ItemsResolver = ItemsResolver;
-//# sourceMappingURL=items.js.map
+], ItemResolver.prototype, "deleteItem", null);
+ItemResolver = __decorate([
+    type_graphql_1.Resolver(Item_1.Item)
+], ItemResolver);
+exports.ItemResolver = ItemResolver;
+//# sourceMappingURL=item.js.map

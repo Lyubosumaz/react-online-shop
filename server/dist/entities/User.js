@@ -12,7 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
-const Items_1 = require("./Items");
+const Item_1 = require("./Item");
+const Stars_1 = require("./Stars");
 let User = class User extends typeorm_1.BaseEntity {
 };
 __decorate([
@@ -35,9 +36,13 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 __decorate([
-    typeorm_1.OneToMany(() => Items_1.Items, (items) => items.cart),
+    typeorm_1.OneToMany(() => Item_1.Item, (item) => item.creator),
     __metadata("design:type", Array)
-], User.prototype, "products", void 0);
+], User.prototype, "items", void 0);
+__decorate([
+    typeorm_1.OneToMany(() => Stars_1.Stars, (star) => star.user),
+    __metadata("design:type", Array)
+], User.prototype, "stars", void 0);
 __decorate([
     type_graphql_1.Field(() => String),
     typeorm_1.CreateDateColumn(),

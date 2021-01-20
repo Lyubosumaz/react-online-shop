@@ -24,7 +24,7 @@ export class User extends BaseEntity {
     @OneToMany(() => Item, (item) => item.creator)
     items: Item[];
 
-    @OneToMany(() => Stars, (stars) => stars.user)
+    @OneToMany(() => Stars, (star) => star.user)
     stars: Stars[];
 
     @Field(() => String)

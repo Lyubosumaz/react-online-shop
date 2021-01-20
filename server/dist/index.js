@@ -23,10 +23,11 @@ require("reflect-metadata");
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
 const constants_1 = require("./constants");
-const Items_1 = require("./entities/Items");
+const Item_1 = require("./entities/Item");
+const Stars_1 = require("./entities/Stars");
 const User_1 = require("./entities/User");
 const hello_1 = require("./resolvers/hello");
-const items_1 = require("./resolvers/items");
+const item_1 = require("./resolvers/item");
 const user_1 = require("./resolvers/user");
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const conn = yield typeorm_1.createConnection({
@@ -37,7 +38,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         logging: true,
         synchronize: true,
         migrations: [path_1.default.join(__dirname, './migrations/*')],
-        entities: [Items_1.Items, User_1.User],
+        entities: [Item_1.Item, User_1.User, Stars_1.Stars],
     });
     const app = express_1.default();
     const RedisStore = connect_redis_1.default(express_session_1.default);
@@ -64,7 +65,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     }));
     const apolloServer = new apollo_server_express_1.ApolloServer({
         schema: yield type_graphql_1.buildSchema({
-            resolvers: [hello_1.HelloResolver, items_1.ItemsResolver, user_1.UserResolver],
+            resolvers: [hello_1.HelloResolver, item_1.ItemResolver, user_1.UserResolver],
             validate: false,
         }),
         context: ({ req, res }) => ({ req, res, redis }),

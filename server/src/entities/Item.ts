@@ -16,7 +16,7 @@ export class Item extends BaseEntity {
 
     @Field()
     @Column({ type: 'int', default: 0 })
-    stars!: number;
+    rating!: number;
 
     @Field()
     @Column()
@@ -34,7 +34,7 @@ export class Item extends BaseEntity {
     @ManyToOne(() => User, (user) => user.items)
     creator: Item;
 
-    @OneToMany(() => Stars, (stars) => stars.posts)
+    @OneToMany(() => Stars, (star) => star.item)
     stars: Stars[];
 
     @Field(() => String)

@@ -9,60 +9,65 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Items = void 0;
+exports.Item = void 0;
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
+const Stars_1 = require("./Stars");
 const User_1 = require("./User");
-let Items = class Items extends typeorm_1.BaseEntity {
+let Item = class Item extends typeorm_1.BaseEntity {
 };
 __decorate([
     type_graphql_1.Field(() => type_graphql_1.Int),
     typeorm_1.PrimaryGeneratedColumn(),
     __metadata("design:type", Number)
-], Items.prototype, "id", void 0);
+], Item.prototype, "id", void 0);
 __decorate([
     type_graphql_1.Field(),
     typeorm_1.Column(),
     __metadata("design:type", String)
-], Items.prototype, "title", void 0);
+], Item.prototype, "title", void 0);
 __decorate([
     type_graphql_1.Field(),
     typeorm_1.Column({ type: 'int', default: 0 }),
     __metadata("design:type", Number)
-], Items.prototype, "stars", void 0);
+], Item.prototype, "rating", void 0);
 __decorate([
     type_graphql_1.Field(),
     typeorm_1.Column(),
     __metadata("design:type", String)
-], Items.prototype, "description", void 0);
+], Item.prototype, "description", void 0);
 __decorate([
     type_graphql_1.Field(),
     typeorm_1.Column({ type: 'int', default: 1 }),
     __metadata("design:type", Number)
-], Items.prototype, "price", void 0);
+], Item.prototype, "price", void 0);
 __decorate([
     type_graphql_1.Field(),
     typeorm_1.Column(),
     __metadata("design:type", Number)
-], Items.prototype, "customerId", void 0);
+], Item.prototype, "customerId", void 0);
 __decorate([
     type_graphql_1.Field(),
-    typeorm_1.ManyToOne(() => User_1.User, (user) => user.products),
-    __metadata("design:type", Items)
-], Items.prototype, "cart", void 0);
+    typeorm_1.ManyToOne(() => User_1.User, (user) => user.items),
+    __metadata("design:type", Item)
+], Item.prototype, "creator", void 0);
+__decorate([
+    typeorm_1.OneToMany(() => Stars_1.Stars, (star) => star.item),
+    __metadata("design:type", Array)
+], Item.prototype, "stars", void 0);
 __decorate([
     type_graphql_1.Field(() => String),
     typeorm_1.CreateDateColumn(),
     __metadata("design:type", Date)
-], Items.prototype, "createdAt", void 0);
+], Item.prototype, "createdAt", void 0);
 __decorate([
     type_graphql_1.Field(() => String),
     typeorm_1.UpdateDateColumn(),
     __metadata("design:type", Date)
-], Items.prototype, "updatedAt", void 0);
-Items = __decorate([
+], Item.prototype, "updatedAt", void 0);
+Item = __decorate([
     type_graphql_1.ObjectType(),
     typeorm_1.Entity()
-], Items);
-exports.Items = Items;
-//# sourceMappingURL=Items.js.map
+], Item);
+exports.Item = Item;
+//# sourceMappingURL=Item.js.map
