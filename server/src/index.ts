@@ -12,7 +12,7 @@ import { COOKIE_NAME, __prod__ } from './constants';
 import { Item } from './entities/Item';
 import { User } from './entities/User';
 import { HelloResolver } from './resolvers/hello';
-import { ItemsResolver } from './resolvers/items';
+import { ItemResolver } from './resolvers/item';
 import { UserResolver } from './resolvers/user';
 import { MyContext } from './types';
 
@@ -65,7 +65,7 @@ const main = async () => {
 
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
-            resolvers: [HelloResolver, ItemsResolver, UserResolver],
+            resolvers: [HelloResolver, ItemResolver, UserResolver],
             validate: false,
         }),
         context: ({ req, res }): MyContext => ({ req, res, redis }),

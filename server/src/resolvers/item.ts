@@ -21,7 +21,7 @@ class PaginationItems {
 }
 
 @Resolver(Item)
-export class ItemsResolver {
+export class ItemResolver {
     @FieldResolver(() => String)
     textSnippet(
         @Root()
