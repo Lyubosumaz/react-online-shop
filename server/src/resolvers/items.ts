@@ -52,7 +52,6 @@ export class ItemsResolver {
             ${cursor ? `where i."createdAt" < $2` : ''}
             order by i."createdAt" DESC
             limit $1
-
             `,
             replacements
         );
@@ -90,13 +89,21 @@ export class ItemsResolver {
     }
 
     @Query(() => Items, { nullable: true })
-    async item(@Arg('id') id: number): Promise<Items | undefined> {
+    async item(
+        @Arg('id')
+        id: number
+    ): Promise<Items | undefined> {
         return Items.findOne(id);
     }
 
     @Mutation(() => Items)
     @UseMiddleware(isAuth)
-    async createItem(@Arg('input') input: ItemsInput, @Ctx() { req }: MyContext): Promise<Items> {
+    async createItem(
+        @Arg('input')
+        input: ItemsInput,
+        @Ctx()
+        { req }: MyContext
+    ): Promise<Items> {
         return Items.create({
             ...input,
             customerId: req.session.userId,
@@ -104,7 +111,12 @@ export class ItemsResolver {
     }
 
     @Mutation(() => Items, { nullable: true })
-    async updateItem(@Arg('id') id: number, @Arg('title', () => String, { nullable: true }) title: string): Promise<Items | null> {
+    async updateItem(
+        @Arg('id')
+        id: number,
+        @Arg('title', () => String, { nullable: true })
+        title: string
+    ): Promise<Items | null> {
         const item = await Items.findOne(id);
         if (!item) {
             return null;
@@ -118,7 +130,10 @@ export class ItemsResolver {
     }
 
     @Mutation(() => Boolean)
-    async deleteItem(@Arg('id') id: number): Promise<boolean> {
+    async deleteItem(
+        @Arg('id')
+        id: number
+    ): Promise<boolean> {
         try {
             await Items.delete(id);
             return true;

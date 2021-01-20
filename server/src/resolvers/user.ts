@@ -28,7 +28,14 @@ class UserResponse {
 @Resolver()
 export class UserResolver {
     @Mutation(() => UserResponse)
-    async changePassword(@Arg('token') token: string, @Arg('newPassword') newPassword: string, @Ctx() { redis, req }: MyContext): Promise<UserResponse> {
+    async changePassword(
+        @Arg('token')
+        token: string,
+        @Arg('newPassword')
+        newPassword: string,
+        @Ctx()
+        { redis, req }: MyContext
+    ): Promise<UserResponse> {
         if (newPassword.length <= 2) {
             return {
                 errors: [
@@ -80,7 +87,12 @@ export class UserResolver {
     }
 
     @Mutation(() => Boolean)
-    async forgottenPassword(@Arg('email') email: string, @Ctx() { redis }: MyContext) {
+    async forgottenPassword(
+        @Arg('email')
+        email: string,
+        @Ctx()
+        { redis }: MyContext
+    ) {
         const user = await User.findOne({ where: { email } });
 
         if (!user) {
@@ -98,7 +110,10 @@ export class UserResolver {
     }
 
     @Query(() => User, { nullable: true })
-    me(@Ctx() { req }: MyContext): Promise<User | undefined> | null {
+    me(
+        @Ctx()
+        { req }: MyContext
+    ): Promise<User | undefined> | null {
         // you are not logged
         if (!req.session.userId) {
             return null;
@@ -108,7 +123,11 @@ export class UserResolver {
     }
 
     @Mutation(() => UserResponse)
-    async register(@Arg('options', () => UsernamePasswordInput) options: UsernamePasswordInput, @Ctx() { req }: MyContext): Promise<UserResponse> {
+    async register(
+        @Arg('options', () => UsernamePasswordInput)
+        options: UsernamePasswordInput,
+        @Ctx() { req }: MyContext
+    ): Promise<UserResponse> {
         const errors = validateRegister(options);
         if (errors) {
             return { errors };
@@ -160,7 +179,14 @@ export class UserResolver {
     }
 
     @Mutation(() => UserResponse)
-    async login(@Arg('usernameOrEmail') usernameOrEmail: string, @Arg('password') password: string, @Ctx() { req }: MyContext): Promise<UserResponse> {
+    async login(
+        @Arg('usernameOrEmail')
+        usernameOrEmail: string,
+        @Arg('password')
+        password: string,
+        @Ctx()
+        { req }: MyContext
+    ): Promise<UserResponse> {
         const user = await User.findOne(usernameOrEmail.includes('@') ? { where: { email: usernameOrEmail } } : { where: { username: usernameOrEmail } });
         if (!user) {
             return {
@@ -193,7 +219,10 @@ export class UserResolver {
     }
 
     @Mutation(() => Boolean)
-    logout(@Ctx() { req, res }: MyContext) {
+    logout(
+        @Ctx()
+        { req, res }: MyContext
+    ) {
         return new Promise((resolve) =>
             req.session.destroy((err: any) => {
                 if (err) {
