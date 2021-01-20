@@ -1,6 +1,6 @@
 import { Arg, Ctx, Field, FieldResolver, InputType, Int, Mutation, ObjectType, Query, Resolver, Root, UseMiddleware } from 'type-graphql';
 import { getConnection } from 'typeorm';
-import { Items } from '../entities/Items';
+import { Item } from '../entities/Item';
 import { isAuth } from '../middleware/isAuth';
 import { MyContext } from '../types';
 
@@ -14,18 +14,18 @@ class ItemsInput {
 
 @ObjectType()
 class PaginationItems {
-    @Field(() => [Items])
-    items: Items[];
+    @Field(() => [Item])
+    items: Item[];
     @Field()
     hasMore: boolean;
 }
 
-@Resolver(Items)
+@Resolver(Item)
 export class ItemsResolver {
     @FieldResolver(() => String)
     textSnippet(
         @Root()
-        root: Items
+        root: Item
     ) {
         return root.description.slice(0, 50);
     }
@@ -88,42 +88,42 @@ export class ItemsResolver {
         };
     }
 
-    @Query(() => Items, { nullable: true })
+    @Query(() => Item, { nullable: true })
     async item(
         @Arg('id')
         id: number
-    ): Promise<Items | undefined> {
-        return Items.findOne(id);
+    ): Promise<Item | undefined> {
+        return Item.findOne(id);
     }
 
-    @Mutation(() => Items)
+    @Mutation(() => Item)
     @UseMiddleware(isAuth)
     async createItem(
         @Arg('input')
         input: ItemsInput,
         @Ctx()
         { req }: MyContext
-    ): Promise<Items> {
-        return Items.create({
+    ): Promise<Item> {
+        return Item.create({
             ...input,
             customerId: req.session.userId,
         }).save();
     }
 
-    @Mutation(() => Items, { nullable: true })
+    @Mutation(() => Item, { nullable: true })
     async updateItem(
         @Arg('id')
         id: number,
         @Arg('title', () => String, { nullable: true })
         title: string
-    ): Promise<Items | null> {
-        const item = await Items.findOne(id);
+    ): Promise<Item | null> {
+        const item = await Item.findOne(id);
         if (!item) {
             return null;
         }
 
         if (typeof title !== 'undefined') {
-            await Items.update({ id }, { title });
+            await Item.update({ id }, { title });
         }
 
         return item;
@@ -135,7 +135,7 @@ export class ItemsResolver {
         id: number
     ): Promise<boolean> {
         try {
-            await Items.delete(id);
+            await Item.delete(id);
             return true;
         } catch {
             return false;

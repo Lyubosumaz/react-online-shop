@@ -9,7 +9,7 @@ import 'reflect-metadata';
 import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
 import { COOKIE_NAME, __prod__ } from './constants';
-import { Items } from './entities/Items';
+import { Item } from './entities/Item';
 import { User } from './entities/User';
 import { HelloResolver } from './resolvers/hello';
 import { ItemsResolver } from './resolvers/items';
@@ -25,7 +25,7 @@ const main = async () => {
         logging: true,
         synchronize: true,
         migrations: [path.join(__dirname, './migrations/*')],
-        entities: [Items, User],
+        entities: [Item, User],
     });
 
     // await conn.runMigrations();

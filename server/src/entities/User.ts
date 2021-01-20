@@ -1,6 +1,7 @@
 import { Field, Int, ObjectType } from 'type-graphql';
 import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { Items } from './Items';
+import { Item } from './Item';
+import { Stars } from './Stars';
 
 @ObjectType()
 @Entity()
@@ -20,8 +21,11 @@ export class User extends BaseEntity {
     @Column()
     password!: string;
 
-    @OneToMany(() => Items, (items) => items.cart)
-    products: Items[];
+    @OneToMany(() => Item, (item) => item.creator)
+    items: Item[];
+
+    @OneToMany(() => Stars, (stars) => stars.user)
+    stars: Stars[];
 
     @Field(() => String)
     @CreateDateColumn()

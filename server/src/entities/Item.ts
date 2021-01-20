@@ -1,10 +1,11 @@
 import { Field, Int, ObjectType } from 'type-graphql';
-import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Stars } from './Stars';
 import { User } from './User';
 
 @ObjectType()
 @Entity()
-export class Items extends BaseEntity {
+export class Item extends BaseEntity {
     @Field(() => Int)
     @PrimaryGeneratedColumn()
     id!: number;
@@ -30,8 +31,11 @@ export class Items extends BaseEntity {
     customerId: number;
 
     @Field()
-    @ManyToOne(() => User, (user) => user.products)
-    cart: Items;
+    @ManyToOne(() => User, (user) => user.items)
+    creator: Item;
+
+    @OneToMany(() => Stars, (stars) => stars.posts)
+    stars: Stars[];
 
     @Field(() => String)
     @CreateDateColumn()
