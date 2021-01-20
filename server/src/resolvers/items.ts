@@ -46,23 +46,9 @@ export class ItemsResolver {
             replacements.push(new Date(parseInt(cursor)));
         }
 
-        // const items = await getConnection().query(
-        //     `
-        //     select i.* from items i
-        //     ${cursor ? `where i."createdAt" < $2` : ''}
-        //     order by i."createdAt" DESC
-        //     limit $1
-
-        //     `,
-        //     replacements
-        // );
-
         const items = await getConnection().query(
             `
-            select i.*,
-            json_build_object('title', i.title) products
-            from items i
-            inner join public.user u on u.id = i."customerId"
+            select i.* from items i
             ${cursor ? `where i."createdAt" < $2` : ''}
             order by i."createdAt" DESC
             limit $1
@@ -70,6 +56,24 @@ export class ItemsResolver {
             `,
             replacements
         );
+
+        // const items = await getConnection().query(
+        //     `
+        //     select i.*,
+        //     json_build_object(
+        //         'id', u.id,
+        //         'username', u.username,
+        //         'email', u.email
+        //         ) products
+        //     from items i
+        //     inner join public.user u on u.id = i."customerId"
+        //     ${cursor ? `where i."createdAt" < $2` : ''}
+        //     order by i."createdAt" DESC
+        //     limit $1
+
+        //     `,
+        //     replacements
+        // );
 
         // const qb = getConnection().getRepository(Items).createQueryBuilder('i').innerJoinAndSelect('i.cart', 'u', 'u.id = i."createdAt"').orderBy('i."createdAt"', 'DESC').take(realLimitPlusOne);
 
