@@ -16,7 +16,7 @@ class ItemsInput {
 @ObjectType()
 class PaginationItems {
     @Field(() => [Item])
-    items: Item[];
+    item: Item[];
     @Field()
     hasMore: boolean;
 }
@@ -111,7 +111,7 @@ export class ItemResolver {
         // const items = await qb.getMany();
 
         return {
-            items: items.slice(0, realLimit),
+            item: items.slice(0, realLimit),
             hasMore: items.length === realLimitPlusOne,
         };
     }

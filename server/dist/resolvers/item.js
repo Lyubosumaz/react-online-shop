@@ -45,7 +45,7 @@ let PaginationItems = class PaginationItems {
 __decorate([
     type_graphql_1.Field(() => [Item_1.Item]),
     __metadata("design:type", Array)
-], PaginationItems.prototype, "items", void 0);
+], PaginationItems.prototype, "item", void 0);
 __decorate([
     type_graphql_1.Field(),
     __metadata("design:type", Boolean)
@@ -86,7 +86,7 @@ let ItemResolver = class ItemResolver {
             limit $1
             `, replacements);
             return {
-                items: items.slice(0, realLimit),
+                item: items.slice(0, realLimit),
                 hasMore: items.length === realLimitPlusOne,
             };
         });
