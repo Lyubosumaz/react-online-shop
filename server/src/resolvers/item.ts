@@ -76,7 +76,7 @@ export class ItemResolver {
 
         const items = await getConnection().query(
             `
-            select i.* from items i
+            select i.* from item i
             ${cursor ? `where i."createdAt" < $2` : ''}
             order by i."createdAt" DESC
             limit $1

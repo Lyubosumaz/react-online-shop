@@ -80,7 +80,7 @@ let ItemResolver = class ItemResolver {
                 replacements.push(new Date(parseInt(cursor)));
             }
             const items = yield typeorm_1.getConnection().query(`
-            select i.* from items i
+            select i.* from item i
             ${cursor ? `where i."createdAt" < $2` : ''}
             order by i."createdAt" DESC
             limit $1

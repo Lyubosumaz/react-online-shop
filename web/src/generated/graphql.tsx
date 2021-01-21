@@ -238,13 +238,13 @@ export type RegisterMutation = (
   ) }
 );
 
-export type ItemsQueryVariables = Exact<{
+export type ItemQueryVariables = Exact<{
   limit: Scalars['Int'];
   cursor?: Maybe<Scalars['String']>;
 }>;
 
 
-export type ItemsQuery = (
+export type ItemQuery = (
   { __typename?: 'Query' }
   & { items: (
     { __typename?: 'PaginationItems' }
@@ -363,8 +363,8 @@ export const RegisterDocument = gql`
 export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
 };
-export const ItemsDocument = gql`
-    query Items($limit: Int!, $cursor: String) {
+export const ItemDocument = gql`
+    query Item($limit: Int!, $cursor: String) {
   items(limit: $limit, cursor: $cursor) {
     hasMore
     item {
@@ -379,8 +379,8 @@ export const ItemsDocument = gql`
 }
     `;
 
-export function useItemsQuery(options: Omit<Urql.UseQueryArgs<ItemsQueryVariables>, 'query'> = {}) {
-  return Urql.useQuery<ItemsQuery>({ query: ItemsDocument, ...options });
+export function useItemQuery(options: Omit<Urql.UseQueryArgs<ItemQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<ItemQuery>({ query: ItemDocument, ...options });
 };
 export const MeDocument = gql`
     query Me {

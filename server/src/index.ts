@@ -29,7 +29,7 @@ const main = async () => {
         entities: [Item, User, Stars],
     });
 
-    // await conn.runMigrations();
+    await conn.runMigrations();
 
     // await Items.delete({});
 
