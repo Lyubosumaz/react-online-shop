@@ -35,7 +35,7 @@ export type QueryItemArgs = {
 
 export type PaginationItems = {
   __typename?: 'PaginationItems';
-  items: Array<Item>;
+  item: Array<Item>;
   hasMore: Scalars['Boolean'];
 };
 
@@ -249,7 +249,7 @@ export type ItemsQuery = (
   & { items: (
     { __typename?: 'PaginationItems' }
     & Pick<PaginationItems, 'hasMore'>
-    & { items: Array<(
+    & { item: Array<(
       { __typename?: 'Item' }
       & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'description' | 'textSnippet'>
     )> }
@@ -367,7 +367,7 @@ export const ItemsDocument = gql`
     query Items($limit: Int!, $cursor: String) {
   items(limit: $limit, cursor: $cursor) {
     hasMore
-    items {
+    item {
       id
       createdAt
       updatedAt
