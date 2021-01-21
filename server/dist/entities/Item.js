@@ -44,7 +44,7 @@ __decorate([
 __decorate([
     type_graphql_1.Field(),
     typeorm_1.ManyToOne(() => User_1.User, (user) => user.items),
-    __metadata("design:type", Item)
+    __metadata("design:type", User_1.User)
 ], Item.prototype, "creator", void 0);
 __decorate([
     typeorm_1.OneToMany(() => Stars_1.Stars, (star) => star.item),

@@ -18,7 +18,7 @@ export type Query = {
   __typename?: 'Query';
   hello: Scalars['String'];
   items: PaginationItems;
-  item?: Maybe<Items>;
+  item?: Maybe<Item>;
   me?: Maybe<User>;
 };
 
@@ -35,18 +35,18 @@ export type QueryItemArgs = {
 
 export type PaginationItems = {
   __typename?: 'PaginationItems';
-  items: Array<Items>;
+  items: Array<Item>;
   hasMore: Scalars['Boolean'];
 };
 
-export type Items = {
-  __typename?: 'Items';
+export type Item = {
+  __typename?: 'Item';
   id: Scalars['Int'];
   title: Scalars['String'];
-  stars: Scalars['Float'];
   description: Scalars['String'];
   price: Scalars['Float'];
   customerId: Scalars['Float'];
+  creator: User;
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
   textSnippet: Scalars['String'];
@@ -63,14 +63,21 @@ export type User = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createItem: Items;
-  updateItem?: Maybe<Items>;
+  rate: Scalars['Boolean'];
+  createItem: Item;
+  updateItem?: Maybe<Item>;
   deleteItem: Scalars['Boolean'];
   changePassword: UserResponse;
   forgottenPassword: Scalars['Boolean'];
   register: UserResponse;
   login: UserResponse;
   logout: Scalars['Boolean'];
+};
+
+
+export type MutationRateArgs = {
+  value: Scalars['Int'];
+  postId: Scalars['Int'];
 };
 
 
@@ -177,8 +184,12 @@ export type CreateItemMutationVariables = Exact<{
 export type CreateItemMutation = (
   { __typename?: 'Mutation' }
   & { createItem: (
-    { __typename?: 'Items' }
-    & Pick<Items, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'description' | 'stars' | 'customerId'>
+    { __typename?: 'Item' }
+    & Pick<Item, 'id' | 'title' | 'description' | 'price' | 'customerId' | 'createdAt' | 'updatedAt'>
+    & { creator: (
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'username' | 'email'>
+    ) }
   ) }
 );
 
@@ -239,8 +250,8 @@ export type ItemsQuery = (
     { __typename?: 'PaginationItems' }
     & Pick<PaginationItems, 'hasMore'>
     & { items: Array<(
-      { __typename?: 'Items' }
-      & Pick<Items, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'description' | 'textSnippet'>
+      { __typename?: 'Item' }
+      & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'description' | 'textSnippet'>
     )> }
   ) }
 );
@@ -294,12 +305,17 @@ export const CreateItemDocument = gql`
     mutation CreateItem($input: ItemsInput!) {
   createItem(input: $input) {
     id
-    createdAt
-    updatedAt
     title
     description
-    stars
+    price
     customerId
+    creator {
+      id
+      username
+      email
+    }
+    createdAt
+    updatedAt
   }
 }
     `;

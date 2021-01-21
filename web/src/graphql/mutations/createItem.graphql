@@ -1,11 +1,16 @@
 mutation CreateItem($input: ItemsInput!) {
     createItem(input: $input) {
         id
-        createdAt
-        updatedAt
         title
         description
-        stars
+        price
         customerId
+        creator {
+            id
+            username
+            email
+        }
+        createdAt
+        updatedAt
     }
 }

@@ -28,7 +28,7 @@ export class Item extends BaseEntity {
 
     @Field()
     @ManyToOne(() => User, (user) => user.items)
-    creator: Item;
+    creator: User;
 
     @OneToMany(() => Stars, (star) => star.item)
     stars: Stars[];
