@@ -1,7 +1,7 @@
-import { Stars } from 'src/entities/Stars';
 import { Arg, Ctx, Field, FieldResolver, InputType, Int, Mutation, ObjectType, Query, Resolver, Root, UseMiddleware } from 'type-graphql';
 import { getConnection } from 'typeorm';
 import { Item } from '../entities/Item';
+import { Stars } from '../entities/Stars';
 import { isAuth } from '../middleware/isAuth';
 import { MyContext } from '../types';
 

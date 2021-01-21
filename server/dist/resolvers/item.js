@@ -22,10 +22,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ItemResolver = void 0;
-const Stars_1 = require("src/entities/Stars");
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
 const Item_1 = require("../entities/Item");
+const Stars_1 = require("../entities/Stars");
 const isAuth_1 = require("../middleware/isAuth");
 let ItemsInput = class ItemsInput {
 };
