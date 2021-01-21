@@ -3,7 +3,7 @@ import { useState } from 'react';
 import AboutUs from '../components/index/AboutUs/AboutUs';
 import BestDesign from '../components/index/BestDesign/BestDesign';
 import OurWork from '../components/index/OurWork/OurWork';
-import { useItemsQuery } from '../generated/graphql';
+import { useItemQuery } from '../generated/graphql';
 import styles from '../styles/scss/4-pages/Home.module.scss';
 import { createUrqlClient } from '../utils/createUrqlClient';
 
@@ -12,7 +12,7 @@ const Home = () => {
         limit: 33,
         cursor: null as string | null,
     });
-    const [{ data, fetching }] = useItemsQuery({
+    const [{ data, fetching }] = useItemQuery({
         variables,
     });
 
@@ -33,7 +33,7 @@ const Home = () => {
             {!data && fetching ? (
                 <div>Loading...</div>
             ) : (
-                data!.items.items.map((item) => (
+                data!.items.item.map((item) => (
                     <div key={item.id}>
                         <h5>{item.title}</h5>
                         <p>{item.description}</p>
@@ -47,7 +47,7 @@ const Home = () => {
                     onClick={() => {
                         setVariables({
                             limit: variables.limit,
-                            cursor: data.items.items[data.items.items.length - 1].createdAt,
+                            cursor: data.items.item[data.items.item.length - 1].createdAt,
                         });
                     }}
                 >

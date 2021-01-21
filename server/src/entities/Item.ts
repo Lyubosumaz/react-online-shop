@@ -23,6 +23,14 @@ export class Item extends BaseEntity {
     price!: number;
 
     @Field()
+    @Column({ type: 'int', default: 1 })
+    rating!: number;
+
+    @Field()
+    @Column()
+    creatorId: number;
+
+    @Field()
     @ManyToOne(() => User, (user) => user.items)
     creator: User;
 

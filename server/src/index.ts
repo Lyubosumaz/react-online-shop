@@ -31,7 +31,7 @@ const main = async () => {
 
     // await conn.runMigrations();
 
-    // await Items.delete({});
+    // await Item.delete({});
 
     const app = express();
 

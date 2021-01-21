@@ -38,6 +38,16 @@ __decorate([
 ], Item.prototype, "price", void 0);
 __decorate([
     type_graphql_1.Field(),
+    typeorm_1.Column({ type: 'int', default: 1 }),
+    __metadata("design:type", Number)
+], Item.prototype, "rating", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    typeorm_1.Column(),
+    __metadata("design:type", Number)
+], Item.prototype, "creatorId", void 0);
+__decorate([
+    type_graphql_1.Field(),
     typeorm_1.ManyToOne(() => User_1.User, (user) => user.items),
     __metadata("design:type", User_1.User)
 ], Item.prototype, "creator", void 0);
