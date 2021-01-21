@@ -23,10 +23,6 @@ export class Item extends BaseEntity {
     price!: number;
 
     @Field()
-    @Column()
-    customerId: number;
-
-    @Field()
     @ManyToOne(() => User, (user) => user.items)
     creator: User;
 
