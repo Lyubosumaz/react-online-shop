@@ -3,6 +3,7 @@ import Wrapper from '../../../layouts/MainWrapper/MainWrapper';
 import buttons from '../../../styles/scss/2-basics/Buttons.module.scss';
 import site from '../../../styles/scss/2-basics/Site.module.scss';
 import styles from '../../../styles/scss/3-components/OurWork.module.scss';
+import MainButton from '../../buttons/MainButton';
 import SecondaryButton from '../../buttons/SecondaryButton';
 
 const OurWork: React.FC<{}> = ({}) => {
@@ -19,14 +20,12 @@ const OurWork: React.FC<{}> = ({}) => {
                         <ul>
                             <li>
                                 <h6>Chair 01</h6>
-
                                 <div className={site[`image`]}>
                                     <span>Image</span>
                                 </div>
-
                                 <h6>Price $100</h6>
 
-                                <button className={buttons[`main-btn`]}>Buy Now</button>
+                                <MainButton text={'Buy Now'} />
                             </li>
 
                             <li>
@@ -38,7 +37,7 @@ const OurWork: React.FC<{}> = ({}) => {
 
                                 <h6>Price $120</h6>
 
-                                <button className={buttons[`main-btn`]}>Buy Now</button>
+                                <MainButton text={'Buy Now'} />
                             </li>
 
                             <li>
@@ -50,7 +49,7 @@ const OurWork: React.FC<{}> = ({}) => {
 
                                 <h6>Price $240</h6>
 
-                                <button className={buttons[`main-btn`]}>Buy Now</button>
+                                <MainButton text={'Buy Now'} />
                             </li>
                         </ul>
 
