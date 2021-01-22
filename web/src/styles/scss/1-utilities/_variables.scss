@@ -1,7 +1,15 @@
 :root {
     --test-test: #359;
+    // colors
     --main-color: #7c2c0c;
+    --main-background-color: #fff;
+    --secondary-color: #fae6c4;
+    --secondary-color-lighter: #efe4d1;
+    --secondary-color-darker: #8e8e8e;
+    // borders
     --main-element-border: 0.05em solid var(--main-color);
+    --main-input-border: 0.05em solid var(--secondary-color-darker);
+    --nav-border: 0.75em solid var(--secondary-color-lighter);
 }
 
 $mainBackgroundColor: #fff;
