@@ -80,10 +80,18 @@ let ItemResolver = class ItemResolver {
                 replacements.push(new Date(parseInt(cursor)));
             }
             const items = yield typeorm_1.getConnection().query(`
-            select i.* from item i
+            select i.*,
+            json_build_object(
+                'id', u.id,
+                'username', u.username,
+                'email', u.email
+                ) creator
+            from item i
+            inner join public.user u on u.id = i."creatorId"
             ${cursor ? `where i."createdAt" < $2` : ''}
             order by i."createdAt" DESC
             limit $1
+
             `, replacements);
             return {
                 item: items.slice(0, realLimit),
@@ -98,7 +106,7 @@ let ItemResolver = class ItemResolver {
     }
     createItem(input, { req }) {
         return __awaiter(this, void 0, void 0, function* () {
-            return Item_1.Item.create(Object.assign(Object.assign({}, input), { customerId: req.session.userId })).save();
+            return Item_1.Item.create(Object.assign(Object.assign({}, input), { creatorId: req.session.userId })).save();
         });
     }
     updateItem(id, title) {
