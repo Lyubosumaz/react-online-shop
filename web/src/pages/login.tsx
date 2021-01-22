@@ -2,9 +2,9 @@ import { withUrqlClient } from 'next-urql';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { Field, withTypes } from 'react-final-form';
+import MainButton from '../components/buttons/MainButton';
 import { useLoginMutation } from '../generated/graphql';
 import Wrapper from '../layouts/MainWrapper/MainWrapper';
-import buttons from '../styles/scss/2-basics/Buttons.module.scss';
 import stylesSpinner from '../styles/scss/3-components/Spinner.module.scss';
 import styles from '../styles/scss/4-pages/Forms.module.scss';
 import { createUrqlClient } from '../utils/createUrqlClient';
@@ -76,9 +76,7 @@ const Login: React.FC<{}> = ({}) => {
                             </Field>
 
                             <div className={styles[`button-wrapper`]}>
-                                <button className={buttons[`main-btn`]} type="submit">
-                                    Login
-                                </button>
+                                <MainButton text={'Login'} type={'submit'} />
                             </div>
                         </Wrapper>
                     </form>

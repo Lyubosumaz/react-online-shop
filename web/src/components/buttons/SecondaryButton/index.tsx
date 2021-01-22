@@ -8,8 +8,8 @@ interface SecondaryButtonProps {
 }
 
 const SecondaryButton: React.FC<SecondaryButtonProps> = ({ text, path }) => {
-    const realPath = path ? path : '/';
     const realTest = text ? text : '';
+    const realPath = path ? path : '/';
 
     return (
         <NextLink href={realPath}>

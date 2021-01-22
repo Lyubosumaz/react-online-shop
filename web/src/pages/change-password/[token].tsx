@@ -4,8 +4,8 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { Field, withTypes } from 'react-final-form';
+import MainButton from '../../components/buttons/MainButton';
 import { useChangePasswordMutation } from '../../generated/graphql';
-import buttons from '../../styles/scss/2-basics/Buttons.module.scss';
 import stylesSpinner from '../../styles/scss/3-components/Spinner.module.scss';
 import { createUrqlClient } from '../../utils/createUrqlClient';
 import { toErrorMap } from '../../utils/toErrorMap';
@@ -71,10 +71,10 @@ const ChangePassword: React.FC<{}> = () => {
                         </Field>
 
                         <div className="buttons">
-                            <button className={buttons[`main-btn`]} type="submit">
-                                Change Password
-                            </button>
+                            <MainButton text={'Change Password'} type={'submit'} />
+
                             <NextLink href="/forgotten-password">forgot password?</NextLink>
+
                             {errors['token'] ? <div>{errors['token']}</div> : <div>123</div>}
                         </div>
                     </form>
