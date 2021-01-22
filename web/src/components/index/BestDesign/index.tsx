@@ -1,15 +1,14 @@
 import React from 'react';
 import Wrapper from '../../../layouts/MainWrapper';
-import site from '../../../styles/scss/2-basics/Site.module.scss';
-import styles from '../../../styles/scss/3-components/BestDesign.module.scss';
 import SecondaryButton from '../../buttons/SecondaryButton';
+import styles from './BestDesign.module.scss';
 
 const BestDesign: React.FC<{}> = ({}) => {
     return (
         <>
             <div className={styles['contact-us']}>
                 <Wrapper>
-                    <div className={[site.column, styles.description].join(' ')}>
+                    <div className={[styles.column, styles.description].join(' ')}>
                         <h2>
                             <span>Best</span>
                             <span>Design</span>
@@ -23,7 +22,7 @@ const BestDesign: React.FC<{}> = ({}) => {
                         </div>
                     </div>
 
-                    <div className={[site.column, site.image].join(' ')}>
+                    <div className={[styles.column, styles.image].join(' ')}>
                         <span>Image</span>
                     </div>
                 </Wrapper>
