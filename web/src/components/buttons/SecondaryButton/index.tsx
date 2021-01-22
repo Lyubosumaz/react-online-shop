@@ -12,9 +12,11 @@ const SecondaryButton: React.FC<SecondaryButtonProps> = ({ text, path }) => {
     const realPath = path ? path : '/';
 
     return (
-        <NextLink href={realPath}>
-            <a className={styles[`secondary-btn`]}>{realTest}</a>
-        </NextLink>
+        <>
+            <NextLink href={realPath}>
+                <a className={styles[`secondary-btn`]}>{realTest}</a>
+            </NextLink>
+        </>
     );
 };
 

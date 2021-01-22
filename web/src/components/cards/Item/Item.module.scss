@@ -1,0 +1,32 @@
+.item-card {
+    padding: 2em 1em;
+    flex: 0 1 18em;
+    text-align: center;
+    border: var(--main-element-border);
+    color: var(--main-color);
+
+    h6,
+    div {
+        margin-bottom: 2rem;
+    }
+
+    div {
+        width: 170px;
+        height: 270px;
+        margin: 0 auto;
+        background-color: #bbb;
+    }
+}
+
+.image {
+    position: relative;
+    background-color: #bbb;
+
+    span {
+        position: absolute;
+        color: var(--main-color);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

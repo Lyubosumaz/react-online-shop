@@ -12,9 +12,11 @@ const MainButton: React.FC<MainButtonProps> = ({ text, type, onClick }) => {
     const realType = type ? type : 'button';
 
     return (
-        <button className={styles[`main-btn`]} type={realType} onClick={onClick}>
-            {realTest}
-        </button>
+        <>
+            <button className={styles[`main-btn`]} type={realType} onClick={onClick}>
+                {realTest}
+            </button>
+        </>
     );
 };
 

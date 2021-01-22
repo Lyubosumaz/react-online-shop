@@ -1,11 +1,28 @@
 import React from 'react';
 import Wrapper from '../../../layouts/MainWrapper/MainWrapper';
-import site from '../../../styles/scss/2-basics/Site.module.scss';
-import MainButton from '../../buttons/MainButton';
 import SecondaryButton from '../../buttons/SecondaryButton';
+import Item from '../../cards/Item';
 import styles from './OurWork.module.scss';
 
 const OurWork: React.FC<{}> = ({}) => {
+    const items = [
+        {
+            title: 'Chair 01',
+            image: 'Image',
+            price: 'Price $100',
+        },
+        {
+            title: 'Chair 02',
+            image: 'Image',
+            price: 'Price $120',
+        },
+        {
+            title: 'Table',
+            image: 'Image',
+            price: 'Price $240',
+        },
+    ];
+
     return (
         <>
             <div className={styles['our-work']}>
@@ -16,41 +33,7 @@ const OurWork: React.FC<{}> = ({}) => {
                             <p>There are many variants of passages to Lorem Ipsum available, but the majority have suffered alteration</p>
                         </header>
 
-                        <ul>
-                            <li>
-                                <h6>Chair 01</h6>
-                                <div className={site[`image`]}>
-                                    <span>Image</span>
-                                </div>
-                                <h6>Price $100</h6>
-
-                                <MainButton text={'Buy Now'} />
-                            </li>
-
-                            <li>
-                                <h6>Chair 02</h6>
-
-                                <div className={site[`image`]}>
-                                    <span>Image</span>
-                                </div>
-
-                                <h6>Price $120</h6>
-
-                                <MainButton text={'Buy Now'} />
-                            </li>
-
-                            <li>
-                                <h6>Table</h6>
-
-                                <div className={site[`image`]}>
-                                    <span>Image</span>
-                                </div>
-
-                                <h6>Price $240</h6>
-
-                                <MainButton text={'Buy Now'} />
-                            </li>
-                        </ul>
+                        <ul>{items ? items.map((item) => <Item data={item} />) : null}</ul>
 
                         <div className={styles[`button-wrapper`]}>
                             <SecondaryButton text={'Read More'} />
