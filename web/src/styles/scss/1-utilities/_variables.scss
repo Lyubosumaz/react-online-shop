@@ -1,5 +1,7 @@
 :root {
     --test-test: #359;
+    --main-color: #7c2c0c;
+    --main-element-border: 0.05em solid var(--main-color);
 }
 
 $mainBackgroundColor: #fff;
