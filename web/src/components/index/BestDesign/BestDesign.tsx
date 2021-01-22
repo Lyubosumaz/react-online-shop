@@ -1,9 +1,8 @@
-import NextLink from 'next/link';
 import React from 'react';
 import Wrapper from '../../../layouts/MainWrapper/MainWrapper';
-import buttons from '../../../styles/scss/2-basics/Buttons.module.scss';
 import site from '../../../styles/scss/2-basics/Site.module.scss';
 import styles from '../../../styles/scss/3-components/BestDesign.module.scss';
+import SecondaryButton from '../../buttons/SecondaryButton';
 
 const BestDesign: React.FC<{}> = ({}) => {
     return (
@@ -20,9 +19,7 @@ const BestDesign: React.FC<{}> = ({}) => {
                         <p>Is is a long established fact that a reader will be distracted by the readable content of</p>
 
                         <div className={`button-wrapper`}>
-                            <NextLink href="/">
-                                <a className={buttons[`seconders-btn`]}>Contact us</a>
-                            </NextLink>
+                            <SecondaryButton text={'Contact us'} />
                         </div>
                     </div>
 
