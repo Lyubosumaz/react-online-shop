@@ -8,6 +8,10 @@ query Item($limit: Int!, $cursor: String) {
             title
             description
             textSnippet
+            creator {
+                id
+                username
+            }
         }
     }
 }

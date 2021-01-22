@@ -4,7 +4,7 @@ mutation CreateItem($input: ItemsInput!) {
         title
         description
         price
-        customerId
+        creatorId
         creator {
             id
             username

@@ -45,7 +45,8 @@ export type Item = {
   title: Scalars['String'];
   description: Scalars['String'];
   price: Scalars['Float'];
-  customerId: Scalars['Float'];
+  rating: Scalars['Float'];
+  creatorId: Scalars['Int'];
   creator: User;
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
@@ -77,7 +78,7 @@ export type Mutation = {
 
 export type MutationRateArgs = {
   value: Scalars['Int'];
-  postId: Scalars['Int'];
+  itemId: Scalars['Int'];
 };
 
 
@@ -185,7 +186,7 @@ export type CreateItemMutation = (
   { __typename?: 'Mutation' }
   & { createItem: (
     { __typename?: 'Item' }
-    & Pick<Item, 'id' | 'title' | 'description' | 'price' | 'customerId' | 'createdAt' | 'updatedAt'>
+    & Pick<Item, 'id' | 'title' | 'description' | 'price' | 'creatorId' | 'createdAt' | 'updatedAt'>
     & { creator: (
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username' | 'email'>
@@ -252,6 +253,10 @@ export type ItemQuery = (
     & { item: Array<(
       { __typename?: 'Item' }
       & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'description' | 'textSnippet'>
+      & { creator: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username'>
+      ) }
     )> }
   ) }
 );
@@ -308,7 +313,7 @@ export const CreateItemDocument = gql`
     title
     description
     price
-    customerId
+    creatorId
     creator {
       id
       username
@@ -374,6 +379,10 @@ export const ItemDocument = gql`
       title
       description
       textSnippet
+      creator {
+        id
+        username
+      }
     }
   }
 }
