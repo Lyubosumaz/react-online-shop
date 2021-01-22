@@ -32,6 +32,7 @@ const main = async () => {
     // await conn.runMigrations();
 
     // await Item.delete({});
+    // await Stars.delete({});
 
     const app = express();
 

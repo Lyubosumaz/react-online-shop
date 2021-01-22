@@ -20,7 +20,7 @@ export class Stars extends BaseEntity {
 
     @Field()
     @Column()
-    postId: number;
+    itemId: number;
 
     @Field(() => Item)
     @ManyToOne(() => Item, (item) => item.stars)

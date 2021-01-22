@@ -42,7 +42,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Item.prototype, "rating", void 0);
 __decorate([
-    type_graphql_1.Field(),
+    type_graphql_1.Field(() => type_graphql_1.Int),
     typeorm_1.Column(),
     __metadata("design:type", Number)
 ], Item.prototype, "creatorId", void 0);

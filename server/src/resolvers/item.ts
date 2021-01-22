@@ -1,7 +1,6 @@
 import { Arg, Ctx, Field, FieldResolver, InputType, Int, Mutation, ObjectType, Query, Resolver, Root, UseMiddleware } from 'type-graphql';
 import { getConnection } from 'typeorm';
 import { Item } from '../entities/Item';
-import { Stars } from '../entities/Stars';
 import { isAuth } from '../middleware/isAuth';
 import { MyContext } from '../types';
 
@@ -34,8 +33,8 @@ export class ItemResolver {
     @Mutation(() => Boolean)
     @UseMiddleware(isAuth)
     async rate(
-        @Arg('postId', () => Int)
-        postId: number,
+        @Arg('itemId', () => Int)
+        itemId: number,
         @Arg('value', () => Int)
         value: number,
         @Ctx() { req }: MyContext
@@ -44,16 +43,24 @@ export class ItemResolver {
         const realValue = isUpVote ? 1 : -1;
         const { userId } = req.session;
 
-        await Stars.insert({ userId, postId, value: realValue });
-
-        await getConnection().query(
-            `
-        update item
-        set i.stars = i.stars + $1
-        where i.id = $2
-        `,
-            [realValue, postId]
-        );
+        try {
+            await getConnection().query(
+                `
+                START TRANSACTION;
+                
+                insert into stars ("userId", "itemId", value)
+                values (${userId},${itemId},${realValue});
+                
+                update item
+                set rating = rating + ${realValue}
+                where id = ${itemId};
+                
+                COMMIT;
+                `
+            );
+        } catch (err) {
+            console.error('Transaction failed');
+        }
 
         return true;
     }
@@ -80,7 +87,9 @@ export class ItemResolver {
             json_build_object(
                 'id', u.id,
                 'username', u.username,
-                'email', u.email
+                'email', u.email,
+                'createdAt', u."createdAt",
+                'updatedAt', u."updatedAt"
                 ) creator
             from item i
             inner join public.user u on u.id = i."creatorId"

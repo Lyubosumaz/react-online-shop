@@ -35,7 +35,7 @@ __decorate([
     type_graphql_1.Field(),
     typeorm_1.Column(),
     __metadata("design:type", Number)
-], Stars.prototype, "postId", void 0);
+], Stars.prototype, "itemId", void 0);
 __decorate([
     type_graphql_1.Field(() => Item_1.Item),
     typeorm_1.ManyToOne(() => Item_1.Item, (item) => item.stars),

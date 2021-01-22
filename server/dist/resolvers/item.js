@@ -25,7 +25,6 @@ exports.ItemResolver = void 0;
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
 const Item_1 = require("../entities/Item");
-const Stars_1 = require("../entities/Stars");
 const isAuth_1 = require("../middleware/isAuth");
 let ItemsInput = class ItemsInput {
 };
@@ -57,17 +56,28 @@ let ItemResolver = class ItemResolver {
     textSnippet(root) {
         return root.description.slice(0, 50);
     }
-    rate(postId, value, { req }) {
+    rate(itemId, value, { req }) {
         return __awaiter(this, void 0, void 0, function* () {
             const isUpVote = value !== -1;
             const realValue = isUpVote ? 1 : -1;
             const { userId } = req.session;
-            yield Stars_1.Stars.insert({ userId, postId, value: realValue });
-            yield typeorm_1.getConnection().query(`
-        update item
-        set i.stars = i.stars + $1
-        where i.id = $2
-        `, [realValue, postId]);
+            try {
+                yield typeorm_1.getConnection().query(`
+                START TRANSACTION;
+                
+                insert into stars ("userId", "itemId", value)
+                values (${userId},${itemId},${realValue});
+                
+                update item
+                set rating = rating + ${realValue}
+                where id = ${itemId};
+                
+                COMMIT;
+                `);
+            }
+            catch (err) {
+                console.error('Transaction failed');
+            }
             return true;
         });
     }
@@ -84,7 +94,9 @@ let ItemResolver = class ItemResolver {
             json_build_object(
                 'id', u.id,
                 'username', u.username,
-                'email', u.email
+                'email', u.email,
+                'createdAt', u."createdAt",
+                'updatedAt', u."updatedAt"
                 ) creator
             from item i
             inner join public.user u on u.id = i."creatorId"
@@ -143,7 +155,7 @@ __decorate([
 __decorate([
     type_graphql_1.Mutation(() => Boolean),
     type_graphql_1.UseMiddleware(isAuth_1.isAuth),
-    __param(0, type_graphql_1.Arg('postId', () => type_graphql_1.Int)),
+    __param(0, type_graphql_1.Arg('itemId', () => type_graphql_1.Int)),
     __param(1, type_graphql_1.Arg('value', () => type_graphql_1.Int)),
     __param(2, type_graphql_1.Ctx()),
     __metadata("design:type", Function),

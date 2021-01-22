@@ -26,7 +26,7 @@ export class Item extends BaseEntity {
     @Column({ type: 'int', default: 1 })
     rating!: number;
 
-    @Field()
+    @Field(() => Int)
     @Column()
     creatorId: number;
 
