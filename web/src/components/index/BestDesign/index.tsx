@@ -1,5 +1,5 @@
 import React from 'react';
-import Wrapper from '../../../layouts/MainWrapper/MainWrapper';
+import Wrapper from '../../../layouts/MainWrapper';
 import site from '../../../styles/scss/2-basics/Site.module.scss';
 import styles from '../../../styles/scss/3-components/BestDesign.module.scss';
 import SecondaryButton from '../../buttons/SecondaryButton';

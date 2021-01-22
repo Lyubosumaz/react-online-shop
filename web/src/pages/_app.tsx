@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import Footer from '../components/navigation/Footer/Footer';
-import NavBar from '../components/navigation/NavBar/NavBar';
+import Footer from '../components/navigation/Footer';
+import Header from '../components/navigation/Header';
 import '../styles/scss/styles.scss';
 
 function MyApp({ Component, pageProps }: any) {
@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }: any) {
                 <title>React-Online-Shop</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <NavBar />
+            <Header />
             <main>
                 <Component {...pageProps} />
             </main>

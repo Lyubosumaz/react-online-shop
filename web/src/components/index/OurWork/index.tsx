@@ -1,5 +1,5 @@
 import React from 'react';
-import Wrapper from '../../../layouts/MainWrapper/MainWrapper';
+import Wrapper from '../../../layouts/MainWrapper';
 import SecondaryButton from '../../buttons/SecondaryButton';
 import Item from '../../cards/Item';
 import styles from './OurWork.module.scss';

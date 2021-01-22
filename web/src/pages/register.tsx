@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Field, withTypes } from 'react-final-form';
 import MainButton from '../components/buttons/MainButton';
 import { useRegisterMutation } from '../generated/graphql';
-import Wrapper from '../layouts/MainWrapper/MainWrapper';
+import Wrapper from '../layouts/MainWrapper';
 import stylesSpinner from '../styles/scss/3-components/Spinner.module.scss';
 import styles from '../styles/scss/4-pages/Forms.module.scss';
 import { createUrqlClient } from '../utils/createUrqlClient';
