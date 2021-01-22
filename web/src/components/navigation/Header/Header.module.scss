@@ -1,5 +1,3 @@
-@import '../1-utilities/variables';
-
 ul {
     display: flex;
     justify-content: space-between;
@@ -7,10 +5,10 @@ ul {
 
 .nav {
     padding: 0.5em 0;
-    background-color: $mainColor;
-    border-top: $navBorder;
-    border-bottom: $navBorder;
-    color: $secondaryLighterColor;
+    background-color: var(--main-color);
+    border-top: var(--nav-border);
+    border-bottom: var(--nav-border);
+    color: var(--secondary-color-lighter);
 
     & > div > ul {
         flex-basis: 100%;
@@ -29,20 +27,24 @@ ul {
     a {
         padding: 0.3em 1em;
         text-transform: uppercase;
-        color: $secondaryLighterColor;
+        color: var(--secondary-color-lighter);
     }
 
     &:focus,
     &:hover {
-        background-color: $secondaryLighterColor;
-        // border-color: $secondaryLighterColor;
+        background-color: var(--secondary-color-lighter);
 
         a {
-            color: $mainColor;
+            color: var(--main-color);
         }
     }
 }
 
 li > ul > li + li {
     margin-left: 0.5em;
+}
+
+.vertical-wrapper {
+    display: flex;
+    align-items: center;
 }

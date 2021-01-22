@@ -33,7 +33,7 @@ const OurWork: React.FC<{}> = ({}) => {
                             <p>There are many variants of passages to Lorem Ipsum available, but the majority have suffered alteration</p>
                         </header>
 
-                        <ul>{items ? items.map((item) => <Item data={item} />) : null}</ul>
+                        <ul>{items ? items.map((item, index) => <Item key={index} data={item} />) : null}</ul>
 
                         <div className={styles[`button-wrapper`]}>
                             <SecondaryButton text={'Read More'} />

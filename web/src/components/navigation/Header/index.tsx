@@ -3,11 +3,10 @@ import NextLink from 'next/link';
 import React from 'react';
 import { useLogoutMutation, useMeQuery } from '../../../generated/graphql';
 import Wrapper from '../../../layouts/MainWrapper';
-import site from '../../../styles/scss/2-basics/Site.module.scss';
-import styles from '../../../styles/scss/3-components/NavBar.module.scss';
 import { createUrqlClient } from '../../../utils/createUrqlClient';
 import { isServer } from '../../../utils/isServer';
 import MainButton from '../../buttons/MainButton';
+import styles from './Header.module.scss';
 
 const NavBar: React.FC<{}> = ({}) => {
     const [, logout] = useLogoutMutation();
@@ -62,7 +61,7 @@ const NavBar: React.FC<{}> = ({}) => {
                     </NextLink>
                 </li>
 
-                <li className={site[`vertical-wrapper`]}>
+                <li className={styles[`vertical-wrapper`]}>
                     <span>Welcome {data.me.username}!</span>
                 </li>
 
@@ -76,7 +75,7 @@ const NavBar: React.FC<{}> = ({}) => {
     return (
         <nav className={styles.nav}>
             <Wrapper>
-                <div className={[site[`vertical-wrapper`], styles[`logo-wrapper`]].join(' ')}>
+                <div className={[styles[`vertical-wrapper`], styles[`logo-wrapper`]].join(' ')}>
                     <p className={styles[`site-logo`]}>ROS</p>
                 </div>
                 <ul>{body}</ul>
