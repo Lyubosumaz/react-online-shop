@@ -1,8 +1,6 @@
-@import '../1-utilities/variables';
-
 .our-work {
     padding: 5em 0;
-    background-color: $mainBackgroundColor;
+    background-color: var(--main-background-color);
 }
 
 .container {
@@ -14,7 +12,7 @@
 
         h3 {
             padding-bottom: 1.5rem;
-            color: $mainColor;
+            color: var(--main-color);
         }
 
         p {
@@ -31,8 +29,8 @@
             padding: 2em 1em;
             flex: 0 1 18em;
             text-align: center;
-            border: $mainElementBorder;
-            color: $mainColor;
+            border: var(--main-element-border);
+            color: var(--main-color);
 
             div {
                 width: 170px;
@@ -51,4 +49,9 @@
             margin-left: 1em;
         }
     }
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: center;
 }

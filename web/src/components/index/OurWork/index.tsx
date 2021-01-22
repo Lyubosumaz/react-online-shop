@@ -1,10 +1,9 @@
 import React from 'react';
 import Wrapper from '../../../layouts/MainWrapper/MainWrapper';
-import buttons from '../../../styles/scss/2-basics/Buttons.module.scss';
 import site from '../../../styles/scss/2-basics/Site.module.scss';
-import styles from '../../../styles/scss/3-components/OurWork.module.scss';
 import MainButton from '../../buttons/MainButton';
 import SecondaryButton from '../../buttons/SecondaryButton';
+import styles from './OurWork.module.scss';
 
 const OurWork: React.FC<{}> = ({}) => {
     return (
@@ -53,7 +52,7 @@ const OurWork: React.FC<{}> = ({}) => {
                             </li>
                         </ul>
 
-                        <div className={buttons[`button-wrapper`]}>
+                        <div className={styles[`button-wrapper`]}>
                             <SecondaryButton text={'Read More'} />
                         </div>
                     </div>
