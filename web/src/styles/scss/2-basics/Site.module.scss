@@ -14,13 +14,12 @@
         transform: translate(-50%, -50%);
     }
 }
+.column {
+    flex-basis: 50%;
+}
 
 .hidden {
     display: none;
-}
-
-.column {
-    flex-basis: 50%;
 }
 
 .vertical-wrapper {

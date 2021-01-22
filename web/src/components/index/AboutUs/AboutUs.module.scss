@@ -1,9 +1,13 @@
-@import '../1-utilities/variables';
 $borderPlace: -1.5em;
+$borderShape: 0.5em solid var(--main-color);
+
+.column {
+    flex-basis: 50%;
+}
 
 .about-us {
     padding: 5em 0;
-    background-color: $mainBackgroundColor;
+    background-color: var(--main-background-color);
     box-shadow: 0 0.3em 1em -0.3em rgba(0, 0, 0, 0.75);
 }
 
@@ -16,7 +20,7 @@ $borderPlace: -1.5em;
         width: 230px;
         height: 530px;
         background-color: #bbb;
-        border: $mainElementBorder;
+        border: var(--main-element-border);
 
         &::before,
         &::after {
@@ -30,15 +34,15 @@ $borderPlace: -1.5em;
         &::before {
             top: $borderPlace;
             left: $borderPlace;
-            border-top: 0.5em solid $mainColor;
-            border-left: 0.5em solid $mainColor;
+            border-top: $borderShape;
+            border-left: $borderShape;
         }
 
         &::after {
             right: $borderPlace;
             bottom: $borderPlace;
-            border-right: 0.5em solid $mainColor;
-            border-bottom: 0.5em solid $mainColor;
+            border-right: $borderShape;
+            border-bottom: $borderShape;
         }
     }
 }
@@ -50,11 +54,24 @@ $borderPlace: -1.5em;
 
     h5 {
         padding-bottom: 0.5rem;
-        color: $mainColor;
+        color: var(--main-color);
     }
 
     p {
         padding-bottom: 1.5rem;
         font-weight: 300;
+    }
+}
+
+.image {
+    position: relative;
+    background-color: #bbb;
+
+    span {
+        position: absolute;
+        color: var(--main-color);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 }
