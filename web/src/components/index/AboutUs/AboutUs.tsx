@@ -1,9 +1,8 @@
-import NextLink from 'next/link';
 import React from 'react';
 import Wrapper from '../../../layouts/MainWrapper/MainWrapper';
-import buttons from '../../../styles/scss/2-basics/Buttons.module.scss';
 import site from '../../../styles/scss/2-basics/Site.module.scss';
 import styles from '../../../styles/scss/3-components/AboutUs.module.scss';
+import SecondaryButton from '../../buttons/SecondaryButton';
 
 const AboutUs: React.FC<{}> = ({}) => {
     return (
@@ -24,9 +23,7 @@ const AboutUs: React.FC<{}> = ({}) => {
                         <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomized</p>
 
                         <div className={`button-wrapper`}>
-                            <NextLink href="/">
-                                <a className={buttons[`seconders-btn`]}>Read More</a>
-                            </NextLink>
+                            <SecondaryButton text={'Read More'} />
                         </div>
                     </div>
                 </Wrapper>

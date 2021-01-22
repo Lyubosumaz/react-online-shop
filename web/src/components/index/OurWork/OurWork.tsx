@@ -1,9 +1,9 @@
-import NextLink from 'next/link';
 import React from 'react';
 import Wrapper from '../../../layouts/MainWrapper/MainWrapper';
 import buttons from '../../../styles/scss/2-basics/Buttons.module.scss';
 import site from '../../../styles/scss/2-basics/Site.module.scss';
 import styles from '../../../styles/scss/3-components/OurWork.module.scss';
+import SecondaryButton from '../../buttons/SecondaryButton';
 
 const OurWork: React.FC<{}> = ({}) => {
     return (
@@ -55,9 +55,7 @@ const OurWork: React.FC<{}> = ({}) => {
                         </ul>
 
                         <div className={buttons[`button-wrapper`]}>
-                            <NextLink href="/">
-                                <a className={buttons[`seconders-btn`]}>Read More</a>
-                            </NextLink>
+                            <SecondaryButton text={'Read More'} />
                         </div>
                     </div>
                 </Wrapper>
