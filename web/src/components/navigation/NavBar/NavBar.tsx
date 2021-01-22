@@ -3,11 +3,11 @@ import NextLink from 'next/link';
 import React from 'react';
 import { useLogoutMutation, useMeQuery } from '../../../generated/graphql';
 import Wrapper from '../../../layouts/MainWrapper/MainWrapper';
-import buttons from '../../../styles/scss/2-basics/Buttons.module.scss';
 import site from '../../../styles/scss/2-basics/Site.module.scss';
 import styles from '../../../styles/scss/3-components/NavBar.module.scss';
 import { createUrqlClient } from '../../../utils/createUrqlClient';
 import { isServer } from '../../../utils/isServer';
+import MainButton from '../../buttons/MainButton';
 
 interface NavBarProps {}
 
@@ -69,9 +69,7 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
                 </li>
 
                 <li>
-                    <button className={buttons[`main-btn`]} onClick={() => logout()}>
-                        Logout
-                    </button>
+                    <MainButton text={'Logout'} onClick={() => logout()} />
                 </li>
             </>
         );
