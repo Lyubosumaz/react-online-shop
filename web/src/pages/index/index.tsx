@@ -1,11 +1,11 @@
 import { withUrqlClient } from 'next-urql';
 import { useState } from 'react';
-import AboutUs from '../components/index/AboutUs';
-import BestDesign from '../components/index/BestDesign';
-import OurWork from '../components/index/OurWork';
-import { useItemQuery } from '../generated/graphql';
-import styles from '../styles/scss/Home.module.scss';
-import { createUrqlClient } from '../utils/createUrqlClient';
+import AboutUs from '../../components/index/AboutUs';
+import BestDesign from '../../components/index/BestDesign';
+import OurWork from '../../components/index/OurWork';
+import { useItemQuery } from '../../generated/graphql';
+import styles from '../../styles/scss/Home.module.scss';
+import { createUrqlClient } from '../../utils/createUrqlClient';
 
 const Home = () => {
     const [variables, setVariables] = useState({

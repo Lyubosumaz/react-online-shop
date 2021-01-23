@@ -1,8 +1,8 @@
 import { withUrqlClient } from 'next-urql';
 import React, { useState } from 'react';
 import { Field, withTypes } from 'react-final-form';
-import { useForgottenPasswordMutation } from '../generated/graphql';
-import { createUrqlClient } from '../utils/createUrqlClient';
+import { useForgottenPasswordMutation } from '../../generated/graphql';
+import { createUrqlClient } from '../../utils/createUrqlClient';
 
 interface ErrType {
     [key: string]: string;
