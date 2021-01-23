@@ -6,7 +6,7 @@ import MainButton from '../../components/buttons/MainButton';
 import { useRegisterMutation } from '../../generated/graphql';
 import Wrapper from '../../layouts/MainWrapper';
 import styles from '../../styles/scss/Forms.module.scss';
-import stylesSpinner from '../../styles/scss/Spinner.module.scss';
+// import stylesSpinner from '../../styles/scss/Spinner.module.scss';
 import { createUrqlClient } from '../../utils/createUrqlClient';
 import { toErrorMap } from '../../utils/toErrorMap';
 
@@ -55,7 +55,7 @@ const Register: React.FC<registerProps> = ({}) => {
                                         <input {...input} type="text" placeholder="John Doe" />
                                         {meta.error && meta.touched && <span>{meta.error}</span>}
                                         {errors['username'] ? <div>{errors['username']}</div> : <div>123</div>}
-                                        {meta.validating && <div className={stylesSpinner.div}></div>}
+                                        {/* {meta.validating && <div className={stylesSpinner.div}></div>} */}
                                     </div>
                                 )}
                             </Field>
@@ -67,7 +67,7 @@ const Register: React.FC<registerProps> = ({}) => {
                                         <input {...input} type="text" placeholder="john@doe.com" />
                                         {meta.error && meta.touched && <span>{meta.error}</span>}
                                         {errors['email'] ? <div>{errors['email']}</div> : <div>123</div>}
-                                        {meta.validating && <div className={stylesSpinner.div}></div>}
+                                        {/* {meta.validating && <div className={stylesSpinner.div}></div>} */}
                                     </div>
                                 )}
                             </Field>
@@ -79,7 +79,7 @@ const Register: React.FC<registerProps> = ({}) => {
                                         <input {...input} type="password" placeholder="********" />
                                         {meta.error && meta.touched && <span>{meta.error}</span>}
                                         {errors['password'] ? <div>{errors['password']}</div> : <div>123</div>}
-                                        {meta.validating && <div className={stylesSpinner.div}></div>}
+                                        {/* {meta.validating && <div className={stylesSpinner.div}></div>} */}
                                     </div>
                                 )}
                             </Field>

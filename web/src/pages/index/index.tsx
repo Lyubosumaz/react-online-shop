@@ -4,8 +4,8 @@ import AboutUs from '../../components/index/AboutUs';
 import BestDesign from '../../components/index/BestDesign';
 import OurWork from '../../components/index/OurWork';
 import { useItemQuery } from '../../generated/graphql';
-import styles from '../../styles/scss/Home.module.scss';
 import { createUrqlClient } from '../../utils/createUrqlClient';
+import styles from './Home.module.scss';
 
 const Home = () => {
     const [variables, setVariables] = useState({

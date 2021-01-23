@@ -6,7 +6,7 @@ import MainButton from '../../components/buttons/MainButton';
 import { useCreateItemMutation } from '../../generated/graphql';
 import Wrapper from '../../layouts/MainWrapper';
 import styles from '../../styles/scss/Forms.module.scss';
-import stylesSpinner from '../../styles/scss/Spinner.module.scss';
+// import stylesSpinner from '../../styles/scss/Spinner.module.scss';
 import { createUrqlClient } from '../../utils/createUrqlClient';
 import { useIsAuth } from '../../utils/useIsAuth';
 
@@ -47,7 +47,7 @@ const CreateItem: React.FC<{}> = ({}) => {
                                         <input {...input} type="text" />
                                         {meta.error && meta.touched && <span>{meta.error}</span>}
                                         {errors['title'] ? <div>{errors['title']}</div> : <div>123</div>}
-                                        {meta.validating && <div className={stylesSpinner.div}></div>}
+                                        {/* {meta.validating && <div className={stylesSpinner.div}></div>} */}
                                     </div>
                                 )}
                             </Field>
@@ -59,7 +59,7 @@ const CreateItem: React.FC<{}> = ({}) => {
                                         <input {...input} type="text" />
                                         {meta.error && meta.touched && <span>{meta.error}</span>}
                                         {errors['description'] ? <div>{errors['description']}</div> : <div>123</div>}
-                                        {meta.validating && <div className={stylesSpinner.div}></div>}
+                                        {/* {meta.validating && <div className={stylesSpinner.div}></div>} */}
                                     </div>
                                 )}
                             </Field>

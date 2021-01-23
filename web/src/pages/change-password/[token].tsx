@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { Field, withTypes } from 'react-final-form';
 import MainButton from '../../components/buttons/MainButton';
 import { useChangePasswordMutation } from '../../generated/graphql';
-import stylesSpinner from '../../styles/scss/3-components/Spinner.module.scss';
+// import stylesSpinner from '../../styles/scss/3-components/Spinner.module.scss';
 import { createUrqlClient } from '../../utils/createUrqlClient';
 import { toErrorMap } from '../../utils/toErrorMap';
 
@@ -53,7 +53,7 @@ const ChangePassword: React.FC<{}> = () => {
                                     <input {...input} type="password" placeholder="New password" />
                                     {meta.error && meta.touched && <span>{meta.error}</span>}
                                     {errors['newPassword'] ? <div>{errors['newPassword']}</div> : <div>123</div>}
-                                    {meta.validating && <div className={stylesSpinner.div}></div>}
+                                    {/* {meta.validating && <div className={stylesSpinner.div}></div>} */}
                                 </div>
                             )}
                         </Field>
@@ -65,7 +65,7 @@ const ChangePassword: React.FC<{}> = () => {
                                     <input {...input} type="password" placeholder="Repeat password" />
                                     {meta.error && meta.touched && <span>{meta.error}</span>}
                                     {errors['repPassword'] ? <div>{errors['repPassword']}</div> : <div>123</div>}
-                                    {meta.validating && <div className={stylesSpinner.div}></div>}
+                                    {/* {meta.validating && <div className={stylesSpinner.div}></div>} */}
                                 </div>
                             )}
                         </Field>
