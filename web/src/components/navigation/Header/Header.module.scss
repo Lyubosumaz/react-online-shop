@@ -38,10 +38,10 @@ ul {
             color: var(--main-color);
         }
     }
-}
 
-li > ul > li + li {
-    margin-left: 0.5em;
+    li > ul > li + li {
+        margin-left: 0.5em;
+    }
 }
 
 .vertical-wrapper {

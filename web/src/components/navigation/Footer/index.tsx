@@ -16,7 +16,7 @@ const Footer: React.FC<{}> = ({}) => {
                     </ul>
 
                     <ul className={styles[`footer-services`]}>
-                        <li>
+                        <li className={styles[`service-card`]}>
                             <header>
                                 <h5>Useful Link</h5>
                             </header>
@@ -28,14 +28,16 @@ const Footer: React.FC<{}> = ({}) => {
                                 <li>Contact Us</li>
                             </ul>
                         </li>
-                        <li>
+
+                        <li className={styles[`service-card`]}>
                             <header>
                                 <h5>Repair</h5>
                             </header>
 
                             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit 30Levcamsamoajajahavlovemorethenthatajaj.</p>
                         </li>
-                        <li>
+
+                        <li className={styles[`service-card`]}>
                             <header>
                                 <h5>Social Media</h5>
                             </header>
@@ -47,7 +49,8 @@ const Footer: React.FC<{}> = ({}) => {
                                 <li>Linkedin</li>
                             </ul>
                         </li>
-                        <li>
+
+                        <li className={styles[`service-card`]}>
                             <header>
                                 <h5>Our Repair Center</h5>
                             </header>

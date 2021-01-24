@@ -8,7 +8,22 @@
 }
 
 .footer-services {
-    flex: 0 0 25%;
+    display: flex;
+    // ul {
+    //     flex-wrap: wrap;
+
+    //     li {
+    //         flex-basis: 100%;
+    //     }
+    // }
+}
+
+.service-card {
+    flex-basis: 20%;
+
+    p {
+        overflow-wrap: break-word;
+    }
 }
 
 .footer-rights {
