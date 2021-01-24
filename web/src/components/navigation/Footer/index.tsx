@@ -6,8 +6,8 @@ import styles from './Footer.module.scss';
 const Footer: React.FC<{}> = ({}) => {
     return (
         <>
-            <footer>
-                <ul>
+            <footer className={styles[`site-footer`]}>
+                <ul className={`footer-shop`}>
                     <li>Lorem lpusm hosting web</li>
                     <li>Call: +7586656566</li>
                     <li>demo@mail.com</li>
