@@ -1,40 +1,40 @@
 .site-footer {
-    background-color: #100703;
-    color: #fcfcfc;
+    // background-color: #100703;
+    // color: #fcfcfc;
 }
 
 .footer-shop-details {
-    flex-basis: 100%;
-    display: flex;
-    justify-content: space-around;
+    // flex-basis: 100%;
+    // display: flex;
+    // justify-content: space-around;
 
     .info {
-        flex-basis: content;
+        // flex-basis: content;
     }
 }
 
 .footer-services {
-    display: flex;
-    justify-content: space-between;
+    // display: flex;
+    // justify-content: space-between;
 
     .service-card {
         // display: flex;
         // flex-wrap: wrap;
 
         &-header {
-            display: block;
-            width: max-content;
-            padding-bottom: 1.5em;
-            white-space: nowrap;
+            // display: block;
+            // width: max-content;
+            // padding-bottom: 1.5em;
+            // white-space: nowrap;
         }
 
         p,
         ul {
-            opacity: 0.5;
+            // opacity: 0.5;
         }
 
         p {
-            overflow-wrap: break-word;
+            // overflow-wrap: break-word;
         }
 
         &-list {
@@ -46,15 +46,9 @@
             }
 
             &-links {
-                margin-bottom: 0.5em;
+                // margin-bottom: 0.5em;
             }
         }
-    }
-
-    // &-navigation,
-    &-repair,
-    &-center {
-        // max-width: 20%; // hmmmmmmmmmmmmmm
     }
 
     // .service-card-media {
