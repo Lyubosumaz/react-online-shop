@@ -3,66 +3,85 @@
     color: #fcfcfc;
 }
 
-.footer-shop {
+.footer-shop-details {
     flex-basis: 100%;
+    display: flex;
+    justify-content: space-around;
+
+    .info {
+        flex-basis: content;
+    }
 }
 
 .footer-services {
     display: flex;
-}
+    justify-content: space-between;
 
-.service-card {
-    max-width: 20%;
+    .service-card {
+        // display: flex;
+        // flex-wrap: wrap;
 
-    header {
-        text-transform: uppercase;
-        padding-bottom: 1.5em;
-    }
-
-    p,
-    ul {
-        opacity: 0.5;
-    }
-
-    p {
-        overflow-wrap: break-word;
-    }
-
-    ul {
-        display: flex;
-        flex-wrap: wrap;
-
-        li {
-            flex-basis: 100%;
-            margin-bottom: 0.5em; // useful links
-        }
-    }
-}
-
-.service-card-media {
-    flex-wrap: nowrap;
-
-    ul {
-        li + li {
-            margin-left: 0.5em;
+        &-header {
+            display: block;
+            width: max-content;
+            padding-bottom: 1.5em;
+            white-space: nowrap;
         }
 
-        li {
-            width: 3em;
-            height: 3em;
-            line-height: 1;
-            border-radius: 50%;
-            background-color: #171717;
-            position: relative;
+        p,
+        ul {
+            opacity: 0.5;
+        }
 
-            span {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
+        p {
+            overflow-wrap: break-word;
+        }
+
+        &-list {
+            // display: flex;
+            // flex-wrap: wrap;
+
+            li {
+                // flex-basis: 100%;
+            }
+
+            &-links {
+                margin-bottom: 0.5em;
             }
         }
     }
+
+    // &-navigation,
+    &-repair,
+    &-center {
+        // max-width: 20%; // hmmmmmmmmmmmmmm
+    }
+
+    // .service-card-media {
+    //     flex-wrap: nowrap;
+
+    //     ul {
+    //         li + li {
+    //             margin-left: 0.5em;
+    //         }
+
+    //         li {
+    //             width: 3em;
+    //             height: 3em;
+    //             line-height: 1;
+    //             border-radius: 50%;
+    //             background-color: #171717;
+    //             position: relative;
+
+    //             span {
+    //                 position: absolute;
+    //                 left: 50%;
+    //                 top: 50%;
+    //                 transform: translate(-50%, -50%);
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 .site-rights {
