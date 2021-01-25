@@ -43,12 +43,24 @@
     flex-wrap: nowrap;
 
     ul {
+        li + li {
+            margin-left: 0.5em;
+        }
+
         li {
             width: 3em;
             height: 3em;
             line-height: 1;
             border-radius: 50%;
             background-color: #171717;
+            position: relative;
+
+            span {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
         }
     }
 }
