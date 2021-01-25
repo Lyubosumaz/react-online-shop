@@ -1,16 +1,12 @@
 .site-footer {
-    // background-color: #100703;
-    // color: #fcfcfc;
+    background-color: #100703;
+    color: #fcfcfc;
 }
 
 .footer-shop-details {
-    // flex-basis: 100%;
-    // display: flex;
-    // justify-content: space-around;
-
-    .info {
-        // flex-basis: content;
-    }
+    display: flex;
+    flex-basis: 100%;
+    justify-content: space-around;
 }
 
 .footer-services {

@@ -10,9 +10,9 @@ const Footer: React.FC<{}> = ({}) => {
             <footer className={styles[`site-footer`]}>
                 <Wrapper>
                     <ul className={styles[`footer-shop-details`]}>
-                        <li className={styles.info}>Lorem lpusm hosting web</li>
-                        <li className={styles.info}>Call: +7586656566</li>
-                        <li className={styles.info}>demo@mail.com</li>
+                        <li>Lorem lpusm hosting web</li>
+                        <li>Call: +7586656566</li>
+                        <li>demo@mail.com</li>
                     </ul>
 
                     <ul className={styles[`footer-services`]}>
