@@ -60,7 +60,7 @@ const Footer: React.FC<{}> = ({}) => {
                     </ul>
                 </Wrapper>
 
-                <div className={styles[`footer-rights`]}>
+                <div className={styles[`site-rights`]}>
                     <p>2020-{new Date().getFullYear()} All Rights Restricted. Design by Free html Templates</p>
                 </div>
             </footer>

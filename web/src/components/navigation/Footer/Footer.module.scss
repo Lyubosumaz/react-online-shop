@@ -9,24 +9,26 @@
 
 .footer-services {
     display: flex;
-    // ul {
-    //     flex-wrap: wrap;
-
-    //     li {
-    //         flex-basis: 100%;
-    //     }
-    // }
 }
 
 .service-card {
-    flex-basis: 20%;
+    max-width: 20%;
 
     p {
         overflow-wrap: break-word;
     }
+
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+
+        li {
+            flex-basis: 100%;
+        }
+    }
 }
 
-.footer-rights {
+.site-rights {
     color: #0b0b22;
     padding: 1em 0;
     text-align: center;
