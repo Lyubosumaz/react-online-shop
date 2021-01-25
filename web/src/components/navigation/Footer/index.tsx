@@ -37,7 +37,7 @@ const Footer: React.FC<{}> = ({}) => {
                             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit 30Levcamsamoajajahavlovemorethenthatajaj.</p>
                         </li>
 
-                        <li className={styles[`service-card-media`]}>
+                        <li className={[styles[`service-card`], styles[`service-card-media`]].join(' ')}>
                             <header>
                                 <h5>Social Media</h5>
                             </header>
