@@ -33,8 +33,6 @@
         flex-wrap: wrap;
 
         li {
-            width: 1em;
-            border-radius: 50%;
             flex-basis: 100%;
             margin-bottom: 0.5em; // useful links
         }
@@ -46,6 +44,10 @@
 
     ul {
         li {
+            width: 3em;
+            height: 3em;
+            line-height: 1;
+            border-radius: 50%;
             background-color: #171717;
         }
     }
