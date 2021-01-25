@@ -4,9 +4,35 @@
 }
 
 .footer-shop-details {
+    padding: 6em 0 2em 0;
     display: flex;
     flex-basis: 100%;
     justify-content: space-around;
+
+    .info {
+        display: flex;
+        cursor: pointer;
+
+        &::before {
+            margin-right: 0.5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 1;
+        }
+
+        &:nth-child(1):before {
+            content: '1';
+        }
+
+        &:nth-child(2):before {
+            content: '2';
+        }
+
+        &:nth-child(3):before {
+            content: '3';
+        }
+    }
 }
 
 .footer-services {
