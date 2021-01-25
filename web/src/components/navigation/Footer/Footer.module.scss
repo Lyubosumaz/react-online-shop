@@ -33,8 +33,20 @@
         flex-wrap: wrap;
 
         li {
+            width: 1em;
+            border-radius: 50%;
             flex-basis: 100%;
             margin-bottom: 0.5em; // useful links
+        }
+    }
+}
+
+.service-card-media {
+    flex-wrap: nowrap;
+
+    ul {
+        li {
+            background-color: #171717;
         }
     }
 }

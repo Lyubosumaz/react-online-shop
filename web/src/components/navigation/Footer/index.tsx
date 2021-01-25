@@ -24,7 +24,7 @@ const Footer: React.FC<{}> = ({}) => {
                             <ul>
                                 <li>Home</li>
                                 <li>About</li>
-                                <li>Our Designe</li>
+                                <li>Our Design</li>
                                 <li>Contact Us</li>
                             </ul>
                         </li>
@@ -37,16 +37,24 @@ const Footer: React.FC<{}> = ({}) => {
                             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit 30Levcamsamoajajahavlovemorethenthatajaj.</p>
                         </li>
 
-                        <li className={styles[`service-card`]}>
+                        <li className={styles[`service-card-media`]}>
                             <header>
                                 <h5>Social Media</h5>
                             </header>
 
                             <ul>
-                                <li>Facebook</li>
-                                <li>Tweeter</li>
-                                <li>Google+</li>
-                                <li>Linkedin</li>
+                                <li>
+                                    <span>F</span>
+                                </li>
+                                <li>
+                                    <span>T</span>
+                                </li>
+                                <li>
+                                    <span>G</span>
+                                </li>
+                                <li>
+                                    <span>L</span>
+                                </li>
                             </ul>
                         </li>
 
