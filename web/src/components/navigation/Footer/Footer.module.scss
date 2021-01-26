@@ -35,77 +35,79 @@
     }
 }
 
-.footer-services .service-card {
-    &-navigation {
-        width: 17%;
-    }
-
-    &-repair {
-        width: 15%;
-    }
-
-    &-media {
-        width: 26%;
-    }
-
-    &-center {
-        width: 28.5%;
-    }
-
-    .header {
-        padding-bottom: 1.5em;
-        white-space: nowrap;
-    }
-
-    .body {
-        overflow-wrap: break-word;
-        opacity: 0.5;
-
-        .links {
-            margin-bottom: 0.5em;
-            cursor: pointer;
-        }
-    }
-
-    .list {
-        display: flex;
-
-        .links + .links {
-            margin-left: 0.5em;
+.footer-services {
+    .service-card {
+        &-navigation {
+            width: 17%;
         }
 
-        .links {
-            width: 3em;
-            height: 3em;
-            line-height: 1;
-            border-radius: 50%;
-            background-color: #171717;
-            position: relative;
-            cursor: pointer;
+        &-repair {
+            width: 15%;
+        }
 
-            &::before {
-                display: block;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
+        &-media {
+            width: 26%;
+        }
+
+        &-center {
+            width: 28.5%;
+        }
+
+        .header {
+            padding-bottom: 1.5em;
+            white-space: nowrap;
+        }
+
+        .body {
+            overflow-wrap: break-word;
+            opacity: 0.5;
+
+            .links {
+                margin-bottom: 0.5em;
+                cursor: pointer;
+            }
+        }
+
+        .list {
+            display: flex;
+
+            .links + .links {
+                margin-left: 0.5em;
+            }
+
+            .links {
+                width: 3em;
+                height: 3em;
                 line-height: 1;
-            }
+                border-radius: 50%;
+                background-color: #171717;
+                position: relative;
+                cursor: pointer;
 
-            &:nth-child(1):before {
-                content: '1';
-            }
+                &::before {
+                    display: block;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                    line-height: 1;
+                }
 
-            &:nth-child(2):before {
-                content: '2';
-            }
+                &:nth-child(1):before {
+                    content: '1';
+                }
 
-            &:nth-child(3):before {
-                content: '3';
-            }
+                &:nth-child(2):before {
+                    content: '2';
+                }
 
-            &:nth-child(4):before {
-                content: '4';
+                &:nth-child(3):before {
+                    content: '3';
+                }
+
+                &:nth-child(4):before {
+                    content: '4';
+                }
             }
         }
     }
