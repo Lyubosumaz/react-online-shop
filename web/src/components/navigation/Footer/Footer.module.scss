@@ -4,7 +4,7 @@
 }
 
 .footer-shop-details {
-    padding: 6em 0 2em 0;
+    padding: 6em 0 2.5em 0;
     display: flex;
     flex-basis: 100%;
     justify-content: space-around;
@@ -72,6 +72,12 @@
             .links {
                 margin-bottom: 0.5em;
                 cursor: pointer;
+
+                // TODO this need to be a tag
+                &:hover,
+                &:focus {
+                    text-decoration: underline;
+                }
             }
         }
 
@@ -114,6 +120,19 @@
 
                 &:nth-child(4):before {
                     content: '4';
+                }
+
+                &:hover {
+                    background-color: #555;
+                }
+
+                &:nth-child(1) {
+                    background-color: #7c2c0c;
+
+                    &:hover {
+                        color: #3b5998;
+                        background-color: var(--secondary-color-lighter);
+                    }
                 }
             }
         }
