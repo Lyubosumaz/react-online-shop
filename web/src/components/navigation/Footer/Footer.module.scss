@@ -36,25 +36,32 @@
 }
 
 .footer-services {
+    padding-bottom: 4em;
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 100%;
+    justify-content: space-between;
+
     .service-card {
         &-navigation {
-            width: 17%;
+            width: 8.85em;
         }
 
         &-repair {
-            width: 15%;
+            width: 7.75em;
         }
 
         &-media {
-            width: 26%;
+            width: 13.75em;
         }
 
         &-center {
-            width: 28.5%;
+            width: 14.7em;
         }
 
         .header {
             padding-bottom: 1.5em;
+            text-transform: uppercase;
             white-space: nowrap;
         }
 

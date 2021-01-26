@@ -34,7 +34,7 @@ const Footer: React.FC<{}> = ({}) => {
                                 <h5>Repair</h5>
                             </header>
 
-                            <p className={styles.body}>Lorem ipsum dolor sit, amet conse ctet ur adipi sicing elit 30Levcamsamoajajahavlovemorethenthatajaj.</p>
+                            <p className={styles.body}>Lorem ipsum dolor sit, amet conse ctet ur adipi sicing elit 30Levcamsamoajajahavlove.</p>
                         </li>
 
                         <li className={[styles[`service-card`], styles[`service-card-media`]].join(' ')}>
@@ -55,7 +55,7 @@ const Footer: React.FC<{}> = ({}) => {
                                 <h5>Our Repair Center</h5>
                             </header>
 
-                            <p className={styles.body}>Lorem ipsum dolor sit, amet consectetur adipisicing elit 30Levcamsamoajajahavlovemorethenthatajaj.</p>
+                            <p className={styles.body}>Lorem ipsum dolor sit, amet conse ctet ur adipi sicing elit 30Levcamsamoajajahavlovemorethenthatajaj.</p>
                         </li>
                     </ul>
                 </Wrapper>
