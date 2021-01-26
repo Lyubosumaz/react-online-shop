@@ -4,12 +4,13 @@ import AboutUs from '../../components/index/AboutUs';
 import BestDesign from '../../components/index/BestDesign';
 import OurWork from '../../components/index/OurWork';
 import { useItemQuery } from '../../generated/graphql';
+import ItemPagination from '../../layouts/ItemPagination';
 import { createUrqlClient } from '../../utils/createUrqlClient';
 import styles from './Home.module.scss';
 
 const Home = () => {
     const [variables, setVariables] = useState({
-        limit: 33,
+        limit: 15,
         cursor: null as string | null,
     });
     const [{ data, fetching }] = useItemQuery({
@@ -33,13 +34,16 @@ const Home = () => {
             {!data && fetching ? (
                 <div>Loading...</div>
             ) : (
-                data!.items.item.map((item) => (
-                    <div key={item.id}>
-                        <h5>{item.title}</h5>
-                        <p>{item.description}</p>
-                        <p>{item.textSnippet}</p>
-                    </div>
-                ))
+                <>
+                    <ItemPagination data={data?.items} />
+                    {/* data!.items.item.map((item) => (
+                        <div key={item.id}>
+                            <h5>{item.title}</h5>
+                            <p>{item.description}</p>
+                            <p>{item.textSnippet}</p>
+                        </div>
+                )) */}
+                </>
             )}
 
             {data && data.items.hasMore ? (

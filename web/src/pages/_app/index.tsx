@@ -12,7 +12,6 @@ function MyApp({ Component, pageProps }: any) {
             </Head>
             <Header />
             <main>
-                <p className="test">adasd</p>
                 <Component {...pageProps} />
             </main>
             <Footer />
