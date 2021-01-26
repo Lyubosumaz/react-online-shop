@@ -16,58 +16,46 @@ const Footer: React.FC<{}> = ({}) => {
                     </ul>
 
                     <ul className={styles[`footer-services`]}>
-                        <li className={[styles[`service-card`], styles[`footer-services-navigation`]].join(' ')}>
-                            <header className={styles[`service-card-header`]}>
+                        <li className={[styles[`service-card`], styles[`service-card-navigation`]].join(' ')}>
+                            <header className={styles.header}>
                                 <h5>Useful Link</h5>
                             </header>
 
-                            <ul className={styles[`service-card-list`]}>
-                                <li className={styles[`service-card-list-links`]}>Home</li>
-                                <li className={styles[`service-card-list-links`]}>About</li>
-                                <li className={styles[`service-card-list-links`]}>Our Design</li>
-                                <li className={styles[`service-card-list-links`]}>Contact Us</li>
+                            <ul className={styles.body}>
+                                <li className={styles.links}>Home</li>
+                                <li className={styles.links}>About</li>
+                                <li className={styles.links}>Our Design</li>
+                                <li className={styles.links}>Contact Us</li>
                             </ul>
                         </li>
 
-                        <li className={[styles[`service-card`], styles[`footer-services-repair`]].join(' ')}>
-                            <header className={styles[`service-card-header`]}>
+                        <li className={[styles[`service-card`], styles[`service-card-repair`]].join(' ')}>
+                            <header className={styles.header}>
                                 <h5>Repair</h5>
                             </header>
 
-                            <div>
-                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit 30Levcamsamoajajahavlovemorethenthatajaj.</p>
-                            </div>
+                            <p className={styles.body}>Lorem ipsum dolor sit, amet conse ctet ur adipi sicing elit 30Levcamsamoajajahavlovemorethenthatajaj.</p>
                         </li>
 
-                        <li className={[styles[`service-card`], styles[`footer-services-media`]].join(' ')}>
-                            <header className={styles[`service-card-header`]}>
+                        <li className={[styles[`service-card`], styles[`service-card-media`]].join(' ')}>
+                            <header className={styles.header}>
                                 <h5>Social Media</h5>
                             </header>
 
-                            <ul>
-                                <li>
-                                    <span>F</span>
-                                </li>
-                                <li>
-                                    <span>T</span>
-                                </li>
-                                <li>
-                                    <span>G</span>
-                                </li>
-                                <li>
-                                    <span>L</span>
-                                </li>
+                            <ul className={styles.list}>
+                                <li className={styles.links}></li>
+                                <li className={styles.links}></li>
+                                <li className={styles.links}></li>
+                                <li className={styles.links}></li>
                             </ul>
                         </li>
 
-                        <li className={[styles[`service-card`], styles[`footer-services-center`]].join(' ')}>
-                            <header className={styles[`service-card-header`]}>
+                        <li className={[styles[`service-card`], styles[`service-card-center`]].join(' ')}>
+                            <header className={styles.header}>
                                 <h5>Our Repair Center</h5>
                             </header>
 
-                            <div>
-                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit 30Levcamsamoajajahavlovemorethenthatajaj.</p>
-                            </div>
+                            <p className={styles.body}>Lorem ipsum dolor sit, amet consectetur adipisicing elit 30Levcamsamoajajahavlovemorethenthatajaj.</p>
                         </li>
                     </ul>
                 </Wrapper>
