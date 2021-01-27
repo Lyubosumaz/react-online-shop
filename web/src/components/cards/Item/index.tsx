@@ -23,7 +23,7 @@ const Item: React.FC<ItemProps> = ({ data }) => {
                     <span>{image ? image : 'Empty'}</span>
                 </div>
 
-                {textSnippet ? <p>{textSnippet}</p> : null}
+                {textSnippet ? <p className={styles[`description`]}>{textSnippet}</p> : null}
 
                 <h6>Price ${price}</h6>
 

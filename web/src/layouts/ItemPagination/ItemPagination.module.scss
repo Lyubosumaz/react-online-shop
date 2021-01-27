@@ -1,4 +1,10 @@
-.items-pagination {
+.items-pagination-component {
+    padding-bottom: 4em;
+    background-color: var(--main-background-color);
+}
+
+.items-pagination-list {
+    padding-bottom: 4em;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

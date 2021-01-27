@@ -23,17 +23,22 @@ const ItemPagination: React.FC<ItemProps> = ({ data, limit, paginationCallback }
 
     return (
         <>
-            <Wrapper>
-                <ul className={styles[`items-pagination`]}>
-                    {!page ? <div>Loading...</div> : page.map((item: any) => <Item key={item.id} data={item} />)}
+            <div className={styles[`items-pagination-component`]}>
+                <Wrapper>
+                    <ul className={styles[`items-pagination-list`]}>
+                        {!page ?
+                            <div>Loading...</div> :
+                            page.map((item: any) => <Item key={item.id} data={item} />)
+                        }
+                    </ul>
 
                     {hasMore ? (
                         <ButtonWrapper>
                             <MainButton text={'Load more'} onClick={() => handleClick()} />
                         </ButtonWrapper>
                     ) : null}
-                </ul>
-            </Wrapper>
+                </Wrapper>
+            </div>
         </>
     );
 };
