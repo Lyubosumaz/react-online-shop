@@ -23,15 +23,16 @@ const Home = () => {
     if (!fetching && !data) {
     }
 
+    const paginationCallback = (arg: any) => {
+        setVariables(arg);
+    };
+
     return (
         <div className={styles.container}>
             <BestDesign />
-
             <AboutUs />
-
             <OurWork />
-
-            {!data && fetching ? <div>Loading...</div> : <ItemPagination data={data?.items} />}
+            {!data && fetching ? <div>Loading...</div> : <ItemPagination paginationCallback={paginationCallback} limit={variables.limit} data={data?.items} />}
         </div>
     );
 };

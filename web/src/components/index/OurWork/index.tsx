@@ -9,17 +9,17 @@ const OurWork: React.FC<{}> = ({}) => {
         {
             title: 'Chair 01',
             image: 'Image',
-            price: 'Price $100',
+            price: '100',
         },
         {
             title: 'Chair 02',
             image: 'Image',
-            price: 'Price $120',
+            price: '120',
         },
         {
             title: 'Table',
             image: 'Image',
-            price: 'Price $240',
+            price: '240',
         },
     ];
 

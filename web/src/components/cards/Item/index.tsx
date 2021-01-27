@@ -12,7 +12,6 @@ export interface ItemProps {
 }
 
 const Item: React.FC<ItemProps> = ({ data }) => {
-    console.log(data);
     const { title, image, price, textSnippet } = data;
 
     return (
@@ -26,7 +25,7 @@ const Item: React.FC<ItemProps> = ({ data }) => {
 
                 {textSnippet ? <p>{textSnippet}</p> : null}
 
-                <h6>{price}</h6>
+                <h6>Price ${price}</h6>
 
                 <MainButton text={'Buy Now'} />
             </li>
