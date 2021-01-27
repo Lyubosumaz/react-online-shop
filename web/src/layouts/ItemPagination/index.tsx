@@ -1,5 +1,8 @@
 import React from 'react';
+import MainButton from '../../components/buttons/MainButton';
 import Item from '../../components/cards/Item';
+import ButtonWrapper from '../ButtonWrapper';
+import Wrapper from '../MainWrapper';
 import styles from './ItemPagination.module.scss';
 
 interface ItemProps {
@@ -20,11 +23,17 @@ const ItemPagination: React.FC<ItemProps> = ({ data, limit, paginationCallback }
 
     return (
         <>
-            <ul className={styles[`items-pagination`]}>
-                {!page ? <div>Loading...</div> : page.map((item: any) => <Item key={item.id} data={item} />)}
+            <Wrapper>
+                <ul className={styles[`items-pagination`]}>
+                    {!page ? <div>Loading...</div> : page.map((item: any) => <Item key={item.id} data={item} />)}
 
-                {hasMore ? <button onClick={() => handleClick()}>Load more</button> : null}
-            </ul>
+                    {hasMore ? (
+                        <ButtonWrapper>
+                            <MainButton text={'Load more'} onClick={() => handleClick()} />
+                        </ButtonWrapper>
+                    ) : null}
+                </ul>
+            </Wrapper>
         </>
     );
 };

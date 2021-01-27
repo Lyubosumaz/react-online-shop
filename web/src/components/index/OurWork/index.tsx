@@ -1,4 +1,5 @@
 import React from 'react';
+import ButtonWrapper from '../../../layouts/ButtonWrapper';
 import Wrapper from '../../../layouts/MainWrapper';
 import SecondaryButton from '../../buttons/SecondaryButton';
 import Item from '../../cards/Item';
@@ -32,12 +33,11 @@ const OurWork: React.FC<{}> = ({}) => {
                             <h3>Our Work Furniture</h3>
                             <p>There are many variants of passages to Lorem Ipsum available, but the majority have suffered alteration</p>
                         </header>
-
                         <ul>{items ? items.map((item, index) => <Item key={index} data={item} />) : null}</ul>
 
-                        <div className={styles[`button-wrapper`]}>
+                        <ButtonWrapper>
                             <SecondaryButton text={'Read More'} />
-                        </div>
+                        </ButtonWrapper>
                     </div>
                 </Wrapper>
             </div>
