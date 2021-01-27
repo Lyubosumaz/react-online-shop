@@ -1,6 +1,7 @@
 import React from 'react';
 import MainButton from '../../components/buttons/MainButton';
 import Item from '../../components/cards/Item';
+import Spinner from '../../components/loading/Spinner';
 import ButtonWrapper from '../ButtonWrapper';
 import ItemWrapper from '../ItemWrapper';
 import Wrapper from '../MainWrapper';
@@ -26,7 +27,7 @@ const ItemPagination: React.FC<ItemProps> = ({ data, limit, paginationCallback }
         <>
             <div className={styles[`items-pagination-component`]}>
                 <Wrapper>
-                    <ItemWrapper>{!page ? <div>Loading...</div> : page.map((item: any) => <Item key={item.id} data={item} />)}</ItemWrapper>
+                    <ItemWrapper>{!page ? <Spinner /> : page.map((item: any) => <Item key={item.id} data={item} />)}</ItemWrapper>
 
                     {hasMore ? (
                         <ButtonWrapper>
