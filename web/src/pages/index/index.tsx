@@ -31,33 +31,7 @@ const Home = () => {
 
             <OurWork />
 
-            {!data && fetching ? (
-                <div>Loading...</div>
-            ) : (
-                <>
-                    <ItemPagination data={data?.items} />
-                    {/* data!.items.item.map((item) => (
-                        <div key={item.id}>
-                            <h5>{item.title}</h5>
-                            <p>{item.description}</p>
-                            <p>{item.textSnippet}</p>
-                        </div>
-                )) */}
-                </>
-            )}
-
-            {data && data.items.hasMore ? (
-                <button
-                    onClick={() => {
-                        setVariables({
-                            limit: variables.limit,
-                            cursor: data.items.item[data.items.item.length - 1].createdAt,
-                        });
-                    }}
-                >
-                    Load more
-                </button>
-            ) : null}
+            {!data && fetching ? <div>Loading...</div> : <ItemPagination data={data?.items} />}
         </div>
     );
 };

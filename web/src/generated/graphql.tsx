@@ -252,7 +252,7 @@ export type ItemQuery = (
     & Pick<PaginationItems, 'hasMore'>
     & { item: Array<(
       { __typename?: 'Item' }
-      & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'description' | 'textSnippet'>
+      & Pick<Item, 'id' | 'title' | 'description' | 'textSnippet' | 'price' | 'rating' | 'createdAt' | 'updatedAt'>
       & { creator: (
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username'>
@@ -374,15 +374,17 @@ export const ItemDocument = gql`
     hasMore
     item {
       id
-      createdAt
-      updatedAt
       title
       description
       textSnippet
+      price
+      rating
       creator {
         id
         username
       }
+      createdAt
+      updatedAt
     }
   }
 }

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Item from '../../components/cards/Item';
 
 interface ItemProps {
     data: any;
@@ -6,22 +7,17 @@ interface ItemProps {
 
 const ItemPagination: React.FC<ItemProps> = ({ data }) => {
     const { hasMore, item: page } = data;
+    const [variables, setVariables] = useState({
+        limit: 15,
+        cursor: null as string | null,
+    });
     console.log(hasMore, page);
 
-    return <>{/* {dataProps}
-            {!data && fetching ? (
-                <div>Loading...</div>
-            ) : (
-                data!.items.item.map((item) => (
-                    <div key={item.id}>
-                        <h5>{item.title}</h5>
-                        <p>{item.description}</p>
-                        <p>{item.textSnippet}</p>
-                    </div>
-                ))
-            )}
+    return (
+        <>
+            {!page ? <div>Loading...</div> : page.map((item: any) => <Item key={item.id} data={item} />)}
 
-            {data && data.items.hasMore ? (
+            {hasMore ? (
                 <button
                     onClick={() => {
                         setVariables({
@@ -32,7 +28,9 @@ const ItemPagination: React.FC<ItemProps> = ({ data }) => {
                 >
                     Load more
                 </button>
-            ) : null} */}</>;
+            ) : null}
+        </>
+    );
 };
 
 export default ItemPagination;
