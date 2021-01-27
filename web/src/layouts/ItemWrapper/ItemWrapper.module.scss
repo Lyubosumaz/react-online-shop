@@ -1,0 +1,11 @@
+.item-wrapper {
+    padding-bottom: 4em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    li {
+        margin-top: 2%;
+        flex: 0 1 32%;
+    }
+}
