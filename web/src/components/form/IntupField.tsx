@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Field } from 'react-final-form';
 
 interface Test {
@@ -12,8 +12,9 @@ interface Test {
 }
 
 const DisplayError = ({ delay, active, dirty, error, touched, children }: Test) => {
-    const [show, setShow] = React.useState(false);
-    React.useEffect(() => {
+    const [show, setShow] = useState(false);
+
+    useEffect(() => {
         let timeout: any;
         if (active && error && dirty) {
             console.info('setting timeout');

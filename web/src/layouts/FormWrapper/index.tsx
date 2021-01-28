@@ -2,17 +2,15 @@ import React from 'react';
 import { withTypes } from 'react-final-form';
 import Wrapper from '../MainWrapper';
 
-type MyValues = {
-    username: string;
-    email: string;
-    password: string;
-};
-
 interface FormWrapperProps {
     children: React.ReactNode;
     fieldType?: any;
     funcOnSubmit?: any;
 }
+
+type MyValues = {
+    [key: string]: string;
+};
 
 const FormWrapper: React.FC<FormWrapperProps> = ({ children, fieldType, funcOnSubmit }) => {
     const { Form } = withTypes<MyValues>();
@@ -22,7 +20,9 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, fieldType, funcOnSu
             <Form
                 onSubmit={
                     // this should be funcOnSubmit
-                    async () => {}
+                    async (values) => {
+                        console.log(values);
+                    }
                 }
                 render={({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
