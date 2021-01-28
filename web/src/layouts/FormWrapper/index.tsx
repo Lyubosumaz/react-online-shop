@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { withTypes } from 'react-final-form';
+import btn from '../../components/buttons/buttons-text.json';
 import { useRegisterMutation } from '../../generated/graphql';
 import { toErrorMap } from '../../utils/toErrorMap';
 import Wrapper from '../MainWrapper';
@@ -28,7 +29,7 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
     const router = useRouter();
     const [errors, setErrors] = useState({} as ErrType);
 
-    const handleSubmit = (select: any, values: any) => {
+    const handleOnSubmit = (select: any, values: any) => {
         switch (select) {
             case 'register':
                 const [, register] = useRegisterMutation();
@@ -46,9 +47,9 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
                     }
                 };
                 break;
-            case 'test':
+            case btn.register:
                 (async () => {
-                    console.log('values', exactBtn, values);
+                    console.log('values', values);
                 })();
                 break;
             default:
@@ -59,7 +60,7 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
     return (
         <>
             <Form
-                onSubmit={(values) => handleSubmit('test', values)}
+                onSubmit={(values) => handleOnSubmit(exactBtn, values)}
                 render={({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
                         <Wrapper>{children}</Wrapper>
