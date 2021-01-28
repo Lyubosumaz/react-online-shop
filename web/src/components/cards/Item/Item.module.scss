@@ -1,38 +1,62 @@
 .item-card {
-    padding: 2em 1em;
-    flex: 0 1 18em;
+    padding: 1.5em 1em;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 0.5fr 270px 1fr auto;
+    grid-template-areas:
+        'title'
+        'picture'
+        'details'
+        'action';
+
     text-align: center;
     border: var(--main-element-border);
     color: var(--main-color);
 
-    h6,
-    div {
-        margin-bottom: 2rem;
+    .title,
+    .picture,
+    .details,
+    .action {
+        padding: 0.3em 0;
     }
 
-    div {
-        width: 170px;
-        height: 270px;
-        margin: 0 auto;
-        background-color: #bbb;
+    .title {
+        grid-area: title;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
-}
 
-.image {
-    position: relative;
-    background-color: #bbb;
+    .picture {
+        grid-area: picture;
 
-    span {
-        position: absolute;
-        color: var(--main-color);
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        .pseudo-image {
+            width: 170px;
+            height: 100%; // image hight is determent from the grid
+            margin: 0 auto;
+            position: relative;
+            background-color: #bbb;
+
+            span {
+                position: absolute;
+                color: var(--main-color);
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
     }
-}
 
-.description {
-    max-width: 90%;
-    margin: 0 auto;
-    margin-bottom: 2em;
+    .details {
+        grid-area: details;
+
+        .description-text {
+            margin: 0 auto;
+            margin-bottom: 2em;
+        }
+    }
+
+    .action {
+        grid-area: action;
+    }
 }

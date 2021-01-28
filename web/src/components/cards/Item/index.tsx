@@ -17,17 +17,25 @@ const Item: React.FC<ItemProps> = ({ data }) => {
     return (
         <>
             <li className={styles[`item-card`]}>
-                <h6>{title}</h6>
+                <header className={styles.title}>
+                    <h6>{title}</h6>
+                </header>
 
-                <div className={styles[`image`]}>
-                    <span>{image ? image : 'Empty'}</span>
-                </div>
+                <section className={styles.picture}>
+                    <div className={styles['pseudo-image']}>
+                        <span>{image ? image : 'Empty'}</span>
+                    </div>
+                </section>
 
-                {textSnippet ? <p className={styles[`description`]}>{textSnippet}</p> : null}
+                <section className={styles.details}>
+                    {textSnippet ? <p className={styles[`description-text`]}>{textSnippet}</p> : null}
 
-                <h6>Price ${price}</h6>
+                    <h6>Price ${price}</h6>
+                </section>
 
-                <MainButton text={'Buy Now'} />
+                <section className={styles.action}>
+                    <MainButton text={'Buy Now'} />
+                </section>
             </li>
         </>
     );
