@@ -7,7 +7,8 @@ import { toErrorMap } from '../../utils/toErrorMap';
 import Wrapper from '../MainWrapper';
 
 interface FormWrapperProps {
-    children: React.ReactNode;
+    // children: React.ReactNode;
+    children: any;
     exactBtn?: any;
 }
 
@@ -57,13 +58,27 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
         }
     };
 
+    const childrenTest = React.Children.map(children, (child, index) => {
+        if (!children[children.length - 1]) {
+            return React.cloneElement(child, {
+                index,
+                fieldError: errors,
+            });
+        }
+
+        return React.cloneElement(child);
+    });
+    // console.log('true', children);
+    // console.log('test', childrenTest);
+
     return (
         <>
             <Form
                 onSubmit={(values) => handleOnSubmit(exactBtn, values)}
                 render={({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
-                        <Wrapper>{children}</Wrapper>
+                        {/* {console.log(children)} */}
+                        <Wrapper>{childrenTest}</Wrapper>
                     </form>
                 )}
             />

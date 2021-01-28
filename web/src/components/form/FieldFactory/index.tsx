@@ -6,13 +6,16 @@ interface FieldFactoryProps {
     fieldLabel?: string;
     fieldType?: string;
     fieldPlaceholder?: string;
+    fieldError?: any;
 }
 
-const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fieldType, fieldPlaceholder }) => {
+const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fieldType, fieldPlaceholder, fieldError }) => {
     const required = (value: any) => (value ? undefined : 'Required');
     const realLabel = fieldLabel ? fieldLabel : '';
     const realType = fieldType ? fieldType : 'text';
     const realPlaceholder = fieldPlaceholder ? fieldPlaceholder : '';
+
+    console.log(fieldError);
 
     return (
         <>
