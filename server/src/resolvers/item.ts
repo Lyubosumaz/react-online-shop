@@ -27,7 +27,16 @@ export class ItemResolver {
         @Root()
         root: Item
     ) {
-        return root.description.slice(0, 50);
+        let newDescription = root.description;
+
+        const breakNum = 47; // cuts the description to 50 symbols
+        if (newDescription.length > breakNum) {
+            let cutDescription = newDescription.slice(0, breakNum).trim();
+            cutDescription = cutDescription.substr(0, cutDescription.length - 1) + cutDescription[cutDescription.length - 1].replace(/[,.\s]/gm, '');
+            newDescription = cutDescription;
+        }
+
+        return newDescription.concat('...');
     }
 
     @Mutation(() => Boolean)

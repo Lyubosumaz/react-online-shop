@@ -19,14 +19,4 @@
             font-weight: 300;
         }
     }
-
-    ul {
-        padding-bottom: 4rem;
-        display: flex;
-        justify-content: space-between;
-
-        li + li {
-            margin-left: 1em;
-        }
-    }
 }

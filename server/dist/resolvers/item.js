@@ -54,7 +54,14 @@ PaginationItems = __decorate([
 ], PaginationItems);
 let ItemResolver = class ItemResolver {
     textSnippet(root) {
-        return root.description.slice(0, 50);
+        let newDescription = root.description;
+        const breakNum = 47;
+        if (newDescription.length > breakNum) {
+            let cutDescription = newDescription.slice(0, breakNum).trim();
+            cutDescription = cutDescription.substr(0, cutDescription.length - 1) + cutDescription[cutDescription.length - 1].replace(/[,.\s]/gm, '');
+            newDescription = cutDescription;
+        }
+        return newDescription.concat('...');
     }
     rate(itemId, value, { req }) {
         return __awaiter(this, void 0, void 0, function* () {
