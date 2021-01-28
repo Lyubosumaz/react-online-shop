@@ -7,8 +7,7 @@ import Wrapper from '../MainWrapper';
 
 interface FormWrapperProps {
     children: React.ReactNode;
-    fieldType?: any;
-    funcOnSubmit?: any;
+    exactBtn?: any;
 }
 
 type MyValues = {
@@ -24,40 +23,43 @@ type registerValues = {
 interface ErrType {
     [key: string]: string;
 }
-const FormWrapper: React.FC<FormWrapperProps> = ({ children, fieldType, funcOnSubmit }) => {
+const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
     const { Form } = withTypes<MyValues>();
     const router = useRouter();
     const [errors, setErrors] = useState({} as ErrType);
 
-    switch ('register') {
-        case 'register':
-            const [, register] = useRegisterMutation();
+    const handleSubmit = (select: any, values: any) => {
+        switch (select) {
+            case 'register':
+                const [, register] = useRegisterMutation();
 
-            async (values: registerValues) => {
-                if (values.username && values.password) {
-                    const response = await register({ options: values });
-                    if (response.data?.register.errors) {
-                        setErrors(toErrorMap(response.data.register.errors));
-                    } else if (response.data?.register.user) {
-                        setErrors({});
-                        router.push('/');
+                async (values: registerValues) => {
+                    if (values.username && values.password) {
+                        const response = await register({ options: values });
+
+                        if (response.data?.register.errors) {
+                            setErrors(toErrorMap(response.data.register.errors));
+                        } else if (response.data?.register.user) {
+                            setErrors({});
+                            router.push('/');
+                        }
                     }
-                }
-            };
-            break;
-        default:
-            break;
-    }
+                };
+                break;
+            case 'test':
+                (async () => {
+                    console.log('values', exactBtn, values);
+                })();
+                break;
+            default:
+                break;
+        }
+    };
 
     return (
         <>
             <Form
-                onSubmit={
-                    // this should be funcOnSubmit
-                    async (values) => {
-                        console.log(values);
-                    }
-                }
+                onSubmit={(values) => handleSubmit('test', values)}
                 render={({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
                         <Wrapper>{children}</Wrapper>
