@@ -1,4 +1,3 @@
-// import { NextPage } from 'next';
 import { withUrqlClient } from 'next-urql';
 import NextLink from 'next/link';
 import React, { useState } from 'react';
@@ -25,15 +24,15 @@ const ChangePassword: React.FC<{}> = () => {
     return (
         <>
             <FormWrapper exactBtn={btnName}>
-                <FieldFactory fieldName={`username`} fieldPlaceholder={`John Doe`} />
+                <FieldFactory fieldName={`newPassword`} fieldType={`password`} fieldLabel={`New password`} fieldPlaceholder={`New password`} />
 
-                <FieldFactory fieldName={`email`} fieldPlaceholder={`john@doe.com`} />
-
-                <FieldFactory fieldName={`password`} fieldType={`password`} fieldPlaceholder={`********`} />
+                <FieldFactory fieldName={`repPassword`} fieldType={`password`} fieldLabel={`Repeat password`} fieldPlaceholder={`Repeat password`} />
 
                 <ButtonWrapper>
-                    <MainButton text={btn.changePassword} type={'submit'} callback={handleCallback} />
+                    <MainButton text={btn.register} type={'submit'} callback={handleCallback} />
+
                     <NextLink href="/forgotten-password">forgot password?</NextLink>
+
                     {/* {errors['token'] ? <div>{errors['token']}</div> : <div>123</div>} */}
                 </ButtonWrapper>
             </FormWrapper>

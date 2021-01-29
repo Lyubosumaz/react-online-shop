@@ -37,6 +37,11 @@ type CreateItemValues = {
     description: string;
 };
 
+type ChangePasswordValues = {
+    newPassword: string;
+    repPassword: string;
+};
+
 interface ErrType {
     [key: string]: string;
 }
