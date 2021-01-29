@@ -28,12 +28,14 @@ const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fiel
         <>
             <Field name={fieldName} validate={required}>
                 {({ input, meta }) => (
-                    <div className={styles[`form-input`]}>
-                        <label>{realLabel}:</label>
-                        <input {...input} type={realType} placeholder={realPlaceholder} />
-                        {meta.error && meta.touched && <span>{meta.error}</span>}
-                        {fetchErr[fieldName] ? <div>{fetchErr[fieldName]}</div> : <div>123</div>}
-                        {meta.validating && <Spinner />}
+                    <div className={styles[`input-field`]}>
+                        <div className={styles[`input-inner-wrapper`]}>
+                            <label className={styles[`input-label`]}>{realLabel}:</label>
+                            <input className={styles[`input-input`]} {...input} type={realType} placeholder={realPlaceholder} />
+                            {meta.error && meta.touched ? <div className={[styles[`error-bar`], `error-touched`].join(' ')}>{meta.error}</div> : <div className={[styles[`error-bar`], `error-touched`].join(' ')}>err RFF</div>}
+                            {fetchErr[fieldName] ? <div className={[styles[`error-bar`], `error-fetched`].join(' ')}>{fetchErr[fieldName]}</div> : <div className={[styles[`error-bar`], `error-fetched`].join(' ')}>err BE</div>}
+                            {meta.validating ? <Spinner /> : <div>loading</div>}
+                        </div>
                     </div>
                 )}
             </Field>

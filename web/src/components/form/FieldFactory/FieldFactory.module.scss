@@ -1,41 +1,49 @@
-.form-input {
+.input-field {
     display: flex;
     flex-wrap: wrap;
     flex-basis: 100%;
+    justify-content: center;
+    align-items: center;
 
-    label,
-    input,
-    div {
+    .input-label,
+    .input-input,
+    .error-bar {
         flex-basis: 100%;
     }
+}
 
-    label {
-        margin-top: 1.5em;
-        position: relative;
-        line-height: 1;
-        color: var(--main-color);
+.input-inner-wrapper {
+    max-width: 40%;
+    display: flex;
+    flex-wrap: wrap;
+}
 
-        &::after {
-            display: block;
-            content: '';
-            width: 3em;
-            height: 3em;
-            position: absolute;
-            right: -1.5em;
-            bottom: -1.5em;
-            border-top: 0.5em solid var(--main-color);
-            border-right: 0.5em solid var(--main-color);
-        }
+.input-label {
+    margin-top: 1.5em;
+    position: relative;
+    line-height: 1;
+    color: var(--main-color);
+
+    &::after {
+        display: block;
+        content: '';
+        width: 3em;
+        height: 3em;
+        position: absolute;
+        right: -1.5em;
+        bottom: -1.5em;
+        border-top: 0.5em solid var(--main-color);
+        border-right: 0.5em solid var(--main-color);
     }
+}
 
-    input {
-        padding: 0.75em 0.5em;
-        border: var(--main-input-border);
-        border-radius: 0.2em;
-        outline: none;
+.input-input {
+    padding: 0.75em 0.5em;
+    border: var(--main-input-border);
+    border-radius: 0.2em;
+    outline: none;
 
-        &:focus {
-            border-color: var(--main-color);
-        }
+    &:focus {
+        border-color: var(--main-color);
     }
 }

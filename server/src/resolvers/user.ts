@@ -158,22 +158,7 @@ export class UserResolver {
                 password: hashedPassword,
             }).save();
             user = result;
-
-            // const result = await getConnection()
-            //     .createQueryBuilder()
-            //     .insert()
-            //     .into(User)
-            //     .values({
-            //         username: options.username,
-            //         email: options.email,
-            //         password: hashedPassword,
-            //     })
-            //     .returning('*')
-            //     .execute();
-            // user = result.raw[0];
         } catch (err) {
-            // duplicate username error
-            // if (err.detail.include('already exists')) {
             if (err.code === '23505') {
                 return {
                     errors: [
