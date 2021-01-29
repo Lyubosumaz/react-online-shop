@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { withTypes } from 'react-final-form';
 import btn from '../../components/buttons/buttons-text.json';
-import { useLoginMutation, useRegisterMutation } from '../../generated/graphql';
+import { useForgottenPasswordMutation, useLoginMutation, useRegisterMutation } from '../../generated/graphql';
 import { toErrorMap } from '../../utils/toErrorMap';
 import Wrapper from '../MainWrapper';
 import styles from './FormWrapper.module.scss';
@@ -28,6 +28,10 @@ type LoginValues = {
     password: string;
 };
 
+type ForgottenPasswordValues = {
+    email: string;
+};
+
 interface ErrType {
     [key: string]: string;
 }
@@ -36,8 +40,10 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
     const { Form } = withTypes<MyValues>();
     const router = useRouter();
     const [errors, setErrors] = useState({} as ErrType);
+    const [complete, setComplete] = useState(false);
     const [, register] = useRegisterMutation();
     const [, login] = useLoginMutation();
+    const [, forgottenPassword] = useForgottenPasswordMutation();
 
     const handleOnSubmit = (clickedBtn: string) => {
         switch (clickedBtn) {
@@ -72,6 +78,11 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
                         }
                     }
                 };
+            case btn.forgottenPassword:
+                return async (values: any) => {
+                    await forgottenPassword(values);
+                    setComplete(true);
+                };
             default:
                 return async () => {
                     setErrors({ form: 'There is a problem' });
@@ -92,11 +103,15 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
         <>
             <Form
                 onSubmit={(values) => handleOnSubmit(exactBtn)(values)}
-                render={({ handleSubmit }) => (
-                    <form className={styles['site-form']} onSubmit={handleSubmit}>
-                        <Wrapper>{newChildren}</Wrapper>
-                    </form>
-                )}
+                render={({ handleSubmit }) =>
+                    complete ? (
+                        <div>If account with that email exists, we sent you an email within 10 minutes</div>
+                    ) : (
+                        <form className={styles['site-form']} onSubmit={handleSubmit}>
+                            <Wrapper>{newChildren}</Wrapper>
+                        </form>
+                    )
+                }
             />
         </>
     );

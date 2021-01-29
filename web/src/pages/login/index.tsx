@@ -13,6 +13,7 @@ const Login: React.FC<{}> = ({}) => {
     const handleCallback = (arg: string) => {
         setBtnName(arg);
     };
+
     return (
         <>
             <FormWrapper exactBtn={btnName}>
