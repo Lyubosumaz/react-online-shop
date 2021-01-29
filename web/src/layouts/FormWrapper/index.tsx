@@ -7,7 +7,7 @@ import { toErrorMap } from '../../utils/toErrorMap';
 import Wrapper from '../MainWrapper';
 
 interface FormWrapperProps {
-    // children: React.ReactNode;
+    // children: React.ReactNode; // TODO
     children: any;
     exactBtn?: any;
 }
@@ -29,13 +29,13 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
     const { Form } = withTypes<MyValues>();
     const router = useRouter();
     const [errors, setErrors] = useState({} as ErrType);
+    const [, register] = useRegisterMutation();
 
     const handleOnSubmit = (clickedBtn: string, values: any) => {
         switch (clickedBtn) {
-            case 'register':
-                const [, register] = useRegisterMutation();
-
-                async (values: registerValues) => {
+            case btn.register:
+                // async (values: registerValues) => {
+                (async () => {
                     if (values.username && values.password) {
                         const response = await register({ options: values });
 
@@ -46,13 +46,13 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
                             router.push('/');
                         }
                     }
-                };
-                break;
-            case btn.register:
-                (async () => {
-                    setErrors({ username8: 'test, test, test' });
-                    console.log('values', values);
+                    console.log('here');
                 })();
+
+                // (async () => {
+                //     setErrors({ username8: 'test, test, test' });
+                //     console.log('values', values);
+                // })();
                 break;
             default:
                 break;

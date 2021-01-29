@@ -12,6 +12,7 @@ interface FieldFactoryProps {
 
 const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fieldType, fieldPlaceholder, fieldError }) => {
     const required = (value: any) => (value ? undefined : 'Required');
+    // const composeValidators = (...validators) => (value) => validators.reduce((error, validator) => error || validator(value), undefined);
     const realLabel = fieldLabel ? fieldLabel : '';
     const realType = fieldType ? fieldType : 'text';
     const realPlaceholder = fieldPlaceholder ? fieldPlaceholder : '';
@@ -31,7 +32,7 @@ const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fiel
                         <input {...input} type={realType} placeholder={realPlaceholder} />
                         {meta.error && meta.touched && <span>{meta.error}</span>}
                         {fetchErr[fieldName] ? <div>{fetchErr[fieldName]}</div> : <div>123</div>}
-                        {meta.validating && <Spinner/>}
+                        {meta.validating && <Spinner />}
                     </div>
                 )}
             </Field>

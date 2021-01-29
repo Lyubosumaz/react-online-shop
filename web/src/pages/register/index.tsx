@@ -1,39 +1,34 @@
 import { withUrqlClient } from 'next-urql';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { Field, withTypes } from 'react-final-form';
+import btn from '../../components/buttons/buttons-text.json';
 import MainButton from '../../components/buttons/MainButton';
-import { useRegisterMutation } from '../../generated/graphql';
-import Wrapper from '../../layouts/MainWrapper';
-import styles from '../../styles/scss/Forms.module.scss';
-// import stylesSpinner from '../../styles/scss/Spinner.module.scss';
+import FieldFactory from '../../components/form/FieldFactory';
+import ButtonWrapper from '../../layouts/ButtonWrapper';
+import FormWrapper from '../../layouts/FormWrapper';
 import { createUrqlClient } from '../../utils/createUrqlClient';
-import { toErrorMap } from '../../utils/toErrorMap';
 
-interface ErrType {
-    [key: string]: string;
-}
+const Register: React.FC<{}> = ({}) => {
+    const [btnName, setBtnName] = useState({});
 
-type MyValues = {
-    username: string;
-    email: string;
-    password: string;
-};
-
-const { Form } = withTypes<MyValues>();
-const required = (value: any) => (value ? undefined : 'Required');
-// const composeValidators = (...validators) => (value) => validators.reduce((error, validator) => error || validator(value), undefined);
-
-interface registerProps {}
-
-const Register: React.FC<registerProps> = ({}) => {
-    const router = useRouter();
-    const [, register] = useRegisterMutation();
-    const [errors, setErrors] = useState({} as ErrType);
+    const handleCallback = (arg: string) => {
+        setBtnName(arg);
+    };
 
     return (
         <>
-            <Form
+            <FormWrapper exactBtn={btnName}>
+                <FieldFactory fieldName={`username`} fieldLabel={`Username`} fieldType={`text`} fieldPlaceholder={`John Doe`} />
+
+                <FieldFactory fieldName={`email`} fieldLabel={`Email`} fieldType={`text`} fieldPlaceholder={`john@doe.com`} />
+
+                <FieldFactory fieldName={`password`} fieldLabel={`Password`} fieldType={`password`} fieldPlaceholder={`********`} />
+
+                <ButtonWrapper>
+                    <MainButton text={btn.register} type={'submit'} callback={handleCallback} />
+                </ButtonWrapper>
+            </FormWrapper>
+
+            {/* <Form
                 onSubmit={async (values: MyValues) => {
                     if (values.username && values.password) {
                         const response = await register({ options: values });
@@ -55,7 +50,7 @@ const Register: React.FC<registerProps> = ({}) => {
                                         <input {...input} type="text" placeholder="John Doe" />
                                         {meta.error && meta.touched && <span>{meta.error}</span>}
                                         {errors['username'] ? <div>{errors['username']}</div> : <div>123</div>}
-                                        {/* {meta.validating && <div className={stylesSpinner.div}></div>} */}
+                                        {meta.validating && <div>1</div>}
                                     </div>
                                 )}
                             </Field>
@@ -67,7 +62,6 @@ const Register: React.FC<registerProps> = ({}) => {
                                         <input {...input} type="text" placeholder="john@doe.com" />
                                         {meta.error && meta.touched && <span>{meta.error}</span>}
                                         {errors['email'] ? <div>{errors['email']}</div> : <div>123</div>}
-                                        {/* {meta.validating && <div className={stylesSpinner.div}></div>} */}
                                     </div>
                                 )}
                             </Field>
@@ -79,7 +73,6 @@ const Register: React.FC<registerProps> = ({}) => {
                                         <input {...input} type="password" placeholder="********" />
                                         {meta.error && meta.touched && <span>{meta.error}</span>}
                                         {errors['password'] ? <div>{errors['password']}</div> : <div>123</div>}
-                                        {/* {meta.validating && <div className={stylesSpinner.div}></div>} */}
                                     </div>
                                 )}
                             </Field>
@@ -90,7 +83,7 @@ const Register: React.FC<registerProps> = ({}) => {
                         </Wrapper>
                     </form>
                 )}
-            />
+            /> */}
         </>
     );
 };
