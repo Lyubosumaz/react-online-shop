@@ -5,6 +5,7 @@ import btn from '../../components/buttons/buttons-text.json';
 import { useRegisterMutation } from '../../generated/graphql';
 import { toErrorMap } from '../../utils/toErrorMap';
 import Wrapper from '../MainWrapper';
+import styles from './FormWrapper.module.scss';
 
 interface FormWrapperProps {
     // children: React.ReactNode; // TODO
@@ -67,7 +68,7 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
             <Form
                 onSubmit={(values) => handleOnSubmit(exactBtn)(values)}
                 render={({ handleSubmit }) => (
-                    <form onSubmit={handleSubmit}>
+                    <form className={styles['site-form']} onSubmit={handleSubmit}>
                         <Wrapper>{newChildren}</Wrapper>
                     </form>
                 )}

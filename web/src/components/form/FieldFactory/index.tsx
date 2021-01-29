@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Field } from 'react-final-form';
 import Spinner from '../../loading/Spinner';
+import styles from './FieldFactory.module.scss';
 
 interface FieldFactoryProps {
     fieldName: string;
@@ -27,7 +28,7 @@ const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fiel
         <>
             <Field name={fieldName} validate={required}>
                 {({ input, meta }) => (
-                    <div>
+                    <div className={styles[`form-input`]}>
                         <label>{realLabel}:</label>
                         <input {...input} type={realType} placeholder={realPlaceholder} />
                         {meta.error && meta.touched && <span>{meta.error}</span>}
