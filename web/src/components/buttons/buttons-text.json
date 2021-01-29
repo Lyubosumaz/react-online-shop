@@ -2,5 +2,6 @@
     "register": "register",
     "login": "login",
     "forgottenPassword": "submit",
-    "createItem": "create item"
+    "createItem": "create item",
+    "changePassword": "change password"
 }

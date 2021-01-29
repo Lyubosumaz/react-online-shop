@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { withTypes } from 'react-final-form';
 import btn from '../../components/buttons/buttons-text.json';
-import { useCreateItemMutation, useForgottenPasswordMutation, useLoginMutation, useRegisterMutation } from '../../generated/graphql';
+import { useChangePasswordMutation, useCreateItemMutation, useForgottenPasswordMutation, useLoginMutation, useRegisterMutation } from '../../generated/graphql';
 import { toErrorMap } from '../../utils/toErrorMap';
 import Wrapper from '../MainWrapper';
 import styles from './FormWrapper.module.scss';
@@ -50,6 +50,7 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
     const [, login] = useLoginMutation();
     const [, forgottenPassword] = useForgottenPasswordMutation();
     const [, createItem] = useCreateItemMutation();
+    const [, changePassword] = useChangePasswordMutation();
 
     const handleOnSubmit = (clickedBtn: string) => {
         switch (clickedBtn) {
@@ -66,6 +67,7 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
                         }
                     }
                 };
+
             case btn.login:
                 return async (values: any) => {
                     if (values.usernameOrEmail && values.password) {
@@ -84,17 +86,38 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
                         }
                     }
                 };
+
             case btn.forgottenPassword:
                 return async (values: any) => {
                     await forgottenPassword(values);
+
                     setComplete(true);
                 };
+
             case btn.createItem:
                 return async (values: any) => {
                     const { error } = await createItem({ input: values });
 
                     if (!error) router.push('/');
                 };
+
+            case btn.changePassword:
+                return async (values: any) => {
+                    if (values.newPassword && values.repPassword && values.newPassword === values.repPassword) {
+                        const response = await changePassword({
+                            newPassword: values.newPassword,
+                            token: typeof router.query.token === 'string' ? router.query.token : '',
+                        });
+                        if (response.data?.changePassword.errors) {
+                            setErrors(toErrorMap(response.data.changePassword.errors));
+                        } else if (response.data?.changePassword.user) {
+                            setErrors({});
+
+                            router.push('/');
+                        }
+                    }
+                };
+
             default:
                 return async () => {
                     setErrors({ form: 'There is a problem' });

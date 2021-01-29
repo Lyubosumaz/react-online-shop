@@ -25,7 +25,7 @@ const CreateItem: React.FC<{}> = ({}) => {
                 <FieldFactory fieldName={`description`} />
 
                 <ButtonWrapper>
-                    <MainButton text={btn.register} type={'submit'} callback={handleCallback} />
+                    <MainButton text={btn.createItem} type={'submit'} callback={handleCallback} />
                 </ButtonWrapper>
             </FormWrapper>
         </>
