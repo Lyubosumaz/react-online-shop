@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { withTypes } from 'react-final-form';
 import btn from '../../components/buttons/buttons-text.json';
-import { useRegisterMutation } from '../../generated/graphql';
+import { useLoginMutation, useRegisterMutation } from '../../generated/graphql';
 import { toErrorMap } from '../../utils/toErrorMap';
 import Wrapper from '../MainWrapper';
 import styles from './FormWrapper.module.scss';
@@ -17,11 +17,17 @@ type MyValues = {
     [key: string]: string;
 };
 
-type registerValues = {
+type RegisterValues = {
     username: string;
     email: string;
     password: string;
 };
+
+type LoginValues = {
+    usernameOrEmail: string;
+    password: string;
+};
+
 interface ErrType {
     [key: string]: string;
 }
@@ -31,6 +37,7 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
     const router = useRouter();
     const [errors, setErrors] = useState({} as ErrType);
     const [, register] = useRegisterMutation();
+    const [, login] = useLoginMutation();
 
     const handleOnSubmit = (clickedBtn: string) => {
         switch (clickedBtn) {
@@ -44,6 +51,24 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
                         } else if (response.data?.register.user) {
                             setErrors({});
                             router.push('/');
+                        }
+                    }
+                };
+            case btn.login:
+                return async (values: any) => {
+                    if (values.usernameOrEmail && values.password) {
+                        const response = await login(values);
+
+                        if (response.data?.login.errors) {
+                            setErrors(toErrorMap(response.data.login.errors));
+                        } else if (response.data?.login.user) {
+                            setErrors({});
+
+                            if (typeof router.query.next === 'string') {
+                                router.push(router.query.next);
+                            } else {
+                                router.push('/');
+                            }
                         }
                     }
                 };

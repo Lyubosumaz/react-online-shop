@@ -1,13 +1,17 @@
-$fieldsWidth: 100%;
-
 .form-input {
-    max-width: 20em;
     display: flex;
     flex-wrap: wrap;
+    flex-basis: 100%;
+
+    label,
+    input,
+    div {
+        flex-basis: 100%;
+    }
 
     label {
+        margin-top: 1.5em;
         position: relative;
-        flex-basis: $fieldsWidth;
         line-height: 1;
         color: var(--main-color);
 
@@ -26,7 +30,6 @@ $fieldsWidth: 100%;
 
     input {
         padding: 0.75em 0.5em;
-        flex-basis: $fieldsWidth;
         border: var(--main-input-border);
         border-radius: 0.2em;
         outline: none;
@@ -34,9 +37,5 @@ $fieldsWidth: 100%;
         &:focus {
             border-color: var(--main-color);
         }
-    }
-
-    div {
-        flex-basis: $fieldsWidth;
     }
 }
