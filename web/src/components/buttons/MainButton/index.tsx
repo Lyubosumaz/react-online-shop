@@ -4,7 +4,7 @@ import styles from './MainButton.module.scss';
 interface MainButtonProps {
     text: string | null;
     type?: 'button' | 'submit' | 'reset' | undefined;
-    onClick?: (event: React.MouseEvent<HTMLElement>) => void;
+    onClick?: (event: React.MouseEvent<HTMLElement>) => void; // TODO should combine onClick and callback into func at some point
     callback?: (arg: string) => void;
 }
 

@@ -6,7 +6,6 @@ import ButtonWrapper from '../ButtonWrapper';
 import ItemWrapper from '../ItemWrapper';
 import Wrapper from '../MainWrapper';
 import styles from './ItemPagination.module.scss';
-
 interface ItemProps {
     data: any;
     limit: any;

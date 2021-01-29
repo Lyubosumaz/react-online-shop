@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Field } from 'react-final-form';
+import Spinner from '../../loading/Spinner';
 
 interface FieldFactoryProps {
     fieldName: string;
@@ -14,8 +15,12 @@ const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fiel
     const realLabel = fieldLabel ? fieldLabel : '';
     const realType = fieldType ? fieldType : 'text';
     const realPlaceholder = fieldPlaceholder ? fieldPlaceholder : '';
+    const propError = fieldError;
+    const [fetchErr, setFetchErr] = useState({} as any);
 
-    console.log(fieldError);
+    useEffect(() => {
+        setFetchErr(fieldError);
+    }, [propError]);
 
     return (
         <>
@@ -24,9 +29,9 @@ const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fiel
                     <div>
                         <label>{realLabel}</label>
                         <input {...input} type={realType} placeholder={realPlaceholder} />
-                        {/* {meta.error && meta.touched && <span>{meta.error}</span>} */}
-                        {/* {errors['username7'] ? <div>{errors['username7']}</div> : <div>123</div>} */}
-                        {/* {meta.validating && <div className={stylesSpinner.div}></div>} */}
+                        {meta.error && meta.touched && <span>{meta.error}</span>}
+                        {fetchErr[fieldName] ? <div>{fetchErr[fieldName]}</div> : <div>123</div>}
+                        {meta.validating && <Spinner/>}
                     </div>
                 )}
             </Field>

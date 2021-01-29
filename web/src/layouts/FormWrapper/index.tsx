@@ -21,17 +21,17 @@ type registerValues = {
     email: string;
     password: string;
 };
-
 interface ErrType {
     [key: string]: string;
 }
+
 const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
     const { Form } = withTypes<MyValues>();
     const router = useRouter();
     const [errors, setErrors] = useState({} as ErrType);
 
-    const handleOnSubmit = (select: any, values: any) => {
-        switch (select) {
+    const handleOnSubmit = (clickedBtn: string, values: any) => {
+        switch (clickedBtn) {
             case 'register':
                 const [, register] = useRegisterMutation();
 
@@ -50,6 +50,7 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
                 break;
             case btn.register:
                 (async () => {
+                    setErrors({ username8: 'test, test, test' });
                     console.log('values', values);
                 })();
                 break;
@@ -58,18 +59,14 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
         }
     };
 
-    const childrenTest = React.Children.map(children, (child, index) => {
-        if (!children[children.length - 1]) {
-            return React.cloneElement(child, {
-                index,
-                fieldError: errors,
-            });
-        }
+    const newChildren = React.Children.map(children, (child, index) => {
+        if (children.length - 1 === index) return React.cloneElement(child); // last element is submit button
 
-        return React.cloneElement(child);
+        return React.cloneElement(child, {
+            index,
+            fieldError: errors,
+        });
     });
-    // console.log('true', children);
-    // console.log('test', childrenTest);
 
     return (
         <>
@@ -77,8 +74,7 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
                 onSubmit={(values) => handleOnSubmit(exactBtn, values)}
                 render={({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
-                        {/* {console.log(children)} */}
-                        <Wrapper>{childrenTest}</Wrapper>
+                        <Wrapper>{newChildren}</Wrapper>
                     </form>
                 )}
             />
