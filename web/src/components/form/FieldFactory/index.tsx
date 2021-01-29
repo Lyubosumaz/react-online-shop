@@ -4,7 +4,7 @@ import Spinner from '../../loading/Spinner';
 
 interface FieldFactoryProps {
     fieldName: string;
-    fieldLabel?: string;
+    fieldLabel?: string | null;
     fieldType?: string;
     fieldPlaceholder?: string;
     fieldError?: any;
@@ -13,7 +13,7 @@ interface FieldFactoryProps {
 const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fieldType, fieldPlaceholder, fieldError }) => {
     const required = (value: any) => (value ? undefined : 'Required');
     // const composeValidators = (...validators) => (value) => validators.reduce((error, validator) => error || validator(value), undefined);
-    const realLabel = fieldLabel ? fieldLabel : '';
+    const realLabel = fieldLabel === null ? '' : !fieldLabel ? (fieldLabel = fieldName.charAt(0).toUpperCase() + fieldName.slice(1)) : fieldLabel;
     const realType = fieldType ? fieldType : 'text';
     const realPlaceholder = fieldPlaceholder ? fieldPlaceholder : '';
     const propError = fieldError;
@@ -28,7 +28,7 @@ const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fiel
             <Field name={fieldName} validate={required}>
                 {({ input, meta }) => (
                     <div>
-                        <label>{realLabel}</label>
+                        <label>{realLabel}:</label>
                         <input {...input} type={realType} placeholder={realPlaceholder} />
                         {meta.error && meta.touched && <span>{meta.error}</span>}
                         {fetchErr[fieldName] ? <div>{fetchErr[fieldName]}</div> : <div>123</div>}

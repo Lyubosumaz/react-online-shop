@@ -31,11 +31,10 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
     const [errors, setErrors] = useState({} as ErrType);
     const [, register] = useRegisterMutation();
 
-    const handleOnSubmit = (clickedBtn: string, values: any) => {
+    const handleOnSubmit = (clickedBtn: string) => {
         switch (clickedBtn) {
             case btn.register:
-                // async (values: registerValues) => {
-                (async () => {
+                return async (values: any) => {
                     if (values.username && values.password) {
                         const response = await register({ options: values });
 
@@ -46,16 +45,11 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
                             router.push('/');
                         }
                     }
-                    console.log('here');
-                })();
-
-                // (async () => {
-                //     setErrors({ username8: 'test, test, test' });
-                //     console.log('values', values);
-                // })();
-                break;
+                };
             default:
-                break;
+                return async () => {
+                    setErrors({ form: 'There is a problem' });
+                };
         }
     };
 
@@ -71,7 +65,7 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
     return (
         <>
             <Form
-                onSubmit={(values) => handleOnSubmit(exactBtn, values)}
+                onSubmit={(values) => handleOnSubmit(exactBtn)(values)}
                 render={({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
                         <Wrapper>{newChildren}</Wrapper>
