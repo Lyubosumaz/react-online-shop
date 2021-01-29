@@ -1,76 +1,33 @@
 import { withUrqlClient } from 'next-urql';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { Field, withTypes } from 'react-final-form';
+import btn from '../../components/buttons/buttons-text.json';
 import MainButton from '../../components/buttons/MainButton';
-import { useCreateItemMutation } from '../../generated/graphql';
-import Wrapper from '../../layouts/MainWrapper';
-import styles from '../../styles/scss/Forms.module.scss';
-// import stylesSpinner from '../../styles/scss/Spinner.module.scss';
+import FieldFactory from '../../components/form/FieldFactory';
+import ButtonWrapper from '../../layouts/ButtonWrapper';
+import FormWrapper from '../../layouts/FormWrapper';
 import { createUrqlClient } from '../../utils/createUrqlClient';
 import { useIsAuth } from '../../utils/useIsAuth';
 
-interface ErrType {
-    [key: string]: string;
-}
-type MyValues = {
-    title: string;
-    description: string;
-};
-
-const { Form } = withTypes<MyValues>();
-const required = (value: any) => (value ? undefined : 'Required');
-
 const CreateItem: React.FC<{}> = ({}) => {
-    const router = useRouter();
     useIsAuth();
-    const [, createItem] = useCreateItemMutation();
-    const [errors, setErrors] = useState({} as ErrType);
+
+    const [btnName, setBtnName] = useState({});
+
+    const handleCallback = (arg: string) => {
+        setBtnName(arg);
+    };
 
     return (
         <>
-            <Form
-                onSubmit={async (values: MyValues) => {
-                    const { error } = await createItem({ input: values });
+            <FormWrapper exactBtn={btnName}>
+                <FieldFactory fieldName={`title`} />
 
-                    if (!error) {
-                        router.push('/');
-                    }
-                }}
-                render={({ handleSubmit }) => (
-                    <form className={styles['site-form']} onSubmit={handleSubmit}>
-                        <Wrapper>
-                            <Field name="title" validate={required}>
-                                {({ input, meta }) => (
-                                    <div>
-                                        <label>Title:</label>
-                                        <input {...input} type="text" />
-                                        {meta.error && meta.touched && <span>{meta.error}</span>}
-                                        {errors['title'] ? <div>{errors['title']}</div> : <div>123</div>}
-                                        {/* {meta.validating && <div className={stylesSpinner.div}></div>} */}
-                                    </div>
-                                )}
-                            </Field>
+                <FieldFactory fieldName={`description`} />
 
-                            <Field name="description" validate={required}>
-                                {({ input, meta }) => (
-                                    <div>
-                                        <label>Description:</label>
-                                        <input {...input} type="text" />
-                                        {meta.error && meta.touched && <span>{meta.error}</span>}
-                                        {errors['description'] ? <div>{errors['description']}</div> : <div>123</div>}
-                                        {/* {meta.validating && <div className={stylesSpinner.div}></div>} */}
-                                    </div>
-                                )}
-                            </Field>
-
-                            <div className={styles[`button-wrapper`]}>
-                                <MainButton text={'Create Item'} type={'submit'} />
-                            </div>
-                        </Wrapper>
-                    </form>
-                )}
-            />
+                <ButtonWrapper>
+                    <MainButton text={btn.register} type={'submit'} callback={handleCallback} />
+                </ButtonWrapper>
+            </FormWrapper>
         </>
     );
 };

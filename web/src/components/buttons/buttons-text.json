@@ -1,5 +1,6 @@
 {
     "register": "register",
     "login": "login",
-    "forgottenPassword": "submit"
+    "forgottenPassword": "submit",
+    "createItem": "create item"
 }

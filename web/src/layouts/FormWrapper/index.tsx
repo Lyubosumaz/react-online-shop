@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { withTypes } from 'react-final-form';
 import btn from '../../components/buttons/buttons-text.json';
-import { useForgottenPasswordMutation, useLoginMutation, useRegisterMutation } from '../../generated/graphql';
+import { useCreateItemMutation, useForgottenPasswordMutation, useLoginMutation, useRegisterMutation } from '../../generated/graphql';
 import { toErrorMap } from '../../utils/toErrorMap';
 import Wrapper from '../MainWrapper';
 import styles from './FormWrapper.module.scss';
@@ -32,6 +32,11 @@ type ForgottenPasswordValues = {
     email: string;
 };
 
+type CreateItemValues = {
+    title: string;
+    description: string;
+};
+
 interface ErrType {
     [key: string]: string;
 }
@@ -44,6 +49,7 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
     const [, register] = useRegisterMutation();
     const [, login] = useLoginMutation();
     const [, forgottenPassword] = useForgottenPasswordMutation();
+    const [, createItem] = useCreateItemMutation();
 
     const handleOnSubmit = (clickedBtn: string) => {
         switch (clickedBtn) {
@@ -82,6 +88,12 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
                 return async (values: any) => {
                     await forgottenPassword(values);
                     setComplete(true);
+                };
+            case btn.createItem:
+                return async (values: any) => {
+                    const { error } = await createItem({ input: values });
+
+                    if (!error) router.push('/');
                 };
             default:
                 return async () => {
