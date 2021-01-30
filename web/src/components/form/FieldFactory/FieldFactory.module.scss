@@ -91,6 +91,11 @@ $borderRadius: 0.3em;
     }
 }
 
-.not-visible {
-    visibility: hidden;
+.error-fetched {
+    padding: 0 0.5em;
+    color: var(--main-error-color);
+
+    .not-visible {
+        visibility: hidden;
+    }
 }

@@ -37,7 +37,6 @@ const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fiel
         } else {
             setEmptyField(false);
         }
-
         setIsFocus(false);
     };
 
@@ -72,11 +71,11 @@ const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fiel
                             </div>
 
                             {fetchErr[fieldName] ? (
-                                <div className={[`error-fetched`].join(' ')}>
+                                <div className={styles[`error-fetched`]}>
                                     <span>{fetchErr[fieldName]}</span>
                                 </div>
                             ) : (
-                                <div className={[`error-fetched`].join(' ')}>
+                                <div className={styles[`error-fetched`]}>
                                     <span className={styles[`not-visible`]}>Error:</span>
                                 </div>
                             )}
