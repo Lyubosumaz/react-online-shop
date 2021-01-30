@@ -44,7 +44,7 @@ const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fiel
         <>
             <Field name={fieldName}>
                 {({ input, meta }) => (
-                    <section className={styles[`input-field`]}>
+                    <section className={[styles[`input-field`], emptyField ? styles['empty-field'] : ''].join(' ')}>
                         <div className={styles[`input-inner-wrapper`]}>
                             <label className={styles[`input-label`]}>{realLabel}:</label>
 
