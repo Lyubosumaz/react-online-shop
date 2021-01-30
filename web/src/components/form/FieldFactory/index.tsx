@@ -84,7 +84,7 @@ const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fiel
                                 </div>
                             ) : (
                                 <div className={[`error-fetched`].join(' ')}>
-                                    <span>Error:</span>
+                                    <span className={styles[`not-visible`]}>Error:</span>
                                 </div>
                             )}
                         </div>
