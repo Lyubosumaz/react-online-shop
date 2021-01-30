@@ -40,6 +40,7 @@
 }
 
 .input-input-wrapper {
+    $borderRadius: 0.3em;
     display: flex;
 
     .icon {
@@ -50,8 +51,8 @@
         border-top: var(--main-input-border);
         border-bottom: var(--main-input-border);
         border-left: var(--main-input-border);
-        border-top-left-radius: 0.3em;
-        border-bottom-left-radius: 0.3em;
+        border-top-left-radius: $borderRadius;
+        border-bottom-left-radius: $borderRadius;
     }
 
     .input-input {
@@ -70,8 +71,8 @@
         border-top: var(--main-input-border);
         border-right: var(--main-input-border);
         border-bottom: var(--main-input-border);
-        border-top-right-radius: 0.3em;
-        border-bottom-right-radius: 0.3em;
+        border-top-right-radius: $borderRadius;
+        border-bottom-right-radius: $borderRadius;
     }
 
     .border-color {
