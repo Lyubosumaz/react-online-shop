@@ -12,31 +12,83 @@ interface FieldFactoryProps {
 }
 
 const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fieldType, fieldPlaceholder, fieldError }) => {
-    const required = (value: any) => (value ? undefined : 'Required');
-    // const composeValidators = (...validators) => (value) => validators.reduce((error, validator) => error || validator(value), undefined);
     const realLabel = fieldLabel === null ? '' : !fieldLabel ? (fieldLabel = fieldName.charAt(0).toUpperCase() + fieldName.slice(1)) : fieldLabel;
     const realType = fieldType ? fieldType : 'text';
     const realPlaceholder = fieldPlaceholder ? fieldPlaceholder : '';
     const propError = fieldError;
     const [fetchErr, setFetchErr] = useState({} as any);
+    const [isFocus, setIsFocus] = useState(false);
+    const styleBorderColor = isFocus ? styles[`border-color`] : '';
+    const [emptyField, setEmptyField] = useState(false);
 
     useEffect(() => {
         setFetchErr(fieldError);
     }, [propError]);
 
+    const handleInputFocus = () => {
+        setEmptyField(false);
+        setIsFocus(true);
+    };
+
+    const handleInputBlur = (inputValue: any) => {
+        if (!inputValue) {
+            setEmptyField(true);
+        } else {
+            setEmptyField(false);
+        }
+
+        setIsFocus(false);
+    };
+
     return (
         <>
-            <Field name={fieldName} validate={required}>
+            <Field name={fieldName}>
                 {({ input, meta }) => (
-                    <div className={styles[`input-field`]}>
+                    <section className={styles[`input-field`]}>
                         <div className={styles[`input-inner-wrapper`]}>
                             <label className={styles[`input-label`]}>{realLabel}:</label>
-                            <input className={styles[`input-input`]} {...input} type={realType} placeholder={realPlaceholder} />
-                            {meta.error && meta.touched ? <div className={[styles[`error-bar`], `error-touched`].join(' ')}>{meta.error}</div> : <div className={[styles[`error-bar`], `error-touched`].join(' ')}>err RFF</div>}
-                            {fetchErr[fieldName] ? <div className={[styles[`error-bar`], `error-fetched`].join(' ')}>{fetchErr[fieldName]}</div> : <div className={[styles[`error-bar`], `error-fetched`].join(' ')}>err BE</div>}
-                            {meta.validating ? <Spinner /> : <div>loading</div>}
+
+                            <div className={styles[`input-input-wrapper`]}>
+                                {meta.validating ? (
+                                    <Spinner />
+                                ) : (
+                                    <div className={[styles.icon, styleBorderColor].join(' ')}>
+                                        <span>Q</span>
+                                    </div>
+                                )}
+
+                                <input
+                                    className={[styles[`input-input`], styleBorderColor].join(' ')}
+                                    {...input}
+                                    type={realType}
+                                    placeholder={realPlaceholder}
+                                    // TODO
+                                    onFocus={handleInputFocus}
+                                    onBlur={() => handleInputBlur(input.value)}
+                                />
+
+                                {emptyField ? (
+                                    <div className={[styles[`error-touched`], styleBorderColor].join(' ')}>
+                                        <span>{'Required'}</span>
+                                    </div>
+                                ) : (
+                                    <div className={[styles[`error-touched`], styleBorderColor].join(' ')}>
+                                        <span>{''}</span>
+                                    </div>
+                                )}
+                            </div>
+
+                            {fetchErr[fieldName] ? (
+                                <div className={[`error-fetched`].join(' ')}>
+                                    <span>{fetchErr[fieldName]}</span>
+                                </div>
+                            ) : (
+                                <div className={[`error-fetched`].join(' ')}>
+                                    <span>Error:</span>
+                                </div>
+                            )}
                         </div>
-                    </div>
+                    </section>
                 )}
             </Field>
         </>

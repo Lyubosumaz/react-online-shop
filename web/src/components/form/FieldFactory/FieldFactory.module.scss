@@ -1,25 +1,27 @@
 .input-field {
+    padding-bottom: 3em;
     display: flex;
-    flex-wrap: wrap;
     flex-basis: 100%;
     justify-content: center;
-    align-items: center;
 
     .input-label,
-    .input-input,
-    .error-bar {
+    .input-input {
         flex-basis: 100%;
     }
 }
 
 .input-inner-wrapper {
-    max-width: 40%;
+    flex-basis: 40%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.input-label-wrapper {
+    display: flex;
 }
 
 .input-label {
-    margin-top: 1.5em;
+    margin-top: 0.5em;
     position: relative;
     line-height: 1;
     color: var(--main-color);
@@ -37,13 +39,42 @@
     }
 }
 
-.input-input {
-    padding: 0.75em 0.5em;
-    border: var(--main-input-border);
-    border-radius: 0.2em;
-    outline: none;
+.input-input-wrapper {
+    display: flex;
 
-    &:focus {
+    .icon {
+        padding: 0.75em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top: var(--main-input-border);
+        border-bottom: var(--main-input-border);
+        border-left: var(--main-input-border);
+        border-top-left-radius: 0.3em;
+        border-bottom-left-radius: 0.3em;
+    }
+
+    .input-input {
+        padding: 0.75em 0;
+        border: none;
+        border-top: var(--main-input-border);
+        border-bottom: var(--main-input-border);
+        outline: none;
+    }
+
+    .error-touched {
+        padding: 0.75em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top: var(--main-input-border);
+        border-right: var(--main-input-border);
+        border-bottom: var(--main-input-border);
+        border-top-right-radius: 0.3em;
+        border-bottom-right-radius: 0.3em;
+    }
+
+    .border-color {
         border-color: var(--main-color);
     }
 }
