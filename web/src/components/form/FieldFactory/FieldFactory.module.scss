@@ -1,3 +1,5 @@
+$borderRadius: 0.3em;
+
 .input-field {
     padding-bottom: 3em;
     display: flex;
@@ -40,7 +42,6 @@
 }
 
 .input-input-wrapper {
-    $borderRadius: 0.3em;
     display: flex;
 
     .icon {
@@ -76,12 +77,18 @@
     }
 
     .border-color {
+        color: var(--main-color);
         border-color: var(--main-color);
     }
-}
 
-.empty-field {
-    color: #f00;
+    .empty-field {
+        color: var(--main-error-color);
+        border-color: var(--main-error-color);
+
+        &::placeholder {
+            color: var(--main-error-color);
+        }
+    }
 }
 
 .not-visible {

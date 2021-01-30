@@ -20,6 +20,7 @@ const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fiel
     const [isFocus, setIsFocus] = useState(false);
     const styleBorderColor = isFocus ? styles[`border-color`] : '';
     const [emptyField, setEmptyField] = useState(false);
+    const styleEmptyField = emptyField ? styles['empty-field'] : '';
 
     useEffect(() => {
         setFetchErr(fieldError);
@@ -44,7 +45,7 @@ const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fiel
         <>
             <Field name={fieldName}>
                 {({ input, meta }) => (
-                    <section className={[styles[`input-field`], emptyField ? styles['empty-field'] : ''].join(' ')}>
+                    <section className={styles[`input-field`]}>
                         <div className={styles[`input-inner-wrapper`]}>
                             <label className={styles[`input-label`]}>{realLabel}:</label>
 
@@ -52,27 +53,19 @@ const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fiel
                                 {meta.validating ? (
                                     <Spinner />
                                 ) : (
-                                    <div className={[styles.icon, styleBorderColor].join(' ')}>
+                                    <div className={[styles.icon, styleBorderColor, styleEmptyField].join(' ')}>
                                         <span>Q</span>
                                     </div>
                                 )}
 
-                                <input
-                                    className={[styles[`input-input`], styleBorderColor].join(' ')}
-                                    {...input}
-                                    type={realType}
-                                    placeholder={realPlaceholder}
-                                    // TODO
-                                    onFocus={handleInputFocus}
-                                    onBlur={() => handleInputBlur(input.value)}
-                                />
+                                <input className={[styles[`input-input`], styleBorderColor, styleEmptyField].join(' ')} {...input} type={realType} placeholder={realPlaceholder} onFocus={handleInputFocus} onBlur={() => handleInputBlur(input.value)} />
 
                                 {emptyField ? (
-                                    <div className={[styles[`error-touched`], styleBorderColor].join(' ')}>
+                                    <div className={[styles[`error-touched`], styleBorderColor, styleEmptyField].join(' ')}>
                                         <span>{'Required'}</span>
                                     </div>
                                 ) : (
-                                    <div className={[styles[`error-touched`], styleBorderColor].join(' ')}>
+                                    <div className={[styles[`error-touched`], styleBorderColor, styleEmptyField].join(' ')}>
                                         <span>{''}</span>
                                     </div>
                                 )}
