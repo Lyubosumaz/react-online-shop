@@ -8,14 +8,9 @@ import Wrapper from '../MainWrapper';
 import styles from './FormWrapper.module.scss';
 
 interface FormWrapperProps {
-    // children: React.ReactNode; // TODO
     children: any;
-    exactBtn?: any;
+    exactBtn: string;
 }
-
-type MyValues = {
-    [key: string]: string;
-};
 
 type RegisterValues = {
     username: string;
@@ -47,7 +42,7 @@ interface ErrType {
 }
 
 const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
-    const { Form } = withTypes<MyValues>();
+    const { Form } = withTypes<any>();
     const router = useRouter();
     const [errors, setErrors] = useState({} as ErrType);
     const [complete, setComplete] = useState(false);
@@ -60,7 +55,7 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
     const handleOnSubmit = (clickedBtn: string) => {
         switch (clickedBtn) {
             case btn.register:
-                return async (values: any) => {
+                return async (values: RegisterValues) => {
                     if (values.username && values.password) {
                         const response = await register({ options: values });
 
@@ -74,7 +69,7 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
                 };
 
             case btn.login:
-                return async (values: any) => {
+                return async (values: LoginValues) => {
                     if (values.usernameOrEmail && values.password) {
                         const response = await login(values);
 
@@ -93,21 +88,21 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
                 };
 
             case btn.forgottenPassword:
-                return async (values: any) => {
+                return async (values: ForgottenPasswordValues) => {
                     await forgottenPassword(values);
 
                     setComplete(true);
                 };
 
             case btn.createItem:
-                return async (values: any) => {
+                return async (values: CreateItemValues) => {
                     const { error } = await createItem({ input: values });
 
                     if (!error) router.push('/');
                 };
 
             case btn.changePassword:
-                return async (values: any) => {
+                return async (values: ChangePasswordValues) => {
                     if (values.newPassword && values.repPassword && values.newPassword === values.repPassword) {
                         const response = await changePassword({
                             newPassword: values.newPassword,
