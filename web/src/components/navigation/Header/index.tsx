@@ -33,6 +33,11 @@ const NavBar: React.FC<{}> = ({}) => {
                                 <a>Create Item</a>
                             </NextLink>
                         </li>
+                        <li className={styles.list}>
+                            <NextLink href="/forgotten-password">
+                                <a>Redeem Password</a>
+                            </NextLink>
+                        </li>
                     </ul>
                 </li>
                 <li className={`nav-items user`}>
@@ -75,10 +80,13 @@ const NavBar: React.FC<{}> = ({}) => {
     return (
         <nav className={styles.nav}>
             <Wrapper>
-                <div className={[styles[`vertical-wrapper`], styles[`logo-wrapper`]].join(' ')}>
-                    <p className={styles[`site-logo`]}>ROS</p>
-                </div>
-                <ul>{body}</ul>
+                <ul className={styles[`nav-list`]}>
+                    <li className={[styles[`vertical-wrapper`], styles[`logo-wrapper`]].join(' ')}>
+                        <p className={styles[`site-logo`]}>ROS</p>
+                    </li>
+
+                    {body}
+                </ul>
             </Wrapper>
         </nav>
     );

@@ -9,14 +9,19 @@
         display: flex;
         justify-content: space-between;
     }
+}
 
-    & > div > ul {
-        flex-basis: 100%;
-    }
+.nav-list {
+    flex-basis: 100%;
 }
 
 .logo-wrapper {
     margin-right: 2em;
+}
+
+.vertical-wrapper {
+    display: flex;
+    align-items: center;
 }
 
 .list {
@@ -42,9 +47,4 @@
     li > ul > li + li {
         margin-left: 0.5em;
     }
-}
-
-.vertical-wrapper {
-    display: flex;
-    align-items: center;
 }
