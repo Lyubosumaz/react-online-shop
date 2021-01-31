@@ -54,14 +54,13 @@ $borderRadius: 0.3em;
         border-left: var(--main-input-border);
         border-top-left-radius: $borderRadius;
         border-bottom-left-radius: $borderRadius;
+        color: var(--secondary-color-darker);
     }
 
     .input-input {
         padding: 0.75em 0;
-        border: none;
         border-top: var(--main-input-border);
         border-bottom: var(--main-input-border);
-        outline: none;
     }
 
     .error-touched {

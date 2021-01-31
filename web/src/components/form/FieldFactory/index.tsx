@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Field } from 'react-final-form';
 import Spinner from '../../loading/Spinner';
 import styles from './FieldFactory.module.scss';
@@ -21,6 +21,7 @@ const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fiel
     const styleBorderColor = isFocus ? styles[`border-color`] : '';
     const [emptyField, setEmptyField] = useState(false);
     const styleEmptyField = emptyField ? styles['empty-field'] : '';
+    const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         setFetchErr(fieldError);
@@ -40,15 +41,21 @@ const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fiel
         setIsFocus(false);
     };
 
+    const focusInputField = () => {
+        if (inputRef && inputRef.current) inputRef.current.focus();
+    };
+
     return (
         <>
             <Field name={fieldName}>
                 {({ input, meta }) => (
                     <section className={styles[`input-field`]}>
                         <div className={styles[`input-inner-wrapper`]}>
-                            <label className={styles[`input-label`]}>{realLabel}:</label>
+                            <label className={styles[`input-label`]} onClick={focusInputField}>
+                                {realLabel}:
+                            </label>
 
-                            <div className={styles[`input-input-wrapper`]}>
+                            <div className={styles[`input-input-wrapper`]} onClick={focusInputField}>
                                 {meta.validating ? (
                                     <Spinner />
                                 ) : (
@@ -57,7 +64,7 @@ const FieldFactory: React.FC<FieldFactoryProps> = ({ fieldName, fieldLabel, fiel
                                     </div>
                                 )}
 
-                                <input className={[styles[`input-input`], styleBorderColor, styleEmptyField].join(' ')} {...input} type={realType} placeholder={realPlaceholder} onFocus={handleInputFocus} onBlur={() => handleInputBlur(input.value)} />
+                                <input ref={inputRef} className={[styles[`input-input`], styleBorderColor, styleEmptyField].join(' ')} {...input} type={realType} placeholder={realPlaceholder} onFocus={handleInputFocus} onBlur={() => handleInputBlur(input.value)} />
 
                                 {emptyField ? (
                                     <div className={[styles[`error-touched`], styleBorderColor, styleEmptyField].join(' ')}>
