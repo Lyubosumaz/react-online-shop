@@ -9,7 +9,7 @@ import styles from './FormWrapper.module.scss';
 
 interface FormWrapperProps {
     children: any;
-    exactBtn: string;
+    exactBtn?: string;
 }
 
 type RegisterValues = {
@@ -52,7 +52,7 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
     const [, createItem] = useCreateItemMutation();
     const [, changePassword] = useChangePasswordMutation();
 
-    const handleOnSubmit = (clickedBtn: string) => {
+    const handleOnSubmit = (clickedBtn: string | undefined) => {
         switch (clickedBtn) {
             case btn.register:
                 return async (values: RegisterValues) => {
@@ -129,7 +129,6 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
         if (children.length - 1 === index) return React.cloneElement(child); // last element is submit button
 
         return React.cloneElement(child, {
-            index,
             fieldError: errors,
         });
     });

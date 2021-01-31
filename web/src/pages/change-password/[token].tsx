@@ -15,7 +15,7 @@ interface ErrType {
 const ChangePassword: React.FC<{}> = () => {
     // const [errors, setErrors] = useState({} as ErrType);
 
-    const [btnName, setBtnName] = useState({});
+    const [btnName, setBtnName] = useState('');
 
     const handleCallback = (arg: string) => {
         setBtnName(arg);

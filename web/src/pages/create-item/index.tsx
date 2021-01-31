@@ -11,7 +11,7 @@ import { useIsAuth } from '../../utils/useIsAuth';
 const CreateItem: React.FC<{}> = ({}) => {
     useIsAuth();
 
-    const [btnName, setBtnName] = useState({});
+    const [btnName, setBtnName] = useState('');
 
     const handleCallback = (arg: string) => {
         setBtnName(arg);

@@ -8,7 +8,7 @@ import FormWrapper from '../../layouts/FormWrapper';
 import { createUrqlClient } from '../../utils/createUrqlClient';
 
 const forgottenPassword: React.FC<{}> = ({}) => {
-    const [btnName, setBtnName] = useState({});
+    const [btnName, setBtnName] = useState('');
 
     const handleCallback = (arg: string) => {
         setBtnName(arg);
