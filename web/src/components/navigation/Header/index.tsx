@@ -24,16 +24,6 @@ const NavBar: React.FC<{}> = ({}) => {
                 <li className={`nav-items site`}>
                     <ul>
                         <li className={styles.list}>
-                            <NextLink href="/">
-                                <a>Home</a>
-                            </NextLink>
-                        </li>
-                        <li className={styles.list}>
-                            <NextLink href="/create-item">
-                                <a>Create Item</a>
-                            </NextLink>
-                        </li>
-                        <li className={styles.list}>
                             <NextLink href="/forgotten-password">
                                 <a>Redeem Password</a>
                             </NextLink>
@@ -83,6 +73,12 @@ const NavBar: React.FC<{}> = ({}) => {
                 <ul className={styles[`nav-list`]}>
                     <li className={[styles[`vertical-wrapper`], styles[`logo-wrapper`]].join(' ')}>
                         <p className={styles[`site-logo`]}>ROS</p>
+                    </li>
+
+                    <li className={styles.list}>
+                        <NextLink href="/">
+                            <a>Home</a>
+                        </NextLink>
                     </li>
 
                     {body}
