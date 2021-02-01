@@ -97,8 +97,9 @@ const FormWrapper: React.FC<FormWrapperProps> = ({ children, exactBtn }) => {
             case btn.createItem:
                 return async (values: CreateItemValues) => {
                     const { error } = await createItem({ input: values });
-
-                    if (!error) router.push('/');
+                    // have problems with entity Item.creator
+                    // if (!error) router.push('/');
+                    router.push('/');
                 };
 
             case btn.changePassword:
