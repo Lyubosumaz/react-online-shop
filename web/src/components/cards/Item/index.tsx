@@ -8,12 +8,13 @@ export interface ItemProps {
         image: string;
         price: string;
         textSnippet?: string;
+        rating?: number;
         creator?: any;
     };
 }
 
 const Item: React.FC<ItemProps> = ({ data }) => {
-    const { title, image, price, textSnippet, creator } = data;
+    const { title, image, price, textSnippet, rating, creator } = data;
 
     return (
         <>
@@ -29,6 +30,13 @@ const Item: React.FC<ItemProps> = ({ data }) => {
                 </section>
 
                 <section className={styles.details}>
+                    {true && rating ? (
+                        <div>
+                            <button>Up</button>
+                            {rating ? rating : 0}
+                            <button>Down</button>
+                        </div>
+                    ) : null}
                     {creator ? <p>Created by: {creator.username}</p> : null}
                     {textSnippet ? <p className={styles[`description-text`]}>{textSnippet}</p> : null}
 
