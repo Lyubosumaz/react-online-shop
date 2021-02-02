@@ -3,6 +3,7 @@ fragment ItemSnippet on Item {
     title
     description
     textSnippet
+    voteStatus
     price
     rating
     creator {

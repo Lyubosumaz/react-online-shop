@@ -19,12 +19,15 @@ export class Item extends BaseEntity {
     description!: string;
 
     @Field()
-    @Column({ type: 'int', default: 1 })
+    @Column({ type: 'int', default: 0.1 })
     price!: number;
 
     @Field()
     @Column({ type: 'int', default: 1 })
     rating!: number;
+
+    @Field(() => Int, { nullable: true })
+    voteStatus!: number | null;
 
     @Field(() => Int)
     @Column()

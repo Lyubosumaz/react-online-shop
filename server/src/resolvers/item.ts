@@ -106,12 +106,14 @@ export class ItemResolver {
         @Arg('limit', () => Int)
         limit: number,
         @Arg('cursor', () => String, { nullable: true })
-        cursor: string | null
+        cursor: string | null,
+        @Ctx()
+        { req }: MyContext
     ): Promise<PaginationItems> {
         const realLimit = Math.min(50, limit);
         const realLimitPlusOne = realLimit + 1;
 
-        const replacements: any[] = [realLimitPlusOne];
+        const replacements: any[] = [realLimitPlusOne, req.session.userId];
 
         if (cursor) {
             replacements.push(new Date(parseInt(cursor)));
@@ -126,10 +128,11 @@ export class ItemResolver {
                 'email', u.email,
                 'createdAt', u."createdAt",
                 'updatedAt', u."updatedAt"
-                ) creator
+                ) creator,
+            ${req.session.userId ? '(select value from stars where "userId" = $2 and "itemId" = i.id) = "voteStatus"' : 'null as "voteStatus"'}
             from item i
             inner join public.user u on u.id = i."creatorId"
-            ${cursor ? `where i."createdAt" < $2` : ''}
+            ${cursor ? `where i."createdAt" < $3` : ''}
             order by i."createdAt" DESC
             limit $1
 
