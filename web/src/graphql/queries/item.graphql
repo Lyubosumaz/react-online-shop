@@ -2,18 +2,7 @@ query Item($limit: Int!, $cursor: String) {
     items(limit: $limit, cursor: $cursor) {
         hasMore
         item {
-            id
-            title
-            description
-            textSnippet
-            price
-            rating
-            creator {
-                id
-                username
-            }
-            createdAt
-            updatedAt
+            ...ItemSnippet
         }
     }
 }

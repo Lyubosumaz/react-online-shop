@@ -1,8 +1,10 @@
 import React from 'react';
+// import { ItemSnippetFragment } from '../../../generated/graphql';
 import MainButton from '../../buttons/MainButton';
 import styles from './Item.module.scss';
 
 export interface ItemProps {
+    // data: ItemSnippetFragment;
     data: {
         title: string;
         image: string;

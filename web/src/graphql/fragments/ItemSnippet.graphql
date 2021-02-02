@@ -1,0 +1,14 @@
+fragment ItemSnippet on Item {
+    id
+    title
+    description
+    textSnippet
+    price
+    rating
+    creator {
+        id
+        username
+    }
+    createdAt
+    updatedAt
+}

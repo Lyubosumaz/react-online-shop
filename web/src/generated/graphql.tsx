@@ -142,6 +142,15 @@ export type UsernamePasswordInput = {
   password: Scalars['String'];
 };
 
+export type ItemSnippetFragment = (
+  { __typename?: 'Item' }
+  & Pick<Item, 'id' | 'title' | 'description' | 'textSnippet' | 'price' | 'rating' | 'createdAt' | 'updatedAt'>
+  & { creator: (
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'username'>
+  ) }
+);
+
 export type RegularErrorFragment = (
   { __typename?: 'FieldError' }
   & Pick<FieldError, 'field' | 'message'>
@@ -252,11 +261,7 @@ export type ItemQuery = (
     & Pick<PaginationItems, 'hasMore'>
     & { item: Array<(
       { __typename?: 'Item' }
-      & Pick<Item, 'id' | 'title' | 'description' | 'textSnippet' | 'price' | 'rating' | 'createdAt' | 'updatedAt'>
-      & { creator: (
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'username'>
-      ) }
+      & ItemSnippetFragment
     )> }
   ) }
 );
@@ -272,6 +277,22 @@ export type MeQuery = (
   )> }
 );
 
+export const ItemSnippetFragmentDoc = gql`
+    fragment ItemSnippet on Item {
+  id
+  title
+  description
+  textSnippet
+  price
+  rating
+  creator {
+    id
+    username
+  }
+  createdAt
+  updatedAt
+}
+    `;
 export const RegularErrorFragmentDoc = gql`
     fragment RegularError on FieldError {
   field
@@ -373,22 +394,11 @@ export const ItemDocument = gql`
   items(limit: $limit, cursor: $cursor) {
     hasMore
     item {
-      id
-      title
-      description
-      textSnippet
-      price
-      rating
-      creator {
-        id
-        username
-      }
-      createdAt
-      updatedAt
+      ...ItemSnippet
     }
   }
 }
-    `;
+    ${ItemSnippetFragmentDoc}`;
 
 export function useItemQuery(options: Omit<Urql.UseQueryArgs<ItemQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<ItemQuery>({ query: ItemDocument, ...options });
