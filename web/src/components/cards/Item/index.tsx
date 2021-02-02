@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useRateMutation } from '../../../generated/graphql';
 // import { ItemSnippetFragment } from '../../../generated/graphql';
 import MainButton from '../../buttons/MainButton';
 import styles from './Item.module.scss';
@@ -6,6 +7,7 @@ import styles from './Item.module.scss';
 export interface ItemProps {
     // data: ItemSnippetFragment;
     data: {
+        id?: number;
         title: string;
         image: string;
         price: string;
@@ -16,7 +18,32 @@ export interface ItemProps {
 }
 
 const Item: React.FC<ItemProps> = ({ data }) => {
-    const { title, image, price, textSnippet, rating, creator } = data;
+    const { id, title, image, price, textSnippet, rating, creator } = data;
+    const [loadingState, setLoadingState] = useState<'upvote-loading' | 'downvote-loading' | 'not-loading'>('not-loading');
+    const [, rate] = useRateMutation();
+
+    const buttonUp = async () => {
+        if (!id) return;
+
+        setLoadingState('upvote-loading');
+        await rate({
+            itemId: id,
+            value: 1,
+        });
+        setLoadingState('not-loading');
+    };
+
+    const buttonDown = async () => {
+        if (!id) return;
+
+        setLoadingState('downvote-loading');
+        await rate({
+            itemId: id,
+            value: -1,
+        });
+
+        setLoadingState('not-loading');
+    };
 
     return (
         <>
@@ -34,9 +61,9 @@ const Item: React.FC<ItemProps> = ({ data }) => {
                 <section className={styles.details}>
                     {true && rating ? (
                         <div>
-                            <button>Up</button>
+                            <button onClick={buttonUp}>{loadingState === 'upvote-loading' ? 'Q' : 'Up'}</button>
                             {rating ? rating : 0}
-                            <button>Down</button>
+                            <button onClick={buttonDown}>{loadingState === 'downvote-loading' ? 'Q' : 'Down'}</button>
                         </div>
                     ) : null}
                     {creator ? <p>Created by: {creator.username}</p> : null}

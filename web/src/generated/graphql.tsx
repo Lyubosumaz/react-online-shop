@@ -235,6 +235,17 @@ export type LogoutMutation = (
   & Pick<Mutation, 'logout'>
 );
 
+export type RateMutationVariables = Exact<{
+  value: Scalars['Int'];
+  itemId: Scalars['Int'];
+}>;
+
+
+export type RateMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'rate'>
+);
+
 export type RegisterMutationVariables = Exact<{
   options: UsernamePasswordInput;
 }>;
@@ -377,6 +388,15 @@ export const LogoutDocument = gql`
 
 export function useLogoutMutation() {
   return Urql.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument);
+};
+export const RateDocument = gql`
+    mutation Rate($value: Int!, $itemId: Int!) {
+  rate(value: $value, itemId: $itemId)
+}
+    `;
+
+export function useRateMutation() {
+  return Urql.useMutation<RateMutation, RateMutationVariables>(RateDocument);
 };
 export const RegisterDocument = gql`
     mutation Register($options: UsernamePasswordInput!) {

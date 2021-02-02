@@ -1,0 +1,3 @@
+mutation Rate($value: Int!, $itemId: Int!) {
+    rate(value: $value, itemId: $itemId)
+}
