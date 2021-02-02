@@ -59,7 +59,7 @@ const Item: React.FC<ItemProps> = ({ data }) => {
                 </section>
 
                 <section className={styles.details}>
-                    {true && rating ? (
+                    {true ? (
                         <div>
                             <button onClick={buttonUp}>{loadingState === 'upvote-loading' ? 'Q' : 'Up'}</button>
                             {rating ? rating : 0}

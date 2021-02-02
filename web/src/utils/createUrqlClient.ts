@@ -1,9 +1,10 @@
 import { cacheExchange, Resolver } from '@urql/exchange-graphcache';
+import gql from 'graphql-tag';
 import 'isomorphic-unfetch';
 import Router from 'next/router';
 import { dedupExchange, Exchange, fetchExchange, stringifyVariables } from 'urql';
 import { pipe, tap } from 'wonka';
-import { LoginMutation, LogoutMutation, MeDocument, MeQuery, RegisterMutation } from '../generated/graphql';
+import { LoginMutation, LogoutMutation, MeDocument, MeQuery, RateMutationVariables, RegisterMutation } from '../generated/graphql';
 import { betterUpdateQuery } from './betterUpdateQuery';
 
 const errorExchange: Exchange = ({ forward }) => (ops$) => {
@@ -69,6 +70,31 @@ export const createUrqlClient = (ssrExchange: any) => ({
             },
             updates: {
                 Mutation: {
+                    rate: (_result, args, cache, info) => {
+                        const { itemId, value } = args as RateMutationVariables;
+                        const data = cache.readFragment(
+                            gql`
+                                fragment _ on Item {
+                                    id
+                                    rating
+                                }
+                            `,
+                            { id: itemId } as any
+                        );
+
+                        if (data) {
+                            const newRating = (data.rating as number) + value;
+
+                            cache.writeFragment(
+                                gql`
+                                    fragment __ on Item {
+                                        rating
+                                    }
+                                `,
+                                { id: itemId, rating: newRating }
+                            );
+                        }
+                    },
                     createItem: (_result, args, cache, info) => {
                         console.log('||||||||||||||||||||||||');
                         const allFields = cache.inspectFields('Query');
