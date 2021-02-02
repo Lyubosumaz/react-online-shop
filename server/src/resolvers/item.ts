@@ -1,3 +1,4 @@
+import { Stars } from 'src/entities/Stars';
 import { Arg, Ctx, Field, FieldResolver, InputType, Int, Mutation, ObjectType, Query, Resolver, Root, UseMiddleware } from 'type-graphql';
 import { getConnection } from 'typeorm';
 import { Item } from '../entities/Item';
@@ -51,24 +52,50 @@ export class ItemResolver {
         const isUpVote = value !== -1;
         const realValue = isUpVote ? 1 : -1;
         const { userId } = req.session;
+        const upvote = await Stars.findOne({ where: { itemId, userId } });
 
-        try {
-            await getConnection().query(
-                `
-                START TRANSACTION;
-                
-                insert into stars ("userId", "itemId", value)
-                values (${userId},${itemId},${realValue});
-                
-                update item
-                set rating = rating + ${realValue}
-                where id = ${itemId};
-                
-                COMMIT;
-                `
-            );
-        } catch (err) {
-            console.error('Transaction failed');
+        // the user has voted on the post before
+        // and they are changing their vote
+        if (upvote && upvote.value !== realValue) {
+            await getConnection().transaction(async (tm) => {
+                await tm.query(
+                    `
+                        update stars
+                        set value = $1
+                        where "itemId" = $2 and "userId" = $3
+                    `,
+                    [realValue, itemId, userId]
+                );
+
+                await tm.query(
+                    `
+                        update item
+                        set rating = rating + $1
+                        where id = $2;
+                    `,
+                    [2 * realValue, itemId]
+                );
+            });
+        } else if (!upvote) {
+            // has never voted before
+            await getConnection().transaction(async (tm) => {
+                await tm.query(
+                    `
+                        insert into stars ("userId", "itemId", value)
+                        values ($1, $2, $3);
+                    `,
+                    [userId, itemId, realValue]
+                );
+
+                await tm.query(
+                    `
+                        update item
+                        set rating = rating + $1
+                        where id = $2;
+                    `,
+                    [realValue, itemId]
+                );
+            });
         }
 
         return true;
