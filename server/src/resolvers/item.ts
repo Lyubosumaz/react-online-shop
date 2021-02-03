@@ -148,7 +148,7 @@ export class ItemResolver {
 
     @Query(() => Item, { nullable: true })
     async item(
-        @Arg('id')
+        @Arg('id', () => Int)
         id: number
     ): Promise<Item | undefined> {
         return Item.findOne(id);

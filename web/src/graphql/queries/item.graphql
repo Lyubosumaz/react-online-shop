@@ -1,8 +1,16 @@
-query Item($limit: Int!, $cursor: String) {
-    items(limit: $limit, cursor: $cursor) {
-        hasMore
-        item {
-            ...ItemSnippet
+query Item($id: Int!) {
+    item(id: $id) {
+        id
+        title
+        description
+        # voteStatus
+        price
+        rating
+        creator {
+            id
+            username
         }
+        createdAt
+        updatedAt
     }
 }
