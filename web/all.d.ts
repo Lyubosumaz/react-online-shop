@@ -1,1 +1,1 @@
-declare module "next-apollo";
+declare module 'next-apollo';
