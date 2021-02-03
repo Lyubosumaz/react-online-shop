@@ -151,7 +151,7 @@ export class ItemResolver {
         @Arg('id', () => Int)
         id: number
     ): Promise<Item | undefined> {
-        return Item.findOne(id);
+        return Item.findOne(id, { relations: ['creator'] });
     }
 
     @Mutation(() => Item)
