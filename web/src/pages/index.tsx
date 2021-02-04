@@ -1,13 +1,13 @@
 import { Box, Button, Flex, Heading, Link, Stack, Text } from '@chakra-ui/core';
 import NextLink from 'next/link';
-import { EditDeletePostButtons } from '../components/EditDeletePostButtons';
+import { EditDeleteItemButtons } from '../components/EditDeleteItemButtons';
 import { Layout } from '../components/Layout';
 import { UpdootSection } from '../components/UpdootSection';
-import { usePostsQuery } from '../generated/graphql';
+import { useItemsQuery } from '../generated/graphql';
 import { withApollo } from '../utils/withApollo';
 
 const Index = () => {
-    const { data, error, loading, fetchMore, variables } = usePostsQuery({
+    const { data, error, loading, fetchMore, variables } = useItemsQuery({
         variables: {
             limit: 15,
             cursor: null,
@@ -30,13 +30,13 @@ const Index = () => {
                 <div>loading...</div>
             ) : (
                 <Stack spacing={8}>
-                    {data?.posts.posts.length ? (
-                        data!.posts.posts.map((p) =>
+                    {data?.items.items.length ? (
+                        data!.items.items.map((p) =>
                             !p ? null : (
                                 <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
-                                    <UpdootSection post={p} />
+                                    <UpdootSection item={p} />
                                     <Box flex={1}>
-                                        <NextLink href="/post/[id]" as={`/post/${p.id}`}>
+                                        <NextLink href="/item/[id]" as={`/item/${p.id}`}>
                                             <Link>
                                                 <Heading fontSize="xl">{p.title}</Heading>
                                             </Link>
@@ -47,7 +47,7 @@ const Index = () => {
                                                 {p.textSnippet}
                                             </Text>
                                             <Box ml="auto">
-                                                <EditDeletePostButtons id={p.id} creatorId={p.creator.id} />
+                                                <EditDeleteItemButtons id={p.id} creatorId={p.creator.id} />
                                             </Box>
                                         </Flex>
                                     </Box>
@@ -57,40 +57,40 @@ const Index = () => {
                     ) : (
                         <Flex alignItems="center">
                             <Box mr={5}>Nothing was created so far!</Box>
-                            <NextLink href="/create-post">
+                            <NextLink href="/create-item">
                                 <Button as={Link} mr={4}>
-                                    create post
+                                    create item
                                 </Button>
                             </NextLink>
                         </Flex>
                     )}
                 </Stack>
             )}
-            {data && data.posts.hasMore ? (
+            {data && data.items.hasMore ? (
                 <Flex>
                     <Button
                         onClick={() => {
                             fetchMore({
                                 variables: {
                                     limit: variables?.limit,
-                                    cursor: data.posts.posts[data.posts.posts.length - 1].createdAt,
+                                    cursor: data.items.items[data.items.items.length - 1].createdAt,
                                 },
                                 // updateQuery: (
                                 //   previousValue,
                                 //   { fetchMoreResult }
-                                // ): PostsQuery => {
+                                // ): ItemsQuery => {
                                 //   if (!fetchMoreResult) {
-                                //     return previousValue as PostsQuery;
+                                //     return previousValue as ItemsQuery;
                                 //   }
 
                                 //   return {
                                 //     __typename: "Query",
-                                //     posts: {
-                                //       __typename: "PaginatedPosts",
-                                //       hasMore: (fetchMoreResult as PostsQuery).posts.hasMore,
-                                //       posts: [
-                                //         ...(previousValue as PostsQuery).posts.posts,
-                                //         ...(fetchMoreResult as PostsQuery).posts.posts,
+                                //     items: {
+                                //       __typename: "PaginatedItems",
+                                //       hasMore: (fetchMoreResult as ItemsQuery).items.hasMore,
+                                //       items: [
+                                //         ...(previousValue as ItemsQuery).items.items,
+                                //         ...(fetchMoreResult as ItemsQuery).items.items,
                                 //       ],
                                 //     },
                                 //   };

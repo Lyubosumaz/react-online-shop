@@ -1,12 +1,12 @@
 import { Box, Heading } from '@chakra-ui/core';
 import React from 'react';
-import { EditDeletePostButtons } from '../../components/EditDeletePostButtons';
+import { EditDeleteItemButtons } from '../../components/EditDeleteItemButtons';
 import { Layout } from '../../components/Layout';
-import { useGetPostFromUrl } from '../../utils/useGetPostFromUrl';
+import { useGetItemFromUrl } from '../../utils/useGetItemFromUrl';
 import { withApollo } from '../../utils/withApollo';
 
-const Post = ({}) => {
-    const { data, error, loading } = useGetPostFromUrl();
+const Item = ({}) => {
+    const { data, error, loading } = useGetItemFromUrl();
 
     if (loading) {
         return (
@@ -20,21 +20,21 @@ const Post = ({}) => {
         return <div>{error.message}</div>;
     }
 
-    if (!data?.post) {
+    if (!data?.item) {
         return (
             <Layout>
-                <Box>could not find post</Box>
+                <Box>could not find item</Box>
             </Layout>
         );
     }
 
     return (
         <Layout>
-            <Heading mb={4}>{data.post.title}</Heading>
-            <Box mb={4}>{data.post.text}</Box>
-            <EditDeletePostButtons id={data.post.id} creatorId={data.post.creator.id} />
+            <Heading mb={4}>{data.item.title}</Heading>
+            <Box mb={4}>{data.item.text}</Box>
+            <EditDeleteItemButtons id={data.item.id} creatorId={data.item.creator.id} />
         </Layout>
     );
 };
 
-export default withApollo({ ssr: true })(Post);
+export default withApollo({ ssr: true })(Item);

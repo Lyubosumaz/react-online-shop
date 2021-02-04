@@ -4,20 +4,20 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { InputField } from '../../../components/InputField';
 import { Layout } from '../../../components/Layout';
-import { usePostQuery, useUpdatePostMutation } from '../../../generated/graphql';
+import { useItemQuery, useUpdateItemMutation } from '../../../generated/graphql';
 import { useGetIntId } from '../../../utils/useGetIntId';
 import { withApollo } from '../../../utils/withApollo';
 
-const EditPost = ({}) => {
+const EditItem = ({}) => {
     const router = useRouter();
     const intId = useGetIntId();
-    const { data, loading } = usePostQuery({
+    const { data, loading } = useItemQuery({
         skip: intId === -1,
         variables: {
             id: intId,
         },
     });
-    const [updatePost] = useUpdatePostMutation();
+    const [updateItem] = useUpdateItemMutation();
     if (loading) {
         return (
             <Layout>
@@ -26,10 +26,10 @@ const EditPost = ({}) => {
         );
     }
 
-    if (!data?.post) {
+    if (!data?.item) {
         return (
             <Layout>
-                <Box>could not find post</Box>
+                <Box>could not find item</Box>
             </Layout>
         );
     }
@@ -37,9 +37,9 @@ const EditPost = ({}) => {
     return (
         <Layout variant="small">
             <Formik
-                initialValues={{ title: data.post.title, text: data.post.text }}
+                initialValues={{ title: data.item.title, text: data.item.text }}
                 onSubmit={async (values) => {
-                    await updatePost({ variables: { id: intId, ...values } });
+                    await updateItem({ variables: { id: intId, ...values } });
                     router.back();
                 }}
             >
@@ -50,7 +50,7 @@ const EditPost = ({}) => {
                             <InputField textarea name="text" placeholder="text..." label="Body" />
                         </Box>
                         <Button mt={4} type="submit" isLoading={isSubmitting} variantColor="teal">
-                            update post
+                            update item
                         </Button>
                     </Form>
                 )}
@@ -59,4 +59,4 @@ const EditPost = ({}) => {
     );
 };
 
-export default withApollo({ ssr: false })(EditPost);
+export default withApollo({ ssr: false })(EditItem);

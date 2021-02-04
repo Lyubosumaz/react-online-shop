@@ -1,13 +1,13 @@
 import { Arg, Ctx, Field, FieldResolver, InputType, Int, Mutation, ObjectType, Query, Resolver, Root, UseMiddleware } from 'type-graphql';
 import { getConnection } from 'typeorm';
-import { Post } from '../entities/Post';
+import { Item } from '../entities/Item';
 import { Star } from '../entities/Star';
 import { User } from '../entities/User';
 import { isAuth } from '../middleware/isAuth';
 import { MyContext } from '../types';
 
 @InputType()
-class PostInput {
+class ItemInput {
     @Field()
     title: string;
     @Field()
@@ -15,44 +15,44 @@ class PostInput {
 }
 
 @ObjectType()
-class PaginatedPosts {
-    @Field(() => [Post])
-    posts: Post[];
+class PaginatedItems {
+    @Field(() => [Item])
+    items: Item[];
     @Field()
     hasMore: boolean;
 }
 
-@Resolver(Post)
-export class PostResolver {
+@Resolver(Item)
+export class ItemResolver {
     @FieldResolver(() => String)
     textSnippet(
         @Root()
-        post: Post
+        item: Item
     ) {
-        return post.text.slice(0, 50);
+        return item.text.slice(0, 50);
     }
 
     @FieldResolver(() => User)
     creator(
         @Root()
-        post: Post,
+        item: Item,
         @Ctx()
         { userLoader }: MyContext
     ) {
-        return userLoader.load(post.creatorId);
+        return userLoader.load(item.creatorId);
     }
 
     @FieldResolver(() => Int, { nullable: true })
     async voteStatus(
         @Root()
-        post: Post,
+        item: Item,
         @Ctx()
         { updootLoader, req }: MyContext
     ) {
         if (!req.session.userId) return null;
 
         const star = await updootLoader.load({
-            postId: post.id,
+            postId: item.id,
             userId: req.session.userId,
         });
 
@@ -75,7 +75,7 @@ export class PostResolver {
 
         const star = await Star.findOne({ where: { postId, userId } });
 
-        // the user has voted on the post before
+        // the user has voted on the item before
         // and they are changing their vote
         if (star && star.value !== realValue) {
             await getConnection().transaction(async (tm) => {
@@ -90,7 +90,7 @@ export class PostResolver {
 
                 await tm.query(
                     `
-                        update post
+                        update item
                         set points = points + $1
                         where id = $2
                     `,
@@ -110,7 +110,7 @@ export class PostResolver {
 
                 await tm.query(
                     `
-                        update post
+                        update item
                         set points = points + $1
                         where id = $2
                     `,
@@ -122,13 +122,13 @@ export class PostResolver {
         return true;
     }
 
-    @Query(() => PaginatedPosts)
-    async posts(
+    @Query(() => PaginatedItems)
+    async items(
         @Arg('limit', () => Int)
         limit: number,
         @Arg('cursor', () => String, { nullable: true })
         cursor: string | null
-    ): Promise<PaginatedPosts | null> {
+    ): Promise<PaginatedItems | null> {
         // 20 -> 21
         const realLimit = Math.min(50, limit);
         const reaLimitPlusOne = realLimit + 1;
@@ -137,19 +137,19 @@ export class PostResolver {
 
         if (cursor) replacements.push(new Date(parseInt(cursor)));
 
-        const posts = await getConnection().query(
+        const items = await getConnection().query(
             `
-                select p.*
-                from post p
-                ${cursor ? `where p."createdAt" < $2` : ''}
-                order by p."createdAt" DESC
+                select i.*
+                from item i
+                ${cursor ? `where i."createdAt" < $2` : ''}
+                order by i."createdAt" DESC
                 limit $1
             `,
             replacements
         );
 
         // const qb = getConnection()
-        //   .getRepository(Post)
+        //   .getRepository(Item)
         //   .createQueryBuilder("p")
         //   .innerJoinAndSelect("p.creator", "u", 'u.id = p."creatorId"')
         //   .orderBy('p."createdAt"', "DESC")
@@ -161,40 +161,40 @@ export class PostResolver {
         //   });
         // }
 
-        // const posts = await qb.getMany();
-        // console.log("posts: ", posts);
+        // const items = await qb.getMany();
+        // console.log("items: ", items);
 
         return {
-            posts: posts.slice(0, realLimit),
-            hasMore: posts.length === reaLimitPlusOne,
+            items: items.slice(0, realLimit),
+            hasMore: items.length === reaLimitPlusOne,
         };
     }
 
-    @Query(() => Post, { nullable: true })
-    post(
+    @Query(() => Item, { nullable: true })
+    item(
         @Arg('id', () => Int)
         id: number
-    ): Promise<Post | undefined> {
-        return Post.findOne(id);
+    ): Promise<Item | undefined> {
+        return Item.findOne(id);
     }
 
-    @Mutation(() => Post)
+    @Mutation(() => Item)
     @UseMiddleware(isAuth)
-    async createPost(
+    async createItem(
         @Arg('input')
-        input: PostInput,
+        input: ItemInput,
         @Ctx()
         { req }: MyContext
-    ): Promise<Post> {
-        return Post.create({
+    ): Promise<Item> {
+        return Item.create({
             ...input,
             creatorId: req.session.userId,
         }).save();
     }
 
-    @Mutation(() => Post, { nullable: true })
+    @Mutation(() => Item, { nullable: true })
     @UseMiddleware(isAuth)
-    async updatePost(
+    async updateItem(
         @Arg('id', () => Int)
         id: number,
         @Arg('title')
@@ -203,10 +203,10 @@ export class PostResolver {
         text: string,
         @Ctx()
         { req }: MyContext
-    ): Promise<Post | null> {
+    ): Promise<Item | null> {
         const result = await getConnection()
             .createQueryBuilder()
-            .update(Post)
+            .update(Item)
             .set({ title, text })
             .where('id = :id and "creatorId" = :creatorId', {
                 id,
@@ -220,23 +220,23 @@ export class PostResolver {
 
     @Mutation(() => Boolean)
     @UseMiddleware(isAuth)
-    async deletePost(
+    async deleteItem(
         @Arg('id', () => Int)
         id: number,
         @Ctx()
         { req }: MyContext
     ): Promise<boolean> {
         // not cascade way
-        // const post = await Post.findOne(id);
-        // if (!post) return false;
-        // if (post.creatorId !== req.session.userId) {
+        // const item = await Item.findOne(id);
+        // if (!item) return false;
+        // if (item.creatorId !== req.session.userId) {
         //   throw new Error("not authorized");
         // }
 
         // await Star.delete({ postId: id });
-        // await Post.delete({ id });
+        // await Item.delete({ id });
 
-        await Post.delete({ id, creatorId: req.session.userId });
+        await Item.delete({ id, creatorId: req.session.userId });
         return true;
     }
 }

@@ -2,10 +2,10 @@ import { ApolloCache } from '@apollo/client';
 import { Flex, IconButton } from '@chakra-ui/core';
 import gql from 'graphql-tag';
 import React, { useState } from 'react';
-import { PostSnippetFragment, useVoteMutation, VoteMutation } from '../generated/graphql';
+import { ItemSnippetFragment, useVoteMutation, VoteMutation } from '../generated/graphql';
 
 interface UpdootSectionProps {
-    post: PostSnippetFragment;
+    item: ItemSnippetFragment;
 }
 
 const updateAfterVote = (value: number, postId: number, cache: ApolloCache<VoteMutation>) => {
@@ -14,9 +14,9 @@ const updateAfterVote = (value: number, postId: number, cache: ApolloCache<VoteM
         points: number;
         voteStatus: number | null;
     }>({
-        id: 'Post:' + postId,
+        id: 'Item:' + postId,
         fragment: gql`
-            fragment _ on Post {
+            fragment _ on Item {
                 id
                 points
                 voteStatus
@@ -30,9 +30,9 @@ const updateAfterVote = (value: number, postId: number, cache: ApolloCache<VoteM
         }
         const newPoints = (data.points as number) + (!data.voteStatus ? 1 : 2) * value;
         cache.writeFragment({
-            id: 'Post:' + postId,
+            id: 'Item:' + postId,
             fragment: gql`
-                fragment __ on Post {
+                fragment __ on Item {
                     points
                     voteStatus
                 }
@@ -42,50 +42,50 @@ const updateAfterVote = (value: number, postId: number, cache: ApolloCache<VoteM
     }
 };
 
-export const UpdootSection: React.FC<UpdootSectionProps> = ({ post }) => {
+export const UpdootSection: React.FC<UpdootSectionProps> = ({ item }) => {
     const [loadingState, setLoadingState] = useState<'star-loading' | 'downdoot-loading' | 'not-loading'>('not-loading');
     const [vote] = useVoteMutation();
     return (
         <Flex direction="column" justifyContent="center" alignItems="center" mr={4}>
             <IconButton
                 onClick={async () => {
-                    if (post.voteStatus === 1) {
+                    if (item.voteStatus === 1) {
                         return;
                     }
                     setLoadingState('star-loading');
                     await vote({
                         variables: {
-                            postId: post.id,
+                            postId: item.id,
                             value: 1,
                         },
-                        update: (cache) => updateAfterVote(1, post.id, cache),
+                        update: (cache) => updateAfterVote(1, item.id, cache),
                     });
                     setLoadingState('not-loading');
                 }}
-                variantColor={post.voteStatus === 1 ? 'green' : undefined}
+                variantColor={item.voteStatus === 1 ? 'green' : undefined}
                 isLoading={loadingState === 'star-loading'}
-                aria-label="star post"
+                aria-label="star item"
                 icon="chevron-up"
             />
-            {post.points}
+            {item.points}
             <IconButton
                 onClick={async () => {
-                    if (post.voteStatus === -1) {
+                    if (item.voteStatus === -1) {
                         return;
                     }
                     setLoadingState('downdoot-loading');
                     await vote({
                         variables: {
-                            postId: post.id,
+                            postId: item.id,
                             value: -1,
                         },
-                        update: (cache) => updateAfterVote(-1, post.id, cache),
+                        update: (cache) => updateAfterVote(-1, item.id, cache),
                     });
                     setLoadingState('not-loading');
                 }}
-                variantColor={post.voteStatus === -1 ? 'red' : undefined}
+                variantColor={item.voteStatus === -1 ? 'red' : undefined}
                 isLoading={loadingState === 'downdoot-loading'}
-                aria-label="downdoot post"
+                aria-label="downdoot item"
                 icon="chevron-down"
             />
         </Flex>

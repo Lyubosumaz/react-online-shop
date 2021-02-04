@@ -10,11 +10,11 @@ import 'reflect-metadata';
 import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
 import { COOKIE_NAME, __prod__ } from './constants';
-import { Post } from './entities/Post';
+import { Item } from './entities/Item';
 import { Star } from './entities/Star';
 import { User } from './entities/User';
 import { HelloResolver } from './resolvers/hello';
-import { PostResolver } from './resolvers/post';
+import { ItemResolver } from './resolvers/item';
 import { UserResolver } from './resolvers/user';
 import { createUpdootLoader } from './utils/createUpdootLoader';
 import { createUserLoader } from './utils/createUserLoader';
@@ -27,11 +27,11 @@ const main = async () => {
         logging: true,
         synchronize: true,
         migrations: [path.join(__dirname, './migrations/*')],
-        entities: [Post, User, Star],
+        entities: [Item, User, Star],
     });
 
     // await conn.runMigrations();
-    // await Post.delete({});
+    // await Item.delete({});
 
     const app = express();
 
@@ -67,7 +67,7 @@ const main = async () => {
 
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
-            resolvers: [HelloResolver, PostResolver, UserResolver],
+            resolvers: [HelloResolver, ItemResolver, UserResolver],
             validate: false,
         }),
         context: ({ req, res }) => ({

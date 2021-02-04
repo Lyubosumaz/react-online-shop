@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import Router from 'next/router';
 import { dedupExchange, Exchange, fetchExchange, stringifyVariables } from 'urql';
 import { pipe, tap } from 'wonka';
-import { DeletePostMutationVariables, LoginMutation, LogoutMutation, MeDocument, MeQuery, RegisterMutation, VoteMutationVariables } from '../generated/graphql';
+import { DeleteItemMutationVariables, LoginMutation, LogoutMutation, MeDocument, MeQuery, RegisterMutation, VoteMutationVariables } from '../generated/graphql';
 import { betterUpdateQuery } from './betterUpdateQuery';
 import { isServer } from './isServer';
 
@@ -29,13 +29,13 @@ const cursorPagination = (): Resolver => {
         }
 
         const fieldKey = `${fieldName}(${stringifyVariables(fieldArgs)})`;
-        const isItInTheCache = cache.resolve(cache.resolveFieldByKey(entityKey, fieldKey) as string, 'posts');
+        const isItInTheCache = cache.resolve(cache.resolve(entityKey, fieldKey) as string, 'items');
         info.partial = !isItInTheCache;
         let hasMore = true;
         const results: string[] = [];
         fieldInfos.forEach((fi) => {
-            const key = cache.resolveFieldByKey(entityKey, fi.fieldKey) as string;
-            const data = cache.resolve(key, 'posts') as string[];
+            const key = cache.resolve(entityKey, fi.fieldKey) as string;
+            const data = cache.resolve(key, 'items') as string[];
             const _hasMore = cache.resolve(key, 'hasMore');
             if (!_hasMore) {
                 hasMore = _hasMore as boolean;
@@ -44,18 +44,18 @@ const cursorPagination = (): Resolver => {
         });
 
         return {
-            __typename: 'PaginatedPosts',
+            __typename: 'PaginatedItems',
             hasMore,
-            posts: results,
+            items: results,
         };
     };
 };
 
-const invalidateAllPosts = (cache: Cache) => {
+const invalidateAllItems = (cache: Cache) => {
     const allFields = cache.inspectFields('Query');
-    const fieldInfos = allFields.filter((info) => info.fieldName === 'posts');
+    const fieldInfos = allFields.filter((info) => info.fieldName === 'items');
     fieldInfos.forEach((fi) => {
-        cache.invalidate('Query', 'posts', fi.arguments || {});
+        cache.invalidate('Query', 'items', fi.arguments || {});
     });
 };
 
@@ -79,26 +79,26 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
             dedupExchange,
             cacheExchange({
                 keys: {
-                    PaginatedPosts: () => null,
+                    PaginatedItems: () => null,
                 },
                 resolvers: {
                     Query: {
-                        posts: cursorPagination(),
+                        items: cursorPagination(),
                     },
                 },
                 updates: {
                     Mutation: {
-                        deletePost: (_result, args, cache, info) => {
+                        deleteItem: (_result, args, cache, info) => {
                             cache.invalidate({
-                                __typename: 'Post',
-                                id: (args as DeletePostMutationVariables).id,
+                                __typename: 'Item',
+                                id: (args as DeleteItemMutationVariables).id,
                             });
                         },
                         vote: (_result, args, cache, info) => {
                             const { postId, value } = args as VoteMutationVariables;
                             const data = cache.readFragment(
                                 gql`
-                                    fragment _ on Post {
+                                    fragment _ on Item {
                                         id
                                         points
                                         voteStatus
@@ -114,7 +114,7 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
                                 const newPoints = (data.points as number) + (!data.voteStatus ? 1 : 2) * value;
                                 cache.writeFragment(
                                     gql`
-                                        fragment __ on Post {
+                                        fragment __ on Item {
                                             points
                                             voteStatus
                                         }
@@ -123,8 +123,8 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
                                 );
                             }
                         },
-                        createPost: (_result, args, cache, info) => {
-                            invalidateAllPosts(cache);
+                        createItem: (_result, args, cache, info) => {
+                            invalidateAllItems(cache);
                         },
                         logout: (_result, args, cache, info) => {
                             betterUpdateQuery<LogoutMutation, MeQuery>(cache, { query: MeDocument }, _result, () => ({ me: null }));
@@ -139,7 +139,7 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
                                     };
                                 }
                             });
-                            invalidateAllPosts(cache);
+                            invalidateAllItems(cache);
                         },
                         register: (_result, args, cache, info) => {
                             betterUpdateQuery<RegisterMutation, MeQuery>(cache, { query: MeDocument }, _result, (result, query) => {

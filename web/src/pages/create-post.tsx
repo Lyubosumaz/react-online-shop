@@ -4,23 +4,23 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { InputField } from '../components/InputField';
 import { Layout } from '../components/Layout';
-import { useCreatePostMutation } from '../generated/graphql';
+import { useCreateItemMutation } from '../generated/graphql';
 import { useIsAuth } from '../utils/useIsAuth';
 import { withApollo } from '../utils/withApollo';
 
-const CreatePost: React.FC<{}> = ({}) => {
+const CreateItem: React.FC<{}> = ({}) => {
     const router = useRouter();
     useIsAuth();
-    const [createPost] = useCreatePostMutation();
+    const [createItem] = useCreateItemMutation();
     return (
         <Layout variant="small">
             <Formik
                 initialValues={{ title: '', text: '' }}
                 onSubmit={async (values) => {
-                    const { errors } = await createPost({
+                    const { errors } = await createItem({
                         variables: { input: values },
                         update: (cache) => {
-                            cache.evict({ fieldName: 'posts:{}' });
+                            cache.evict({ fieldName: 'items:{}' });
                         },
                     });
                     if (!errors) {
@@ -35,7 +35,7 @@ const CreatePost: React.FC<{}> = ({}) => {
                             <InputField textarea name="text" placeholder="text..." label="Body" />
                         </Box>
                         <Button mt={4} type="submit" isLoading={isSubmitting} variantColor="teal">
-                            create post
+                            create item
                         </Button>
                     </Form>
                 )}
@@ -44,4 +44,4 @@ const CreatePost: React.FC<{}> = ({}) => {
     );
 };
 
-export default withApollo({ ssr: false })(CreatePost);
+export default withApollo({ ssr: false })(CreateItem);

@@ -5,7 +5,7 @@ import { User } from './User';
 
 @ObjectType()
 @Entity()
-export class Post extends BaseEntity {
+export class Item extends BaseEntity {
     @Field()
     @PrimaryGeneratedColumn()
     id!: number;
@@ -30,10 +30,10 @@ export class Post extends BaseEntity {
     creatorId: number;
 
     @Field()
-    @ManyToOne(() => User, (user) => user.posts)
+    @ManyToOne(() => User, (user) => user.items)
     creator: User;
 
-    @OneToMany(() => Star, (star) => star.post)
+    @OneToMany(() => Star, (star) => star.item)
     stars: Star[];
 
     @Field(() => String)

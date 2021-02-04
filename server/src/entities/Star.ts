@@ -1,12 +1,12 @@
 import { BaseEntity, Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
-import { Post } from './Post';
+import { Item } from './Item';
 import { User } from './User';
 
 // m to n
 // many to many
-// user <-> posts
-// user -> join table <- posts
-// user -> star <- posts
+// user <-> items
+// user -> join table <- items
+// user -> star <- items
 
 @Entity()
 export class Star extends BaseEntity {
@@ -22,8 +22,8 @@ export class Star extends BaseEntity {
     @PrimaryColumn()
     postId: number;
 
-    @ManyToOne(() => Post, (post) => post.stars, {
+    @ManyToOne(() => Item, (item) => item.stars, {
         onDelete: 'CASCADE',
     })
-    post: Post;
+    item: Item;
 }

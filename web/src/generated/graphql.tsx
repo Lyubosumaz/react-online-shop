@@ -1,5 +1,5 @@
-import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
+import { gql } from '@apollo/client';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
@@ -14,30 +14,30 @@ export type Scalars = {
 export type Query = {
   __typename?: 'Query';
   hello: Scalars['String'];
-  posts: PaginatedPosts;
-  post?: Maybe<Post>;
+  items: PaginatedItems;
+  item?: Maybe<Item>;
   me?: Maybe<User>;
 };
 
 
-export type QueryPostsArgs = {
+export type QueryItemsArgs = {
   cursor?: Maybe<Scalars['String']>;
   limit: Scalars['Int'];
 };
 
 
-export type QueryPostArgs = {
+export type QueryItemArgs = {
   id: Scalars['Int'];
 };
 
-export type PaginatedPosts = {
-  __typename?: 'PaginatedPosts';
-  posts: Array<Post>;
+export type PaginatedItems = {
+  __typename?: 'PaginatedItems';
+  items: Array<Item>;
   hasMore: Scalars['Boolean'];
 };
 
-export type Post = {
-  __typename?: 'Post';
+export type Item = {
+  __typename?: 'Item';
   id: Scalars['Float'];
   title: Scalars['String'];
   text: Scalars['String'];
@@ -62,9 +62,9 @@ export type User = {
 export type Mutation = {
   __typename?: 'Mutation';
   vote: Scalars['Boolean'];
-  createPost: Post;
-  updatePost?: Maybe<Post>;
-  deletePost: Scalars['Boolean'];
+  createItem: Item;
+  updateItem?: Maybe<Item>;
+  deleteItem: Scalars['Boolean'];
   changePassword: UserResponse;
   forgotPassword: Scalars['Boolean'];
   register: UserResponse;
@@ -79,19 +79,19 @@ export type MutationVoteArgs = {
 };
 
 
-export type MutationCreatePostArgs = {
-  input: PostInput;
+export type MutationCreateItemArgs = {
+  input: ItemInput;
 };
 
 
-export type MutationUpdatePostArgs = {
+export type MutationUpdateItemArgs = {
   text: Scalars['String'];
   title: Scalars['String'];
   id: Scalars['Int'];
 };
 
 
-export type MutationDeletePostArgs = {
+export type MutationDeleteItemArgs = {
   id: Scalars['Int'];
 };
 
@@ -117,7 +117,7 @@ export type MutationLoginArgs = {
   usernameOrEmail: Scalars['String'];
 };
 
-export type PostInput = {
+export type ItemInput = {
   title: Scalars['String'];
   text: Scalars['String'];
 };
@@ -140,9 +140,9 @@ export type UsernamePasswordInput = {
   password: Scalars['String'];
 };
 
-export type PostSnippetFragment = (
-  { __typename?: 'Post' }
-  & Pick<Post, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'points' | 'textSnippet' | 'voteStatus'>
+export type ItemSnippetFragment = (
+  { __typename?: 'Item' }
+  & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'points' | 'textSnippet' | 'voteStatus'>
   & { creator: (
     { __typename?: 'User' }
     & Pick<User, 'id' | 'username'>
@@ -184,27 +184,27 @@ export type ChangePasswordMutation = (
   ) }
 );
 
-export type CreatePostMutationVariables = Exact<{
-  input: PostInput;
+export type CreateItemMutationVariables = Exact<{
+  input: ItemInput;
 }>;
 
 
-export type CreatePostMutation = (
+export type CreateItemMutation = (
   { __typename?: 'Mutation' }
-  & { createPost: (
-    { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'text' | 'points' | 'creatorId'>
+  & { createItem: (
+    { __typename?: 'Item' }
+    & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'text' | 'points' | 'creatorId'>
   ) }
 );
 
-export type DeletePostMutationVariables = Exact<{
+export type DeleteItemMutationVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
 
-export type DeletePostMutation = (
+export type DeleteItemMutation = (
   { __typename?: 'Mutation' }
-  & Pick<Mutation, 'deletePost'>
+  & Pick<Mutation, 'deleteItem'>
 );
 
 export type ForgotPasswordMutationVariables = Exact<{
@@ -252,18 +252,18 @@ export type RegisterMutation = (
   ) }
 );
 
-export type UpdatePostMutationVariables = Exact<{
+export type UpdateItemMutationVariables = Exact<{
   id: Scalars['Int'];
   title: Scalars['String'];
   text: Scalars['String'];
 }>;
 
 
-export type UpdatePostMutation = (
+export type UpdateItemMutation = (
   { __typename?: 'Mutation' }
-  & { updatePost?: Maybe<(
-    { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'title' | 'text' | 'textSnippet'>
+  & { updateItem?: Maybe<(
+    { __typename?: 'Item' }
+    & Pick<Item, 'id' | 'title' | 'text' | 'textSnippet'>
   )> }
 );
 
@@ -289,16 +289,16 @@ export type MeQuery = (
   )> }
 );
 
-export type PostQueryVariables = Exact<{
+export type ItemQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
 
-export type PostQuery = (
+export type ItemQuery = (
   { __typename?: 'Query' }
-  & { post?: Maybe<(
-    { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'points' | 'text' | 'voteStatus'>
+  & { item?: Maybe<(
+    { __typename?: 'Item' }
+    & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'points' | 'text' | 'voteStatus'>
     & { creator: (
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username'>
@@ -306,26 +306,26 @@ export type PostQuery = (
   )> }
 );
 
-export type PostsQueryVariables = Exact<{
+export type ItemsQueryVariables = Exact<{
   limit: Scalars['Int'];
   cursor?: Maybe<Scalars['String']>;
 }>;
 
 
-export type PostsQuery = (
+export type ItemsQuery = (
   { __typename?: 'Query' }
-  & { posts: (
-    { __typename?: 'PaginatedPosts' }
-    & Pick<PaginatedPosts, 'hasMore'>
-    & { posts: Array<(
-      { __typename?: 'Post' }
-      & PostSnippetFragment
+  & { items: (
+    { __typename?: 'PaginatedItems' }
+    & Pick<PaginatedItems, 'hasMore'>
+    & { items: Array<(
+      { __typename?: 'Item' }
+      & ItemSnippetFragment
     )> }
   ) }
 );
 
-export const PostSnippetFragmentDoc = gql`
-    fragment PostSnippet on Post {
+export const ItemSnippetFragmentDoc = gql`
+    fragment ItemSnippet on Item {
   id
   createdAt
   updatedAt
@@ -395,9 +395,9 @@ export function useChangePasswordMutation(baseOptions?: Apollo.MutationHookOptio
 export type ChangePasswordMutationHookResult = ReturnType<typeof useChangePasswordMutation>;
 export type ChangePasswordMutationResult = Apollo.MutationResult<ChangePasswordMutation>;
 export type ChangePasswordMutationOptions = Apollo.BaseMutationOptions<ChangePasswordMutation, ChangePasswordMutationVariables>;
-export const CreatePostDocument = gql`
-    mutation CreatePost($input: PostInput!) {
-  createPost(input: $input) {
+export const CreateItemDocument = gql`
+    mutation CreateItem($input: ItemInput!) {
+  createItem(input: $input) {
     id
     createdAt
     updatedAt
@@ -408,61 +408,61 @@ export const CreatePostDocument = gql`
   }
 }
     `;
-export type CreatePostMutationFn = Apollo.MutationFunction<CreatePostMutation, CreatePostMutationVariables>;
+export type CreateItemMutationFn = Apollo.MutationFunction<CreateItemMutation, CreateItemMutationVariables>;
 
 /**
- * __useCreatePostMutation__
+ * __useCreateItemMutation__
  *
- * To run a mutation, you first call `useCreatePostMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreatePostMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useCreateItemMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateItemMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [createPostMutation, { data, loading, error }] = useCreatePostMutation({
+ * const [createItemMutation, { data, loading, error }] = useCreateItemMutation({
  *   variables: {
  *      input: // value for 'input'
  *   },
  * });
  */
-export function useCreatePostMutation(baseOptions?: Apollo.MutationHookOptions<CreatePostMutation, CreatePostMutationVariables>) {
-        return Apollo.useMutation<CreatePostMutation, CreatePostMutationVariables>(CreatePostDocument, baseOptions);
+export function useCreateItemMutation(baseOptions?: Apollo.MutationHookOptions<CreateItemMutation, CreateItemMutationVariables>) {
+        return Apollo.useMutation<CreateItemMutation, CreateItemMutationVariables>(CreateItemDocument, baseOptions);
       }
-export type CreatePostMutationHookResult = ReturnType<typeof useCreatePostMutation>;
-export type CreatePostMutationResult = Apollo.MutationResult<CreatePostMutation>;
-export type CreatePostMutationOptions = Apollo.BaseMutationOptions<CreatePostMutation, CreatePostMutationVariables>;
-export const DeletePostDocument = gql`
-    mutation DeletePost($id: Int!) {
-  deletePost(id: $id)
+export type CreateItemMutationHookResult = ReturnType<typeof useCreateItemMutation>;
+export type CreateItemMutationResult = Apollo.MutationResult<CreateItemMutation>;
+export type CreateItemMutationOptions = Apollo.BaseMutationOptions<CreateItemMutation, CreateItemMutationVariables>;
+export const DeleteItemDocument = gql`
+    mutation DeleteItem($id: Int!) {
+  deleteItem(id: $id)
 }
     `;
-export type DeletePostMutationFn = Apollo.MutationFunction<DeletePostMutation, DeletePostMutationVariables>;
+export type DeleteItemMutationFn = Apollo.MutationFunction<DeleteItemMutation, DeleteItemMutationVariables>;
 
 /**
- * __useDeletePostMutation__
+ * __useDeleteItemMutation__
  *
- * To run a mutation, you first call `useDeletePostMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeletePostMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useDeleteItemMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteItemMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [deletePostMutation, { data, loading, error }] = useDeletePostMutation({
+ * const [deleteItemMutation, { data, loading, error }] = useDeleteItemMutation({
  *   variables: {
  *      id: // value for 'id'
  *   },
  * });
  */
-export function useDeletePostMutation(baseOptions?: Apollo.MutationHookOptions<DeletePostMutation, DeletePostMutationVariables>) {
-        return Apollo.useMutation<DeletePostMutation, DeletePostMutationVariables>(DeletePostDocument, baseOptions);
+export function useDeleteItemMutation(baseOptions?: Apollo.MutationHookOptions<DeleteItemMutation, DeleteItemMutationVariables>) {
+        return Apollo.useMutation<DeleteItemMutation, DeleteItemMutationVariables>(DeleteItemDocument, baseOptions);
       }
-export type DeletePostMutationHookResult = ReturnType<typeof useDeletePostMutation>;
-export type DeletePostMutationResult = Apollo.MutationResult<DeletePostMutation>;
-export type DeletePostMutationOptions = Apollo.BaseMutationOptions<DeletePostMutation, DeletePostMutationVariables>;
+export type DeleteItemMutationHookResult = ReturnType<typeof useDeleteItemMutation>;
+export type DeleteItemMutationResult = Apollo.MutationResult<DeleteItemMutation>;
+export type DeleteItemMutationOptions = Apollo.BaseMutationOptions<DeleteItemMutation, DeleteItemMutationVariables>;
 export const ForgotPasswordDocument = gql`
     mutation ForgotPassword($email: String!) {
   forgotPassword(email: $email)
@@ -587,9 +587,9 @@ export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<Reg
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
-export const UpdatePostDocument = gql`
-    mutation UpdatePost($id: Int!, $title: String!, $text: String!) {
-  updatePost(id: $id, title: $title, text: $text) {
+export const UpdateItemDocument = gql`
+    mutation UpdateItem($id: Int!, $title: String!, $text: String!) {
+  updateItem(id: $id, title: $title, text: $text) {
     id
     title
     text
@@ -597,20 +597,20 @@ export const UpdatePostDocument = gql`
   }
 }
     `;
-export type UpdatePostMutationFn = Apollo.MutationFunction<UpdatePostMutation, UpdatePostMutationVariables>;
+export type UpdateItemMutationFn = Apollo.MutationFunction<UpdateItemMutation, UpdateItemMutationVariables>;
 
 /**
- * __useUpdatePostMutation__
+ * __useUpdateItemMutation__
  *
- * To run a mutation, you first call `useUpdatePostMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdatePostMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useUpdateItemMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateItemMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [updatePostMutation, { data, loading, error }] = useUpdatePostMutation({
+ * const [updateItemMutation, { data, loading, error }] = useUpdateItemMutation({
  *   variables: {
  *      id: // value for 'id'
  *      title: // value for 'title'
@@ -618,12 +618,12 @@ export type UpdatePostMutationFn = Apollo.MutationFunction<UpdatePostMutation, U
  *   },
  * });
  */
-export function useUpdatePostMutation(baseOptions?: Apollo.MutationHookOptions<UpdatePostMutation, UpdatePostMutationVariables>) {
-        return Apollo.useMutation<UpdatePostMutation, UpdatePostMutationVariables>(UpdatePostDocument, baseOptions);
+export function useUpdateItemMutation(baseOptions?: Apollo.MutationHookOptions<UpdateItemMutation, UpdateItemMutationVariables>) {
+        return Apollo.useMutation<UpdateItemMutation, UpdateItemMutationVariables>(UpdateItemDocument, baseOptions);
       }
-export type UpdatePostMutationHookResult = ReturnType<typeof useUpdatePostMutation>;
-export type UpdatePostMutationResult = Apollo.MutationResult<UpdatePostMutation>;
-export type UpdatePostMutationOptions = Apollo.BaseMutationOptions<UpdatePostMutation, UpdatePostMutationVariables>;
+export type UpdateItemMutationHookResult = ReturnType<typeof useUpdateItemMutation>;
+export type UpdateItemMutationResult = Apollo.MutationResult<UpdateItemMutation>;
+export type UpdateItemMutationOptions = Apollo.BaseMutationOptions<UpdateItemMutation, UpdateItemMutationVariables>;
 export const VoteDocument = gql`
     mutation Vote($value: Int!, $postId: Int!) {
   vote(value: $value, postId: $postId)
@@ -687,9 +687,9 @@ export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
-export const PostDocument = gql`
-    query Post($id: Int!) {
-  post(id: $id) {
+export const ItemDocument = gql`
+    query Item($id: Int!) {
+  item(id: $id) {
     id
     createdAt
     updatedAt
@@ -706,64 +706,64 @@ export const PostDocument = gql`
     `;
 
 /**
- * __usePostQuery__
+ * __useItemQuery__
  *
- * To run a query within a React component, call `usePostQuery` and pass it any options that fit your needs.
- * When your component renders, `usePostQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useItemQuery` and pass it any options that fit your needs.
+ * When your component renders, `useItemQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = usePostQuery({
+ * const { data, loading, error } = useItemQuery({
  *   variables: {
  *      id: // value for 'id'
  *   },
  * });
  */
-export function usePostQuery(baseOptions: Apollo.QueryHookOptions<PostQuery, PostQueryVariables>) {
-        return Apollo.useQuery<PostQuery, PostQueryVariables>(PostDocument, baseOptions);
+export function useItemQuery(baseOptions: Apollo.QueryHookOptions<ItemQuery, ItemQueryVariables>) {
+        return Apollo.useQuery<ItemQuery, ItemQueryVariables>(ItemDocument, baseOptions);
       }
-export function usePostLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PostQuery, PostQueryVariables>) {
-          return Apollo.useLazyQuery<PostQuery, PostQueryVariables>(PostDocument, baseOptions);
+export function useItemLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ItemQuery, ItemQueryVariables>) {
+          return Apollo.useLazyQuery<ItemQuery, ItemQueryVariables>(ItemDocument, baseOptions);
         }
-export type PostQueryHookResult = ReturnType<typeof usePostQuery>;
-export type PostLazyQueryHookResult = ReturnType<typeof usePostLazyQuery>;
-export type PostQueryResult = Apollo.QueryResult<PostQuery, PostQueryVariables>;
-export const PostsDocument = gql`
-    query Posts($limit: Int!, $cursor: String) {
-  posts(limit: $limit, cursor: $cursor) {
+export type ItemQueryHookResult = ReturnType<typeof useItemQuery>;
+export type ItemLazyQueryHookResult = ReturnType<typeof useItemLazyQuery>;
+export type ItemQueryResult = Apollo.QueryResult<ItemQuery, ItemQueryVariables>;
+export const ItemsDocument = gql`
+    query Items($limit: Int!, $cursor: String) {
+  items(limit: $limit, cursor: $cursor) {
     hasMore
-    posts {
-      ...PostSnippet
+    items {
+      ...ItemSnippet
     }
   }
 }
-    ${PostSnippetFragmentDoc}`;
+    ${ItemSnippetFragmentDoc}`;
 
 /**
- * __usePostsQuery__
+ * __useItemsQuery__
  *
- * To run a query within a React component, call `usePostsQuery` and pass it any options that fit your needs.
- * When your component renders, `usePostsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useItemsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useItemsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = usePostsQuery({
+ * const { data, loading, error } = useItemsQuery({
  *   variables: {
  *      limit: // value for 'limit'
  *      cursor: // value for 'cursor'
  *   },
  * });
  */
-export function usePostsQuery(baseOptions: Apollo.QueryHookOptions<PostsQuery, PostsQueryVariables>) {
-        return Apollo.useQuery<PostsQuery, PostsQueryVariables>(PostsDocument, baseOptions);
+export function useItemsQuery(baseOptions: Apollo.QueryHookOptions<ItemsQuery, ItemsQueryVariables>) {
+        return Apollo.useQuery<ItemsQuery, ItemsQueryVariables>(ItemsDocument, baseOptions);
       }
-export function usePostsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PostsQuery, PostsQueryVariables>) {
-          return Apollo.useLazyQuery<PostsQuery, PostsQueryVariables>(PostsDocument, baseOptions);
+export function useItemsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ItemsQuery, ItemsQueryVariables>) {
+          return Apollo.useLazyQuery<ItemsQuery, ItemsQueryVariables>(ItemsDocument, baseOptions);
         }
-export type PostsQueryHookResult = ReturnType<typeof usePostsQuery>;
-export type PostsLazyQueryHookResult = ReturnType<typeof usePostsLazyQuery>;
-export type PostsQueryResult = Apollo.QueryResult<PostsQuery, PostsQueryVariables>;
+export type ItemsQueryHookResult = ReturnType<typeof useItemsQuery>;
+export type ItemsLazyQueryHookResult = ReturnType<typeof useItemsLazyQuery>;
+export type ItemsQueryResult = Apollo.QueryResult<ItemsQuery, ItemsQueryVariables>;
