@@ -1,8 +1,0 @@
-query Items($limit: Int!, $cursor: String) {
-    items(limit: $limit, cursor: $cursor) {
-        hasMore
-        item {
-            ...ItemSnippet
-        }
-    }
-}
