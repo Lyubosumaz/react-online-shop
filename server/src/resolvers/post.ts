@@ -49,9 +49,7 @@ export class PostResolver {
         @Ctx()
         { updootLoader, req }: MyContext
     ) {
-        if (!req.session.userId) {
-            return null;
-        }
+        if (!req.session.userId) return null;
 
         const updoot = await updootLoader.load({
             postId: post.id,
@@ -120,6 +118,7 @@ export class PostResolver {
                 );
             });
         }
+
         return true;
     }
 
@@ -136,9 +135,7 @@ export class PostResolver {
 
         const replacements: any[] = [reaLimitPlusOne];
 
-        if (cursor) {
-            replacements.push(new Date(parseInt(cursor)));
-        }
+        if (cursor) replacements.push(new Date(parseInt(cursor)));
 
         const posts = await getConnection().query(
             `
@@ -231,9 +228,7 @@ export class PostResolver {
     ): Promise<boolean> {
         // not cascade way
         // const post = await Post.findOne(id);
-        // if (!post) {
-        //   return false;
-        // }
+        // if (!post) return false;
         // if (post.creatorId !== req.session.userId) {
         //   throw new Error("not authorized");
         // }

@@ -1,5 +1,6 @@
 import argon2 from 'argon2';
 import { Arg, Ctx, Field, FieldResolver, Mutation, ObjectType, Query, Resolver, Root } from 'type-graphql';
+import { getConnection } from 'typeorm';
 import { v4 } from 'uuid';
 import { COOKIE_NAME, FORGET_PASSWORD_PREFIX } from '../constants';
 import { User } from '../entities/User';
@@ -141,12 +142,19 @@ export class UserResolver {
         const hashedPassword = await argon2.hash(options.password);
         let user;
         try {
-            const result = await User.create({
-                username: options.username,
-                email: options.email,
-                password: hashedPassword,
-            }).save();
-            user = result;
+            // User.create({}).save()
+            const result = await getConnection()
+                .createQueryBuilder()
+                .insert()
+                .into(User)
+                .values({
+                    username: options.username,
+                    email: options.email,
+                    password: hashedPassword,
+                })
+                .returning('*')
+                .execute();
+            user = result.raw[0];
         } catch (err) {
             if (err.code === '23505') {
                 return {
@@ -163,7 +171,7 @@ export class UserResolver {
         // store user id session
         // this will set a cookie on the user
         // keep them logged in
-        req.session.userId = user?.id;
+        req.session.userId = user.id;
 
         return { user };
     }
