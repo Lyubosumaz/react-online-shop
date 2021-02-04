@@ -1,7 +1,7 @@
 import DataLoader from 'dataloader';
 import { User } from '../entities/User';
 
-// [1, 78, 8, 9]
+// [1, 7, 8, 9]
 // [{id: 1, username: 'tim'}, {}, {}, {}]
 export const createUserLoader = () =>
     new DataLoader<number, User>(async (userIds) => {

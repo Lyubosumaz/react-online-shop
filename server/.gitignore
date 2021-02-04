@@ -1,4 +1,3 @@
 dist
 node_modules
-# you should add that
-# .env
+.env

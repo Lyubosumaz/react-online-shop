@@ -104,7 +104,7 @@ export class PostResolver {
     }
 
     @Query(() => PaginatedPosts)
-    async posts(@Arg('limit', () => Int) limit: number, @Arg('cursor', () => String, { nullable: true }) cursor: string | null): Promise<PaginatedPosts> {
+    async posts(@Arg('limit', () => Int) limit: number, @Arg('cursor', () => String, { nullable: true }) cursor: string | null): Promise<PaginatedPosts | null> {
         // 20 -> 21
         const realLimit = Math.min(50, limit);
         const reaLimitPlusOne = realLimit + 1;
@@ -142,10 +142,12 @@ export class PostResolver {
         // const posts = await qb.getMany();
         // console.log("posts: ", posts);
 
-        return {
+        const result = {
             posts: posts.slice(0, realLimit),
             hasMore: posts.length === reaLimitPlusOne,
         };
+
+        return result.posts.length && result.hasMore ? result : null;
     }
 
     @Query(() => Post, { nullable: true })
