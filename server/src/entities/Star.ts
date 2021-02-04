@@ -6,23 +6,23 @@ import { User } from './User';
 // many to many
 // user <-> posts
 // user -> join table <- posts
-// user -> updoot <- posts
+// user -> star <- posts
 
 @Entity()
-export class Updoot extends BaseEntity {
+export class Star extends BaseEntity {
     @Column({ type: 'int' })
     value: number;
 
     @PrimaryColumn()
     userId: number;
 
-    @ManyToOne(() => User, (user) => user.updoots)
+    @ManyToOne(() => User, (user) => user.stars)
     user: User;
 
     @PrimaryColumn()
     postId: number;
 
-    @ManyToOne(() => Post, (post) => post.updoots, {
+    @ManyToOne(() => Post, (post) => post.stars, {
         onDelete: 'CASCADE',
     })
     post: Post;

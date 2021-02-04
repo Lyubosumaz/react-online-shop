@@ -1,7 +1,7 @@
 import { Arg, Ctx, Field, FieldResolver, InputType, Int, Mutation, ObjectType, Query, Resolver, Root, UseMiddleware } from 'type-graphql';
 import { getConnection } from 'typeorm';
 import { Post } from '../entities/Post';
-import { Updoot } from '../entities/Updoot';
+import { Star } from '../entities/Star';
 import { User } from '../entities/User';
 import { isAuth } from '../middleware/isAuth';
 import { MyContext } from '../types';
@@ -51,12 +51,12 @@ export class PostResolver {
     ) {
         if (!req.session.userId) return null;
 
-        const updoot = await updootLoader.load({
+        const star = await updootLoader.load({
             postId: post.id,
             userId: req.session.userId,
         });
 
-        return updoot ? updoot.value : null;
+        return star ? star.value : null;
     }
 
     @Mutation(() => Boolean)
@@ -73,15 +73,15 @@ export class PostResolver {
         const realValue = isUpdoot ? 1 : -1;
         const { userId } = req.session;
 
-        const updoot = await Updoot.findOne({ where: { postId, userId } });
+        const star = await Star.findOne({ where: { postId, userId } });
 
         // the user has voted on the post before
         // and they are changing their vote
-        if (updoot && updoot.value !== realValue) {
+        if (star && star.value !== realValue) {
             await getConnection().transaction(async (tm) => {
                 await tm.query(
                     `
-                        update updoot
+                        update star
                         set value = $1
                         where "postId" = $2 and "userId" = $3
                     `,
@@ -97,12 +97,12 @@ export class PostResolver {
                     [2 * realValue, postId]
                 );
             });
-        } else if (!updoot) {
+        } else if (!star) {
             // has never voted before
             await getConnection().transaction(async (tm) => {
                 await tm.query(
                     `
-                        insert into updoot ("userId", "postId", value)
+                        insert into star ("userId", "postId", value)
                         values ($1, $2, $3)
                     `,
                     [userId, postId, realValue]
@@ -233,7 +233,7 @@ export class PostResolver {
         //   throw new Error("not authorized");
         // }
 
-        // await Updoot.delete({ postId: id });
+        // await Star.delete({ postId: id });
         // await Post.delete({ id });
 
         await Post.delete({ id, creatorId: req.session.userId });
