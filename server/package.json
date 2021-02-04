@@ -1,6 +1,6 @@
 {
     "name": "react-online-shop-server",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "",
     "main": "index.js",
     "scripts": {
@@ -17,7 +17,7 @@
         "url": "git+https://github.com/Lyubosumaz/react-online-shop.git"
     },
     "keywords": [],
-    "author": "",
+    "author": "Lyubosumaz",
     "license": "ISC",
     "devDependencies": {
         "@types/connect-redis": "^0.0.14",
