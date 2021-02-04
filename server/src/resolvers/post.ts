@@ -142,12 +142,10 @@ export class PostResolver {
         // const posts = await qb.getMany();
         // console.log("posts: ", posts);
 
-        const result = {
+        return {
             posts: posts.slice(0, realLimit),
             hasMore: posts.length === reaLimitPlusOne,
         };
-
-        return result.posts.length && result.hasMore ? result : null;
     }
 
     @Query(() => Post, { nullable: true })

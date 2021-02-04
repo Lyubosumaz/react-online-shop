@@ -30,28 +30,39 @@ const Index = () => {
                 <div>loading...</div>
             ) : (
                 <Stack spacing={8}>
-                    {data!.posts.posts.map((p) =>
-                        !p ? null : (
-                            <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
-                                <UpdootSection post={p} />
-                                <Box flex={1}>
-                                    <NextLink href="/post/[id]" as={`/post/${p.id}`}>
-                                        <Link>
-                                            <Heading fontSize="xl">{p.title}</Heading>
-                                        </Link>
-                                    </NextLink>
-                                    <Text>posted by {p.creator.username}</Text>
-                                    <Flex align="center">
-                                        <Text flex={1} mt={4}>
-                                            {p.textSnippet}
-                                        </Text>
-                                        <Box ml="auto">
-                                            <EditDeletePostButtons id={p.id} creatorId={p.creator.id} />
-                                        </Box>
-                                    </Flex>
-                                </Box>
-                            </Flex>
+                    {data?.posts.posts.length ? (
+                        data!.posts.posts.map((p) =>
+                            !p ? null : (
+                                <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
+                                    <UpdootSection post={p} />
+                                    <Box flex={1}>
+                                        <NextLink href="/post/[id]" as={`/post/${p.id}`}>
+                                            <Link>
+                                                <Heading fontSize="xl">{p.title}</Heading>
+                                            </Link>
+                                        </NextLink>
+                                        <Text>posted by {p.creator.username}</Text>
+                                        <Flex align="center">
+                                            <Text flex={1} mt={4}>
+                                                {p.textSnippet}
+                                            </Text>
+                                            <Box ml="auto">
+                                                <EditDeletePostButtons id={p.id} creatorId={p.creator.id} />
+                                            </Box>
+                                        </Flex>
+                                    </Box>
+                                </Flex>
+                            )
                         )
+                    ) : (
+                        <Flex alignItems="center">
+                            <Box mr={5}>Nothing was created so far!</Box>
+                            <NextLink href="/create-post">
+                                <Button as={Link} mr={4}>
+                                    create post
+                                </Button>
+                            </NextLink>
+                        </Flex>
                     )}
                 </Stack>
             )}

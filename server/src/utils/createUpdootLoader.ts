@@ -1,8 +1,6 @@
 import DataLoader from 'dataloader';
 import { Updoot } from '../entities/Updoot';
 
-// [{postId: 5, userId: 10}]
-// [{postId: 5, userId: 10, value: 1}]
 export const createUpdootLoader = () =>
     new DataLoader<{ postId: number; userId: number }, Updoot | null>(async (keys) => {
         const updoots = await Updoot.findByIds(keys as any);
@@ -11,5 +9,6 @@ export const createUpdootLoader = () =>
             updootIdsToUpdoot[`${updoot.userId}|${updoot.postId}`] = updoot;
         });
 
-        return keys.map((key) => updootIdsToUpdoot[`${key.userId}|${key.postId}`]);
+        const sortedUpdoot = keys.map((key) => updootIdsToUpdoot[`${key.userId}|${key.postId}`]);
+        return sortedUpdoot;
     });

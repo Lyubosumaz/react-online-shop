@@ -4,6 +4,7 @@ import { createUpdootLoader } from './utils/createUpdootLoader';
 import { createUserLoader } from './utils/createUserLoader';
 
 export type MyContext = {
+    // @ts-ignore
     req: Request & { session: Express.Session };
     redis: Redis;
     res: Response;

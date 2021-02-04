@@ -9,10 +9,6 @@
         "gen": "graphql-codegen --config codegen.yml"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-svg-core": "^1.2.34",
-        "@fortawesome/free-brands-svg-icons": "^5.15.2",
-        "@fortawesome/free-solid-svg-icons": "^5.15.2",
-        "@fortawesome/react-fontawesome": "^0.1.14",
         "@urql/exchange-graphcache": "^3.3.3",
         "final-form": "^4.20.1",
         "graphql": "^15.4.0",
