@@ -4,7 +4,7 @@
     "port": 5432,
     "username": "root",
     "password": "root",
-    "database": "test_ros",
+    "database": "test_ros_two",
     "entities": ["dist/entities/*.js"],
     "migrations": ["dist/migrations/*.js"]
 }
