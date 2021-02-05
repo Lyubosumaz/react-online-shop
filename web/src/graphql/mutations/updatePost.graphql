@@ -1,8 +1,8 @@
-mutation UpdateItem($id: Int!, $title: String!, $text: String!) {
-    updateItem(id: $id, title: $title, text: $text) {
+mutation UpdateItem($id: Int!, $title: String!, $description: String!) {
+    updateItem(id: $id, title: $title, description: $description) {
         id
         title
-        text
-        textSnippet
+        description
+        descriptionSnippet
     }
 }

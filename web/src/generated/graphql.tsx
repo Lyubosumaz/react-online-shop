@@ -40,14 +40,14 @@ export type Item = {
   __typename?: 'Item';
   id: Scalars['Float'];
   title: Scalars['String'];
-  text: Scalars['String'];
+  description: Scalars['String'];
   points: Scalars['Float'];
   voteStatus?: Maybe<Scalars['Int']>;
   creatorId: Scalars['Float'];
   creator: User;
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
-  textSnippet: Scalars['String'];
+  descriptionSnippet: Scalars['String'];
 };
 
 export type User = {
@@ -85,7 +85,7 @@ export type MutationCreateItemArgs = {
 
 
 export type MutationUpdateItemArgs = {
-  text: Scalars['String'];
+  description: Scalars['String'];
   title: Scalars['String'];
   id: Scalars['Int'];
 };
@@ -119,7 +119,7 @@ export type MutationLoginArgs = {
 
 export type ItemInput = {
   title: Scalars['String'];
-  text: Scalars['String'];
+  description: Scalars['String'];
 };
 
 export type UserResponse = {
@@ -142,7 +142,7 @@ export type UsernamePasswordInput = {
 
 export type ItemSnippetFragment = (
   { __typename?: 'Item' }
-  & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'points' | 'textSnippet' | 'voteStatus'>
+  & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'points' | 'descriptionSnippet' | 'voteStatus'>
   & { creator: (
     { __typename?: 'User' }
     & Pick<User, 'id' | 'username'>
@@ -193,7 +193,7 @@ export type CreateItemMutation = (
   { __typename?: 'Mutation' }
   & { createItem: (
     { __typename?: 'Item' }
-    & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'text' | 'points' | 'creatorId'>
+    & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'description' | 'points' | 'creatorId'>
   ) }
 );
 
@@ -255,7 +255,7 @@ export type RegisterMutation = (
 export type UpdateItemMutationVariables = Exact<{
   id: Scalars['Int'];
   title: Scalars['String'];
-  text: Scalars['String'];
+  description: Scalars['String'];
 }>;
 
 
@@ -263,7 +263,7 @@ export type UpdateItemMutation = (
   { __typename?: 'Mutation' }
   & { updateItem?: Maybe<(
     { __typename?: 'Item' }
-    & Pick<Item, 'id' | 'title' | 'text' | 'textSnippet'>
+    & Pick<Item, 'id' | 'title' | 'description' | 'descriptionSnippet'>
   )> }
 );
 
@@ -298,7 +298,7 @@ export type ItemQuery = (
   { __typename?: 'Query' }
   & { item?: Maybe<(
     { __typename?: 'Item' }
-    & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'points' | 'text' | 'voteStatus'>
+    & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'points' | 'description' | 'voteStatus'>
     & { creator: (
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username'>
@@ -331,7 +331,7 @@ export const ItemSnippetFragmentDoc = gql`
   updatedAt
   title
   points
-  textSnippet
+  descriptionSnippet
   voteStatus
   creator {
     id
@@ -402,7 +402,7 @@ export const CreateItemDocument = gql`
     createdAt
     updatedAt
     title
-    text
+    description
     points
     creatorId
   }
@@ -588,12 +588,12 @@ export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
 export const UpdateItemDocument = gql`
-    mutation UpdateItem($id: Int!, $title: String!, $text: String!) {
-  updateItem(id: $id, title: $title, text: $text) {
+    mutation UpdateItem($id: Int!, $title: String!, $description: String!) {
+  updateItem(id: $id, title: $title, description: $description) {
     id
     title
-    text
-    textSnippet
+    description
+    descriptionSnippet
   }
 }
     `;
@@ -614,7 +614,7 @@ export type UpdateItemMutationFn = Apollo.MutationFunction<UpdateItemMutation, U
  *   variables: {
  *      id: // value for 'id'
  *      title: // value for 'title'
- *      text: // value for 'text'
+ *      description: // value for 'description'
  *   },
  * });
  */
@@ -695,7 +695,7 @@ export const ItemDocument = gql`
     updatedAt
     title
     points
-    text
+    description
     voteStatus
     creator {
       id

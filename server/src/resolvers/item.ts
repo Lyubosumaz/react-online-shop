@@ -11,7 +11,7 @@ class ItemInput {
     @Field()
     title: string;
     @Field()
-    text: string;
+    description: string;
 }
 
 @ObjectType()
@@ -25,11 +25,11 @@ class PaginatedItems {
 @Resolver(Item)
 export class ItemResolver {
     @FieldResolver(() => String)
-    textSnippet(
+    descriptionSnippet(
         @Root()
         item: Item
     ) {
-        return item.text.slice(0, 50);
+        return item.description.slice(0, 50);
     }
 
     @FieldResolver(() => User)
@@ -199,15 +199,15 @@ export class ItemResolver {
         id: number,
         @Arg('title')
         title: string,
-        @Arg('text')
-        text: string,
+        @Arg('description')
+        description: string,
         @Ctx()
         { req }: MyContext
     ): Promise<Item | null> {
         const result = await getConnection()
             .createQueryBuilder()
             .update(Item)
-            .set({ title, text })
+            .set({ title, description })
             .where('id = :id and "creatorId" = :creatorId', {
                 id,
                 creatorId: req.session.userId,

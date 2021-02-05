@@ -37,7 +37,7 @@ const EditItem = ({}) => {
     return (
         <Layout variant="small">
             <Formik
-                initialValues={{ title: data.item.title, text: data.item.text }}
+                initialValues={{ title: data.item.title, description: data.item.description }}
                 onSubmit={async (values) => {
                     await updateItem({ variables: { id: intId, ...values } });
                     router.back();
@@ -47,7 +47,7 @@ const EditItem = ({}) => {
                     <Form>
                         <InputField name="title" placeholder="title" label="Title" />
                         <Box mt={4}>
-                            <InputField textarea name="text" placeholder="text..." label="Body" />
+                            <InputField textarea name="description" placeholder="description..." label="Body" />
                         </Box>
                         <Button mt={4} type="submit" isLoading={isSubmitting} variantColor="teal">
                             update item

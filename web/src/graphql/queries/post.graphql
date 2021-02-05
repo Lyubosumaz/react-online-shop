@@ -5,7 +5,7 @@ query Item($id: Int!) {
         updatedAt
         title
         points
-        text
+        description
         voteStatus
         creator {
             id

@@ -16,7 +16,7 @@ export class Item extends BaseEntity {
 
     @Field()
     @Column()
-    text!: string;
+    description!: string;
 
     @Field()
     @Column({ type: 'int', default: 0 })

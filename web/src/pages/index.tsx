@@ -44,7 +44,7 @@ const Index = () => {
                                         <Text>posted by {p.creator.username}</Text>
                                         <Flex align="center">
                                             <Text flex={1} mt={4}>
-                                                {p.textSnippet}
+                                                {p.descriptionSnippet}
                                             </Text>
                                             <Box ml="auto">
                                                 <EditDeleteItemButtons id={p.id} creatorId={p.creator.id} />

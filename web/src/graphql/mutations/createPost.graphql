@@ -4,7 +4,7 @@ mutation CreateItem($input: ItemInput!) {
         createdAt
         updatedAt
         title
-        text
+        description
         points
         creatorId
     }

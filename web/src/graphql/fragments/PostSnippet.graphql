@@ -4,7 +4,7 @@ fragment ItemSnippet on Item {
     updatedAt
     title
     points
-    textSnippet
+    descriptionSnippet
     voteStatus
     creator {
         id

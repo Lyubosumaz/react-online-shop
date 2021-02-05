@@ -15,7 +15,7 @@ const CreateItem: React.FC<{}> = ({}) => {
     return (
         <Layout variant="small">
             <Formik
-                initialValues={{ title: '', text: '' }}
+                initialValues={{ title: '', description: '' }}
                 onSubmit={async (values) => {
                     const { errors } = await createItem({
                         variables: { input: values },
@@ -32,7 +32,7 @@ const CreateItem: React.FC<{}> = ({}) => {
                     <Form>
                         <InputField name="title" placeholder="title" label="Title" />
                         <Box mt={4}>
-                            <InputField textarea name="text" placeholder="text..." label="Body" />
+                            <InputField textarea name="description" placeholder="description..." label="Body" />
                         </Box>
                         <Button mt={4} type="submit" isLoading={isSubmitting} variantColor="teal">
                             create item

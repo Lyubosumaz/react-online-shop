@@ -31,7 +31,7 @@ const Item = ({}) => {
     return (
         <Layout>
             <Heading mb={4}>{data.item.title}</Heading>
-            <Box mb={4}>{data.item.text}</Box>
+            <Box mb={4}>{data.item.description}</Box>
             <EditDeleteItemButtons id={data.item.id} creatorId={data.item.creator.id} />
         </Layout>
     );
