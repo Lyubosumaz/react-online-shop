@@ -29,7 +29,16 @@ export class ItemResolver {
         @Root()
         item: Item
     ) {
-        return item.description.slice(0, 50);
+        let newDescription = item.description;
+
+        const breakNum = 47; // cuts the description uo to 50 symbols
+        if (newDescription.length >= breakNum) {
+            let cutDescription = newDescription.slice(0, breakNum).trim();
+            cutDescription = cutDescription.substr(0, cutDescription.length - 1) + cutDescription[cutDescription.length - 1].replace(/[-,.\s]/gm, '');
+            newDescription = cutDescription.concat('...');
+        }
+
+        return newDescription;
     }
 
     @FieldResolver(() => User)
