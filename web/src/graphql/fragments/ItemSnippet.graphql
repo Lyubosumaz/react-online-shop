@@ -10,4 +10,6 @@ fragment ItemSnippet on Item {
         id
         username
     }
+    price
+    category
 }

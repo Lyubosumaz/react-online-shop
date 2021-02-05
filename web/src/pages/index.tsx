@@ -30,18 +30,25 @@ const Index = () => {
                 <div>loading...</div>
             ) : (
                 <Stack spacing={8}>
+                    {/* {console.log(data?.items.items)} */}
                     {data?.items.items.length ? (
                         data!.items.items.map((p) =>
                             !p ? null : (
                                 <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
                                     <UpdootSection item={p} />
                                     <Box flex={1}>
-                                        <NextLink href="/item/[id]" as={`/item/${p.id}`}>
-                                            <Link>
-                                                <Heading fontSize="xl">{p.title}</Heading>
-                                            </Link>
-                                        </NextLink>
-                                        <Text>posted by {p.creator.username}</Text>
+                                        <Flex>
+                                            <NextLink href="/item/[id]" as={`/item/${p.id}`}>
+                                                <Link flexGrow={1}>
+                                                    <Heading fontSize="xl">{p.title}</Heading>
+                                                </Link>
+                                            </NextLink>
+                                            <Text>${p.price}</Text>
+                                        </Flex>
+                                        <Flex justify="space-between" mb={4}>
+                                            <Text>categories: {p.category}</Text>
+                                            <Text>added by {p.creator.username}</Text>
+                                        </Flex>
                                         <Flex align="center">
                                             <Text flex={1} mt={4}>
                                                 {p.descriptionSnippet}

@@ -1,5 +1,5 @@
-import * as Apollo from '@apollo/client';
 import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
@@ -39,8 +39,10 @@ export type PaginatedItems = {
 export type Item = {
   __typename?: 'Item';
   id: Scalars['Float'];
+  category: Scalars['String'];
   title: Scalars['String'];
   description: Scalars['String'];
+  price: Scalars['Float'];
   rating: Scalars['Float'];
   voteStatus?: Maybe<Scalars['Int']>;
   creatorId: Scalars['Float'];
@@ -142,7 +144,7 @@ export type UsernamePasswordInput = {
 
 export type ItemSnippetFragment = (
   { __typename?: 'Item' }
-  & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'rating' | 'descriptionSnippet' | 'voteStatus'>
+  & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'rating' | 'descriptionSnippet' | 'voteStatus' | 'price' | 'category'>
   & { creator: (
     { __typename?: 'User' }
     & Pick<User, 'id' | 'username'>
@@ -337,6 +339,8 @@ export const ItemSnippetFragmentDoc = gql`
     id
     username
   }
+  price
+  category
 }
     `;
 export const RegularErrorFragmentDoc = gql`
