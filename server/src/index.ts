@@ -20,7 +20,6 @@ import { createUpdootLoader } from './utils/createUpdootLoader';
 import { createUserLoader } from './utils/createUserLoader';
 
 const main = async () => {
-    // @ts-ignore
     const conn = await createConnection({
         type: 'postgres',
         url: process.env.DATABASE_URL,
@@ -30,8 +29,13 @@ const main = async () => {
         entities: [Item, User, Star],
     });
 
-    // await conn.runMigrations();
+    // const firstUser = await User.findOne({ id: 2 }); // TODO admin user
+    // console.log(firstUser);
+    // if (firstUser)
+    await conn.runMigrations();
+    // await Star.delete({});
     // await Item.delete({});
+    // await User.delete({});
 
     const app = express();
 
