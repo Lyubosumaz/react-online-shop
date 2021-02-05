@@ -100,7 +100,7 @@ export class ItemResolver {
                 await tm.query(
                     `
                         update item
-                        set points = points + $1
+                        set rating = rating + $1
                         where id = $2
                     `,
                     [2 * realValue, postId]
@@ -120,7 +120,7 @@ export class ItemResolver {
                 await tm.query(
                     `
                         update item
-                        set points = points + $1
+                        set rating = rating + $1
                         where id = $2
                     `,
                     [realValue, postId]

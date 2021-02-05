@@ -11,14 +11,14 @@ interface UpdootSectionProps {
 const updateAfterVote = (value: number, postId: number, cache: ApolloCache<VoteMutation>) => {
     const data = cache.readFragment<{
         id: number;
-        points: number;
+        rating: number;
         voteStatus: number | null;
     }>({
         id: 'Item:' + postId,
         fragment: gql`
             fragment _ on Item {
                 id
-                points
+                rating
                 voteStatus
             }
         `,
@@ -28,16 +28,16 @@ const updateAfterVote = (value: number, postId: number, cache: ApolloCache<VoteM
         if (data.voteStatus === value) {
             return;
         }
-        const newPoints = (data.points as number) + (!data.voteStatus ? 1 : 2) * value;
+        const newPoints = (data.rating as number) + (!data.voteStatus ? 1 : 2) * value;
         cache.writeFragment({
             id: 'Item:' + postId,
             fragment: gql`
                 fragment __ on Item {
-                    points
+                    rating
                     voteStatus
                 }
             `,
-            data: { points: newPoints, voteStatus: value },
+            data: { rating: newPoints, voteStatus: value },
         });
     }
 };
@@ -67,7 +67,7 @@ export const UpdootSection: React.FC<UpdootSectionProps> = ({ item }) => {
                 aria-label="star item"
                 icon="chevron-up"
             />
-            {item.points}
+            {item.rating}
             <IconButton
                 onClick={async () => {
                     if (item.voteStatus === -1) {

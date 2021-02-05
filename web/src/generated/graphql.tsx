@@ -41,7 +41,7 @@ export type Item = {
   id: Scalars['Float'];
   title: Scalars['String'];
   description: Scalars['String'];
-  points: Scalars['Float'];
+  rating: Scalars['Float'];
   voteStatus?: Maybe<Scalars['Int']>;
   creatorId: Scalars['Float'];
   creator: User;
@@ -142,7 +142,7 @@ export type UsernamePasswordInput = {
 
 export type ItemSnippetFragment = (
   { __typename?: 'Item' }
-  & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'points' | 'descriptionSnippet' | 'voteStatus'>
+  & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'rating' | 'descriptionSnippet' | 'voteStatus'>
   & { creator: (
     { __typename?: 'User' }
     & Pick<User, 'id' | 'username'>
@@ -193,7 +193,7 @@ export type CreateItemMutation = (
   { __typename?: 'Mutation' }
   & { createItem: (
     { __typename?: 'Item' }
-    & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'description' | 'points' | 'creatorId'>
+    & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'description' | 'rating' | 'creatorId'>
   ) }
 );
 
@@ -298,7 +298,7 @@ export type ItemQuery = (
   { __typename?: 'Query' }
   & { item?: Maybe<(
     { __typename?: 'Item' }
-    & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'points' | 'description' | 'voteStatus'>
+    & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'rating' | 'description' | 'voteStatus'>
     & { creator: (
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username'>
@@ -330,7 +330,7 @@ export const ItemSnippetFragmentDoc = gql`
   createdAt
   updatedAt
   title
-  points
+  rating
   descriptionSnippet
   voteStatus
   creator {
@@ -403,7 +403,7 @@ export const CreateItemDocument = gql`
     updatedAt
     title
     description
-    points
+    rating
     creatorId
   }
 }
@@ -694,7 +694,7 @@ export const ItemDocument = gql`
     createdAt
     updatedAt
     title
-    points
+    rating
     description
     voteStatus
     creator {

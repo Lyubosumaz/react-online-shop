@@ -3,7 +3,7 @@ fragment ItemSnippet on Item {
     createdAt
     updatedAt
     title
-    points
+    rating
     descriptionSnippet
     voteStatus
     creator {

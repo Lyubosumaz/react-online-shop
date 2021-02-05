@@ -5,7 +5,7 @@ mutation CreateItem($input: ItemInput!) {
         updatedAt
         title
         description
-        points
+        rating
         creatorId
     }
 }
