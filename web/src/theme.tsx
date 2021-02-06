@@ -8,8 +8,6 @@ const theme = {
     },
     fonts: {
         ...chakraTheme.fonts,
-        // body: 'Montserrat, sans-serif',
-        heading: 'Montserrat, Georgia, sans-serif',
         mono: 'Menlo, monospace',
     },
     breakpoints: ['40em', '52em', '64em'],
