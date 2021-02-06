@@ -2,8 +2,9 @@ import { Box, Button, Flex, Heading, Link, Stack, Text } from '@chakra-ui/core';
 import NextLink from 'next/link';
 import { EditDeleteItemButtons } from '../components/EditDeleteItemButtons';
 import { Layout } from '../components/Layout';
-import { UpdootSection } from '../components/UpdootSection';
+import { VoteSection } from '../components/VoteSection';
 import { useItemsQuery } from '../generated/graphql';
+import { usePriceRound } from '../utils/usePriceRound';
 import { withApollo } from '../utils/withApollo';
 
 const Index = () => {
@@ -35,7 +36,7 @@ const Index = () => {
                         data!.items.items.map((p) =>
                             !p ? null : (
                                 <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
-                                    <UpdootSection item={p} />
+                                    <VoteSection item={p} />
                                     <Box flex={1}>
                                         <Flex>
                                             <NextLink href="/item/[id]" as={`/item/${p.id}`}>
@@ -43,7 +44,7 @@ const Index = () => {
                                                     <Heading fontSize="xl">{p.title}</Heading>
                                                 </Link>
                                             </NextLink>
-                                            <Text>${p.price}</Text>
+                                            <Text>${usePriceRound(p.price)}</Text>
                                         </Flex>
                                         <Flex justify="space-between" mb={4}>
                                             <Text>categories: {p.category}</Text>

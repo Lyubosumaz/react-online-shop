@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import React, { useState } from 'react';
 import { ItemSnippetFragment, useVoteMutation, VoteMutation } from '../generated/graphql';
 
-interface UpdootSectionProps {
+interface VoteSectionProps {
     item: ItemSnippetFragment;
 }
 
@@ -42,7 +42,7 @@ const updateAfterVote = (value: number, postId: number, cache: ApolloCache<VoteM
     }
 };
 
-export const UpdootSection: React.FC<UpdootSectionProps> = ({ item }) => {
+export const VoteSection: React.FC<VoteSectionProps> = ({ item }) => {
     const [loadingState, setLoadingState] = useState<'star-loading' | 'downdoot-loading' | 'not-loading'>('not-loading');
     const [vote] = useVoteMutation();
     return (
