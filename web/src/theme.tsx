@@ -8,6 +8,8 @@ const theme = {
     },
     fonts: {
         ...chakraTheme.fonts,
+        heading: 'Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
+        body: `Poppins,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`,
         mono: 'Menlo, monospace',
     },
     breakpoints: ['40em', '52em', '64em'],
