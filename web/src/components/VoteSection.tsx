@@ -1,8 +1,10 @@
 import { ApolloCache } from '@apollo/client';
-import { Flex, IconButton } from '@chakra-ui/core';
+import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
+import { Flex, IconButton } from '@chakra-ui/react';
 import gql from 'graphql-tag';
 import React, { useState } from 'react';
 import { ItemSnippetFragment, useVoteMutation, VoteMutation } from '../generated/graphql';
+
 
 interface VoteSectionProps {
     item: ItemSnippetFragment;
@@ -62,10 +64,10 @@ export const VoteSection: React.FC<VoteSectionProps> = ({ item }) => {
                     });
                     setLoadingState('not-loading');
                 }}
-                variantColor={item.voteStatus === 1 ? 'green' : undefined}
+                colorScheme={item.voteStatus === 1 ? 'green' : undefined}
                 isLoading={loadingState === 'star-loading'}
                 aria-label="star item"
-                icon="chevron-up"
+                icon={<ChevronUpIcon />}
             />
             {item.rating}
             <IconButton
@@ -83,10 +85,10 @@ export const VoteSection: React.FC<VoteSectionProps> = ({ item }) => {
                     });
                     setLoadingState('not-loading');
                 }}
-                variantColor={item.voteStatus === -1 ? 'red' : undefined}
+                colorScheme={item.voteStatus === -1 ? 'red' : undefined}
                 isLoading={loadingState === 'downdoot-loading'}
                 aria-label="downdoot item"
-                icon="chevron-down"
+                icon={<ChevronDownIcon />}
             />
         </Flex>
     );

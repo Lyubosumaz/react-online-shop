@@ -1,4 +1,4 @@
-import { Box, Button } from '@chakra-ui/core';
+import { Box, Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -49,7 +49,7 @@ const EditItem = ({}) => {
                         <Box mt={4}>
                             <InputField textarea name="description" placeholder="description..." label="Body" />
                         </Box>
-                        <Button mt={4} type="submit" isLoading={isSubmitting} variantColor="teal">
+                        <Button mt={4} type="submit" isLoading={isSubmitting} colorScheme="teal">
                             update item
                         </Button>
                     </Form>

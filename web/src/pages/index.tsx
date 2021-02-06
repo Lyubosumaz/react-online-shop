@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Link, Stack, Text } from '@chakra-ui/core';
+import { Box, Button, Flex, Heading, Link, Stack, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { EditDeleteItemButtons } from '../components/EditDeleteItemButtons';
 import { Layout } from '../components/Layout';
@@ -41,7 +41,7 @@ const Index = () => {
                                         <Flex>
                                             <NextLink href="/item/[id]" as={`/item/${p.id}`}>
                                                 <Link flexGrow={1}>
-                                                    <Heading fontSize="xl">{p.title}</Heading>
+                                                    <Heading fontSize="2xl">{p.title}</Heading>
                                                 </Link>
                                             </NextLink>
                                             <Text>${usePriceRound(p.price)}</Text>
