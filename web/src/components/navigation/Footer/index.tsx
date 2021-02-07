@@ -1,6 +1,7 @@
-import { Flex, List, ListIcon, ListItem, Text } from '@chakra-ui/react';
+import { Flex, Heading, IconButton, Link, List, ListIcon, ListItem, Text } from '@chakra-ui/react';
+import NextLink from 'next/link';
 import React from 'react';
-import { FaMapMarkerAlt, FaMobileAlt, FaPhoneAlt } from 'react-icons/fa';
+import { FaFacebookF, FaGoogle, FaLinkedinIn, FaMapMarkerAlt, FaMobileAlt, FaPhoneAlt, FaTwitter } from 'react-icons/fa';
 
 const Footer: React.FC<{}> = ({}) => {
     return (
@@ -20,104 +21,82 @@ const Footer: React.FC<{}> = ({}) => {
                 </ListItem>
             </List>
 
-            <ul
-            // className={styles[`footer-services`]}
-            >
-                <li
-                // className={[styles[`service-card`], styles[`service-card-navigation`]].join(' ')}
-                >
-                    <header
-                    // className={styles.header}
-                    >
-                        <h5>Useful Link</h5>
-                    </header>
+            <List display="flex" justifyContent="space-between">
+                <ListItem maxWidth="7rem">
+                    <Heading as="h4" size="md">
+                        Useful Link
+                    </Heading>
 
-                    <ul
-                    // className={styles.body}
-                    >
-                        <li
-                        // className={styles.links}
-                        >
-                            Home
-                        </li>
-                        <li
-                        // className={styles.links}
-                        >
-                            About
-                        </li>
-                        <li
-                        // className={styles.links}
-                        >
-                            Our Design
-                        </li>
-                        <li
-                        // className={styles.links}
-                        >
-                            Contact Us
-                        </li>
-                    </ul>
-                </li>
+                    <List>
+                        {/* TODO links paths need adding */}
+                        <ListItem>
+                            <NextLink href="/">
+                                <Link>Home</Link>
+                            </NextLink>
+                        </ListItem>
+                        <ListItem>
+                            <NextLink href="/">
+                                <Link>About</Link>
+                            </NextLink>
+                        </ListItem>
+                        <ListItem>
+                            <NextLink href="/">
+                                <Link>Our Design</Link>
+                            </NextLink>
+                        </ListItem>
+                        <ListItem>
+                            <NextLink href="/">
+                                <Link>Contact Us</Link>
+                            </NextLink>
+                        </ListItem>
+                    </List>
+                </ListItem>
 
-                <li
-                // className={[styles[`service-card`], styles[`service-card-repair`]].join(' ')}
-                >
-                    <header
-                    // className={styles.header}
-                    >
-                        <h5>Repair</h5>
-                    </header>
+                <ListItem maxWidth="8rem">
+                    <Heading as="h4" size="md">
+                        Repair
+                    </Heading>
 
-                    <p
-                    // className={styles.body}
-                    >
-                        Lorem ipsum dolor sit, amet conse ctet ur adipi sicing elit 30Levcamsamoajajahavlove.
-                    </p>
-                </li>
+                    <Text>Lorem ipsum dolor sit, amet conse ctet ur adipi sicing elit 30Levcamsamoajajahavlove.</Text>
+                </ListItem>
 
-                <li
-                // className={[styles[`service-card`], styles[`service-card-media`]].join(' ')}
-                >
-                    <header
-                    // className={styles.header}
-                    >
-                        <h5>Social Media</h5>
-                    </header>
+                <ListItem maxWidth="13rem">
+                    <Heading as="h4" size="md">
+                        Social Media
+                    </Heading>
 
-                    <ul
-                    // className={styles.list}
-                    >
-                        <li
-                        // className={styles.links}
-                        ></li>
-                        <li
-                        // className={styles.links}
-                        ></li>
-                        <li
-                        // className={styles.links}
-                        ></li>
-                        <li
-                        // className={styles.links}
-                        ></li>
-                    </ul>
-                </li>
+                    <List display="flex">
+                        <ListItem mr={1}>
+                            <NextLink href="/" as={'some'}>
+                                <IconButton as={Link} size="lg" icon={<FaFacebookF />} borderRadius="full" aria-label="Edit Item" />
+                            </NextLink>
+                        </ListItem>
+                        <ListItem mr={1}>
+                            <NextLink href="/" as={'some'}>
+                                <IconButton as={Link} size="lg" icon={<FaTwitter />} borderRadius="full" aria-label="Edit Item" />
+                            </NextLink>
+                        </ListItem>
+                        <ListItem mr={1}>
+                            <NextLink href="/" as={'some'}>
+                                <IconButton as={Link} size="lg" icon={<FaGoogle />} borderRadius="full" aria-label="Edit Item" />
+                            </NextLink>
+                        </ListItem>
+                        <ListItem>
+                            <NextLink href="/" as={'some'}>
+                                <IconButton as={Link} size="lg" icon={<FaLinkedinIn />} borderRadius="full" aria-label="Edit Item" />
+                            </NextLink>
+                        </ListItem>
+                    </List>
+                </ListItem>
 
-                <li
-                // className={[styles[`service-card`], styles[`service-card-center`]].join(' ')}
-                >
-                    <header
-                    // className={styles.header}
-                    // className={styles[`site-rights`]}
-                    >
-                        <h5>Our Repair Center</h5>
-                    </header>
+                <ListItem maxWidth="15rem">
+                    <Heading as="h4" size="md">
+                        Our Repair Center
+                    </Heading>
 
-                    <p
-                    // className={styles.body}
-                    >
-                        Lorem ipsum dolor sit, amet conse ctet ur adipi sicing elit 30Levcamsamoajajahavlovemorethenthatajaj.
-                    </p>
-                </li>
-            </ul>
+                    <Text>Lorem ipsum dolor sit, amet conse ctet ur adipi sicing elit 30Levcamsamoajajahavlovemorethenthatajaj.</Text>
+                </ListItem>
+            </List>
 
             <Flex p="1rem 0" justifyContent="center" alignItems="center">
                 <Text>2020-{new Date().getFullYear()} All Rights Restricted. Design by Free html Templates</Text>
