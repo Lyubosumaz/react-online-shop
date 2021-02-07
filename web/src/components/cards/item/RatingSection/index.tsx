@@ -1,12 +1,11 @@
 import { ApolloCache } from '@apollo/client';
-import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
-import { Flex, IconButton } from '@chakra-ui/react';
+import { Flex, IconButton, Text } from '@chakra-ui/react';
 import gql from 'graphql-tag';
 import React, { useState } from 'react';
-import { ItemSnippetFragment, useVoteMutation, VoteMutation } from '../generated/graphql';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { ItemSnippetFragment, useVoteMutation, VoteMutation } from '../../../../generated/graphql';
 
-
-interface VoteSectionProps {
+interface RatingSectionProps {
     item: ItemSnippetFragment;
 }
 
@@ -44,17 +43,21 @@ const updateAfterVote = (value: number, postId: number, cache: ApolloCache<VoteM
     }
 };
 
-export const VoteSection: React.FC<VoteSectionProps> = ({ item }) => {
-    const [loadingState, setLoadingState] = useState<'star-loading' | 'downdoot-loading' | 'not-loading'>('not-loading');
+// TODO this needs to be reworked
+// useVoteMutation should be for users
+// an new useRatingMutation should be for items
+// using the reworked Star entity
+export const RatingSection: React.FC<RatingSectionProps> = ({ item }) => {
+    const [loadingState, setLoadingState] = useState<'up-vote-loading' | 'down-vote-loading' | 'not-loading'>('not-loading');
     const [vote] = useVoteMutation();
+
     return (
         <Flex direction="column" justifyContent="center" alignItems="center" mr={4}>
             <IconButton
                 onClick={async () => {
-                    if (item.voteStatus === 1) {
-                        return;
-                    }
-                    setLoadingState('star-loading');
+                    if (item.voteStatus === 1) return;
+
+                    setLoadingState('up-vote-loading');
                     await vote({
                         variables: {
                             postId: item.id,
@@ -65,17 +68,21 @@ export const VoteSection: React.FC<VoteSectionProps> = ({ item }) => {
                     setLoadingState('not-loading');
                 }}
                 colorScheme={item.voteStatus === 1 ? 'green' : undefined}
-                isLoading={loadingState === 'star-loading'}
-                aria-label="star item"
-                icon={<ChevronUpIcon />}
+                isLoading={loadingState === 'up-vote-loading'}
+                aria-label="Positive Vote"
+                icon={<FaChevronUp />}
             />
-            {item.rating}
+
+            <Text boxSize={10} margin="0.5rem 0" display="flex" justifyContent="center" alignItems="center" border="1px solid #E2E8F0" borderRadius="0.375rem">
+                {item.rating}
+            </Text>
+
             <IconButton
                 onClick={async () => {
                     if (item.voteStatus === -1) {
                         return;
                     }
-                    setLoadingState('downdoot-loading');
+                    setLoadingState('down-vote-loading');
                     await vote({
                         variables: {
                             postId: item.id,
@@ -86,9 +93,9 @@ export const VoteSection: React.FC<VoteSectionProps> = ({ item }) => {
                     setLoadingState('not-loading');
                 }}
                 colorScheme={item.voteStatus === -1 ? 'red' : undefined}
-                isLoading={loadingState === 'downdoot-loading'}
-                aria-label="downdoot item"
-                icon={<ChevronDownIcon />}
+                isLoading={loadingState === 'down-vote-loading'}
+                aria-label="Negative Vote"
+                icon={<FaChevronDown />}
             />
         </Flex>
     );

@@ -1,8 +1,8 @@
 import { Box, Button, Flex, Heading, Link, Stack, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { ItemActionButtons } from '../components/cards/item/ItemActionButtons';
+import { RatingSection } from '../components/cards/item/RatingSection';
 import { Layout } from '../components/Layout';
-import { VoteSection } from '../components/VoteSection';
 import { useItemsQuery } from '../generated/graphql';
 import { usePriceRound } from '../utils/usePriceRound';
 import { withApollo } from '../utils/withApollo';
@@ -35,7 +35,7 @@ const Index = () => {
                         data!.items.items.map((p) =>
                             !p ? null : (
                                 <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
-                                    <VoteSection item={p} />
+                                    <RatingSection item={p} />
                                     <Box flex={1}>
                                         <Flex>
                                             <NextLink href="/item/[id]" as={`/item/${p.id}`}>
