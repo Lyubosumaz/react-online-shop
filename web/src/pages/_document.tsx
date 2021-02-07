@@ -1,6 +1,16 @@
+import { NextPageContext } from 'next';
+import { RenderPage } from 'next/dist/next-server/lib/utils';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 
+interface Context extends NextPageContext {
+    renderPage: RenderPage;
+}
 class MyDocument extends Document {
+    static async getInitialProps(ctx: Context) {
+        const initialProps = await Document.getInitialProps(ctx);
+        return { ...initialProps };
+    }
+
     render() {
         return (
             <Html>
