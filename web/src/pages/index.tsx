@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Heading, Link, Stack, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { EditDeleteItemButtons } from '../components/EditDeleteItemButtons';
+import { ItemActionButtons } from '../components/cards/item/ItemActionButtons';
 import { Layout } from '../components/Layout';
 import { VoteSection } from '../components/VoteSection';
 import { useItemsQuery } from '../generated/graphql';
@@ -31,7 +31,6 @@ const Index = () => {
                 <div>loading...</div>
             ) : (
                 <Stack spacing={8}>
-                    {/* {console.log(data?.items.items)} */}
                     {data?.items.items.length ? (
                         data!.items.items.map((p) =>
                             !p ? null : (
@@ -55,7 +54,7 @@ const Index = () => {
                                                 {p.descriptionSnippet}
                                             </Text>
                                             <Box ml="auto">
-                                                <EditDeleteItemButtons id={p.id} creatorId={p.creator.id} />
+                                                <ItemActionButtons id={p.id} creatorId={p.creator.id} />
                                             </Box>
                                         </Flex>
                                     </Box>

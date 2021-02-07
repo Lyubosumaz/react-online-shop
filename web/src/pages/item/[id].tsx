@@ -1,6 +1,6 @@
 import { Box, Heading } from '@chakra-ui/react';
 import React from 'react';
-import { EditDeleteItemButtons } from '../../components/EditDeleteItemButtons';
+import { ItemActionButtons } from '../../components/cards/item/ItemActionButtons';
 import { Layout } from '../../components/Layout';
 import { useGetItemFromUrl } from '../../utils/useGetItemFromUrl';
 import { withApollo } from '../../utils/withApollo';
@@ -32,7 +32,7 @@ const Item = ({}) => {
         <Layout>
             <Heading mb={4}>{data.item.title}</Heading>
             <Box mb={4}>{data.item.description}</Box>
-            <EditDeleteItemButtons id={data.item.id} creatorId={data.item.creator.id} />
+            <ItemActionButtons id={data.item.id} creatorId={data.item.creator.id} />
         </Layout>
     );
 };
