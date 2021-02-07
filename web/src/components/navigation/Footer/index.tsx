@@ -1,30 +1,24 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, List, ListIcon, ListItem, Text } from '@chakra-ui/react';
 import React from 'react';
+import { FaMapMarkerAlt, FaMobileAlt, FaPhoneAlt } from 'react-icons/fa';
 
 const Footer: React.FC<{}> = ({}) => {
     return (
-        <footer
-        // className={styles[`site-footer`]}
-        >
-            <ul
-            // className={styles[`footer-shop-details`]}
-            >
-                <li
-                // className={styles.info}
-                >
+        <footer>
+            <List display="flex" justifyContent="space-around">
+                <ListItem>
+                    <ListIcon as={FaMapMarkerAlt} boxSize={6} color="green.500" />
                     Lorem lpusm hosting web
-                </li>
-                <li
-                // className={styles.info}
-                >
+                </ListItem>
+                <ListItem>
+                    <ListIcon as={FaMobileAlt} boxSize={6} color="green.500" />
                     Call: +7586656566
-                </li>
-                <li
-                // className={styles.info}
-                >
+                </ListItem>
+                <ListItem>
+                    <ListIcon as={FaPhoneAlt} boxSize={6} color="green.500" />
                     demo@mail.com
-                </li>
-            </ul>
+                </ListItem>
+            </List>
 
             <ul
             // className={styles[`footer-services`]}
