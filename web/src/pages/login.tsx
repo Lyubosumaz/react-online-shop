@@ -4,7 +4,7 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { InputField } from '../components/InputField';
-import { Wrapper } from '../components/Wrapper';
+import MainWrapper from '../components/layouts/MainWrapper';
 import { MeDocument, MeQuery, useLoginMutation } from '../generated/graphql';
 import { toErrorMap } from '../utils/toErrorMap';
 import { withApollo } from '../utils/withApollo';
@@ -13,7 +13,7 @@ const Login: React.FC<{}> = ({}) => {
     const router = useRouter();
     const [login] = useLoginMutation();
     return (
-        <Wrapper variant="small">
+        <MainWrapper variant="small">
             <Formik
                 initialValues={{ usernameOrEmail: '', password: '' }}
                 onSubmit={async (values, { setErrors }) => {
@@ -59,7 +59,7 @@ const Login: React.FC<{}> = ({}) => {
                     </Form>
                 )}
             </Formik>
-        </Wrapper>
+        </MainWrapper>
     );
 };
 

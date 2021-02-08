@@ -5,7 +5,7 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { InputField } from '../../components/InputField';
-import { Wrapper } from '../../components/Wrapper';
+import MainWrapper from '../../components/layouts/MainWrapper';
 import { MeDocument, MeQuery, useChangePasswordMutation } from '../../generated/graphql';
 import { toErrorMap } from '../../utils/toErrorMap';
 import { withApollo } from '../../utils/withApollo';
@@ -15,7 +15,7 @@ const ChangePassword: NextPage = () => {
     const [changePassword] = useChangePasswordMutation();
     const [tokenError, setTokenError] = useState('');
     return (
-        <Wrapper variant="small">
+        <MainWrapper variant="small">
             <Formik
                 initialValues={{ newPassword: '' }}
                 onSubmit={async (values, { setErrors }) => {
@@ -65,7 +65,7 @@ const ChangePassword: NextPage = () => {
                     </Form>
                 )}
             </Formik>
-        </Wrapper>
+        </MainWrapper>
     );
 };
 

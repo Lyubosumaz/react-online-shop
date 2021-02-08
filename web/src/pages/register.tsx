@@ -3,7 +3,7 @@ import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { InputField } from '../components/InputField';
-import { Wrapper } from '../components/Wrapper';
+import MainWrapper from '../components/layouts/MainWrapper';
 import { MeDocument, MeQuery, useRegisterMutation } from '../generated/graphql';
 import { toErrorMap } from '../utils/toErrorMap';
 import { withApollo } from '../utils/withApollo';
@@ -14,7 +14,7 @@ const Register: React.FC<registerProps> = ({}) => {
     const router = useRouter();
     const [register] = useRegisterMutation();
     return (
-        <Wrapper variant="small">
+        <MainWrapper variant="small">
             <Formik
                 initialValues={{ email: '', username: '', password: '' }}
                 onSubmit={async (values, { setErrors }) => {
@@ -53,7 +53,7 @@ const Register: React.FC<registerProps> = ({}) => {
                     </Form>
                 )}
             </Formik>
-        </Wrapper>
+        </MainWrapper>
     );
 };
 
