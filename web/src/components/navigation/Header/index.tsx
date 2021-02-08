@@ -8,49 +8,9 @@ import { isServer } from '../../../utils/isServer';
 const Header: React.FC<{}> = ({}) => {
     const [logout, { loading: logoutFetching }] = useLogoutMutation();
     const apolloClient = useApolloClient();
-    const { data, loading } = useMeQuery({
+    const { data } = useMeQuery({
         skip: isServer(),
     });
-
-    let body = null;
-
-    // data is loading
-    if (loading) {
-        // user not logged in
-    } else if (!data?.me) {
-        body = (
-            <>
-                <NextLink href="/login">
-                    <Link mr={2}>login</Link>
-                </NextLink>
-                <NextLink href="/register">
-                    <Link>register</Link>
-                </NextLink>
-            </>
-        );
-        // user is logged in
-    } else {
-        body = (
-            <Flex align="center">
-                <NextLink href="/create-item">
-                    <Button as={Link} mr={4}>
-                        create item
-                    </Button>
-                </NextLink>
-                <Box mr={2}>{data.me.username}</Box>
-                <Button
-                    onClick={async () => {
-                        await logout();
-                        await apolloClient.resetStore();
-                    }}
-                    isLoading={logoutFetching}
-                    variant="link"
-                >
-                    logout
-                </Button>
-            </Flex>
-        );
-    }
 
     return (
         <Flex zIndex={1} position="sticky" top={0} bg="tan" p={4}>
@@ -60,7 +20,37 @@ const Header: React.FC<{}> = ({}) => {
                         <Heading>LiReddit</Heading>
                     </Link>
                 </NextLink>
-                <Box ml={'auto'}>{body}</Box>
+                <Box ml={'auto'}>
+                    {!data?.me ? (
+                        <>
+                            <NextLink href="/login">
+                                <Link mr={2}>login</Link>
+                            </NextLink>
+                            <NextLink href="/register">
+                                <Link>register</Link>
+                            </NextLink>
+                        </>
+                    ) : (
+                        <Flex align="center">
+                            <NextLink href="/create-item">
+                                <Button as={Link} mr={4}>
+                                    create item
+                                </Button>
+                            </NextLink>
+                            <Box mr={2}>{data.me.username}</Box>
+                            <Button
+                                onClick={async () => {
+                                    await logout();
+                                    await apolloClient.resetStore();
+                                }}
+                                isLoading={logoutFetching}
+                                variant="link"
+                            >
+                                logout
+                            </Button>
+                        </Flex>
+                    )}
+                </Box>
             </Flex>
         </Flex>
     );
