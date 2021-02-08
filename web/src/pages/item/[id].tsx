@@ -1,7 +1,7 @@
 import { Box, Heading } from '@chakra-ui/react';
 import React from 'react';
 import { ItemActionButtons } from '../../components/cards/item/ItemActionButtons';
-import { Layout } from '../../components/Layout';
+import MainLayout from '../../components/layouts/MainLayout';
 import { useGetItemFromUrl } from '../../utils/useGetItemFromUrl';
 import { withApollo } from '../../utils/withApollo';
 
@@ -29,11 +29,11 @@ const Item = ({}) => {
     }
 
     return (
-        <Layout>
+        <MainLayout>
             <Heading mb={4}>{data.item.title}</Heading>
             <Box mb={4}>{data.item.description}</Box>
             <ItemActionButtons id={data.item.id} creatorId={data.item.creator.id} />
-        </Layout>
+        </MainLayout>
     );
 };
 

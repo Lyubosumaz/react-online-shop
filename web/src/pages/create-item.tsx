@@ -3,7 +3,7 @@ import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { InputField } from '../components/InputField';
-import { Layout } from '../components/Layout';
+import MainLayout from '../components/layouts/MainLayout';
 import { useCreateItemMutation } from '../generated/graphql';
 import { useIsAuth } from '../utils/useIsAuth';
 import { withApollo } from '../utils/withApollo';
@@ -13,7 +13,7 @@ const CreateItem: React.FC<{}> = ({}) => {
     useIsAuth();
     const [createItem] = useCreateItemMutation();
     return (
-        <Layout variant="small">
+        <MainLayout variant="small">
             <Formik
                 initialValues={{ title: '', description: '' }}
                 onSubmit={async (values) => {
@@ -40,7 +40,7 @@ const CreateItem: React.FC<{}> = ({}) => {
                     </Form>
                 )}
             </Formik>
-        </Layout>
+        </MainLayout>
     );
 };
 

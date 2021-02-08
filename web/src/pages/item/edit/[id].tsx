@@ -3,7 +3,7 @@ import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { InputField } from '../../../components/InputField';
-import { Layout } from '../../../components/Layout';
+import MainLayout from '../../../components/layouts/MainLayout';
 import { useItemQuery, useUpdateItemMutation } from '../../../generated/graphql';
 import { useGetIntId } from '../../../utils/useGetIntId';
 import { withApollo } from '../../../utils/withApollo';
@@ -20,22 +20,22 @@ const EditItem = ({}) => {
     const [updateItem] = useUpdateItemMutation();
     if (loading) {
         return (
-            <Layout>
+            <MainLayout>
                 <div>loading...</div>
-            </Layout>
+            </MainLayout>
         );
     }
 
     if (!data?.item) {
         return (
-            <Layout>
+            <MainLayout>
                 <Box>could not find item</Box>
-            </Layout>
+            </MainLayout>
         );
     }
 
     return (
-        <Layout variant="small">
+        <MainLayout variant="small">
             <Formik
                 initialValues={{ title: data.item.title, description: data.item.description }}
                 onSubmit={async (values) => {
@@ -55,7 +55,7 @@ const EditItem = ({}) => {
                     </Form>
                 )}
             </Formik>
-        </Layout>
+        </MainLayout>
     );
 };
 

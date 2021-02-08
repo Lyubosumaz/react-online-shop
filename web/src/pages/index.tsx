@@ -2,7 +2,7 @@ import { Box, Button, Flex, Heading, Link, Stack, Text } from '@chakra-ui/react'
 import NextLink from 'next/link';
 import { ItemActionButtons } from '../components/cards/item/ItemActionButtons';
 import { RatingSection } from '../components/cards/item/RatingSection';
-import { Layout } from '../components/Layout';
+import MainLayout from '../components/layouts/MainLayout';
 import { useItemsQuery } from '../generated/graphql';
 import { usePriceRound } from '../utils/usePriceRound';
 import { withApollo } from '../utils/withApollo';
@@ -26,7 +26,7 @@ const Index = () => {
     }
 
     return (
-        <Layout>
+        <MainLayout>
             {!data && loading ? (
                 <div>loading...</div>
             ) : (
@@ -112,7 +112,7 @@ const Index = () => {
                     </Button>
                 </Flex>
             ) : null}
-        </Layout>
+        </MainLayout>
     );
 };
 
