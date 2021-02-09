@@ -3,13 +3,17 @@ import NextLink from 'next/link';
 import React from 'react';
 import { FaFacebookF, FaGoogle, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 
+const SectionHeading: React.FC<{}> = ({ children, ...props }) => (
+    <Heading as="h4" pb={8} fontSize="1.5rem" textTransform="uppercase" whiteSpace="nowrap" {...props}>
+        {children}
+    </Heading>
+);
+
 const UtilityLinks: React.FC<{}> = ({}) => {
     return (
         <List pb="4rem" display="flex" justifyContent="space-between">
             <ListItem maxWidth="9.5rem">
-                <Heading as="h4" pb={8} fontSize="1.5rem" textTransform="uppercase" whiteSpace="nowrap">
-                    Useful Link
-                </Heading>
+                <SectionHeading>Useful Link</SectionHeading>
 
                 <List spacing={2} opacity="0.5">
                     {/* TODO links paths need adding */}
