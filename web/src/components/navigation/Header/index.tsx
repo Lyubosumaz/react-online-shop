@@ -9,8 +9,7 @@ import { isServer } from '../../../utils/isServer';
 
 const FooterNavItem: React.FC<{ href: string }> = ({ children, href, ...rest }) => (
     <NextLink href={href}>
-        {/* <Button as={Link} mr={4} textTransform="uppercase" backgroundColor="#7c2c0c" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c' }}> */}
-        <Button as={Link} mr={4} textTransform="uppercase" {...rest}>
+        <Button as={Link} mr={4} textTransform="uppercase" backgroundColor="#7c2c0c" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c' }}>
             {children}
         </Button>
     </NextLink>
@@ -45,6 +44,7 @@ const Header: React.FC<{}> = ({}) => {
                             <Flex align="center">
                                 <FooterNavItem href="/create-item">Create Item</FooterNavItem>
                                 <FooterNavItem href="/forgotten-password">Recover Password</FooterNavItem>
+                                {/* TODO adding profile page */}
                                 <Flex mr={4} alignItems="center">
                                     <Text mr={2}>Welcome:</Text>
                                     <NextLink href="/">
@@ -53,6 +53,7 @@ const Header: React.FC<{}> = ({}) => {
                                         </Button>
                                     </NextLink>
                                 </Flex>
+                                {/* TODO adding cart page */}
                                 <IconButton mr={4} aria-label="Search database" icon={<FaShoppingCart />} backgroundColor="#7c2c0c" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c' }} />
                                 <Button
                                     height="2.5rem"
