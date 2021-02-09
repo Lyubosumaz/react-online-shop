@@ -10,9 +10,9 @@ const Item = ({}) => {
 
     if (loading) {
         return (
-            <Layout>
+            <MainLayout>
                 <div>loading...</div>
-            </Layout>
+            </MainLayout>
         );
     }
 
@@ -22,9 +22,9 @@ const Item = ({}) => {
 
     if (!data?.item) {
         return (
-            <Layout>
+            <MainLayout>
                 <Box>could not find item</Box>
-            </Layout>
+            </MainLayout>
         );
     }
 

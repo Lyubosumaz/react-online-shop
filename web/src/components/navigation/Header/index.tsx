@@ -14,7 +14,7 @@ const Header: React.FC<{}> = ({}) => {
 
     return (
         <Flex zIndex={1} position="sticky" top={0} bg="tan" p={4}>
-            <Flex flex={1} m="auto" align="center" maxW={800}>
+            <Flex flex={1} m="auto" align="center" maxW={800} backgroundColor="#7c2c0c">
                 <NextLink href="/">
                     <Link>
                         <Heading>LiReddit</Heading>
@@ -24,7 +24,9 @@ const Header: React.FC<{}> = ({}) => {
                     {!data?.me ? (
                         <>
                             <NextLink href="/login">
-                                <Link mr={2}>login</Link>
+                                <Button as={Link} mr={4}>
+                                    <Link mr={2}>login</Link>
+                                </Button>
                             </NextLink>
                             <NextLink href="/register">
                                 <Link>register</Link>
@@ -33,11 +35,11 @@ const Header: React.FC<{}> = ({}) => {
                     ) : (
                         <Flex align="center">
                             <NextLink href="/create-item">
-                                <Button as={Link} mr={4}>
+                                <Button as={Link} mr={4} textTransform="uppercase" backgroundColor="#7c2c0c" color="#efe4d1" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c' }}>
                                     create item
                                 </Button>
                             </NextLink>
-                            <Box mr={2}>{data.me.username}</Box>
+                            <Box mr={2}>Welcome {data.me.username}</Box>
                             <Button
                                 onClick={async () => {
                                     await logout();
