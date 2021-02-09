@@ -5,8 +5,8 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { InputField } from '../../components/InputField';
-import MainWrapper from '../../components/layouts/MainWrapper';
 import { MeDocument, MeQuery, useChangePasswordMutation } from '../../generated/graphql';
+import MainWrapper from '../../layouts/MainWrapper';
 import { toErrorMap } from '../../utils/toErrorMap';
 import { withApollo } from '../../utils/withApollo';
 
@@ -54,7 +54,7 @@ const ChangePassword: NextPage = () => {
                                 <Box mr={2} style={{ color: 'red' }}>
                                     {tokenError}
                                 </Box>
-                                <NextLink href="/forgot-password">
+                                <NextLink href="/forgotten-password">
                                     <Link>click here to get a new one</Link>
                                 </NextLink>
                             </Flex>

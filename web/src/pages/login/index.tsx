@@ -3,11 +3,11 @@ import { Form, Formik } from 'formik';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { InputField } from '../components/InputField';
-import MainWrapper from '../components/layouts/MainWrapper';
-import { MeDocument, MeQuery, useLoginMutation } from '../generated/graphql';
-import { toErrorMap } from '../utils/toErrorMap';
-import { withApollo } from '../utils/withApollo';
+import { InputField } from '../../components/InputField';
+import { MeDocument, MeQuery, useLoginMutation } from '../../generated/graphql';
+import MainWrapper from '../../layouts/MainWrapper';
+import { toErrorMap } from '../../utils/toErrorMap';
+import { withApollo } from '../../utils/withApollo';
 
 const Login: React.FC<{}> = ({}) => {
     const router = useRouter();
@@ -49,7 +49,7 @@ const Login: React.FC<{}> = ({}) => {
                             <InputField name="password" placeholder="password" label="Password" type="password" />
                         </Box>
                         <Flex mt={2}>
-                            <NextLink href="/forgot-password">
+                            <NextLink href="/forgotten-password">
                                 <Link ml="auto">forgot password?</Link>
                             </NextLink>
                         </Flex>

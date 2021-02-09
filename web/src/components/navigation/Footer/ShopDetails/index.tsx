@@ -1,22 +1,21 @@
 import { List, ListIcon, ListItem } from '@chakra-ui/react';
 import React from 'react';
+import { IconType } from 'react-icons';
 import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
+
+const SiteInformationItem: React.FC<{ icon: IconType }> = ({ children, icon }) => (
+    <ListItem>
+        <ListIcon as={icon} boxSize={6} mr={3} />
+        {children}
+    </ListItem>
+);
 
 const ShopDetails: React.FC<{}> = ({}) => {
     return (
         <List padding="8rem 0 4rem 0" display="flex" justifyContent="space-around">
-            <ListItem>
-                <ListIcon as={FaMapMarkerAlt} boxSize={6} mr={3} />
-                Lorem lpusm hosting web
-            </ListItem>
-            <ListItem>
-                <ListIcon as={FaPhoneAlt} boxSize={6} mr={3} />
-                Call: +7586656566
-            </ListItem>
-            <ListItem>
-                <ListIcon as={FaEnvelope} boxSize={6} mr={3} />
-                demo@mail.com
-            </ListItem>
+            <SiteInformationItem icon={FaMapMarkerAlt}>Lorem lpusm hosting web</SiteInformationItem>
+            <SiteInformationItem icon={FaPhoneAlt}>Call: +7586656566</SiteInformationItem>
+            <SiteInformationItem icon={FaEnvelope}>demo@mail.com</SiteInformationItem>
         </List>
     );
 };

@@ -3,8 +3,8 @@ import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { InputField } from '../../../components/InputField';
-import MainLayout from '../../../components/layouts/MainLayout';
 import { useItemQuery, useUpdateItemMutation } from '../../../generated/graphql';
+import MainLayout from '../../../layouts/MainLayout';
 import { useGetIntId } from '../../../utils/useGetIntId';
 import { withApollo } from '../../../utils/withApollo';
 

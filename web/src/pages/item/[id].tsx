@@ -1,7 +1,7 @@
 import { Box, Heading } from '@chakra-ui/react';
 import React from 'react';
 import { ItemActionButtons } from '../../components/cards/item/ItemActionButtons';
-import MainLayout from '../../components/layouts/MainLayout';
+import MainLayout from '../../layouts/MainLayout';
 import { useGetItemFromUrl } from '../../utils/useGetItemFromUrl';
 import { withApollo } from '../../utils/withApollo';
 

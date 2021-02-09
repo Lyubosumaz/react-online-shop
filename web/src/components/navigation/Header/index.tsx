@@ -13,48 +13,50 @@ const Header: React.FC<{}> = ({}) => {
     });
 
     return (
-        <Flex zIndex={1} position="sticky" top={0} bg="tan" p={4}>
-            <Flex flex={1} m="auto" align="center" maxW={800} backgroundColor="#7c2c0c">
-                <NextLink href="/">
-                    <Link>
-                        <Heading>LiReddit</Heading>
-                    </Link>
-                </NextLink>
-                <Box ml={'auto'}>
-                    {!data?.me ? (
-                        <>
-                            <NextLink href="/login">
-                                <Button as={Link} mr={4}>
-                                    <Link mr={2}>login</Link>
+        <header style={{ backgroundColor: '#7c2c0c', color: '#fcfcfc' }}>
+            <Flex zIndex={1} position="sticky" top={0} bg="tan" p={4}>
+                <Flex flex={1} m="auto" align="center" maxW={800} backgroundColor="#7c2c0c">
+                    <NextLink href="/">
+                        <Link>
+                            <Heading>LiReddit</Heading>
+                        </Link>
+                    </NextLink>
+                    <Box ml={'auto'}>
+                        {!data?.me ? (
+                            <>
+                                <NextLink href="/login">
+                                    <Button as={Link} mr={4}>
+                                        <Link mr={2}>login</Link>
+                                    </Button>
+                                </NextLink>
+                                <NextLink href="/register">
+                                    <Link>register</Link>
+                                </NextLink>
+                            </>
+                        ) : (
+                            <Flex align="center">
+                                <NextLink href="/create-item">
+                                    <Button as={Link} mr={4} textTransform="uppercase" backgroundColor="#7c2c0c" color="#efe4d1" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c' }}>
+                                        create item
+                                    </Button>
+                                </NextLink>
+                                <Box mr={2}>Welcome {data.me.username}</Box>
+                                <Button
+                                    onClick={async () => {
+                                        await logout();
+                                        await apolloClient.resetStore();
+                                    }}
+                                    isLoading={logoutFetching}
+                                    variant="link"
+                                >
+                                    logout
                                 </Button>
-                            </NextLink>
-                            <NextLink href="/register">
-                                <Link>register</Link>
-                            </NextLink>
-                        </>
-                    ) : (
-                        <Flex align="center">
-                            <NextLink href="/create-item">
-                                <Button as={Link} mr={4} textTransform="uppercase" backgroundColor="#7c2c0c" color="#efe4d1" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c' }}>
-                                    create item
-                                </Button>
-                            </NextLink>
-                            <Box mr={2}>Welcome {data.me.username}</Box>
-                            <Button
-                                onClick={async () => {
-                                    await logout();
-                                    await apolloClient.resetStore();
-                                }}
-                                isLoading={logoutFetching}
-                                variant="link"
-                            >
-                                logout
-                            </Button>
-                        </Flex>
-                    )}
-                </Box>
+                            </Flex>
+                        )}
+                    </Box>
+                </Flex>
             </Flex>
-        </Flex>
+        </header>
     );
 };
 
