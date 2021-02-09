@@ -7,7 +7,7 @@ import MainLayout from '../../layouts/MainLayout';
 import { usePriceRound } from '../../utils/usePriceRound';
 import { withApollo } from '../../utils/withApollo';
 
-const Index = () => {
+const Home = () => {
     const { data, error, loading, fetchMore, variables } = useItemsQuery({
         variables: {
             limit: 15,
@@ -116,4 +116,4 @@ const Index = () => {
     );
 };
 
-export default withApollo({ ssr: true })(Index);
+export default withApollo({ ssr: true })(Home);
