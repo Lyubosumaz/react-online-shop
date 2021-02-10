@@ -44,17 +44,19 @@ const Header: React.FC<{}> = ({}) => {
                             <Flex align="center">
                                 <FooterNavItem href="/create-item">Create Item</FooterNavItem>
                                 <FooterNavItem href="/forgotten-password">Recover Password</FooterNavItem>
-                                {/* TODO adding profile page */}
                                 <Flex mr={4} alignItems="center">
-                                    <Text mr={2}>Welcome:</Text>
-                                    <NextLink href="/">
+                                    <Text mr={2} fontWeight="bold">
+                                        Welcome:
+                                    </Text>
+                                    <NextLink href="/profile">
                                         <Button as={Link} p="0 0.75em" textTransform="uppercase" backgroundColor="#7c2c0c" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c' }}>
                                             {data.me.username}
                                         </Button>
                                     </NextLink>
                                 </Flex>
-                                {/* TODO adding cart page */}
-                                <IconButton mr={4} aria-label="Search database" icon={<FaShoppingCart />} backgroundColor="#7c2c0c" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c' }} />
+                                <NextLink href="/cart">
+                                    <IconButton mr={4} aria-label="Cart" icon={<FaShoppingCart />} backgroundColor="#7c2c0c" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c' }} />
+                                </NextLink>
                                 <Button
                                     height="2.5rem"
                                     padding="0 1rem"
