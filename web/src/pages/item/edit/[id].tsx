@@ -2,7 +2,7 @@ import { Box, Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { InputField } from '../../../components/InputField';
+import { InputField } from '../../../components/form/InputField';
 import { useItemQuery, useUpdateItemMutation } from '../../../generated/graphql';
 import MainLayout from '../../../layouts/MainLayout';
 import { useGetIntId } from '../../../utils/useGetIntId';
@@ -47,7 +47,7 @@ const EditItem = ({}) => {
                     <Form>
                         <InputField name="title" placeholder="title" label="Title" />
                         <Box mt={4}>
-                            <InputField textarea name="description" placeholder="description..." label="Body" />
+                            <InputField name="description" placeholder="description..." label="Body" isTextarea />
                         </Box>
                         <Button mt={4} type="submit" isLoading={isSubmitting} colorScheme="teal">
                             update item
