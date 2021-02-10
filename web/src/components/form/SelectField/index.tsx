@@ -21,7 +21,7 @@ const SelectField: React.FC<SelectFieldProps> = ({ options, label, placeholder, 
     };
 
     return (
-        <Box>
+        <Box mb={8}>
             <FormLabel>{label}</FormLabel>
             {isPopulated ? (
                 <Select icon={<FaCaretDown />} onChange={handleChange} placeholder={placeholder}>

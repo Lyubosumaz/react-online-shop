@@ -10,7 +10,7 @@ const ForgotPassword: React.FC<{}> = ({}) => {
     const [complete, setComplete] = useState(false);
     const [forgotPassword] = useForgotPasswordMutation();
     return (
-        <MainWrapper variant="small">
+        <MainWrapper size="small" variant="form">
             <Formik
                 initialValues={{ email: '' }}
                 onSubmit={async (values) => {
