@@ -1,5 +1,5 @@
 import { useApolloClient } from '@apollo/client';
-import { Box, Button, Flex, Icon, IconButton, Link, Text } from '@chakra-ui/react';
+import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Box, Button, Flex, Icon, IconButton, Link, Text, useDisclosure } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import { FaShoppingCart, FaStore } from 'react-icons/fa';
@@ -21,6 +21,8 @@ const Header: React.FC<{}> = ({}) => {
     const { data } = useMeQuery({
         skip: isServer(),
     });
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const cancelRef = React.useRef<HTMLButtonElement>(null);
 
     return (
         <header style={{ padding: '0.5rem 0', position: 'static', top: 0, backgroundColor: '#7c2c0c', color: '#efe4d1', borderTop: '1rem solid #efe4d1', borderBottom: '1rem solid #efe4d1', zIndex: 1 }}>
@@ -57,22 +59,33 @@ const Header: React.FC<{}> = ({}) => {
                                 <NextLink href="/cart">
                                     <IconButton mr={4} aria-label="Cart" icon={<FaShoppingCart />} backgroundColor="#7c2c0c" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c' }} />
                                 </NextLink>
-                                <Button
-                                    height="2.5rem"
-                                    padding="0 1rem"
-                                    textTransform="uppercase"
-                                    backgroundColor="#7c2c0c"
-                                    color="#efe4d1"
-                                    _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c', textDecoration: 'underline' }}
-                                    onClick={async () => {
-                                        await logout();
-                                        await apolloClient.resetStore();
-                                    }}
-                                    isLoading={logoutFetching}
-                                    variant="link"
-                                >
+                                <Button height="2.5rem" padding="0 1rem" textTransform="uppercase" backgroundColor="#7c2c0c" color="#efe4d1" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c', textDecoration: 'underline' }} onClick={onOpen} isLoading={logoutFetching} variant="link">
                                     Logout
                                 </Button>
+                                <AlertDialog motionPreset="slideInBottom" leastDestructiveRef={cancelRef} onClose={onClose} isOpen={isOpen} isCentered>
+                                    <AlertDialogOverlay />
+
+                                    <AlertDialogContent>
+                                        <AlertDialogHeader>Want to logout?</AlertDialogHeader>
+                                        <AlertDialogCloseButton />
+                                        <AlertDialogBody>Are you sure you want to logout?</AlertDialogBody>
+                                        <AlertDialogFooter>
+                                            <Button ref={cancelRef} onClick={onClose}>
+                                                No
+                                            </Button>
+                                            <Button
+                                                colorScheme="red"
+                                                ml={3}
+                                                onClick={async () => {
+                                                    await logout();
+                                                    await apolloClient.resetStore();
+                                                }}
+                                            >
+                                                Yes
+                                            </Button>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                </AlertDialog>
                             </Flex>
                         )}
                     </Box>
