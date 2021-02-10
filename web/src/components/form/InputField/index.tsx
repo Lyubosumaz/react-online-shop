@@ -8,8 +8,8 @@ type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
     isTextarea?: boolean;
 };
 
-export const InputField: React.FC<InputFieldProps> = ({ label, isTextarea: textarea, ...props }) => {
-    let InputOrTextarea = (textarea ? Textarea : Input) as ComponentWithAs<React.ElementType<any>>;
+export const InputField: React.FC<InputFieldProps> = ({ label, isTextarea, ...props }) => {
+    let InputOrTextarea = (isTextarea ? Textarea : Input) as ComponentWithAs<React.ElementType<any>>;
     const [field, { error }] = useField(props);
 
     return (
