@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import * as Yup from 'yup';
 import InputField from '../../components/form/InputField';
-import NumberField from '../../components/form/NumberField';
 import SelectField from '../../components/form/SelectField';
 import { useCreateItemMutation } from '../../generated/graphql';
 import MainLayout from '../../layouts/MainLayout';
@@ -16,10 +15,10 @@ const CreateItem: React.FC<{}> = ({}) => {
     useIsAuth();
     const [createItem] = useCreateItemMutation();
 
-    const [writtenPrice, setWrittenPrice] = React.useState('');
-    const _selectPrice = (category: string) => {
-        setWrittenPrice(category);
-    };
+    // const [writtenPrice, setWrittenPrice] = React.useState('');
+    // const _selectPrice = (category: string) => {
+    //     setWrittenPrice(category);
+    // };
 
     const categoryList = [
         { value: 'all', text: 'All' },
@@ -46,15 +45,15 @@ const CreateItem: React.FC<{}> = ({}) => {
     return (
         <MainLayout size="small" variant="form">
             <Formik
-                initialValues={{ category: '', title: '', description: '' }}
+                initialValues={{ category: '', title: '', description: '', price: '' }}
                 validationSchema={Yup.object({
-                    category: Yup.string().required('required'),
-                    title: Yup.string().max(15, 'Must be 15 characters or less').required('required'),
-                    description: Yup.string().max(255, 'Must be 255 characters or less').required('required'),
+                    category: Yup.string().required('is required'),
+                    title: Yup.string().max(15, 'must be 15 characters or less').required('is required'),
+                    description: Yup.string().max(255, 'must be 255 characters or less').required('is required'),
+                    price: Yup.number().typeError('needs a correct number').min(0.05, 'must be $0.05 or greater').required('is required'),
                 })}
                 onSubmit={async (values: any) => {
-                    const witchCallbackFields = { ...values, price: writtenPrice };
-                    console.log('values: ', values, 'values++: ', witchCallbackFields);
+                    console.log('values: ', values);
                     // const { errors } = await createItem({
                     //     variables: { input: witchSelectFields },
                     //     update: (cache) => {
@@ -70,7 +69,7 @@ const CreateItem: React.FC<{}> = ({}) => {
                     <Form>
                         <SelectField name="category" placeholder="Select category" label="Category" options={categoryList} />
                         <InputField name="title" placeholder="title" label="Title" />
-                        <NumberField name="price" label="Price" callback={_selectPrice} />
+                        <InputField name="price" placeholder="price" label="Price" />
                         <InputField name="description" placeholder="item description..." label="Description" isTextarea />
                         <Button type="submit" isLoading={isSubmitting} colorScheme="teal">
                             create item
