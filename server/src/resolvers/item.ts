@@ -211,17 +211,22 @@ export class ItemResolver {
     async updateItem(
         @Arg('id', () => Int)
         id: number,
+        @Arg('category')
+        category: string,
         @Arg('title')
         title: string,
         @Arg('description')
         description: string,
+        @Arg('price')
+        price: string,
         @Ctx()
         { req }: MyContext
     ): Promise<Item | null> {
+        console.log(id, category, title, description, price);
         const result = await getConnection()
             .createQueryBuilder()
             .update(Item)
-            .set({ title, description })
+            .set({ category, title, description, price: Number(price) })
             .where('id = :id and "creatorId" = :creatorId', {
                 id,
                 creatorId: req.session.userId,

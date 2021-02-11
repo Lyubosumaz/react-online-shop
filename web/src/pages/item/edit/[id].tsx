@@ -2,7 +2,9 @@ import { Box, Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { categoryList } from '../../../category-list.json';
 import InputField from '../../../components/form/InputField';
+import SelectField from '../../../components/form/SelectField';
 import { useItemQuery, useUpdateItemMutation } from '../../../generated/graphql';
 import MainLayout from '../../../layouts/MainLayout';
 import { useGetIntId } from '../../../utils/useGetIntId';
@@ -18,7 +20,6 @@ const EditItem = ({}) => {
         },
     });
 
-    console.log(data);
     const [updateItem] = useUpdateItemMutation();
     if (loading) {
         return (
@@ -39,7 +40,12 @@ const EditItem = ({}) => {
     return (
         <MainLayout size="small" variant="form">
             <Formik
-                initialValues={{ title: data.item.title, description: data.item.description }}
+                initialValues={{
+                    category: data.item.category,
+                    title: data.item.title,
+                    description: data.item.description,
+                    price: data.item.price.toString(),
+                }}
                 onSubmit={async (values) => {
                     await updateItem({ variables: { id: intId, ...values } });
                     router.back();
@@ -47,10 +53,10 @@ const EditItem = ({}) => {
             >
                 {({ isSubmitting }) => (
                     <Form>
+                        <SelectField name="category" placeholder="Select category" label="Category" options={categoryList} />
                         <InputField name="title" placeholder="title" label="Title" />
-                        <Box mt={4}>
-                            <InputField name="description" placeholder="description..." label="Body" isTextarea />
-                        </Box>
+                        <InputField name="price" placeholder="price" label="Price" />
+                        <InputField name="description" placeholder="item description..." label="Description" isTextarea />
                         <Button mt={4} type="submit" isLoading={isSubmitting} colorScheme="teal">
                             update item
                         </Button>

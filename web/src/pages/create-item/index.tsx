@@ -2,6 +2,7 @@ import { Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { categoryList } from '../../category-list.json'; // TODO create huge categories and sub categories
 import InputField from '../../components/form/InputField';
 import SelectField from '../../components/form/SelectField';
 import { useCreateItemMutation } from '../../generated/graphql';
@@ -22,33 +23,15 @@ const CreateItem: React.FC<{}> = ({}) => {
     useIsAuth();
     const [createItem] = useCreateItemMutation();
 
-    // TODO create huge categories and sub categories
-    const categoryList = [
-        { value: 'all', text: 'All' },
-        { value: 'gaming', text: 'Gaming' },
-        { value: 'bookstore', text: 'Bookstore' },
-        { value: 'music', text: 'Music' },
-        { value: 'movies', text: 'Movies' },
-        { value: 'merchandise', text: 'Merchandise' },
-        { value: 'laptops', text: 'Laptops' },
-        { value: 'computers', text: 'Computers' },
-        { value: 'audio', text: 'Audio' },
-        { value: 'hi-fi', text: 'Hi-Fi' },
-        { value: 'mobile_devices', text: 'Mobile devices' },
-        { value: 'tv', text: 'TV' },
-        { value: 'monitors', text: 'Monitors' },
-        { value: 'video', text: 'Video' },
-        { value: 'toys', text: 'Toys' },
-        { value: 'mother', text: 'Mother' },
-        { value: 'baby', text: 'Baby' },
-        { value: 'puzzles', text: 'Puzzles' },
-        { value: 'games', text: 'Games' },
-    ];
-
     return (
         <MainLayout size="small" variant="form">
             <Formik
-                initialValues={{ category: '', title: '', description: '', price: '' }}
+                initialValues={{
+                    category: '',
+                    title: '',
+                    description: '',
+                    price: '',
+                }}
                 validationSchema={createValidations}
                 onSubmit={async (values: CreateItemFields) => {
                     const { errors } = await createItem({

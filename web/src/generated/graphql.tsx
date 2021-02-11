@@ -89,8 +89,10 @@ export type MutationCreateItemArgs = {
 
 
 export type MutationUpdateItemArgs = {
+  price: Scalars['String'];
   description: Scalars['String'];
   title: Scalars['String'];
+  category: Scalars['String'];
   id: Scalars['Int'];
 };
 
@@ -260,8 +262,10 @@ export type RegisterMutation = (
 
 export type UpdateItemMutationVariables = Exact<{
   id: Scalars['Int'];
+  category: Scalars['String'];
   title: Scalars['String'];
   description: Scalars['String'];
+  price: Scalars['String'];
 }>;
 
 
@@ -269,7 +273,7 @@ export type UpdateItemMutation = (
   { __typename?: 'Mutation' }
   & { updateItem?: Maybe<(
     { __typename?: 'Item' }
-    & Pick<Item, 'id' | 'title' | 'description' | 'descriptionSnippet'>
+    & Pick<Item, 'id' | 'category' | 'title' | 'description' | 'descriptionSnippet' | 'price'>
   )> }
 );
 
@@ -598,12 +602,20 @@ export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
 export const UpdateItemDocument = gql`
-    mutation UpdateItem($id: Int!, $title: String!, $description: String!) {
-  updateItem(id: $id, title: $title, description: $description) {
+    mutation UpdateItem($id: Int!, $category: String!, $title: String!, $description: String!, $price: String!) {
+  updateItem(
+    id: $id
+    category: $category
+    title: $title
+    description: $description
+    price: $price
+  ) {
     id
+    category
     title
     description
     descriptionSnippet
+    price
   }
 }
     `;
@@ -623,8 +635,10 @@ export type UpdateItemMutationFn = Apollo.MutationFunction<UpdateItemMutation, U
  * const [updateItemMutation, { data, loading, error }] = useUpdateItemMutation({
  *   variables: {
  *      id: // value for 'id'
+ *      category: // value for 'category'
  *      title: // value for 'title'
  *      description: // value for 'description'
+ *      price: // value for 'price'
  *   },
  * });
  */
