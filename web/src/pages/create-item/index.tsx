@@ -2,6 +2,7 @@ import { Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
+import * as Yup from 'yup';
 import InputField from '../../components/form/InputField';
 import NumberField from '../../components/form/NumberField';
 import SelectField from '../../components/form/SelectField';
@@ -46,6 +47,11 @@ const CreateItem: React.FC<{}> = ({}) => {
         <MainLayout size="small" variant="form">
             <Formik
                 initialValues={{ category: '', title: '', description: '' }}
+                validationSchema={Yup.object({
+                    category: Yup.string().required('required'),
+                    title: Yup.string().max(15, 'Must be 15 characters or less').required('required'),
+                    description: Yup.string().max(255, 'Must be 255 characters or less').required('required'),
+                })}
                 onSubmit={async (values: any) => {
                     const witchCallbackFields = { ...values, price: writtenPrice };
                     console.log('values: ', values, 'values++: ', witchCallbackFields);

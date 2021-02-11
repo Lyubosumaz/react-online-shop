@@ -2,6 +2,7 @@ import { FormControl, FormLabel, Select } from '@chakra-ui/react';
 import { useField } from 'formik';
 import React, { InputHTMLAttributes } from 'react';
 import { FaCaretDown, FaExclamation } from 'react-icons/fa';
+import ErrorField from '../ErrorField';
 
 type OptionsType = {
     value: string;
@@ -16,7 +17,7 @@ type SelectFieldProps = InputHTMLAttributes<HTMLSelectElement> & {
 
 const SelectField: React.FC<any> = ({ placeholder, label, options, ...props }) => {
     const isPopulated = Array.isArray(options) && options.length != 0;
-    const [field, { touched, error }] = useField(props);
+    const [field, { error }] = useField(props);
 
     return (
         <FormControl mb={8} isInvalid={!!error}>
@@ -32,7 +33,7 @@ const SelectField: React.FC<any> = ({ placeholder, label, options, ...props }) =
             ) : (
                 <Select icon={<FaExclamation />} placeholder={`${label}'s are empty`} isDisabled />
             )}
-            {touched && error ? <div className="error">{error}</div> : null}
+            <ErrorField label={label} error={error} />
         </FormControl>
     );
 };

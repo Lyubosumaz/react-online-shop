@@ -9,14 +9,15 @@ type InputFieldProps = InputHTMLAttributes<NumberInputProps> & {
 
 const NumberField: React.FC<InputFieldProps> = ({ name, label, callback }) => {
     const handleChange = (event: any) => {
-        callback(event);
+        console.log(event);
+        // callback(event);
     };
 
     return (
         <Box mb={8}>
             <FormLabel htmlFor={name}>{label}</FormLabel>
             <NumberInput id={name} defaultValue={0} onChange={handleChange} precision={2} step={0.1} min={0.05}>
-                <NumberInputField />
+                <NumberInputField id={name} onChange={handleChange} />
                 <NumberInputStepper>
                     <NumberIncrementStepper />
                     <NumberDecrementStepper />
