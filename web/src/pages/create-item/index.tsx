@@ -14,11 +14,8 @@ const CreateItem: React.FC<{}> = ({}) => {
     const router = useRouter();
     useIsAuth();
     const [createItem] = useCreateItemMutation();
-    const [selectCategory, setSelectCategory] = React.useState('');
+
     const [writtenPrice, setWrittenPrice] = React.useState('');
-    const _selectCategory = (category: string) => {
-        setSelectCategory(category);
-    };
     const _selectPrice = (category: string) => {
         setWrittenPrice(category);
     };
@@ -48,9 +45,9 @@ const CreateItem: React.FC<{}> = ({}) => {
     return (
         <MainLayout size="small" variant="form">
             <Formik
-                initialValues={{ title: '', description: '' }}
+                initialValues={{ category: '', title: '', description: '' }}
                 onSubmit={async (values: any) => {
-                    const witchCallbackFields = { ...values, category: selectCategory, price: writtenPrice };
+                    const witchCallbackFields = { ...values, price: writtenPrice };
                     console.log('values: ', values, 'values++: ', witchCallbackFields);
                     // const { errors } = await createItem({
                     //     variables: { input: witchSelectFields },
@@ -65,7 +62,7 @@ const CreateItem: React.FC<{}> = ({}) => {
             >
                 {({ isSubmitting }) => (
                     <Form>
-                        <SelectField name="category" options={categoryList} placeholder="Select category" label="Category" callback={_selectCategory} />
+                        <SelectField name="category" placeholder="Select category" label="Category" options={categoryList} />
                         <InputField name="title" placeholder="title" label="Title" />
                         <NumberField name="price" label="Price" callback={_selectPrice} />
                         <InputField name="description" placeholder="item description..." label="Description" isTextarea />

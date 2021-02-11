@@ -1,32 +1,29 @@
-import { Box, FormLabel, Select } from '@chakra-ui/react';
-import React from 'react';
+import { FormControl, FormLabel, Select } from '@chakra-ui/react';
+import { useField } from 'formik';
+import React, { InputHTMLAttributes } from 'react';
 import { FaCaretDown, FaExclamation } from 'react-icons/fa';
 
-type OptionType = {
+type OptionsType = {
     value: string;
     text: string;
 };
 
-interface SelectFieldProps {
-    name: string;
-    options: OptionType[];
-    label: string;
+type SelectFieldProps = InputHTMLAttributes<HTMLSelectElement> & {
     placeholder: string;
-    callback: (arg: string) => void;
-}
+    label: string;
+    options: OptionsType[];
+};
 
-const SelectField: React.FC<SelectFieldProps> = ({ name, options, label, placeholder, callback }) => {
+const SelectField: React.FC<any> = ({ placeholder, label, options, ...props }) => {
     const isPopulated = Array.isArray(options) && options.length != 0;
-    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        callback(event.target.value);
-    };
+    const [field, { touched, error }] = useField(props);
 
     return (
-        <Box mb={8}>
-            <FormLabel htmlFor={name}>{label}</FormLabel>
+        <FormControl mb={8} isInvalid={!!error}>
+            <FormLabel htmlFor={field.name}>{label}</FormLabel>
             {isPopulated ? (
-                <Select icon={<FaCaretDown />} id={name} onChange={handleChange} placeholder={placeholder}>
-                    {options.map((el, i) => (
+                <Select id={field.name} icon={<FaCaretDown />} {...field} {...props} placeholder={placeholder}>
+                    {options.map((el: any, i: any) => (
                         <option key={i} value={el.value}>
                             {el.text}
                         </option>
@@ -35,7 +32,8 @@ const SelectField: React.FC<SelectFieldProps> = ({ name, options, label, placeho
             ) : (
                 <Select icon={<FaExclamation />} placeholder={`${label}'s are empty`} isDisabled />
             )}
-        </Box>
+            {touched && error ? <div className="error">{error}</div> : null}
+        </FormControl>
     );
 };
 
