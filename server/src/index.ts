@@ -32,7 +32,7 @@ const main = async () => {
     // const firstUser = await User.findOne({ id: 2 }); // TODO admin user
     // console.log(firstUser);
     // if (firstUser)
-    await conn.runMigrations();
+    // await conn.runMigrations();
     // await Star.delete({});
     // await Item.delete({});
     // await User.delete({});

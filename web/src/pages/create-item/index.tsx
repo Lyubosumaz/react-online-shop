@@ -10,6 +10,13 @@ import MainLayout from '../../layouts/MainLayout';
 import { useIsAuth } from '../../utils/useIsAuth';
 import { withApollo } from '../../utils/withApollo';
 
+interface CreateItemFields {
+    category: string;
+    title: string;
+    description: string;
+    price: string;
+}
+
 const CreateItem: React.FC<{}> = ({}) => {
     const router = useRouter();
     useIsAuth();
@@ -52,17 +59,15 @@ const CreateItem: React.FC<{}> = ({}) => {
                     description: Yup.string().max(255, 'must be 255 characters or less').required('is required'),
                     price: Yup.number().typeError('needs a correct number').min(0.05, 'must be $0.05 or greater').required('is required'),
                 })}
-                onSubmit={async (values: any) => {
-                    console.log('values: ', values);
-                    // const { errors } = await createItem({
-                    //     variables: { input: witchSelectFields },
-                    //     update: (cache) => {
-                    //         cache.evict({ fieldName: 'items:{}' });
-                    //     },
-                    // });
-                    // if (!errors) {
-                    //     router.push('/');
-                    // }
+                onSubmit={async (values: CreateItemFields) => {
+                    const { errors } = await createItem({
+                        variables: { input: values },
+                        update: (cache) => {
+                            cache.evict({ fieldName: 'items:{}' });
+                        },
+                    });
+
+                    if (!errors) router.push('/');
                 }}
             >
                 {({ isSubmitting }) => (

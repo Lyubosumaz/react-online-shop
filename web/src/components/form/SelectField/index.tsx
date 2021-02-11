@@ -17,10 +17,10 @@ type SelectFieldProps = InputHTMLAttributes<HTMLSelectElement> & {
 
 const SelectField: React.FC<any> = ({ placeholder, label, options, ...props }) => {
     const isPopulated = Array.isArray(options) && options.length != 0;
-    const [field, { error }] = useField(props);
+    const [field, { touched, error }] = useField(props);
 
     return (
-        <FormControl mb={8} isInvalid={!!error}>
+        <FormControl mb={8} isInvalid={!!touched && !!error}>
             <FormLabel htmlFor={field.name}>{label}</FormLabel>
             {isPopulated ? (
                 <Select id={field.name} icon={<FaCaretDown />} {...field} {...props} placeholder={placeholder}>
@@ -33,7 +33,7 @@ const SelectField: React.FC<any> = ({ placeholder, label, options, ...props }) =
             ) : (
                 <Select icon={<FaExclamation />} placeholder={`${label}'s are empty`} isDisabled />
             )}
-            <ErrorField label={label} error={error} />
+            <ErrorField label={label} touched={touched} error={error} />
         </FormControl>
     );
 };

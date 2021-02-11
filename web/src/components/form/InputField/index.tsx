@@ -11,13 +11,13 @@ type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
 
 const InputField: React.FC<InputFieldProps> = ({ label, isTextarea, ...props }) => {
     let InputOrTextarea = (isTextarea ? Textarea : Input) as ComponentWithAs<React.ElementType<any>>;
-    const [field, { error }] = useField(props);
+    const [field, { touched, error }] = useField(props);
 
     return (
-        <FormControl mb={8} isInvalid={!!error}>
+        <FormControl mb={8} isInvalid={!!touched && !!error}>
             <FormLabel htmlFor={field.name}>{label}</FormLabel>
             <InputOrTextarea {...field} {...props} id={field.name} />
-            <ErrorField label={label} error={error} />
+            <ErrorField label={label} touched={touched} error={error} />
         </FormControl>
     );
 };
