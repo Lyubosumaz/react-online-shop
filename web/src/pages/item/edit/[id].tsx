@@ -17,6 +17,8 @@ const EditItem = ({}) => {
             id: intId,
         },
     });
+
+    console.log(data);
     const [updateItem] = useUpdateItemMutation();
     if (loading) {
         return (

@@ -122,7 +122,9 @@ export type MutationLoginArgs = {
 };
 
 export type ItemInput = {
+  category: Scalars['String'];
   title: Scalars['String'];
+  price: Scalars['String'];
   description: Scalars['String'];
 };
 
@@ -291,7 +293,7 @@ export type ItemQuery = (
   { __typename?: 'Query' }
   & { item?: Maybe<(
     { __typename?: 'Item' }
-    & Pick<Item, 'id' | 'createdAt' | 'updatedAt' | 'title' | 'rating' | 'description' | 'voteStatus'>
+    & Pick<Item, 'id' | 'category' | 'title' | 'description' | 'price' | 'rating' | 'voteStatus' | 'createdAt' | 'updatedAt'>
     & { creator: (
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username'>
@@ -667,16 +669,18 @@ export const ItemDocument = gql`
     query Item($id: Int!) {
   item(id: $id) {
     id
-    createdAt
-    updatedAt
+    category
     title
-    rating
     description
+    price
+    rating
     voteStatus
     creator {
       id
       username
     }
+    createdAt
+    updatedAt
   }
 }
     `;

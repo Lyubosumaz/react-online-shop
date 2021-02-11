@@ -1,15 +1,17 @@
 query Item($id: Int!) {
     item(id: $id) {
         id
-        createdAt
-        updatedAt
+        category
         title
-        rating
         description
+        price
+        rating
         voteStatus
         creator {
             id
             username
         }
+        createdAt
+        updatedAt
     }
 }

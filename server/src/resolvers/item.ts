@@ -199,7 +199,6 @@ export class ItemResolver {
         @Ctx()
         { req }: MyContext
     ): Promise<Item> {
-        console.log(input);
         return Item.create({
             ...input,
             price: Number(input.price),
