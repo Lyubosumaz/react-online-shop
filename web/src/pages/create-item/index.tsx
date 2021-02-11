@@ -15,8 +15,12 @@ const CreateItem: React.FC<{}> = ({}) => {
     useIsAuth();
     const [createItem] = useCreateItemMutation();
     const [selectCategory, setSelectCategory] = React.useState('');
+    const [writtenPrice, setWrittenPrice] = React.useState('');
     const _selectCategory = (category: string) => {
         setSelectCategory(category);
+    };
+    const _selectPrice = (category: string) => {
+        setWrittenPrice(category);
     };
 
     const categoryList = [
@@ -44,10 +48,10 @@ const CreateItem: React.FC<{}> = ({}) => {
     return (
         <MainLayout size="small" variant="form">
             <Formik
-                initialValues={{ title: '', description: '', price: '' }}
+                initialValues={{ title: '', description: '' }}
                 onSubmit={async (values: any) => {
-                    const witchSelectFields = { ...values, category: selectCategory };
-                    console.log('values: ', values, 'values++: ', witchSelectFields);
+                    const witchCallbackFields = { ...values, category: selectCategory, price: writtenPrice };
+                    console.log('values: ', values, 'values++: ', witchCallbackFields);
                     // const { errors } = await createItem({
                     //     variables: { input: witchSelectFields },
                     //     update: (cache) => {
@@ -63,7 +67,7 @@ const CreateItem: React.FC<{}> = ({}) => {
                     <Form>
                         <SelectField name="category" options={categoryList} placeholder="Select category" label="Category" callback={_selectCategory} />
                         <InputField name="title" placeholder="title" label="Title" />
-                        <NumberField name="price" label="Price" />
+                        <NumberField name="price" label="Price" callback={_selectPrice} />
                         <InputField name="description" placeholder="item description..." label="Description" isTextarea />
                         <Button type="submit" isLoading={isSubmitting} colorScheme="teal">
                             create item

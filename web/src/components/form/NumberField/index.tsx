@@ -1,28 +1,28 @@
-import { FormControl, FormErrorMessage, FormLabel, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper } from '@chakra-ui/react';
-import { useField } from 'formik';
+import { Box, FormLabel, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputProps, NumberInputStepper } from '@chakra-ui/react';
 import React, { InputHTMLAttributes } from 'react';
 
-type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
+type InputFieldProps = InputHTMLAttributes<NumberInputProps> & {
     name: string;
     label: string;
+    callback: (arg: string) => void;
 };
 
-const NumberField: React.FC<any> = ({ label, ...props }) => {
-    const [field, { error }] = useField(props);
-    console.log('n props: ', props, 'n field: ', field, 'n error: ', { error });
+const NumberField: React.FC<InputFieldProps> = ({ name, label, callback }) => {
+    const handleChange = (event: any) => {
+        callback(event);
+    };
 
     return (
-        <FormControl mb={8} isInvalid={!!error}>
-            <FormLabel htmlFor={field.name}>{label}</FormLabel>
-            <NumberInput defaultValue={0.1} precision={2} step={0.1} min={0.05} {...field} {...props} id={field.name}>
+        <Box mb={8}>
+            <FormLabel htmlFor={name}>{label}</FormLabel>
+            <NumberInput id={name} defaultValue={0} onChange={handleChange} precision={2} step={0.1} min={0.05}>
                 <NumberInputField />
                 <NumberInputStepper>
                     <NumberIncrementStepper />
                     <NumberDecrementStepper />
                 </NumberInputStepper>
             </NumberInput>
-            {error ? <FormErrorMessage>{error}</FormErrorMessage> : null}
-        </FormControl>
+        </Box>
     );
 };
 
