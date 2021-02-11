@@ -2,11 +2,11 @@ import { Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
-import * as Yup from 'yup';
 import InputField from '../../components/form/InputField';
 import SelectField from '../../components/form/SelectField';
 import { useCreateItemMutation } from '../../generated/graphql';
 import MainLayout from '../../layouts/MainLayout';
+import { createValidations } from '../../utils/formValidations';
 import { useIsAuth } from '../../utils/useIsAuth';
 import { withApollo } from '../../utils/withApollo';
 
@@ -22,11 +22,7 @@ const CreateItem: React.FC<{}> = ({}) => {
     useIsAuth();
     const [createItem] = useCreateItemMutation();
 
-    // const [writtenPrice, setWrittenPrice] = React.useState('');
-    // const _selectPrice = (category: string) => {
-    //     setWrittenPrice(category);
-    // };
-
+    // TODO create huge categories and sub categories
     const categoryList = [
         { value: 'all', text: 'All' },
         { value: 'gaming', text: 'Gaming' },
@@ -53,12 +49,7 @@ const CreateItem: React.FC<{}> = ({}) => {
         <MainLayout size="small" variant="form">
             <Formik
                 initialValues={{ category: '', title: '', description: '', price: '' }}
-                validationSchema={Yup.object({
-                    category: Yup.string().required('is required'),
-                    title: Yup.string().max(15, 'must be 15 characters or less').required('is required'),
-                    description: Yup.string().max(255, 'must be 255 characters or less').required('is required'),
-                    price: Yup.number().typeError('needs a correct number').min(0.05, 'must be $0.05 or greater').required('is required'),
-                })}
+                validationSchema={createValidations}
                 onSubmit={async (values: CreateItemFields) => {
                     const { errors } = await createItem({
                         variables: { input: values },
