@@ -2,7 +2,8 @@ import { Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { InputField } from '../../components/form/InputField';
+import InputField from '../../components/form/InputField';
+import NumberField from '../../components/form/NumberField';
 import SelectField from '../../components/form/SelectField';
 import { useCreateItemMutation } from '../../generated/graphql';
 import MainLayout from '../../layouts/MainLayout';
@@ -46,22 +47,23 @@ const CreateItem: React.FC<{}> = ({}) => {
                 initialValues={{ title: '', description: '', price: '' }}
                 onSubmit={async (values: any) => {
                     const witchSelectFields = { ...values, category: selectCategory };
-                    const { errors } = await createItem({
-                        variables: { input: witchSelectFields },
-                        update: (cache) => {
-                            cache.evict({ fieldName: 'items:{}' });
-                        },
-                    });
-                    if (!errors) {
-                        router.push('/');
-                    }
+                    console.log('values: ', values, 'values++: ', witchSelectFields);
+                    // const { errors } = await createItem({
+                    //     variables: { input: witchSelectFields },
+                    //     update: (cache) => {
+                    //         cache.evict({ fieldName: 'items:{}' });
+                    //     },
+                    // });
+                    // if (!errors) {
+                    //     router.push('/');
+                    // }
                 }}
             >
                 {({ isSubmitting }) => (
                     <Form>
-                        <SelectField options={categoryList} placeholder="Select category" label="Category" callback={_selectCategory} />
+                        <SelectField name="category" options={categoryList} placeholder="Select category" label="Category" callback={_selectCategory} />
                         <InputField name="title" placeholder="title" label="Title" />
-                        <InputField name="price" placeholder="price" label="Price" />
+                        <NumberField name="price" label="Price" />
                         <InputField name="description" placeholder="item description..." label="Description" isTextarea />
                         <Button type="submit" isLoading={isSubmitting} colorScheme="teal">
                             create item

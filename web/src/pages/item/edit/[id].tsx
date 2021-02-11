@@ -2,7 +2,7 @@ import { Box, Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { InputField } from '../../../components/form/InputField';
+import InputField from '../../../components/form/InputField';
 import { useItemQuery, useUpdateItemMutation } from '../../../generated/graphql';
 import MainLayout from '../../../layouts/MainLayout';
 import { useGetIntId } from '../../../utils/useGetIntId';

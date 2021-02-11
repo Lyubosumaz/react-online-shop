@@ -11,7 +11,7 @@ export class Item extends BaseEntity {
     id!: number;
 
     @Field()
-    @Column({ default: 'all' })
+    @Column()
     category!: string;
 
     @Field()

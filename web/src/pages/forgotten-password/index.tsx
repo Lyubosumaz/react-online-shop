@@ -1,7 +1,7 @@
 import { Box, Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
-import { InputField } from '../../components/form/InputField';
+import InputField from '../../components/form/InputField';
 import { useForgotPasswordMutation } from '../../generated/graphql';
 import MainWrapper from '../../layouts/MainWrapper';
 import { withApollo } from '../../utils/withApollo';

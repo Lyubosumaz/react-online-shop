@@ -9,7 +9,11 @@ import { MyContext } from '../types';
 @InputType()
 class ItemInput {
     @Field()
+    category: string;
+    @Field()
     title: string;
+    @Field()
+    price: string;
     @Field()
     description: string;
 }
@@ -195,8 +199,10 @@ export class ItemResolver {
         @Ctx()
         { req }: MyContext
     ): Promise<Item> {
+        console.log(input);
         return Item.create({
             ...input,
+            price: Number(input.price),
             creatorId: req.session.userId,
         }).save();
     }

@@ -3,8 +3,10 @@ mutation CreateItem($input: ItemInput!) {
         id
         createdAt
         updatedAt
+        category
         title
         description
+        price
         rating
         creatorId
     }
