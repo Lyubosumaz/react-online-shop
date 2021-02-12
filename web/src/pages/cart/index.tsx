@@ -1,4 +1,5 @@
 import React from 'react';
+import { withApollo } from '../../utils/withApollo';
 
 const Cart: React.FC<{}> = ({}) => {
     return (
@@ -9,4 +10,4 @@ const Cart: React.FC<{}> = ({}) => {
     );
 };
 
-export default Cart;
+export default withApollo({ ssr: false })(Cart);

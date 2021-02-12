@@ -1,5 +1,6 @@
 import NextLink from 'next/link';
 import React from 'react';
+import { withApollo } from '../../utils/withApollo';
 
 const FourOhFour: React.FC<{}> = ({}) => {
     return (
@@ -12,4 +13,4 @@ const FourOhFour: React.FC<{}> = ({}) => {
     );
 };
 
-export default FourOhFour;
+export default withApollo({ ssr: false })(FourOhFour);
