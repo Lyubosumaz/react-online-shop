@@ -1,4 +1,4 @@
-import { Flex, Icon, IconButton, Text } from '@chakra-ui/react';
+import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, Flex, Icon, IconButton, Text, useDisclosure } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import { FaIdCard, FaLock, FaLockOpen, FaTimes, FaUser } from 'react-icons/fa';
@@ -11,6 +11,8 @@ const Profile: React.FC<{}> = ({}) => {
     const { data } = useMeQuery({
         skip: isServer(),
     });
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const cancelRef = React.useRef<HTMLButtonElement>(null);
 
     return (
         <MainLayout>
@@ -37,7 +39,30 @@ const Profile: React.FC<{}> = ({}) => {
                 <Text mr={2} minW="8.5rem">
                     Delete Account:
                 </Text>
-                <IconButton icon={<FaTimes />} aria-label="Reset Password" />
+                <IconButton icon={<FaTimes />} aria-label="Reset Password" onClick={onOpen} />
+                <AlertDialog motionPreset="slideInBottom" leastDestructiveRef={cancelRef} onClose={onClose} isOpen={isOpen} isCentered>
+                    <AlertDialogOverlay />
+
+                    <AlertDialogContent>
+                        <AlertDialogHeader>Delete your account?</AlertDialogHeader>
+                        <AlertDialogCloseButton />
+                        <AlertDialogBody>Do you really want to delete your account?</AlertDialogBody>
+                        <AlertDialogFooter>
+                            <Button ref={cancelRef} onClick={onClose}>
+                                No
+                            </Button>
+                            <Button
+                                colorScheme="red"
+                                ml={3}
+                                onClick={() => {
+                                    console.log('Your account has been deleted');
+                                }}
+                            >
+                                Yes
+                            </Button>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialog>
             </Flex>
         </MainLayout>
     );
