@@ -70,7 +70,7 @@ export type Mutation = {
   updateItem?: Maybe<Item>;
   deleteItem: Scalars['Boolean'];
   changePassword: UserResponse;
-  forgotPassword: Scalars['Boolean'];
+  forgottenPassword: Scalars['Boolean'];
   register: UserResponse;
   login: UserResponse;
   logout: Scalars['Boolean'];
@@ -222,7 +222,7 @@ export type ForgotPasswordMutationVariables = Exact<{
 
 export type ForgotPasswordMutation = (
   { __typename?: 'Mutation' }
-  & Pick<Mutation, 'forgotPassword'>
+  & Pick<Mutation, 'forgottenPassword'>
 );
 
 export type LoginMutationVariables = Exact<{
@@ -479,7 +479,7 @@ export type DeleteItemMutationResult = Apollo.MutationResult<DeleteItemMutation>
 export type DeleteItemMutationOptions = Apollo.BaseMutationOptions<DeleteItemMutation, DeleteItemMutationVariables>;
 export const ForgotPasswordDocument = gql`
     mutation ForgottenPassword($email: String!) {
-  forgotPassword(email: $email)
+  forgottenPassword(email: $email)
 }
     `;
 export type ForgotPasswordMutationFn = Apollo.MutationFunction<ForgotPasswordMutation, ForgotPasswordMutationVariables>;

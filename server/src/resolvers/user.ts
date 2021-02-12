@@ -99,7 +99,7 @@ export class UserResolver {
     }
 
     @Mutation(() => Boolean)
-    async forgotPassword(
+    async forgottenPassword(
         @Arg('email')
         email: string,
         @Ctx()

@@ -9,7 +9,7 @@ import { withApollo } from '../../utils/withApollo';
 
 const ForgottenPassword: React.FC<{}> = ({}) => {
     const [complete, setComplete] = useState(false);
-    const [forgotPassword] = useForgotPasswordMutation();
+    const [forgottenPassword] = useForgotPasswordMutation();
 
     return (
         <MainWrapper size="small" variant="form">
@@ -17,7 +17,7 @@ const ForgottenPassword: React.FC<{}> = ({}) => {
                 initialValues={{ email: '' }}
                 validationSchema={forgottenPasswordValidations}
                 onSubmit={async (values) => {
-                    await forgotPassword({ variables: values });
+                    await forgottenPassword({ variables: values });
                     setComplete(true);
                 }}
             >
