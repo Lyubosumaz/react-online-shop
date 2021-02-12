@@ -7,6 +7,7 @@ import InputField from '../../../components/form/InputField';
 import SelectField from '../../../components/form/SelectField';
 import { useItemQuery, useUpdateItemMutation } from '../../../generated/graphql';
 import MainLayout from '../../../layouts/MainLayout';
+import { createValidations } from '../../../utils/formValidations';
 import { useGetIntId } from '../../../utils/useGetIntId';
 import { withApollo } from '../../../utils/withApollo';
 
@@ -46,6 +47,7 @@ const EditItem = ({}) => {
                     description: data.item.description,
                     price: data.item.price.toString(),
                 }}
+                validationSchema={createValidations}
                 onSubmit={async (values) => {
                     await updateItem({ variables: { id: intId, ...values } });
                     router.back();

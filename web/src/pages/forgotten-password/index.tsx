@@ -4,15 +4,18 @@ import React, { useState } from 'react';
 import InputField from '../../components/form/InputField';
 import { useForgotPasswordMutation } from '../../generated/graphql';
 import MainWrapper from '../../layouts/MainWrapper';
+import { forgottenPasswordValidations } from '../../utils/formValidations';
 import { withApollo } from '../../utils/withApollo';
 
-const ForgotPassword: React.FC<{}> = ({}) => {
+const ForgottenPassword: React.FC<{}> = ({}) => {
     const [complete, setComplete] = useState(false);
     const [forgotPassword] = useForgotPasswordMutation();
+
     return (
         <MainWrapper size="small" variant="form">
             <Formik
                 initialValues={{ email: '' }}
+                validationSchema={forgottenPasswordValidations}
                 onSubmit={async (values) => {
                     await forgotPassword({ variables: values });
                     setComplete(true);
@@ -35,4 +38,4 @@ const ForgotPassword: React.FC<{}> = ({}) => {
     );
 };
 
-export default withApollo({ ssr: false })(ForgotPassword);
+export default withApollo({ ssr: false })(ForgottenPassword);

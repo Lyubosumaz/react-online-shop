@@ -6,3 +6,22 @@ export const createValidations = Yup.object().shape({
     description: Yup.string().max(255, 'must be 255 characters or less').required('is required'),
     price: Yup.number().typeError('needs a correct number').min(0.05, 'must be $0.05 or greater').required('is required'),
 });
+
+export const registerValidations = Yup.object().shape({
+    email: Yup.string(),
+    username: Yup.string().required('is required'),
+    password: Yup.string().required('is required'),
+});
+
+export const loginValidations = Yup.object().shape({
+    usernameOrEmail: Yup.string().required('is required'),
+    password: Yup.string().required('is required'),
+});
+
+export const forgottenPasswordValidations = Yup.object().shape({
+    email: Yup.string().required('is required'),
+});
+
+export const changePasswordValidations = Yup.object().shape({
+    newPassword: Yup.string().required('is required'),
+});

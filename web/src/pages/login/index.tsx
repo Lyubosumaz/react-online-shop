@@ -6,6 +6,7 @@ import React from 'react';
 import InputField from '../../components/form/InputField';
 import { MeDocument, MeQuery, useLoginMutation } from '../../generated/graphql';
 import MainWrapper from '../../layouts/MainWrapper';
+import { loginValidations } from '../../utils/formValidations';
 import { toErrorMap } from '../../utils/toErrorMap';
 import { withApollo } from '../../utils/withApollo';
 
@@ -16,6 +17,7 @@ const Login: React.FC<{}> = ({}) => {
         <MainWrapper size="small" variant="form">
             <Formik
                 initialValues={{ usernameOrEmail: '', password: '' }}
+                validationSchema={loginValidations}
                 onSubmit={async (values, { setErrors }) => {
                     const response = await login({
                         variables: values,

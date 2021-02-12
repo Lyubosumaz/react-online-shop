@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import InputField from '../../components/form/InputField';
 import { MeDocument, MeQuery, useChangePasswordMutation } from '../../generated/graphql';
 import MainWrapper from '../../layouts/MainWrapper';
+import { changePasswordValidations } from '../../utils/formValidations';
 import { toErrorMap } from '../../utils/toErrorMap';
 import { withApollo } from '../../utils/withApollo';
 
@@ -18,6 +19,7 @@ const ChangePassword: NextPage = () => {
         <MainWrapper size="small" variant="form">
             <Formik
                 initialValues={{ newPassword: '' }}
+                validationSchema={changePasswordValidations}
                 onSubmit={async (values, { setErrors }) => {
                     const response = await changePassword({
                         variables: {

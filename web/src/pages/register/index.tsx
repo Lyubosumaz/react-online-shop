@@ -5,18 +5,18 @@ import React from 'react';
 import InputField from '../../components/form/InputField';
 import { MeDocument, MeQuery, useRegisterMutation } from '../../generated/graphql';
 import MainWrapper from '../../layouts/MainWrapper';
+import { registerValidations } from '../../utils/formValidations';
 import { toErrorMap } from '../../utils/toErrorMap';
 import { withApollo } from '../../utils/withApollo';
 
-interface registerProps {}
-
-const Register: React.FC<registerProps> = ({}) => {
+const Register: React.FC<{}> = ({}) => {
     const router = useRouter();
     const [register] = useRegisterMutation();
     return (
         <MainWrapper size="small" variant="form">
             <Formik
                 initialValues={{ email: '', username: '', password: '' }}
+                validationSchema={registerValidations}
                 onSubmit={async (values, { setErrors }) => {
                     const response = await register({
                         variables: { options: values },
