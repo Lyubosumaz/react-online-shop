@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import InputField from '../../components/form/InputField';
 import { useDeleteUserMutation, useMeQuery } from '../../generated/graphql';
 import MainWrapper from '../../layouts/MainWrapper';
-import { emailValidations } from '../../utils/formValidations';
+import { deleteUserValidations } from '../../utils/formValidations';
 import { isServer } from '../../utils/isServer';
 import { withApollo } from '../../utils/withApollo';
 
@@ -19,12 +19,12 @@ const DeleteAccount: React.FC<{}> = ({}) => {
         <MainWrapper size="small" variant="form">
             <Formik
                 initialValues={{ email: '' }}
-                validationSchema={emailValidations}
+                validationSchema={deleteUserValidations}
                 onSubmit={async (values) => {
                     await deleteUser({
                         variables: {
                             ...values,
-                            loggedUser: typeof data?.me?.id === 'number' ? data?.me?.id : -1,
+                            loggedUser: typeof data?.me?.id === 'string' ? data?.me?.id : -1,
                         },
                     });
                     setComplete(true);

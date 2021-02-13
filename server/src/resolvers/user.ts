@@ -239,6 +239,8 @@ export class UserResolver {
     async deleteUser(
         @Arg('email')
         email: string,
+        @Arg('password')
+        password: string,
         @Arg('loggedUser', () => Int)
         loggedUser: number,
         @Ctx()
@@ -258,7 +260,7 @@ export class UserResolver {
         const user = await User.findOne({ where: { email } });
         // the email is not in the db
         if (!user) return true;
-        console.log(user, loggedUser);
+        console.log(user, password, loggedUser);
 
         // const token = v4();
 
