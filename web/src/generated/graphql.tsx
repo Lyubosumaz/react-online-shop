@@ -126,6 +126,7 @@ export type MutationLoginArgs = {
 
 
 export type MutationDeleteUserArgs = {
+  loggedUser: Scalars['Int'];
   email: Scalars['String'];
 };
 
@@ -223,6 +224,7 @@ export type DeleteItemMutation = (
 
 export type DeleteUserMutationVariables = Exact<{
   email: Scalars['String'];
+  loggedUser: Scalars['Int'];
 }>;
 
 
@@ -494,8 +496,8 @@ export type DeleteItemMutationHookResult = ReturnType<typeof useDeleteItemMutati
 export type DeleteItemMutationResult = Apollo.MutationResult<DeleteItemMutation>;
 export type DeleteItemMutationOptions = Apollo.BaseMutationOptions<DeleteItemMutation, DeleteItemMutationVariables>;
 export const DeleteUserDocument = gql`
-    mutation DeleteUser($email: String!) {
-  deleteUser(email: $email)
+    mutation DeleteUser($email: String!, $loggedUser: Int!) {
+  deleteUser(email: $email, loggedUser: $loggedUser)
 }
     `;
 export type DeleteUserMutationFn = Apollo.MutationFunction<DeleteUserMutation, DeleteUserMutationVariables>;
@@ -514,6 +516,7 @@ export type DeleteUserMutationFn = Apollo.MutationFunction<DeleteUserMutation, D
  * const [deleteUserMutation, { data, loading, error }] = useDeleteUserMutation({
  *   variables: {
  *      email: // value for 'email'
+ *      loggedUser: // value for 'loggedUser'
  *   },
  * });
  */

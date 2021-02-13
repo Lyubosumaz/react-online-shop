@@ -1,3 +1,3 @@
-mutation DeleteUser($email: String!) {
-    deleteUser(email: $email)
+mutation DeleteUser($email: String!, $loggedUser: Int!) {
+    deleteUser(email: $email, loggedUser: $loggedUser)
 }

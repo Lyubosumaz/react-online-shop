@@ -2,13 +2,17 @@ import { Box, Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import InputField from '../../components/form/InputField';
-import { useDeleteUserMutation } from '../../generated/graphql';
+import { useDeleteUserMutation, useMeQuery } from '../../generated/graphql';
 import MainWrapper from '../../layouts/MainWrapper';
 import { emailValidations } from '../../utils/formValidations';
+import { isServer } from '../../utils/isServer';
 import { withApollo } from '../../utils/withApollo';
 
 const DeleteAccount: React.FC<{}> = ({}) => {
     const [complete, setComplete] = useState(false);
+    const { data } = useMeQuery({
+        skip: isServer(),
+    });
     const [deleteUser] = useDeleteUserMutation();
 
     return (
@@ -17,7 +21,12 @@ const DeleteAccount: React.FC<{}> = ({}) => {
                 initialValues={{ email: '' }}
                 validationSchema={emailValidations}
                 onSubmit={async (values) => {
-                    await deleteUser({ variables: values });
+                    await deleteUser({
+                        variables: {
+                            ...values,
+                            loggedUser: typeof data?.me?.id === 'number' ? data?.me?.id : -1,
+                        },
+                    });
                     setComplete(true);
                 }}
             >

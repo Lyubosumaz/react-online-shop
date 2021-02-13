@@ -1,8 +1,8 @@
 import argon2 from 'argon2';
-import { Arg, Ctx, Field, FieldResolver, Mutation, ObjectType, Query, Resolver, Root } from 'type-graphql';
+import { Arg, Ctx, Field, FieldResolver, Int, Mutation, ObjectType, Query, Resolver, Root } from 'type-graphql';
 import { getConnection } from 'typeorm';
 import { v4 } from 'uuid';
-import { COOKIE_NAME, FORGET_PASSWORD_PREFIX } from '../constants';
+import { COOKIE_NAME, FORGOTTEN_PASSWORD_PREFIX } from '../constants';
 import { User } from '../entities/User';
 import { MyContext } from '../types';
 import { sendEmail } from '../utils/sendEmail';
@@ -61,7 +61,7 @@ export class UserResolver {
             };
         }
 
-        const key = FORGET_PASSWORD_PREFIX + token;
+        const key = FORGOTTEN_PASSWORD_PREFIX + token;
         const userId = await redis.get(key);
         if (!userId) {
             return {
@@ -111,7 +111,7 @@ export class UserResolver {
 
         const token = v4();
 
-        await redis.set(FORGET_PASSWORD_PREFIX + token, user.id, 'ex', 1000 * 60 * 60 * 24 * 3); // 3 days
+        await redis.set(FORGOTTEN_PASSWORD_PREFIX + token, user.id, 'ex', 1000 * 60 * 60 * 24 * 3); // 3 days
 
         await sendEmail(email, `<a href="${process.env.CORS_ORIGIN}/change-password/${token}">reset password</a>`);
 
@@ -239,17 +239,30 @@ export class UserResolver {
     async deleteUser(
         @Arg('email')
         email: string,
+        @Arg('loggedUser', () => Int)
+        loggedUser: number,
         @Ctx()
         { redis }: MyContext
     ) {
-        console.log(email, redis);
-        // const user = await User.findOne({ where: { email } });
+        // not present user id on the request
+        if (loggedUser === -1)
+            return {
+                errors: [
+                    {
+                        field: 'email',
+                        message: "there was problem, couldn't delete the account",
+                    },
+                ],
+            };
+
+        const user = await User.findOne({ where: { email } });
         // the email is not in the db
-        // if (!user) return true;
+        if (!user) return true;
+        console.log(user, loggedUser);
 
         // const token = v4();
 
-        // await redis.set(FORGET_PASSWORD_PREFIX + token, user.id, 'ex', 1000 * 60 * 60 * 24 * 3); // 3 days
+        // await redis.set(FORGOTTEN_PASSWORD_PREFIX + token, user.id, 'ex', 1000 * 60 * 60 * 24 * 3); // 3 days
 
         // await sendEmail(email, `<a href="${process.env.CORS_ORIGIN}/change-password/${token}">reset password</a>`);
 
