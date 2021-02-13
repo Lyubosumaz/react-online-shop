@@ -45,7 +45,6 @@ const Header: React.FC<{}> = ({}) => {
                         ) : (
                             <Flex align="center">
                                 <FooterNavItem href="/create-item">Create Item</FooterNavItem>
-                                <FooterNavItem href="/forgotten-password">Recover Password</FooterNavItem>
                                 <Flex mr={4} alignItems="center">
                                     <Text mr={2} fontWeight="bold">
                                         Welcome:

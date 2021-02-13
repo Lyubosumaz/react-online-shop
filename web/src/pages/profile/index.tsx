@@ -39,7 +39,10 @@ const Profile: React.FC<{}> = ({}) => {
                 <Text mr={2} minW="8.5rem">
                     Delete Account:
                 </Text>
-                <IconButton icon={<FaTimes />} aria-label="Reset Password" onClick={onOpen} />
+                <NextLink href="/delete-account">
+                    <IconButton icon={<FaTimes />} aria-label="Delete Account" />
+                </NextLink>
+
                 <AlertDialog motionPreset="slideInBottom" leastDestructiveRef={cancelRef} onClose={onClose} isOpen={isOpen} isCentered>
                     <AlertDialogOverlay />
 

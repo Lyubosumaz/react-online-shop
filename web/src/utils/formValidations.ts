@@ -18,7 +18,7 @@ export const loginValidations = Yup.object().shape({
     password: Yup.string().required('is required'),
 });
 
-export const forgottenPasswordValidations = Yup.object().shape({
+export const emailValidations = Yup.object().shape({
     email: Yup.string().required('is required'),
 });
 

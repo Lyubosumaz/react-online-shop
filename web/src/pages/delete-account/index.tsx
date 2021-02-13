@@ -2,14 +2,14 @@ import { Box, Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import InputField from '../../components/form/InputField';
-import { useForgotPasswordMutation } from '../../generated/graphql';
+import { useDeleteUserMutation } from '../../generated/graphql';
 import MainWrapper from '../../layouts/MainWrapper';
 import { emailValidations } from '../../utils/formValidations';
 import { withApollo } from '../../utils/withApollo';
 
-const ForgottenPassword: React.FC<{}> = ({}) => {
+const DeleteAccount: React.FC<{}> = ({}) => {
     const [complete, setComplete] = useState(false);
-    const [forgottenPassword] = useForgotPasswordMutation();
+    const [deleteUser] = useDeleteUserMutation();
 
     return (
         <MainWrapper size="small" variant="form">
@@ -17,7 +17,7 @@ const ForgottenPassword: React.FC<{}> = ({}) => {
                 initialValues={{ email: '' }}
                 validationSchema={emailValidations}
                 onSubmit={async (values) => {
-                    await forgottenPassword({ variables: values });
+                    await deleteUser({ variables: values });
                     setComplete(true);
                 }}
             >
@@ -38,4 +38,4 @@ const ForgottenPassword: React.FC<{}> = ({}) => {
     );
 };
 
-export default withApollo({ ssr: false })(ForgottenPassword);
+export default withApollo({ ssr: false })(DeleteAccount);
