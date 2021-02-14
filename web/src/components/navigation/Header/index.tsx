@@ -40,7 +40,7 @@ const Header: React.FC<{}> = ({}) => {
                         {!data?.me ? (
                             <>
                                 <FooterNavItem href="/login">Login</FooterNavItem>
-                                <FooterNavItem href="/login">Register</FooterNavItem>
+                                <FooterNavItem href="/register">Register</FooterNavItem>
                             </>
                         ) : (
                             <Flex align="center">
