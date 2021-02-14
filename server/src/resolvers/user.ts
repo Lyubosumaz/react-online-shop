@@ -244,7 +244,7 @@ export class UserResolver {
         @Arg('loggedUser', () => Int)
         loggedUser: number,
         @Ctx()
-        { redis, req }: MyContext
+        { redis, req, res }: MyContext
     ): Promise<UserResponse | boolean> {
         // logged user id not present
         if (loggedUser === -1) {
@@ -286,19 +286,22 @@ export class UserResolver {
         // your are logged in with same account
         // account exist in the db
         if (userId === user.id && userId === loggedUser) {
-            console.log('all is correct');
             await User.delete({ id: user.id });
+
+            return new Promise((resolve) =>
+                req.session.destroy((err: any) => {
+                    res.clearCookie(COOKIE_NAME);
+
+                    if (err) {
+                        console.warn(err);
+                        resolve(false);
+                        return;
+                    }
+
+                    resolve(true);
+                })
+            );
         }
-
-        console.log('userId: ', userId, 'user: ', user, 'password: ', password, 'loggedUser: ', loggedUser);
-        // the email is not in the db
-        // if (!user) return true;
-
-        // const token = v4();
-
-        // await redis.set(FORGOTTEN_PASSWORD_PREFIX + token, user.id, 'ex', 1000 * 60 * 60 * 24 * 3); // 3 days
-
-        // await sendEmail(email, `<a href="${process.env.CORS_ORIGIN}/change-password/${token}">reset password</a>`);
 
         return true;
     }
