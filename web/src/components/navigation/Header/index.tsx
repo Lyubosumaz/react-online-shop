@@ -1,8 +1,8 @@
 import { useApolloClient } from '@apollo/client';
-import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Box, Button, Flex, Icon, IconButton, Link, Text, useColorMode, useDisclosure } from '@chakra-ui/react';
+import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, Flex, Icon, IconButton, Link, Text, useColorMode, useDisclosure } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
-import { FaShoppingCart, FaStore } from 'react-icons/fa';
+import { FaMoon, FaShoppingCart, FaStore, FaSun } from 'react-icons/fa';
 import { useLogoutMutation, useMeQuery } from '../../../generated/graphql';
 import MainWrapper from '../../../layouts/MainWrapper';
 import { isServer } from '../../../utils/isServer';
@@ -38,7 +38,7 @@ const Header: React.FC<{}> = ({}) => {
                         </Link>
                     </NextLink>
 
-                    <Box ml={'auto'}>
+                    <Flex ml={'auto'} alignItems="center">
                         {!data?.me ? (
                             <>
                                 <FooterNavItem href="/login">Login</FooterNavItem>
@@ -60,7 +60,7 @@ const Header: React.FC<{}> = ({}) => {
                                 <NextLink href="/cart">
                                     <IconButton mr={4} aria-label="Cart" icon={<FaShoppingCart />} backgroundColor="#7c2c0c" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c' }} />
                                 </NextLink>
-                                <Button height="2.5rem" padding="0 1rem" textTransform="uppercase" backgroundColor="#7c2c0c" color="#efe4d1" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c', textDecoration: 'underline' }} onClick={onOpen} isLoading={logoutFetching} variant="link">
+                                <Button mr={4} height="2.5rem" padding="0 1rem" textTransform="uppercase" backgroundColor="#7c2c0c" color="#efe4d1" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c', textDecoration: 'underline' }} onClick={onOpen} isLoading={logoutFetching} variant="link">
                                     Logout
                                 </Button>
                                 <AlertDialog motionPreset="slideInBottom" leastDestructiveRef={cancelRef} onClose={onClose} isOpen={isOpen} isCentered>
@@ -89,9 +89,9 @@ const Header: React.FC<{}> = ({}) => {
                                 </AlertDialog>
                             </Flex>
                         )}
-
-                        <Button onClick={toggleColorMode}>Toggle {colorMode === 'light' ? 'Dark' : 'Light'}</Button>
-                    </Box>
+                        <IconButton aria-label="Color Mode" icon={colorMode === 'light' ? <FaSun /> : <FaMoon />} onClick={toggleColorMode} backgroundColor="#7c2c0c" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c' }} />
+                        {/* TODO button for translate site */}
+                    </Flex>
                 </Flex>
             </MainWrapper>
         </header>
