@@ -2,10 +2,11 @@ import { Box, Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import InputField from '../../components/form/InputField';
-import { useDeleteUserMutation, useMeQuery } from '../../generated/graphql';
+import { useDeleteAccountMutation, useMeQuery } from '../../generated/graphql';
 import MainWrapper from '../../layouts/MainWrapper';
-import { deleteUserValidations } from '../../utils/formValidations';
+import { deleteAccountValidations } from '../../utils/formValidations';
 import { isServer } from '../../utils/isServer';
+import { toErrorMap } from '../../utils/toErrorMap';
 import { withApollo } from '../../utils/withApollo';
 
 const DeleteAccount: React.FC<{}> = ({}) => {
@@ -13,21 +14,27 @@ const DeleteAccount: React.FC<{}> = ({}) => {
     const { data } = useMeQuery({
         skip: isServer(),
     });
-    const [deleteUser] = useDeleteUserMutation();
+    const [deleteAccount] = useDeleteAccountMutation();
 
     return (
         <MainWrapper size="small" variant="form">
             <Formik
-                initialValues={{ email: '' }}
-                validationSchema={deleteUserValidations}
-                onSubmit={async (values) => {
-                    await deleteUser({
+                initialValues={{ email: '', password: '' }}
+                validationSchema={deleteAccountValidations}
+                onSubmit={async (values, { setErrors }) => {
+                    const response = await deleteAccount({
                         variables: {
                             ...values,
-                            loggedUser: typeof data?.me?.id === 'string' ? data?.me?.id : -1,
+                            loggedUser: typeof data?.me?.id === 'number' ? data?.me?.id : -1,
                         },
                     });
-                    setComplete(true);
+
+                    if (response.data?.deleteAccount.errors) {
+                        setErrors(toErrorMap(response.data.deleteAccount.errors));
+                    } else if (response.data?.deleteAccount.user) {
+                        // worked
+                        setComplete(true);
+                    }
                 }}
             >
                 {({ isSubmitting }) =>
@@ -36,6 +43,7 @@ const DeleteAccount: React.FC<{}> = ({}) => {
                     ) : (
                         <Form>
                             <InputField name="email" placeholder="email" label="Email" type="email" />
+                            <InputField name="password" placeholder="password" label="Password" type="password" />
                             <Button mt={4} type="submit" isLoading={isSubmitting} colorScheme="teal">
                                 forgot password
                             </Button>

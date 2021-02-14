@@ -1,3 +1,5 @@
-mutation DeleteUser($email: String!, $password: String!, $loggedUser: Int!) {
-    deleteUser(email: $email, password: $password, loggedUser: $loggedUser)
+mutation DeleteAccount($email: String!, $password: String!, $loggedUser: Int!) {
+    deleteAccount(email: $email, password: $password, loggedUser: $loggedUser) {
+        ...RegularUserResponse
+    }
 }

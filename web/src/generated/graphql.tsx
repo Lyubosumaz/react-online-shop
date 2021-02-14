@@ -74,7 +74,7 @@ export type Mutation = {
   register: UserResponse;
   login: UserResponse;
   logout: Scalars['Boolean'];
-  deleteUser: Scalars['Boolean'];
+  deleteAccount: UserResponse;
 };
 
 
@@ -125,8 +125,9 @@ export type MutationLoginArgs = {
 };
 
 
-export type MutationDeleteUserArgs = {
+export type MutationDeleteAccountArgs = {
   loggedUser: Scalars['Int'];
+  password: Scalars['String'];
   email: Scalars['String'];
 };
 
@@ -222,15 +223,19 @@ export type DeleteItemMutation = (
   & Pick<Mutation, 'deleteItem'>
 );
 
-export type DeleteUserMutationVariables = Exact<{
+export type DeleteAccountMutationVariables = Exact<{
   email: Scalars['String'];
+  password: Scalars['String'];
   loggedUser: Scalars['Int'];
 }>;
 
 
-export type DeleteUserMutation = (
+export type DeleteAccountMutation = (
   { __typename?: 'Mutation' }
-  & Pick<Mutation, 'deleteUser'>
+  & { deleteAccount: (
+    { __typename?: 'UserResponse' }
+    & RegularUserResponseFragment
+  ) }
 );
 
 export type ForgottenPasswordMutationVariables = Exact<{
@@ -495,37 +500,40 @@ export function useDeleteItemMutation(baseOptions?: Apollo.MutationHookOptions<D
 export type DeleteItemMutationHookResult = ReturnType<typeof useDeleteItemMutation>;
 export type DeleteItemMutationResult = Apollo.MutationResult<DeleteItemMutation>;
 export type DeleteItemMutationOptions = Apollo.BaseMutationOptions<DeleteItemMutation, DeleteItemMutationVariables>;
-export const DeleteUserDocument = gql`
-    mutation DeleteUser($email: String!, $loggedUser: Int!) {
-  deleteUser(email: $email, loggedUser: $loggedUser)
+export const DeleteAccountDocument = gql`
+    mutation DeleteAccount($email: String!, $password: String!, $loggedUser: Int!) {
+  deleteAccount(email: $email, password: $password, loggedUser: $loggedUser) {
+    ...RegularUserResponse
+  }
 }
-    `;
-export type DeleteUserMutationFn = Apollo.MutationFunction<DeleteUserMutation, DeleteUserMutationVariables>;
+    ${RegularUserResponseFragmentDoc}`;
+export type DeleteAccountMutationFn = Apollo.MutationFunction<DeleteAccountMutation, DeleteAccountMutationVariables>;
 
 /**
- * __useDeleteUserMutation__
+ * __useDeleteAccountMutation__
  *
- * To run a mutation, you first call `useDeleteUserMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeleteUserMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useDeleteAccountMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteAccountMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [deleteUserMutation, { data, loading, error }] = useDeleteUserMutation({
+ * const [deleteAccountMutation, { data, loading, error }] = useDeleteAccountMutation({
  *   variables: {
  *      email: // value for 'email'
+ *      password: // value for 'password'
  *      loggedUser: // value for 'loggedUser'
  *   },
  * });
  */
-export function useDeleteUserMutation(baseOptions?: Apollo.MutationHookOptions<DeleteUserMutation, DeleteUserMutationVariables>) {
-        return Apollo.useMutation<DeleteUserMutation, DeleteUserMutationVariables>(DeleteUserDocument, baseOptions);
+export function useDeleteAccountMutation(baseOptions?: Apollo.MutationHookOptions<DeleteAccountMutation, DeleteAccountMutationVariables>) {
+        return Apollo.useMutation<DeleteAccountMutation, DeleteAccountMutationVariables>(DeleteAccountDocument, baseOptions);
       }
-export type DeleteUserMutationHookResult = ReturnType<typeof useDeleteUserMutation>;
-export type DeleteUserMutationResult = Apollo.MutationResult<DeleteUserMutation>;
-export type DeleteUserMutationOptions = Apollo.BaseMutationOptions<DeleteUserMutation, DeleteUserMutationVariables>;
+export type DeleteAccountMutationHookResult = ReturnType<typeof useDeleteAccountMutation>;
+export type DeleteAccountMutationResult = Apollo.MutationResult<DeleteAccountMutation>;
+export type DeleteAccountMutationOptions = Apollo.BaseMutationOptions<DeleteAccountMutation, DeleteAccountMutationVariables>;
 export const ForgottenPasswordDocument = gql`
     mutation ForgottenPassword($email: String!) {
   forgottenPassword(email: $email)

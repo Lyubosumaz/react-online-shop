@@ -235,8 +235,8 @@ export class UserResolver {
         );
     }
 
-    @Mutation(() => Boolean)
-    async deleteUser(
+    @Mutation(() => UserResponse || Boolean)
+    async deleteAccount(
         @Arg('email')
         email: string,
         @Arg('password')
@@ -244,23 +244,30 @@ export class UserResolver {
         @Arg('loggedUser', () => Int)
         loggedUser: number,
         @Ctx()
-        { redis }: MyContext
-    ) {
-        // not present user id on the request
+        { redis, req }: MyContext
+    ): Promise<UserResponse | boolean> {
+        // logged user id not present
         if (loggedUser === -1)
             return {
                 errors: [
                     {
                         field: 'email',
-                        message: "there was problem, couldn't delete the account",
+                        message: "have problem, couldn't delete the account",
                     },
                 ],
             };
 
+        const userId = req.session.userId;
+
         const user = await User.findOne({ where: { email } });
+        console.log(userId === user?.id && userId === loggedUser);
+        if (userId === user?.id && userId === loggedUser) {
+            console.log('all is correct');
+        }
+
+        console.log('userId: ', userId, 'user: ', user, 'password: ', password, 'loggedUser: ', loggedUser);
         // the email is not in the db
-        if (!user) return true;
-        console.log(user, password, loggedUser);
+        // if (!user) return true;
 
         // const token = v4();
 
