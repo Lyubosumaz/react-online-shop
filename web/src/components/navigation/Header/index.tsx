@@ -1,5 +1,5 @@
 import { useApolloClient } from '@apollo/client';
-import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Box, Button, Flex, Icon, IconButton, Link, Text, useDisclosure } from '@chakra-ui/react';
+import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Box, Button, Flex, Icon, IconButton, Link, Text, useColorMode, useDisclosure } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import { FaShoppingCart, FaStore } from 'react-icons/fa';
@@ -23,6 +23,7 @@ const Header: React.FC<{}> = ({}) => {
     });
     const { isOpen, onOpen, onClose } = useDisclosure();
     const cancelRef = React.useRef<HTMLButtonElement>(null);
+    const { colorMode, toggleColorMode } = useColorMode();
 
     return (
         <header style={{ padding: '0.5rem 0', position: 'static', top: 0, backgroundColor: '#7c2c0c', color: '#efe4d1', borderTop: '1rem solid #efe4d1', borderBottom: '1rem solid #efe4d1', zIndex: 1 }}>
@@ -36,6 +37,7 @@ const Header: React.FC<{}> = ({}) => {
                             </Text>
                         </Link>
                     </NextLink>
+
                     <Box ml={'auto'}>
                         {!data?.me ? (
                             <>
@@ -87,6 +89,8 @@ const Header: React.FC<{}> = ({}) => {
                                 </AlertDialog>
                             </Flex>
                         )}
+
+                        <Button onClick={toggleColorMode}>Toggle {colorMode === 'light' ? 'Dark' : 'Light'}</Button>
                     </Box>
                 </Flex>
             </MainWrapper>
