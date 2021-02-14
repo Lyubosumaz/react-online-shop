@@ -40,7 +40,6 @@ const DeleteAccount: React.FC<{}> = ({}) => {
                         },
                     });
 
-                    console.log(response.data?.deleteAccount);
                     if (response.data?.deleteAccount.errors) {
                         setErrors(toErrorMap(response.data.deleteAccount.errors));
                     } else if (response.data?.deleteAccount) {
