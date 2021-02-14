@@ -1,4 +1,4 @@
-import { Box, Button } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -42,12 +42,8 @@ const Register: React.FC<{}> = ({}) => {
                 {({ isSubmitting }) => (
                     <Form>
                         <InputField name="username" placeholder="username" label="Username" />
-                        <Box mt={4}>
-                            <InputField name="email" placeholder="email" label="Email" />
-                        </Box>
-                        <Box mt={4}>
-                            <InputField name="password" placeholder="password" label="Password" type="password" />
-                        </Box>
+                        <InputField name="email" placeholder="email" label="Email" />
+                        <InputField name="password" placeholder="password" label="Password" type="password" />
                         <Button mt={4} type="submit" isLoading={isSubmitting} colorScheme="teal">
                             register
                         </Button>
