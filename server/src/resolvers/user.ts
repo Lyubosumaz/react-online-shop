@@ -247,7 +247,7 @@ export class UserResolver {
         { redis, req }: MyContext
     ): Promise<UserResponse | boolean> {
         // logged user id not present
-        if (loggedUser === -1)
+        if (loggedUser === -1) {
             return {
                 errors: [
                     {
@@ -256,13 +256,38 @@ export class UserResolver {
                     },
                 ],
             };
-
-        const userId = req.session.userId;
+        }
 
         const user = await User.findOne({ where: { email } });
-        console.log(userId === user?.id && userId === loggedUser);
-        if (userId === user?.id && userId === loggedUser) {
+        if (!user) {
+            return {
+                errors: [
+                    {
+                        field: 'email',
+                        message: 'is not existent',
+                    },
+                ],
+            };
+        }
+
+        const valid = await argon2.verify(user.password, password);
+        if (!valid) {
+            return {
+                errors: [
+                    {
+                        field: 'password',
+                        message: 'is incorrect',
+                    },
+                ],
+            };
+        }
+
+        const userId = req.session.userId;
+        // your are logged in with same account
+        // account exist in the db
+        if (userId === user.id && userId === loggedUser) {
             console.log('all is correct');
+            await User.delete({ id: user.id });
         }
 
         console.log('userId: ', userId, 'user: ', user, 'password: ', password, 'loggedUser: ', loggedUser);
