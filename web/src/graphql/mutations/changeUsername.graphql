@@ -1,0 +1,5 @@
+mutation ChangeUsername($oldUsername: String!, $newUsername: String!, $password: String!, $loggedUser: Int!) {
+    changeUsername(oldUsername: $oldUsername, newUsername: $newUsername, password: $password, loggedUser: $loggedUser) {
+        ...RegularUserResponse
+    }
+}

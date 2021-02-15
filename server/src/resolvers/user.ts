@@ -365,4 +365,64 @@ export class UserResolver {
 
         return { user };
     }
+
+    @Mutation(() => UserResponse)
+    async changeUsername(
+        @Arg('oldUsername')
+        oldUsername: string,
+        @Arg('newUsername')
+        newUsername: string,
+        @Arg('password')
+        password: string,
+        @Arg('loggedUser', () => Int)
+        loggedUser: number,
+        @Ctx()
+        { req }: MyContext
+    ): Promise<UserResponse> {
+        // logged user id not present
+        if (loggedUser === -1) {
+            return {
+                errors: [
+                    {
+                        field: 'oldEmail',
+                        message: "have problem, couldn't change email",
+                    },
+                ],
+            };
+        }
+
+        let user = await User.findOne({ where: { username: oldUsername } });
+        if (!user) {
+            return {
+                errors: [
+                    {
+                        field: 'oldEmail',
+                        message: 'does not existent',
+                    },
+                ],
+            };
+        }
+
+        const valid = await argon2.verify(user.password, password);
+        if (!valid) {
+            return {
+                errors: [
+                    {
+                        field: 'password',
+                        message: 'is incorrect',
+                    },
+                ],
+            };
+        }
+
+        const userId = req.session.userId;
+        // your are logged in with same account
+        // account exist in the db
+        if (userId === user.id && userId === loggedUser) {
+            await User.update({ id: user.id }, { username: newUsername });
+            user = await User.findOne({ id: user.id });
+        }
+
+        return { user };
+    }
 }
