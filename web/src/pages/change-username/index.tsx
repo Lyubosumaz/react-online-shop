@@ -29,6 +29,8 @@ const ChangeUsername: React.FC<{}> = ({}) => {
                             loggedUser: typeof data?.me?.id === 'number' ? data?.me?.id : -1,
                         },
                         update: (cache, { data }) => {
+                            if (data?.changeUsername?.errors) return;
+
                             cache.writeQuery<MeQuery>({
                                 query: MeDocument,
                                 data: {

@@ -396,8 +396,8 @@ export class UserResolver {
             return {
                 errors: [
                     {
-                        field: 'oldEmail',
-                        message: "have problem, couldn't change email",
+                        field: 'oldUsername',
+                        message: "have problem, couldn't change username",
                     },
                 ],
             };
@@ -408,7 +408,7 @@ export class UserResolver {
             return {
                 errors: [
                     {
-                        field: 'oldEmail',
+                        field: 'oldUsername',
                         message: 'does not existent',
                     },
                 ],
