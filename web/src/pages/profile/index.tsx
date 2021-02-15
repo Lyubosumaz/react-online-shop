@@ -1,4 +1,4 @@
-import { Flex, Icon, IconButton, Text } from '@chakra-ui/react';
+import { Button, Flex, Icon, IconButton, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import { FaEdit, FaEnvelope, FaIdCard, FaLock, FaLockOpen, FaTrashAlt, FaUser } from 'react-icons/fa';
@@ -24,7 +24,7 @@ const Profile: React.FC<{}> = ({}) => {
                 <Icon as={FaUser} w={8} h={8} mr={2} />
                 <TextHolder>Username:</TextHolder>
                 <Text mr={2}>{data?.me?.username}</Text>
-                <NextLink href="/">
+                <NextLink href="/change-username">
                     <IconButton icon={<FaEdit />} aria-label="Reset Password" />
                 </NextLink>
             </Flex>
@@ -33,9 +33,15 @@ const Profile: React.FC<{}> = ({}) => {
                 <Icon as={FaEnvelope} w={8} h={8} mr={2} />
                 <TextHolder>Change Email:</TextHolder>
                 <Text mr={2}>new@new.com</Text>
-                <NextLink href="/">
-                    <IconButton icon={<FaEdit />} aria-label="Reset Password" />
-                </NextLink>
+                {true ? ( // TODO adding email auth
+                    <NextLink href="/change-email">
+                        <IconButton icon={<FaEdit />} aria-label="Reset Password" />
+                    </NextLink>
+                ) : (
+                    <NextLink href="/confirm-email">
+                        <Button mr={2}>confirm email</Button>
+                    </NextLink>
+                )}
             </Flex>
 
             <Flex m="0.5rem 0" alignItems="center">
