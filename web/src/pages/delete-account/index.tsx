@@ -50,7 +50,7 @@ const DeleteAccount: React.FC<{}> = ({}) => {
             >
                 {({ isSubmitting }) => (
                     <Form>
-                        <InputField name="email" placeholder="email" label="Email" type="email" />
+                        <InputField name="email" placeholder="email" label="Email" />
                         <InputField name="password" placeholder="password" label="Password" type="password" />
                         <Button mt={4} isLoading={isSubmitting} onClick={onOpen} colorScheme="teal">
                             forgot password

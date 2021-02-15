@@ -26,7 +26,7 @@ const ForgottenPassword: React.FC<{}> = ({}) => {
                         <Box>if an account with that email exists, we sent you can email</Box>
                     ) : (
                         <Form>
-                            <InputField name="email" placeholder="email" label="Email" type="email" />
+                            <InputField name="email" placeholder="email" label="Email" />
                             <Button mt={4} type="submit" isLoading={isSubmitting} colorScheme="teal">
                                 forgot password
                             </Button>
