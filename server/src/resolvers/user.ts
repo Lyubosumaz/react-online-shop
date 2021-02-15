@@ -331,7 +331,7 @@ export class UserResolver {
             };
         }
 
-        const user = await User.findOne({ where: { email: oldEmail } });
+        let user = await User.findOne({ where: { email: oldEmail } });
         if (!user) {
             return {
                 errors: [
@@ -360,6 +360,7 @@ export class UserResolver {
         // account exist in the db
         if (userId === user.id && userId === loggedUser) {
             await User.update({ id: user.id }, { email: newEmail, emailStatus: -1 });
+            user = await User.findOne({ id: user.id });
         }
 
         return { user };

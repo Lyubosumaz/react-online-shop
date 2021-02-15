@@ -33,7 +33,7 @@ const ChangeEmail: React.FC<{}> = ({}) => {
                                 query: MeDocument,
                                 data: {
                                     __typename: 'Query',
-                                    me: data?.changeEmail.user,
+                                    me: data?.changeEmail?.user,
                                 },
                             });
                             cache.evict({ fieldName: 'items:{}' });
@@ -44,7 +44,7 @@ const ChangeEmail: React.FC<{}> = ({}) => {
                         setErrors(toErrorMap(response.data.changeEmail.errors));
                     } else if (response.data?.changeEmail) {
                         // worked
-                        router.push('/profile');
+                        router.back();
                     }
                 }}
             >
