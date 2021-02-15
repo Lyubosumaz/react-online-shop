@@ -343,6 +343,18 @@ export class UserResolver {
             };
         }
 
+        const checkForExistingEmail = await User.findOne({ where: { email: newEmail } });
+        if (checkForExistingEmail) {
+            return {
+                errors: [
+                    {
+                        field: 'newEmail',
+                        message: 'already existent',
+                    },
+                ],
+            };
+        }
+
         const valid = await argon2.verify(user.password, password);
         if (!valid) {
             return {
@@ -398,6 +410,18 @@ export class UserResolver {
                     {
                         field: 'oldEmail',
                         message: 'does not existent',
+                    },
+                ],
+            };
+        }
+
+        const checkForExistingUsername = await User.findOne({ where: { username: newUsername } });
+        if (checkForExistingUsername) {
+            return {
+                errors: [
+                    {
+                        field: 'newUsername',
+                        message: 'already existent',
                     },
                 ],
             };
