@@ -18,6 +18,10 @@ export class User extends BaseEntity {
     @Column({ unique: true })
     email!: string;
 
+    @Field()
+    @Column({ type: 'int', default: -1 })
+    emailStatus!: number;
+
     @Column()
     password!: string;
 
