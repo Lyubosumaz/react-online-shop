@@ -1,0 +1,5 @@
+mutation ChangeEmail($oldEmail: String!, $newEmail: String!, $password: String!) {
+    changeEmail(oldEmail: $oldEmail, newEmail: $newEmail, password: $password) {
+        ...RegularUserResponse
+    }
+}

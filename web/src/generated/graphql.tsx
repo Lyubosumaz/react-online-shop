@@ -59,6 +59,7 @@ export type User = {
   id: Scalars['Float'];
   username: Scalars['String'];
   email: Scalars['String'];
+  emailStatus: Scalars['Float'];
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
 };
@@ -75,6 +76,7 @@ export type Mutation = {
   login: UserResponse;
   logout: Scalars['Boolean'];
   deleteAccount: UserResponse;
+  changeEmail: UserResponse;
 };
 
 
@@ -131,6 +133,13 @@ export type MutationDeleteAccountArgs = {
   email: Scalars['String'];
 };
 
+
+export type MutationChangeEmailArgs = {
+  password: Scalars['String'];
+  newEmail: Scalars['String'];
+  oldEmail: Scalars['String'];
+};
+
 export type ItemInput = {
   category: Scalars['String'];
   title: Scalars['String'];
@@ -184,6 +193,21 @@ export type RegularUserResponseFragment = (
     { __typename?: 'User' }
     & RegularUserFragment
   )> }
+);
+
+export type ChangeEmailMutationVariables = Exact<{
+  oldEmail: Scalars['String'];
+  newEmail: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type ChangeEmailMutation = (
+  { __typename?: 'Mutation' }
+  & { changeEmail: (
+    { __typename?: 'UserResponse' }
+    & RegularUserResponseFragment
+  ) }
 );
 
 export type ChangePasswordMutationVariables = Exact<{
@@ -397,6 +421,40 @@ export const RegularUserResponseFragmentDoc = gql`
 }
     ${RegularErrorFragmentDoc}
 ${RegularUserFragmentDoc}`;
+export const ChangeEmailDocument = gql`
+    mutation ChangeEmail($oldEmail: String!, $newEmail: String!, $password: String!) {
+  changeEmail(oldEmail: $oldEmail, newEmail: $newEmail, password: $password) {
+    ...RegularUserResponse
+  }
+}
+    ${RegularUserResponseFragmentDoc}`;
+export type ChangeEmailMutationFn = Apollo.MutationFunction<ChangeEmailMutation, ChangeEmailMutationVariables>;
+
+/**
+ * __useChangeEmailMutation__
+ *
+ * To run a mutation, you first call `useChangeEmailMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useChangeEmailMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [changeEmailMutation, { data, loading, error }] = useChangeEmailMutation({
+ *   variables: {
+ *      oldEmail: // value for 'oldEmail'
+ *      newEmail: // value for 'newEmail'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useChangeEmailMutation(baseOptions?: Apollo.MutationHookOptions<ChangeEmailMutation, ChangeEmailMutationVariables>) {
+        return Apollo.useMutation<ChangeEmailMutation, ChangeEmailMutationVariables>(ChangeEmailDocument, baseOptions);
+      }
+export type ChangeEmailMutationHookResult = ReturnType<typeof useChangeEmailMutation>;
+export type ChangeEmailMutationResult = Apollo.MutationResult<ChangeEmailMutation>;
+export type ChangeEmailMutationOptions = Apollo.BaseMutationOptions<ChangeEmailMutation, ChangeEmailMutationVariables>;
 export const ChangePasswordDocument = gql`
     mutation ChangePassword($token: String!, $newPassword: String!) {
   changePassword(token: $token, newPassword: $newPassword) {

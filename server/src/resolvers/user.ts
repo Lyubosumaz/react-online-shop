@@ -244,7 +244,7 @@ export class UserResolver {
         @Arg('loggedUser', () => Int)
         loggedUser: number,
         @Ctx()
-        { redis, req, res }: MyContext
+        { req, res }: MyContext
     ): Promise<UserResponse | boolean> {
         // logged user id not present
         if (loggedUser === -1) {
@@ -304,5 +304,20 @@ export class UserResolver {
         }
 
         return true;
+    }
+
+    @Mutation(() => UserResponse)
+    async changeEmail(
+        @Arg('oldEmail')
+        oldEmail: string,
+        @Arg('newEmail')
+        newEmail: string,
+        @Arg('password')
+        password: string,
+        @Ctx()
+        { req, res }: MyContext
+    ): Promise<UserResponse> {
+        console.log('old email: ', oldEmail, 'new email: ', newEmail, 'password: ', password);
+        return {};
     }
 }

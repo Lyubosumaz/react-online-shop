@@ -2,16 +2,21 @@ import { Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import InputField from '../../components/form/InputField';
+import { useChangeEmailMutation } from '../../generated/graphql';
 import MainWrapper from '../../layouts/MainWrapper';
 import { changeEmailValidations } from '../../utils/formValidations';
+import { withApollo } from '../../utils/withApollo';
 
 const ChangeEmail: React.FC<{}> = ({}) => {
+    const [changeEmail] = useChangeEmailMutation();
+
     return (
         <MainWrapper size="small" variant="form">
             <Formik
                 initialValues={{ oldEmail: '', newEmail: '', password: '' }}
                 validationSchema={changeEmailValidations}
                 onSubmit={async (values, { setErrors }) => {
+                    changeEmail({ variables: values });
                     console.log('change email: ', values);
                 }}
             >
@@ -30,4 +35,4 @@ const ChangeEmail: React.FC<{}> = ({}) => {
     );
 };
 
-export default ChangeEmail;
+export default withApollo({ ssr: false })(ChangeEmail);
