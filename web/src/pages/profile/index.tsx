@@ -32,7 +32,7 @@ const Profile: React.FC<{}> = ({}) => {
             <Flex m="0.5rem 0" alignItems="center">
                 <Icon as={FaEnvelope} w={8} h={8} mr={2} />
                 <TextHolder>Change Email:</TextHolder>
-                <Text mr={2}>new@new.com</Text>
+                <Text mr={2}>{data?.me?.email}</Text>
                 {true ? ( // TODO adding email auth
                     <NextLink href="/change-email">
                         <IconButton icon={<FaEdit />} aria-label="Reset Password" />
