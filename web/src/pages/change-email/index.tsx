@@ -3,7 +3,7 @@ import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
 import InputField from '../../components/form/InputField';
-import { useChangeEmailMutation, useMeQuery } from '../../generated/graphql';
+import { MeDocument, MeQuery, useChangeEmailMutation, useMeQuery } from '../../generated/graphql';
 import MainWrapper from '../../layouts/MainWrapper';
 import { changeEmailValidations } from '../../utils/formValidations';
 import { isServer } from '../../utils/isServer';
@@ -27,6 +27,16 @@ const ChangeEmail: React.FC<{}> = ({}) => {
                         variables: {
                             ...values,
                             loggedUser: typeof data?.me?.id === 'number' ? data?.me?.id : -1,
+                        },
+                        update: (cache, { data }) => {
+                            cache.writeQuery<MeQuery>({
+                                query: MeDocument,
+                                data: {
+                                    __typename: 'Query',
+                                    me: data?.changeEmail.user,
+                                },
+                            });
+                            cache.evict({ fieldName: 'items:{}' });
                         },
                     });
 
