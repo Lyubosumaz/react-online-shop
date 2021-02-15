@@ -235,7 +235,7 @@ export class UserResolver {
         );
     }
 
-    @Mutation(() => UserResponse || Boolean)
+    @Mutation(() => UserResponse)
     async deleteAccount(
         @Arg('email')
         email: string,
@@ -317,9 +317,51 @@ export class UserResolver {
         @Arg('loggedUser', () => Int)
         loggedUser: number,
         @Ctx()
-        { req, res }: MyContext
+        { req }: MyContext
     ): Promise<UserResponse> {
-        console.log('old email: ', oldEmail, 'new email: ', newEmail, 'password: ', password);
-        return {};
+        // logged user id not present
+        if (loggedUser === -1) {
+            return {
+                errors: [
+                    {
+                        field: 'oldEmail',
+                        message: "have problem, couldn't change email",
+                    },
+                ],
+            };
+        }
+
+        const user = await User.findOne({ where: { email: oldEmail } });
+        if (!user) {
+            return {
+                errors: [
+                    {
+                        field: 'oldEmail',
+                        message: 'does not existent',
+                    },
+                ],
+            };
+        }
+
+        const valid = await argon2.verify(user.password, password);
+        if (!valid) {
+            return {
+                errors: [
+                    {
+                        field: 'password',
+                        message: 'is incorrect',
+                    },
+                ],
+            };
+        }
+
+        const userId = req.session.userId;
+        // your are logged in with same account
+        // account exist in the db
+        if (userId === user.id && userId === loggedUser) {
+            await User.update({ id: user.id }, { email: newEmail, emailStatus: -1 });
+        }
+
+        return { user };
     }
 }

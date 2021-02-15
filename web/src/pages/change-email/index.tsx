@@ -1,14 +1,17 @@
 import { Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
+import { useRouter } from 'next/router';
 import React from 'react';
 import InputField from '../../components/form/InputField';
 import { useChangeEmailMutation, useMeQuery } from '../../generated/graphql';
 import MainWrapper from '../../layouts/MainWrapper';
 import { changeEmailValidations } from '../../utils/formValidations';
 import { isServer } from '../../utils/isServer';
+import { toErrorMap } from '../../utils/toErrorMap';
 import { withApollo } from '../../utils/withApollo';
 
 const ChangeEmail: React.FC<{}> = ({}) => {
+    const router = useRouter();
     const [changeEmail] = useChangeEmailMutation();
     const { data } = useMeQuery({
         skip: isServer(),
@@ -27,7 +30,12 @@ const ChangeEmail: React.FC<{}> = ({}) => {
                         },
                     });
 
-                    console.log('change email: ', values, 'response: ', response);
+                    if (response.data?.changeEmail.errors) {
+                        setErrors(toErrorMap(response.data.changeEmail.errors));
+                    } else if (response.data?.changeEmail) {
+                        // worked
+                        router.push('/profile');
+                    }
                 }}
             >
                 {({ isSubmitting }) => (
