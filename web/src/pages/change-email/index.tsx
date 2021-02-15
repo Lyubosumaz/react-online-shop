@@ -2,13 +2,17 @@ import { Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import InputField from '../../components/form/InputField';
-import { useChangeEmailMutation } from '../../generated/graphql';
+import { useChangeEmailMutation, useMeQuery } from '../../generated/graphql';
 import MainWrapper from '../../layouts/MainWrapper';
 import { changeEmailValidations } from '../../utils/formValidations';
+import { isServer } from '../../utils/isServer';
 import { withApollo } from '../../utils/withApollo';
 
 const ChangeEmail: React.FC<{}> = ({}) => {
     const [changeEmail] = useChangeEmailMutation();
+    const { data } = useMeQuery({
+        skip: isServer(),
+    });
 
     return (
         <MainWrapper size="small" variant="form">
@@ -16,8 +20,14 @@ const ChangeEmail: React.FC<{}> = ({}) => {
                 initialValues={{ oldEmail: '', newEmail: '', password: '' }}
                 validationSchema={changeEmailValidations}
                 onSubmit={async (values, { setErrors }) => {
-                    changeEmail({ variables: values });
-                    console.log('change email: ', values);
+                    const response = await changeEmail({
+                        variables: {
+                            ...values,
+                            loggedUser: typeof data?.me?.id === 'number' ? data?.me?.id : -1,
+                        },
+                    });
+
+                    console.log('change email: ', values, 'response: ', response);
                 }}
             >
                 {({ isSubmitting }) => (

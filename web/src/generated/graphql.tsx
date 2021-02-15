@@ -135,6 +135,7 @@ export type MutationDeleteAccountArgs = {
 
 
 export type MutationChangeEmailArgs = {
+  loggedUser: Scalars['Int'];
   password: Scalars['String'];
   newEmail: Scalars['String'];
   oldEmail: Scalars['String'];
@@ -199,6 +200,7 @@ export type ChangeEmailMutationVariables = Exact<{
   oldEmail: Scalars['String'];
   newEmail: Scalars['String'];
   password: Scalars['String'];
+  loggedUser: Scalars['Int'];
 }>;
 
 
@@ -422,8 +424,13 @@ export const RegularUserResponseFragmentDoc = gql`
     ${RegularErrorFragmentDoc}
 ${RegularUserFragmentDoc}`;
 export const ChangeEmailDocument = gql`
-    mutation ChangeEmail($oldEmail: String!, $newEmail: String!, $password: String!) {
-  changeEmail(oldEmail: $oldEmail, newEmail: $newEmail, password: $password) {
+    mutation ChangeEmail($oldEmail: String!, $newEmail: String!, $password: String!, $loggedUser: Int!) {
+  changeEmail(
+    oldEmail: $oldEmail
+    newEmail: $newEmail
+    password: $password
+    loggedUser: $loggedUser
+  ) {
     ...RegularUserResponse
   }
 }
@@ -446,6 +453,7 @@ export type ChangeEmailMutationFn = Apollo.MutationFunction<ChangeEmailMutation,
  *      oldEmail: // value for 'oldEmail'
  *      newEmail: // value for 'newEmail'
  *      password: // value for 'password'
+ *      loggedUser: // value for 'loggedUser'
  *   },
  * });
  */

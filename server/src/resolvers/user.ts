@@ -314,6 +314,8 @@ export class UserResolver {
         newEmail: string,
         @Arg('password')
         password: string,
+        @Arg('loggedUser', () => Int)
+        loggedUser: number,
         @Ctx()
         { req, res }: MyContext
     ): Promise<UserResponse> {
