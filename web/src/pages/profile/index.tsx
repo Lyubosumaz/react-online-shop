@@ -1,4 +1,4 @@
-import { Button, Flex, Icon, IconButton, Text } from '@chakra-ui/react';
+import { Button, Icon, IconButton, List, ListItem, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import { FaEdit, FaEnvelope, FaIdCard, FaLock, FaLockOpen, FaTrashAlt, FaUser } from 'react-icons/fa';
@@ -20,45 +20,47 @@ const Profile: React.FC<{}> = ({}) => {
 
     return (
         <MainLayout>
-            <Flex m="0.5rem 0" alignItems="center">
-                <Icon as={FaUser} w={8} h={8} mr={2} />
-                <TextHolder>Username:</TextHolder>
-                <Text mr={2}>{data?.me?.username}</Text>
-                <NextLink href="/change-username">
-                    <IconButton icon={<FaEdit />} aria-label="Reset Password" />
-                </NextLink>
-            </Flex>
-
-            <Flex m="0.5rem 0" alignItems="center">
-                <Icon as={FaEnvelope} w={8} h={8} mr={2} />
-                <TextHolder>Change Email:</TextHolder>
-                <Text mr={2}>{data?.me?.email}</Text>
-                {true ? ( // TODO adding email auth
-                    <NextLink href="/change-email">
+            <List padding="8rem 0" spacing={10}>
+                <ListItem m="0.5rem 0" d="flex" alignItems="center">
+                    <Icon as={FaUser} w={8} h={8} mr={2} />
+                    <TextHolder>Username:</TextHolder>
+                    <Text mr={2}>{data?.me?.username}</Text>
+                    <NextLink href="/change-username">
                         <IconButton icon={<FaEdit />} aria-label="Reset Password" />
                     </NextLink>
-                ) : (
-                    <NextLink href="/confirm-email">
-                        <Button mr={2}>confirm email</Button>
+                </ListItem>
+
+                <ListItem m="0.5rem 0" d="flex" alignItems="center">
+                    <Icon as={FaEnvelope} w={8} h={8} mr={2} />
+                    <TextHolder>Change Email:</TextHolder>
+                    <Text mr={2}>{data?.me?.email}</Text>
+                    {false ? ( // TODO adding email auth
+                        <NextLink href="/change-email">
+                            <IconButton icon={<FaEdit />} aria-label="Reset Password" />
+                        </NextLink>
+                    ) : (
+                        <NextLink href="/confirm-email">
+                            <Button mr={2}>confirm email</Button>
+                        </NextLink>
+                    )}
+                </ListItem>
+
+                <ListItem m="0.5rem 0" d="flex" alignItems="center">
+                    <Icon as={FaLock} w={8} h={8} mr={2} />
+                    <TextHolder>Change Password:</TextHolder>
+                    <NextLink href="/forgotten-password">
+                        <IconButton icon={<FaLockOpen />} aria-label="Reset Password" />
                     </NextLink>
-                )}
-            </Flex>
+                </ListItem>
 
-            <Flex m="0.5rem 0" alignItems="center">
-                <Icon as={FaLock} w={8} h={8} mr={2} />
-                <TextHolder>Change Password:</TextHolder>
-                <NextLink href="/forgotten-password">
-                    <IconButton icon={<FaLockOpen />} aria-label="Reset Password" />
-                </NextLink>
-            </Flex>
-
-            <Flex m="0.5rem 0" alignItems="center">
-                <Icon as={FaIdCard} w={8} h={8} mr={2} />
-                <TextHolder>Delete Account:</TextHolder>
-                <NextLink href="/delete-account">
-                    <IconButton icon={<FaTrashAlt />} aria-label="Delete Account" />
-                </NextLink>
-            </Flex>
+                <ListItem m="0.5rem 0" d="flex" alignItems="center">
+                    <Icon as={FaIdCard} w={8} h={8} mr={2} />
+                    <TextHolder>Delete Account:</TextHolder>
+                    <NextLink href="/delete-account">
+                        <IconButton icon={<FaTrashAlt />} aria-label="Delete Account" />
+                    </NextLink>
+                </ListItem>
+            </List>
         </MainLayout>
     );
 };
