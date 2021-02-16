@@ -1,22 +1,13 @@
 import React from 'react';
 import Footer from '../../components/navigation/Footer';
 import Header from '../../components/navigation/Header';
-import MainWrapper, { WrapperSize, WrapperVarian } from '../MainWrapper';
+import Main from '../MainBody';
 
-interface LayoutProps {
-    size?: WrapperSize;
-    variant?: WrapperVarian;
-}
-
-const MainLayout: React.FC<LayoutProps> = ({ children, size, variant }) => {
+const MainLayout: React.FC<{}> = ({ children }) => {
     return (
         <>
             <Header />
-            <main>
-                <MainWrapper size={size} variant={variant}>
-                    {children}
-                </MainWrapper>
-            </main>
+            <Main>{children}</Main>
             <Footer />
         </>
     );

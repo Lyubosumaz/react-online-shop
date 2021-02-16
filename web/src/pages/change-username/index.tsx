@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import InputField from '../../components/form/InputField';
 import { MeDocument, MeQuery, useChangeUsernameMutation, useMeQuery } from '../../generated/graphql';
-import MainWrapper from '../../layouts/MainWrapper';
+import SecondaryLayout from '../../layouts/SecondaryLayout';
 import { changeUsernameValidations } from '../../utils/formValidations';
 import { isServer } from '../../utils/isServer';
 import { toErrorMap } from '../../utils/toErrorMap';
@@ -18,7 +18,7 @@ const ChangeUsername: React.FC<{}> = ({}) => {
     });
 
     return (
-        <MainWrapper size="small" variant="form">
+        <SecondaryLayout>
             <Formik
                 initialValues={{ oldUsername: '', newUsername: '', password: '' }}
                 validationSchema={changeUsernameValidations}
@@ -61,7 +61,7 @@ const ChangeUsername: React.FC<{}> = ({}) => {
                     </Form>
                 )}
             </Formik>
-        </MainWrapper>
+        </SecondaryLayout>
     );
 };
 
