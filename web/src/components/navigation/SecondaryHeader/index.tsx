@@ -1,4 +1,4 @@
-import { List, ListItem } from '@chakra-ui/react';
+import { List, ListItem, Select } from '@chakra-ui/react';
 import React from 'react';
 import MainWrapper from '../../../layouts/MainWrapper';
 import ColorMode from '../../buttons/ColorMode';
@@ -14,7 +14,18 @@ const SecondaryHeader: React.FC<{}> = ({}) => {
                     </ListItem>
 
                     <ListItem>
-                        <ColorMode />
+                        <List display="flex" justifyContent="space-between">
+                            <ListItem>
+                                <Select placeholder="Language">
+                                    <option value="english">English</option>
+                                    <option value="bulgarian">Bulgarian</option>
+                                </Select>
+                            </ListItem>
+
+                            <ListItem ml={4}>
+                                <ColorMode />
+                            </ListItem>
+                        </List>
                     </ListItem>
                 </List>
             </MainWrapper>
