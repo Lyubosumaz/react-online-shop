@@ -7,7 +7,7 @@ import GoBack from '../../buttons/GoBack';
 const SecondaryHeader: React.FC<{}> = ({}) => {
     return (
         <header style={{ padding: '1rem 0', borderBottom: '0.15rem solid #2C7A7B' }}>
-            <MainWrapper size="small">
+            <MainWrapper size="medium">
                 <List display="flex" justifyContent="space-between">
                     <ListItem>
                         <GoBack />
