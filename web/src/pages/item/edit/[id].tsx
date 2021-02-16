@@ -7,6 +7,7 @@ import InputField from '../../../components/form/InputField';
 import SelectField from '../../../components/form/SelectField';
 import { useItemQuery, useUpdateItemMutation } from '../../../generated/graphql';
 import MainLayout from '../../../layouts/MainLayout';
+import SecondaryLayout from '../../../layouts/SecondaryLayout';
 import { createValidations } from '../../../utils/formValidations';
 import { useGetIntId } from '../../../utils/useGetIntId';
 import { withApollo } from '../../../utils/withApollo';
@@ -39,7 +40,7 @@ const EditItem = ({}) => {
     }
 
     return (
-        <MainLayout size="small" variant="form">
+        <SecondaryLayout>
             <Formik
                 initialValues={{
                     category: data.item.category,
@@ -65,7 +66,7 @@ const EditItem = ({}) => {
                     </Form>
                 )}
             </Formik>
-        </MainLayout>
+        </SecondaryLayout>
     );
 };
 

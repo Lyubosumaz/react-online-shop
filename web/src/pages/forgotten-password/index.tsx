@@ -3,7 +3,7 @@ import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import InputField from '../../components/form/InputField';
 import { useForgottenPasswordMutation } from '../../generated/graphql';
-import MainWrapper from '../../layouts/MainWrapper';
+import SecondaryLayout from '../../layouts/SecondaryLayout';
 import { forgottenPasswordValidations } from '../../utils/formValidations';
 import { withApollo } from '../../utils/withApollo';
 
@@ -12,7 +12,7 @@ const ForgottenPassword: React.FC<{}> = ({}) => {
     const [forgottenPassword] = useForgottenPasswordMutation();
 
     return (
-        <MainWrapper size="small" variant="form">
+        <SecondaryLayout>
             <Formik
                 initialValues={{ email: '' }}
                 validationSchema={forgottenPasswordValidations}
@@ -34,7 +34,7 @@ const ForgottenPassword: React.FC<{}> = ({}) => {
                     )
                 }
             </Formik>
-        </MainWrapper>
+        </SecondaryLayout>
     );
 };
 

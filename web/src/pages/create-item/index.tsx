@@ -6,7 +6,7 @@ import { categoryList } from '../../category-list.json'; // TODO create huge cat
 import InputField from '../../components/form/InputField';
 import SelectField from '../../components/form/SelectField';
 import { useCreateItemMutation } from '../../generated/graphql';
-import MainLayout from '../../layouts/MainLayout';
+import SecondaryLayout from '../../layouts/SecondaryLayout';
 import { createValidations } from '../../utils/formValidations';
 import { useIsAuth } from '../../utils/useIsAuth';
 import { withApollo } from '../../utils/withApollo';
@@ -24,7 +24,7 @@ const CreateItem: React.FC<{}> = ({}) => {
     const [createItem] = useCreateItemMutation();
 
     return (
-        <MainLayout size="small" variant="form">
+        <SecondaryLayout>
             <Formik
                 initialValues={{
                     category: '',
@@ -56,7 +56,7 @@ const CreateItem: React.FC<{}> = ({}) => {
                     </Form>
                 )}
             </Formik>
-        </MainLayout>
+        </SecondaryLayout>
     );
 };
 

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import InputField from '../../components/form/InputField';
 import { MeDocument, MeQuery, useLoginMutation } from '../../generated/graphql';
-import MainWrapper from '../../layouts/MainWrapper';
+import SecondaryLayout from '../../layouts/SecondaryLayout';
 import { loginValidations } from '../../utils/formValidations';
 import { toErrorMap } from '../../utils/toErrorMap';
 import { withApollo } from '../../utils/withApollo';
@@ -14,7 +14,7 @@ const Login: React.FC<{}> = ({}) => {
     const router = useRouter();
     const [login] = useLoginMutation();
     return (
-        <MainWrapper size="small" variant="form">
+        <SecondaryLayout>
             <Formik
                 initialValues={{ usernameOrEmail: '', password: '' }}
                 validationSchema={loginValidations}
@@ -59,7 +59,7 @@ const Login: React.FC<{}> = ({}) => {
                     </Form>
                 )}
             </Formik>
-        </MainWrapper>
+        </SecondaryLayout>
     );
 };
 
