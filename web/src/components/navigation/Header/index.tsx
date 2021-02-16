@@ -1,11 +1,12 @@
 import { useApolloClient } from '@apollo/client';
-import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, Flex, Icon, IconButton, Link, Text, useColorMode, useDisclosure } from '@chakra-ui/react';
+import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, Flex, Icon, IconButton, Link, Text, useDisclosure } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
-import { FaMoon, FaShoppingCart, FaStore, FaSun } from 'react-icons/fa';
+import { FaShoppingCart, FaStore } from 'react-icons/fa';
 import { useLogoutMutation, useMeQuery } from '../../../generated/graphql';
 import MainWrapper from '../../../layouts/MainWrapper';
 import { isServer } from '../../../utils/isServer';
+import ColorMode from '../../buttons/ColorMode';
 
 const FooterNavItem: React.FC<{ href: string }> = ({ children, href, ...rest }) => (
     <NextLink href={href}>
@@ -23,7 +24,6 @@ const Header: React.FC<{}> = ({}) => {
     });
     const { isOpen, onOpen, onClose } = useDisclosure();
     const cancelRef = React.useRef<HTMLButtonElement>(null);
-    const { colorMode, toggleColorMode } = useColorMode();
 
     return (
         <header style={{ padding: '0.5rem 0', position: 'static', top: 0, backgroundColor: '#7c2c0c', color: '#efe4d1', borderTop: '1rem solid #efe4d1', borderBottom: '1rem solid #efe4d1', zIndex: 1 }}>
@@ -89,7 +89,8 @@ const Header: React.FC<{}> = ({}) => {
                                 </AlertDialog>
                             </Flex>
                         )}
-                        <IconButton aria-label="Color Mode" icon={colorMode === 'light' ? <FaSun /> : <FaMoon />} onClick={toggleColorMode} backgroundColor="#7c2c0c" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c' }} />
+
+                        <ColorMode />
                         {/* TODO button for translate site */}
                     </Flex>
                 </Flex>
