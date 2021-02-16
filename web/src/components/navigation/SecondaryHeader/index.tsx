@@ -6,7 +6,7 @@ import GoBack from '../../buttons/GoBack';
 
 const SecondaryHeader: React.FC<{}> = ({}) => {
     return (
-        <header style={{ margin: '1rem 0' }}>
+        <header style={{ padding: '1rem 0', borderBottom: '0.15rem solid #2C7A7B' }}>
             <MainWrapper>
                 <List display="flex" justifyContent="space-between">
                     <ListItem>
@@ -16,6 +16,7 @@ const SecondaryHeader: React.FC<{}> = ({}) => {
                     <ListItem>
                         <List display="flex" justifyContent="space-between">
                             <ListItem>
+                                {/* TODO adding multiple languages */}
                                 <Select placeholder="Language">
                                     <option value="english">English</option>
                                     <option value="bulgarian">Bulgarian</option>

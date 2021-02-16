@@ -90,7 +90,7 @@ const Header: React.FC<{}> = ({}) => {
                             </Flex>
                         )}
 
-                        <ColorMode />
+                        <ColorMode control="custom" />
                         {/* TODO button for translate site */}
                     </Flex>
                 </Flex>
