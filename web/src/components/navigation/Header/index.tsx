@@ -1,12 +1,13 @@
 import { useApolloClient } from '@apollo/client';
-import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, Flex, Icon, IconButton, Link, Text, useDisclosure } from '@chakra-ui/react';
+import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, Flex, IconButton, Link, Text, useDisclosure } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
-import { FaShoppingCart, FaStore } from 'react-icons/fa';
+import { FaShoppingCart } from 'react-icons/fa';
 import { useLogoutMutation, useMeQuery } from '../../../generated/graphql';
 import MainWrapper from '../../../layouts/MainWrapper';
 import { isServer } from '../../../utils/isServer';
 import ColorMode from '../../buttons/ColorMode';
+import Logo from '../../Logo';
 
 const FooterNavItem: React.FC<{ href: string }> = ({ children, href, ...rest }) => (
     <NextLink href={href}>
@@ -29,14 +30,7 @@ const Header: React.FC<{}> = ({}) => {
         <header style={{ padding: '0.5rem 0', position: 'static', top: 0, backgroundColor: '#7c2c0c', color: '#efe4d1', borderTop: '1rem solid #efe4d1', borderBottom: '1rem solid #efe4d1', zIndex: 1 }}>
             <MainWrapper>
                 <Flex flex={1} align="center" backgroundColor="#7c2c0c">
-                    <NextLink href="/">
-                        <Link p={2} display="flex" alignItems="center" border="0.175rem solid transparent" borderRadius={8} _hover={{ borderColor: '#fcfcfc', color: '#fcfcfc' }}>
-                            <Icon as={FaStore} w={8} h={8} />
-                            <Text fontSize="2.5rem" fontWeight="700" lineHeight={1}>
-                                ROS
-                            </Text>
-                        </Link>
-                    </NextLink>
+                    <Logo />
 
                     <Flex ml={'auto'} alignItems="center">
                         {!data?.me ? (
