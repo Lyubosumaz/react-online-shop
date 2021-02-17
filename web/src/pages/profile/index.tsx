@@ -36,27 +36,31 @@ const Profile: React.FC<{}> = ({}) => {
                     <Icon as={FaEnvelope} w={8} h={8} mr={2} />
                     <TextHolder>Change Email:</TextHolder>
                     <Text mr={2}>{data?.me?.email}</Text>
-                    {false ? ( // TODO adding email auth
+                    {false ? (
                         <NextLink href="/change-email">
                             <IconButton icon={<FaEdit />} aria-label="Reset Password" />
                         </NextLink>
-                    ) : !confirmEmailClick ? (
-                        <Button
-                            mr={2}
-                            onClick={async () => {
-                                await confirmEmailMessage({
-                                    variables: {
-                                        email: typeof data?.me?.email === 'string' ? data?.me?.email : '-1',
-                                    },
-                                });
+                    ) : data?.me?.emailStatus && data.me.emailStatus > 0 ? (
+                        !confirmEmailClick ? (
+                            <Button
+                                mr={2}
+                                onClick={async () => {
+                                    await confirmEmailMessage({
+                                        variables: {
+                                            email: typeof data?.me?.email === 'string' ? data?.me?.email : '-1',
+                                        },
+                                    });
 
-                                setConfirmEmailClick(true);
-                            }}
-                        >
-                            confirm email
-                        </Button>
+                                    setConfirmEmailClick(true);
+                                }}
+                            >
+                                confirm email
+                            </Button>
+                        ) : (
+                            <Text color="teal">An message to your mail has been sent</Text>
+                        )
                     ) : (
-                        <Text color="teal">Mail has been sent</Text>
+                        <Text color="teal">Your mail has been confirm</Text>
                     )}
                 </ListItem>
 
