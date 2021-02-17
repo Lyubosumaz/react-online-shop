@@ -203,7 +203,7 @@ export type RegularErrorFragment = (
 
 export type RegularUserFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'id' | 'username'>
+  & Pick<User, 'id' | 'username' | 'email' | 'emailStatus'>
 );
 
 export type RegularUserResponseFragment = (
@@ -439,7 +439,7 @@ export type MeQuery = (
   { __typename?: 'Query' }
   & { me?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'username' | 'email' | 'emailStatus'>
+    & RegularUserFragment
   )> }
 );
 
@@ -470,6 +470,8 @@ export const RegularUserFragmentDoc = gql`
     fragment RegularUser on User {
   id
   username
+  email
+  emailStatus
 }
     `;
 export const RegularUserResponseFragmentDoc = gql`
@@ -1049,13 +1051,10 @@ export type ItemsQueryResult = Apollo.QueryResult<ItemsQuery, ItemsQueryVariable
 export const MeDocument = gql`
     query Me {
   me {
-    id
-    username
-    email
-    emailStatus
+    ...RegularUser
   }
 }
-    `;
+    ${RegularUserFragmentDoc}`;
 
 /**
  * __useMeQuery__

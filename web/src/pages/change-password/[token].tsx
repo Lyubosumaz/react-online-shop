@@ -17,7 +17,7 @@ const ChangePassword: NextPage = () => {
     const [tokenError, setTokenError] = useState('');
 
     return (
-        <SecondaryLayout>
+        <SecondaryLayout goBackButton="hidden">
             <Formik
                 initialValues={{ newPassword: '' }}
                 validationSchema={changePasswordValidations}

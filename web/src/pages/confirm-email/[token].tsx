@@ -1,7 +1,7 @@
 import { Button, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { useConfirmEmailAcceptMutation } from '../../generated/graphql';
+import { MeDocument, MeQuery, useConfirmEmailAcceptMutation } from '../../generated/graphql';
 import SecondaryLayout from '../../layouts/SecondaryLayout';
 import { withApollo } from '../../utils/withApollo';
 
@@ -11,7 +11,7 @@ const ConfirmEmail: React.FC<{}> = ({}) => {
     const [errMessage, setErrMessage] = useState<string>('');
 
     return (
-        <SecondaryLayout>
+        <SecondaryLayout goBackButton="hidden">
             <Text>
                 To conforms your email
                 <Button
@@ -21,13 +21,22 @@ const ConfirmEmail: React.FC<{}> = ({}) => {
                             variables: {
                                 token: typeof router.query.token === 'string' ? router.query.token : '',
                             },
+                            update: (cache, { data }) => {
+                                cache.writeQuery<MeQuery>({
+                                    query: MeDocument,
+                                    data: {
+                                        __typename: 'Query',
+                                        me: data?.confirmEmailAccept.user,
+                                    },
+                                });
+                            },
                         });
 
                         if (response.data?.confirmEmailAccept.errors) {
                             setErrMessage(response?.data?.confirmEmailAccept.errors[0].message);
                         } else if (response.data?.confirmEmailAccept) {
                             // worked
-                            router.push('/');
+                            router.push('/profile');
                         }
                     }}
                 >
