@@ -72,6 +72,7 @@ export type Mutation = {
   deleteItem: Scalars['Boolean'];
   changePassword: UserResponse;
   forgottenPassword: Scalars['Boolean'];
+  confirmEmailMessage: Scalars['Boolean'];
   register: UserResponse;
   login: UserResponse;
   logout: Scalars['Boolean'];
@@ -113,6 +114,11 @@ export type MutationChangePasswordArgs = {
 
 
 export type MutationForgottenPasswordArgs = {
+  email: Scalars['String'];
+};
+
+
+export type MutationConfirmEmailMessageArgs = {
   email: Scalars['String'];
 };
 
@@ -191,7 +197,7 @@ export type RegularErrorFragment = (
 
 export type RegularUserFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'id' | 'username' | 'email'>
+  & Pick<User, 'id' | 'username'>
 );
 
 export type RegularUserResponseFragment = (
@@ -249,6 +255,16 @@ export type ChangeUsernameMutation = (
     { __typename?: 'UserResponse' }
     & RegularUserResponseFragment
   ) }
+);
+
+export type ConfirmEmailMessageMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type ConfirmEmailMessageMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'confirmEmailMessage'>
 );
 
 export type CreateItemMutationVariables = Exact<{
@@ -404,7 +420,7 @@ export type MeQuery = (
   { __typename?: 'Query' }
   & { me?: Maybe<(
     { __typename?: 'User' }
-    & RegularUserFragment
+    & Pick<User, 'id' | 'username' | 'email' | 'emailStatus'>
   )> }
 );
 
@@ -435,7 +451,6 @@ export const RegularUserFragmentDoc = gql`
     fragment RegularUser on User {
   id
   username
-  email
 }
     `;
 export const RegularUserResponseFragmentDoc = gql`
@@ -562,6 +577,36 @@ export function useChangeUsernameMutation(baseOptions?: Apollo.MutationHookOptio
 export type ChangeUsernameMutationHookResult = ReturnType<typeof useChangeUsernameMutation>;
 export type ChangeUsernameMutationResult = Apollo.MutationResult<ChangeUsernameMutation>;
 export type ChangeUsernameMutationOptions = Apollo.BaseMutationOptions<ChangeUsernameMutation, ChangeUsernameMutationVariables>;
+export const ConfirmEmailMessageDocument = gql`
+    mutation ConfirmEmailMessage($email: String!) {
+  confirmEmailMessage(email: $email)
+}
+    `;
+export type ConfirmEmailMessageMutationFn = Apollo.MutationFunction<ConfirmEmailMessageMutation, ConfirmEmailMessageMutationVariables>;
+
+/**
+ * __useConfirmEmailMessageMutation__
+ *
+ * To run a mutation, you first call `useConfirmEmailMessageMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useConfirmEmailMessageMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [confirmEmailMessageMutation, { data, loading, error }] = useConfirmEmailMessageMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useConfirmEmailMessageMutation(baseOptions?: Apollo.MutationHookOptions<ConfirmEmailMessageMutation, ConfirmEmailMessageMutationVariables>) {
+        return Apollo.useMutation<ConfirmEmailMessageMutation, ConfirmEmailMessageMutationVariables>(ConfirmEmailMessageDocument, baseOptions);
+      }
+export type ConfirmEmailMessageMutationHookResult = ReturnType<typeof useConfirmEmailMessageMutation>;
+export type ConfirmEmailMessageMutationResult = Apollo.MutationResult<ConfirmEmailMessageMutation>;
+export type ConfirmEmailMessageMutationOptions = Apollo.BaseMutationOptions<ConfirmEmailMessageMutation, ConfirmEmailMessageMutationVariables>;
 export const CreateItemDocument = gql`
     mutation CreateItem($input: ItemInput!) {
   createItem(input: $input) {
@@ -953,10 +998,13 @@ export type ItemsQueryResult = Apollo.QueryResult<ItemsQuery, ItemsQueryVariable
 export const MeDocument = gql`
     query Me {
   me {
-    ...RegularUser
+    id
+    username
+    email
+    emailStatus
   }
 }
-    ${RegularUserFragmentDoc}`;
+    `;
 
 /**
  * __useMeQuery__

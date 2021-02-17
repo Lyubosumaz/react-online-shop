@@ -2,7 +2,7 @@ import { Button, Icon, IconButton, List, ListItem, Text } from '@chakra-ui/react
 import NextLink from 'next/link';
 import React from 'react';
 import { FaEdit, FaEnvelope, FaIdCard, FaLock, FaLockOpen, FaTrashAlt, FaUser } from 'react-icons/fa';
-import { useMeQuery } from '../../generated/graphql';
+import { useConfirmEmailMessageMutation, useMeQuery } from '../../generated/graphql';
 import MainLayout from '../../layouts/MainLayout';
 import { isServer } from '../../utils/isServer';
 import { withApollo } from '../../utils/withApollo';
@@ -17,6 +17,7 @@ const Profile: React.FC<{}> = ({}) => {
     const { data } = useMeQuery({
         skip: isServer(),
     });
+    const [confirmEmailMessage] = useConfirmEmailMessageMutation();
 
     return (
         <MainLayout>
@@ -39,9 +40,18 @@ const Profile: React.FC<{}> = ({}) => {
                             <IconButton icon={<FaEdit />} aria-label="Reset Password" />
                         </NextLink>
                     ) : (
-                        <NextLink href="/confirm-email">
-                            <Button mr={2}>confirm email</Button>
-                        </NextLink>
+                        <Button
+                            mr={2}
+                            onClick={async () =>
+                                await confirmEmailMessage({
+                                    variables: {
+                                        email: typeof data?.me?.email === 'number' ? data?.me?.email : '-1',
+                                    },
+                                })
+                            }
+                        >
+                            confirm email
+                        </Button>
                     )}
                 </ListItem>
 

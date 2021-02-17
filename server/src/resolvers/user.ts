@@ -2,7 +2,7 @@ import argon2 from 'argon2';
 import { Arg, Ctx, Field, FieldResolver, Int, Mutation, ObjectType, Query, Resolver, Root } from 'type-graphql';
 import { getConnection } from 'typeorm';
 import { v4 } from 'uuid';
-import { COOKIE_NAME, FORGOTTEN_PASSWORD_PREFIX } from '../constants';
+import { CONFIRM_EMAIL_PREFIX, COOKIE_NAME, FORGOTTEN_PASSWORD_PREFIX } from '../constants';
 import { User } from '../entities/User';
 import { MyContext } from '../types';
 import { sendEmail } from '../utils/sendEmail';
@@ -114,6 +114,28 @@ export class UserResolver {
         await redis.set(FORGOTTEN_PASSWORD_PREFIX + token, user.id, 'ex', 1000 * 60 * 60 * 24 * 3); // 3 days
 
         await sendEmail(email, `<a href="${process.env.CORS_ORIGIN}/change-password/${token}">reset password</a>`);
+
+        return true;
+    }
+
+    @Mutation(() => Boolean)
+    async confirmEmailMessage(
+        @Arg('email')
+        email: string,
+        @Ctx()
+        { redis }: MyContext
+    ) {
+        if (email === '-1') return;
+
+        const user = await User.findOne({ where: { email } });
+        // the email is not in the db
+        if (!user) return true;
+
+        const token = v4();
+
+        await redis.set(CONFIRM_EMAIL_PREFIX + token, user.id, 'ex', 1000 * 60 * 60 * 24 * 3); // 3 days
+
+        await sendEmail(email, `<a href="${process.env.CORS_ORIGIN}/confirm-email/${token}">confirm email</a>`);
 
         return true;
     }

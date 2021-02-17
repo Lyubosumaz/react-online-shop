@@ -15,6 +15,7 @@ const ChangePassword: NextPage = () => {
     const router = useRouter();
     const [changePassword] = useChangePasswordMutation();
     const [tokenError, setTokenError] = useState('');
+
     return (
         <SecondaryLayout>
             <Formik
