@@ -1,3 +1,5 @@
 mutation ConfirmEmailAccept($token: String!) {
-    confirmEmailAccept(token: $token)
+    confirmEmailAccept(token: $token) {
+        ...RegularUserResponse
+    }
 }

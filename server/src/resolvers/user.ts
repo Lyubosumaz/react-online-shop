@@ -118,21 +118,48 @@ export class UserResolver {
         return true;
     }
 
-    @Mutation(() => Boolean)
+    @Mutation(() => UserResponse)
     async confirmEmailAccept(
         @Arg('token')
         token: string,
         @Ctx()
-        { req }: MyContext
-    ) {
+        { redis }: MyContext
+    ): Promise<UserResponse> {
         console.log(token);
-        // const user = await User.findOne({ id: req.session.userId });
 
-        // if (user) {
-        //     await User.update({ id: user.id }, { emailStatus: 1 });
-        // }
+        const key = CONFIRM_EMAIL_PREFIX + token;
+        const userId = await redis.get(key);
+        if (!userId) {
+            return {
+                errors: [
+                    {
+                        field: 'token',
+                        message: 'token expired',
+                    },
+                ],
+            };
+        }
 
-        return true;
+        const userIdNum = parseInt(userId);
+        const user = await User.findOne(userIdNum);
+
+        console.log(user);
+        if (!user) {
+            return {
+                errors: [
+                    {
+                        field: 'token',
+                        message: 'user no longer exists',
+                    },
+                ],
+            };
+        }
+
+        await User.update({ id: userIdNum }, { emailStatus: 1 });
+
+        await redis.del(key);
+
+        return { user };
     }
 
     @Mutation(() => Boolean)
