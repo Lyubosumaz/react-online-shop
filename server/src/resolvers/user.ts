@@ -141,7 +141,7 @@ export class UserResolver {
 
         const userIdNum = parseInt(userId);
         const user = await User.findOne(userIdNum);
-        if (user) {
+        if (!user) {
             return {
                 errors: [
                     {
