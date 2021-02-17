@@ -119,13 +119,26 @@ export class UserResolver {
     }
 
     @Mutation(() => Boolean)
+    async confirmEmailAccept(
+        @Ctx()
+        { req }: MyContext
+    ) {
+        const user = await User.findOne({ id: req.session.userId });
+
+        if (user) {
+            await User.update({ id: user.id }, { emailStatus: 1 });
+        }
+
+        return true;
+    }
+
+    @Mutation(() => Boolean)
     async confirmEmailMessage(
         @Arg('email')
         email: string,
         @Ctx()
         { redis }: MyContext
     ) {
-        console.log(email);
         if (email === '-1') return true;
 
         const user = await User.findOne({ where: { email } });
