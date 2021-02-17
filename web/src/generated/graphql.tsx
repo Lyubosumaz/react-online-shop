@@ -119,6 +119,11 @@ export type MutationForgottenPasswordArgs = {
 };
 
 
+export type MutationConfirmEmailAcceptArgs = {
+  token: Scalars['String'];
+};
+
+
 export type MutationConfirmEmailMessageArgs = {
   email: Scalars['String'];
 };
@@ -258,7 +263,9 @@ export type ChangeUsernameMutation = (
   ) }
 );
 
-export type ConfirmEmailAcceptMutationVariables = Exact<{ [key: string]: never; }>;
+export type ConfirmEmailAcceptMutationVariables = Exact<{
+  token: Scalars['String'];
+}>;
 
 
 export type ConfirmEmailAcceptMutation = (
@@ -587,8 +594,8 @@ export type ChangeUsernameMutationHookResult = ReturnType<typeof useChangeUserna
 export type ChangeUsernameMutationResult = Apollo.MutationResult<ChangeUsernameMutation>;
 export type ChangeUsernameMutationOptions = Apollo.BaseMutationOptions<ChangeUsernameMutation, ChangeUsernameMutationVariables>;
 export const ConfirmEmailAcceptDocument = gql`
-    mutation ConfirmEmailAccept {
-  confirmEmailAccept
+    mutation ConfirmEmailAccept($token: String!) {
+  confirmEmailAccept(token: $token)
 }
     `;
 export type ConfirmEmailAcceptMutationFn = Apollo.MutationFunction<ConfirmEmailAcceptMutation, ConfirmEmailAcceptMutationVariables>;
@@ -606,6 +613,7 @@ export type ConfirmEmailAcceptMutationFn = Apollo.MutationFunction<ConfirmEmailA
  * @example
  * const [confirmEmailAcceptMutation, { data, loading, error }] = useConfirmEmailAcceptMutation({
  *   variables: {
+ *      token: // value for 'token'
  *   },
  * });
  */

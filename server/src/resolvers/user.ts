@@ -120,14 +120,17 @@ export class UserResolver {
 
     @Mutation(() => Boolean)
     async confirmEmailAccept(
+        @Arg('token')
+        token: string,
         @Ctx()
         { req }: MyContext
     ) {
-        const user = await User.findOne({ id: req.session.userId });
+        console.log(token);
+        // const user = await User.findOne({ id: req.session.userId });
 
-        if (user) {
-            await User.update({ id: user.id }, { emailStatus: 1 });
-        }
+        // if (user) {
+        //     await User.update({ id: user.id }, { emailStatus: 1 });
+        // }
 
         return true;
     }
