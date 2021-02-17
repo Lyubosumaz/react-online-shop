@@ -152,7 +152,8 @@ export class UserResolver {
             };
         }
 
-        await User.update({ id: userIdNum }, { emailStatus: -1 });
+        // emailStatus: 1 confirmed/verified email
+        await User.update({ id: userIdNum }, { emailStatus: 1 });
 
         await redis.del(key);
 
@@ -433,6 +434,7 @@ export class UserResolver {
         const userId = req.session.userId;
         // your are logged in with same account
         // account exist in the db
+        // emailStatus: -1 user email is present
         if (userId === user.id && userId === loggedUser) {
             await User.update({ id: user.id }, { email: newEmail, emailStatus: -1 });
             user = await User.findOne({ id: user.id });

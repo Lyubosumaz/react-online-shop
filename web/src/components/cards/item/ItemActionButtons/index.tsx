@@ -46,7 +46,6 @@ export const ItemActionButtons: React.FC<ItemActionButtonsProps> = ({ id, creato
                                     deleteItem({
                                         variables: { id },
                                         update: (cache) => {
-                                            // Item:77
                                             cache.evict({ id: 'Item:' + id });
                                         },
                                     });

@@ -222,7 +222,6 @@ export class ItemResolver {
         @Ctx()
         { req }: MyContext
     ): Promise<Item | null> {
-        console.log(id, category, title, description, price);
         const result = await getConnection()
             .createQueryBuilder()
             .update(Item)

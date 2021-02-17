@@ -22,13 +22,16 @@ const ConfirmEmail: React.FC<{}> = ({}) => {
                                 token: typeof router.query.token === 'string' ? router.query.token : '',
                             },
                             update: (cache, { data }) => {
+                                if (data?.confirmEmailAccept?.errors) return;
+
                                 cache.writeQuery<MeQuery>({
                                     query: MeDocument,
                                     data: {
                                         __typename: 'Query',
-                                        me: data?.confirmEmailAccept.user,
+                                        me: data?.confirmEmailAccept?.user,
                                     },
                                 });
+                                cache.evict({});
                             },
                         });
 

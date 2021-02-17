@@ -38,7 +38,7 @@ const ChangeEmail: React.FC<{}> = ({}) => {
                                     me: data?.changeEmail?.user,
                                 },
                             });
-                            cache.evict({ fieldName: 'items:{}' });
+                            cache.evict({});
                         },
                     });
 

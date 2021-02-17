@@ -38,7 +38,7 @@ const ChangeUsername: React.FC<{}> = ({}) => {
                                     me: data?.changeUsername?.user,
                                 },
                             });
-                            cache.evict({ fieldName: 'items:{}' });
+                            cache.evict({});
                         },
                     });
 

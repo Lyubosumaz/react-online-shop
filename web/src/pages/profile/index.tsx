@@ -35,12 +35,12 @@ const Profile: React.FC<{}> = ({}) => {
                 <ListItem m="0.5rem 0" d="flex" alignItems="center">
                     <Icon as={FaEnvelope} w={8} h={8} mr={2} />
                     <TextHolder>Change Email:</TextHolder>
-                    <Text mr={2}>{data?.me?.email}</Text>
-                    {false ? (
+                    <Text mr={4}>{data?.me?.email}</Text>
+                    {data?.me?.emailStatus && data.me.emailStatus > 0 ? (
                         <NextLink href="/change-email">
                             <IconButton icon={<FaEdit />} aria-label="Reset Password" />
                         </NextLink>
-                    ) : data?.me?.emailStatus && data.me.emailStatus > 0 ? (
+                    ) : data?.me?.emailStatus && data.me.emailStatus < 0 ? (
                         !confirmEmailClick ? (
                             <Button
                                 mr={2}
@@ -57,7 +57,7 @@ const Profile: React.FC<{}> = ({}) => {
                                 confirm email
                             </Button>
                         ) : (
-                            <Text color="teal">An message to your mail has been sent</Text>
+                            <Text color="teal">Message to your email has been sent</Text>
                         )
                     ) : (
                         <Text color="teal">Your mail has been confirm</Text>
