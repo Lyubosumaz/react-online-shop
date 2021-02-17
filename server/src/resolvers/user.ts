@@ -125,9 +125,8 @@ export class UserResolver {
         @Ctx()
         { redis }: MyContext
     ): Promise<UserResponse> {
-        console.log(token);
-
         const key = CONFIRM_EMAIL_PREFIX + token;
+
         const userId = await redis.get(key);
         if (!userId) {
             return {
@@ -142,9 +141,7 @@ export class UserResolver {
 
         const userIdNum = parseInt(userId);
         const user = await User.findOne(userIdNum);
-
-        console.log(user);
-        if (!user) {
+        if (user) {
             return {
                 errors: [
                     {
@@ -155,7 +152,7 @@ export class UserResolver {
             };
         }
 
-        await User.update({ id: userIdNum }, { emailStatus: 1 });
+        await User.update({ id: userIdNum }, { emailStatus: -1 });
 
         await redis.del(key);
 
