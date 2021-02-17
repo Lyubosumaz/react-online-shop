@@ -1,6 +1,6 @@
 import { Button, Icon, IconButton, List, ListItem, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaEdit, FaEnvelope, FaIdCard, FaLock, FaLockOpen, FaTrashAlt, FaUser } from 'react-icons/fa';
 import { useConfirmEmailMessageMutation, useMeQuery } from '../../generated/graphql';
 import MainLayout from '../../layouts/MainLayout';
@@ -18,6 +18,7 @@ const Profile: React.FC<{}> = ({}) => {
         skip: isServer(),
     });
     const [confirmEmailMessage] = useConfirmEmailMessageMutation();
+    const [confirmEmailClick, setConfirmEmailClick] = useState(false);
 
     return (
         <MainLayout>
@@ -39,19 +40,23 @@ const Profile: React.FC<{}> = ({}) => {
                         <NextLink href="/change-email">
                             <IconButton icon={<FaEdit />} aria-label="Reset Password" />
                         </NextLink>
-                    ) : (
+                    ) : !confirmEmailClick ? (
                         <Button
                             mr={2}
-                            onClick={async () =>
+                            onClick={async () => {
                                 await confirmEmailMessage({
                                     variables: {
-                                        email: typeof data?.me?.email === 'number' ? data?.me?.email : '-1',
+                                        email: typeof data?.me?.email === 'string' ? data?.me?.email : '-1',
                                     },
-                                })
-                            }
+                                });
+
+                                setConfirmEmailClick(true);
+                            }}
                         >
                             confirm email
                         </Button>
+                    ) : (
+                        <Text color="teal">Mail has been sent</Text>
                     )}
                 </ListItem>
 

@@ -125,7 +125,8 @@ export class UserResolver {
         @Ctx()
         { redis }: MyContext
     ) {
-        if (email === '-1') return;
+        console.log(email);
+        if (email === '-1') return true;
 
         const user = await User.findOne({ where: { email } });
         // the email is not in the db
