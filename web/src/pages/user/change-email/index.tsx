@@ -2,13 +2,13 @@ import { Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
-import InputField from '../../components/form/InputField';
-import { MeDocument, MeQuery, useChangeEmailMutation, useMeQuery } from '../../generated/graphql';
-import SecondaryLayout from '../../layouts/SecondaryLayout';
-import { changeEmailValidations } from '../../utils/formValidations';
-import { isServer } from '../../utils/isServer';
-import { toErrorMap } from '../../utils/toErrorMap';
-import { withApollo } from '../../utils/withApollo';
+import InputField from '../../../components/form/InputField';
+import { MeDocument, MeQuery, useChangeEmailMutation, useMeQuery } from '../../../generated/graphql';
+import SecondaryLayout from '../../../layouts/SecondaryLayout';
+import { changeEmailValidations } from '../../../utils/formValidations';
+import { isServer } from '../../../utils/isServer';
+import { toErrorMap } from '../../../utils/toErrorMap';
+import { withApollo } from '../../../utils/withApollo';
 
 const ChangeEmail: React.FC<{}> = ({}) => {
     const router = useRouter();
@@ -46,7 +46,7 @@ const ChangeEmail: React.FC<{}> = ({}) => {
                         setErrors(toErrorMap(response.data.changeEmail.errors));
                     } else if (response.data?.changeEmail) {
                         // worked
-                        router.back();
+                        router.push('/profile');
                     }
                 }}
             >

@@ -4,12 +4,12 @@ import { NextPage } from 'next';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import InputField from '../../components/form/InputField';
-import { MeDocument, MeQuery, useChangePasswordMutation } from '../../generated/graphql';
-import SecondaryLayout from '../../layouts/SecondaryLayout';
-import { changePasswordValidations } from '../../utils/formValidations';
-import { toErrorMap } from '../../utils/toErrorMap';
-import { withApollo } from '../../utils/withApollo';
+import InputField from '../../../components/form/InputField';
+import { MeDocument, MeQuery, useChangePasswordMutation } from '../../../generated/graphql';
+import SecondaryLayout from '../../../layouts/SecondaryLayout';
+import { changePasswordValidations } from '../../../utils/formValidations';
+import { toErrorMap } from '../../../utils/toErrorMap';
+import { withApollo } from '../../../utils/withApollo';
 
 const ChangePassword: NextPage = () => {
     const router = useRouter();
@@ -45,7 +45,7 @@ const ChangePassword: NextPage = () => {
                         setErrors(errorMap);
                     } else if (response.data?.changePassword.user) {
                         // worked
-                        router.push('/');
+                        router.push('/profile');
                     }
                 }}
             >

@@ -2,13 +2,13 @@ import { Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
-import InputField from '../../components/form/InputField';
-import { MeDocument, MeQuery, useChangeUsernameMutation, useMeQuery } from '../../generated/graphql';
-import SecondaryLayout from '../../layouts/SecondaryLayout';
-import { changeUsernameValidations } from '../../utils/formValidations';
-import { isServer } from '../../utils/isServer';
-import { toErrorMap } from '../../utils/toErrorMap';
-import { withApollo } from '../../utils/withApollo';
+import InputField from '../../../components/form/InputField';
+import { MeDocument, MeQuery, useChangeUsernameMutation, useMeQuery } from '../../../generated/graphql';
+import SecondaryLayout from '../../../layouts/SecondaryLayout';
+import { changeUsernameValidations } from '../../../utils/formValidations';
+import { isServer } from '../../../utils/isServer';
+import { toErrorMap } from '../../../utils/toErrorMap';
+import { withApollo } from '../../../utils/withApollo';
 
 const ChangeUsername: React.FC<{}> = ({}) => {
     const router = useRouter();
@@ -46,7 +46,7 @@ const ChangeUsername: React.FC<{}> = ({}) => {
                         setErrors(toErrorMap(response.data.changeUsername.errors));
                     } else if (response.data?.changeUsername) {
                         // worked
-                        router.back();
+                        router.push('/profile');
                     }
                 }}
             >

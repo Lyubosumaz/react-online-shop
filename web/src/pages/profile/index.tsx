@@ -27,7 +27,7 @@ const Profile: React.FC<{}> = ({}) => {
                     <Icon as={FaUser} w={8} h={8} mr={2} />
                     <TextHolder>Username:</TextHolder>
                     <Text mr={2}>{data?.me?.username}</Text>
-                    <NextLink href="/change-username">
+                    <NextLink href="/user/change-username">
                         <IconButton icon={<FaEdit />} aria-label="Reset Password" />
                     </NextLink>
                 </ListItem>
@@ -37,7 +37,7 @@ const Profile: React.FC<{}> = ({}) => {
                     <TextHolder>Change Email:</TextHolder>
                     <Text mr={4}>{data?.me?.email}</Text>
                     {data?.me?.emailStatus && data.me.emailStatus > 0 ? (
-                        <NextLink href="/change-email">
+                        <NextLink href="/user/change-email">
                             <IconButton icon={<FaEdit />} aria-label="Reset Password" />
                         </NextLink>
                     ) : data?.me?.emailStatus && data.me.emailStatus < 0 ? (
@@ -67,7 +67,7 @@ const Profile: React.FC<{}> = ({}) => {
                 <ListItem m="0.5rem 0" d="flex" alignItems="center">
                     <Icon as={FaLock} w={8} h={8} mr={2} />
                     <TextHolder>Change Password:</TextHolder>
-                    <NextLink href="/forgotten-password">
+                    <NextLink href="/user/forgotten-password">
                         <IconButton icon={<FaLockOpen />} aria-label="Reset Password" />
                     </NextLink>
                 </ListItem>
@@ -75,7 +75,7 @@ const Profile: React.FC<{}> = ({}) => {
                 <ListItem m="0.5rem 0" d="flex" alignItems="center">
                     <Icon as={FaIdCard} w={8} h={8} mr={2} />
                     <TextHolder>Delete Account:</TextHolder>
-                    <NextLink href="/delete-account">
+                    <NextLink href="/user/delete-account">
                         <IconButton icon={<FaTrashAlt />} aria-label="Delete Account" />
                     </NextLink>
                 </ListItem>

@@ -113,7 +113,7 @@ export class UserResolver {
 
         await redis.set(FORGOTTEN_PASSWORD_PREFIX + token, user.id, 'ex', 1000 * 60 * 60 * 24 * 3); // 3 days
 
-        await sendEmail(email, `<a href="${process.env.CORS_ORIGIN}/change-password/${token}">reset password</a>`);
+        await sendEmail(email, `<a href="${process.env.CORS_ORIGIN}/user/change-password/${token}">reset password</a>`);
 
         return true;
     }
@@ -177,7 +177,7 @@ export class UserResolver {
 
         await redis.set(CONFIRM_EMAIL_PREFIX + token, user.id, 'ex', 1000 * 60 * 60 * 24 * 3); // 3 days
 
-        await sendEmail(email, `<a href="${process.env.CORS_ORIGIN}/confirm-email/${token}">confirm email</a>`);
+        await sendEmail(email, `<a href="${process.env.CORS_ORIGIN}/user/confirm-email/${token}">confirm email</a>`);
 
         return true;
     }

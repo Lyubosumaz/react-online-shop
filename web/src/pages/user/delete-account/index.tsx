@@ -2,13 +2,13 @@ import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogConten
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React, { useRef } from 'react';
-import InputField from '../../components/form/InputField';
-import { useDeleteAccountMutation, useMeQuery } from '../../generated/graphql';
-import SecondaryLayout from '../../layouts/SecondaryLayout';
-import { deleteAccountValidations } from '../../utils/formValidations';
-import { isServer } from '../../utils/isServer';
-import { toErrorMap } from '../../utils/toErrorMap';
-import { withApollo } from '../../utils/withApollo';
+import InputField from '../../../components/form/InputField';
+import { useDeleteAccountMutation, useMeQuery } from '../../../generated/graphql';
+import SecondaryLayout from '../../../layouts/SecondaryLayout';
+import { deleteAccountValidations } from '../../../utils/formValidations';
+import { isServer } from '../../../utils/isServer';
+import { toErrorMap } from '../../../utils/toErrorMap';
+import { withApollo } from '../../../utils/withApollo';
 
 const DeleteAccount: React.FC<{}> = ({}) => {
     const formRef = useRef<any>(null);
@@ -44,7 +44,7 @@ const DeleteAccount: React.FC<{}> = ({}) => {
                         setErrors(toErrorMap(response.data.deleteAccount.errors));
                     } else if (response.data?.deleteAccount) {
                         // worked
-                        router.push('/');
+                        router.push('/profile');
                     }
                 }}
             >
