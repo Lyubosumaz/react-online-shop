@@ -40,11 +40,10 @@ const UtilityLinks: React.FC<{}> = ({}) => {
                 <SectionHeading>Useful Link</SectionHeading>
 
                 <List spacing={2} opacity="0.5">
-                    <SiteLinksItem href="/">Home</SiteLinksItem>
-                    {/* TODO links paths need adding */}
-                    <SiteLinksItem href="/">About</SiteLinksItem>
-                    <SiteLinksItem href="/">Our Design</SiteLinksItem>
-                    <SiteLinksItem href="/">Contact Us</SiteLinksItem>
+                    <SiteLinksItem href="/">Shop</SiteLinksItem>
+                    <SiteLinksItem href="/about">About</SiteLinksItem>
+                    <SiteLinksItem href="/contact-us">Contact Us</SiteLinksItem>
+                    <SiteLinksItem href="/subscribe-newsletter">Subscribe</SiteLinksItem>
                 </List>
             </ListItem>
 
