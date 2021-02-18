@@ -18,6 +18,10 @@ export const loginValidations = Yup.object().shape({
     password: Yup.string().required('is required'),
 });
 
+export const subscribeValidations = Yup.object().shape({
+    email: Yup.string().required('is required'),
+});
+
 export const confirmEmailValidations = Yup.object().shape({
     email: Yup.string().required('is required'),
 });
