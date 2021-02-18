@@ -1,5 +1,5 @@
-import { Box, Button, Flex, Heading, Image, Input } from '@chakra-ui/react';
-import { Form, Formik } from 'formik';
+import { Box, Button, Flex, FormControl, FormErrorMessage, Heading, Image, Input } from '@chakra-ui/react';
+import { Field, Form, Formik } from 'formik';
 import React from 'react';
 import MainLayout from '../../layouts/MainLayout';
 import { subscribeValidations } from '../../utils/formValidations';
@@ -57,18 +57,34 @@ const SubscribeNewsletter: React.FC<{}> = ({}) => {
                             >
                                 {({ isSubmitting }) => (
                                     <Form style={{ width: '100%' }}>
-                                        <Input
-                                            placeholder="Enter Your Email"
-                                            fontSize="xl"
-                                            // styles
-                                            p="1.6rem 1rem"
-                                            borderRadius={0}
-                                            borderColor="#8b4222"
-                                            color="#7c2c0c"
-                                            _placeholder={{ color: '#7c2c0c' }}
-                                            _hover={{ borderColor: '#8b4222' }}
-                                            _focus={{ borderColor: '#8b4222' }}
-                                        />
+                                        <Field name="email">
+                                            {({ field, form }: any) => (
+                                                <FormControl mb={8} isInvalid={!!form.errors.email && !!form.touched.email}>
+                                                    {console.log(form.errors)}
+                                                    {console.log(form.touched)}
+                                                    <Input
+                                                        {...field}
+                                                        placeholder="Enter Your Email"
+                                                        fontSize="xl"
+                                                        // styles
+                                                        p="1.6rem 1rem"
+                                                        borderRadius={0}
+                                                        borderColor="#8b4222"
+                                                        color="#7c2c0c"
+                                                        _placeholder={{ color: '#7c2c0c' }}
+                                                        _hover={{ borderColor: '#8b4222' }}
+                                                        _focus={{ borderColor: '#8b4222' }}
+                                                    />
+                                                    {form.errors.email ? (
+                                                        <FormErrorMessage fontSize="1.1rem">Email {form.errors.email}</FormErrorMessage>
+                                                    ) : (
+                                                        <Box mt={2} fontSize="1.1rem" visibility="hidden" color="transparent">
+                                                            placeholder
+                                                        </Box>
+                                                    )}
+                                                </FormControl>
+                                            )}
+                                        </Field>
 
                                         <Box mt={8} d="flex" justifyContent="center">
                                             <Button
