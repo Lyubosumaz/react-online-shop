@@ -530,7 +530,7 @@ export class UserResolver {
 
         const userId = req.session.userId;
         if (user.id === userId) {
-            await User.update({ id: user.id }, { emailStatus: 1 });
+            await User.update({ id: user.id }, { newsletterSub: 1 });
         }
 
         return true;
@@ -551,7 +551,7 @@ export class UserResolver {
 
         const userId = req.session.userId;
         if (user.id === userId) {
-            await User.update({ id: user.id }, { emailStatus: -1 });
+            await User.update({ id: user.id }, { newsletterSub: -1 });
         }
 
         return true;

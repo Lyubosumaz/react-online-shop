@@ -31,32 +31,9 @@ const SubscribeNewsletter: React.FC<{}> = ({}) => {
                             <Formik
                                 initialValues={{ email: '' }}
                                 validationSchema={subscribeValidations}
-                                onSubmit={async (values, { setErrors }) => {
-                                    console.log(values);
+                                onSubmit={async (values, { resetForm }) => {
                                     await subscribeNewsletter({ variables: values });
-                                    // const response = await changePassword({
-                                    //     variables: values,
-                                    //     // update: (cache, { data }) => {
-                                    //     //     cache.writeQuery<MeQuery>({
-                                    //     //         query: MeDocument,
-                                    //     //         data: {
-                                    //     //             __typename: 'Query',
-                                    //     //             me: data?.changePassword.user,
-                                    //     //         },
-                                    //     //     });
-                                    //     // },
-                                    // });
-
-                                    // if (response.data?.changePassword.errors) {
-                                    //     const errorMap = toErrorMap(response.data.changePassword.errors);
-                                    //     if ('token' in errorMap) {
-                                    //         setTokenError(errorMap.token);
-                                    //     }
-                                    //     setErrors(errorMap);
-                                    // } else if (response.data?.changePassword.user) {
-                                    //     // worked
-                                    //     router.push('/profile');
-                                    // }
+                                    resetForm();
                                 }}
                             >
                                 {({ isSubmitting }) => (
@@ -64,8 +41,6 @@ const SubscribeNewsletter: React.FC<{}> = ({}) => {
                                         <Field name="email">
                                             {({ field, form }: any) => (
                                                 <FormControl mb={8} isInvalid={!!form.errors.email && !!form.touched.email}>
-                                                    {console.log(form.errors)}
-                                                    {console.log(form.touched)}
                                                     <Input
                                                         {...field}
                                                         placeholder="Enter Your Email"
