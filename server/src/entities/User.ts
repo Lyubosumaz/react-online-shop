@@ -25,6 +25,10 @@ export class User extends BaseEntity {
     @Column()
     password!: string;
 
+    @Field()
+    @Column({ type: 'int', default: -1 })
+    newsletterSub!: number;
+
     @OneToMany(() => Item, (item) => item.creator)
     items: Item[];
 

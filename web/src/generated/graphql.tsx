@@ -60,6 +60,7 @@ export type User = {
   username: Scalars['String'];
   email: Scalars['String'];
   emailStatus: Scalars['Float'];
+  newsletterSub: Scalars['Float'];
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
 };
@@ -80,6 +81,7 @@ export type Mutation = {
   deleteAccount: UserResponse;
   changeEmail: UserResponse;
   changeUsername: UserResponse;
+  subscribeNewsletter: Scalars['Boolean'];
 };
 
 
@@ -160,6 +162,11 @@ export type MutationChangeUsernameArgs = {
   password: Scalars['String'];
   newUsername: Scalars['String'];
   oldUsername: Scalars['String'];
+};
+
+
+export type MutationSubscribeNewsletterArgs = {
+  email: Scalars['String'];
 };
 
 export type ItemInput = {
@@ -367,6 +374,16 @@ export type RegisterMutation = (
     { __typename?: 'UserResponse' }
     & RegularUserResponseFragment
   ) }
+);
+
+export type SubscribeNewsletterMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type SubscribeNewsletterMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'subscribeNewsletter'>
 );
 
 export type UpdateItemMutationVariables = Exact<{
@@ -888,6 +905,36 @@ export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<Reg
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
+export const SubscribeNewsletterDocument = gql`
+    mutation SubscribeNewsletter($email: String!) {
+  subscribeNewsletter(email: $email)
+}
+    `;
+export type SubscribeNewsletterMutationFn = Apollo.MutationFunction<SubscribeNewsletterMutation, SubscribeNewsletterMutationVariables>;
+
+/**
+ * __useSubscribeNewsletterMutation__
+ *
+ * To run a mutation, you first call `useSubscribeNewsletterMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSubscribeNewsletterMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [subscribeNewsletterMutation, { data, loading, error }] = useSubscribeNewsletterMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useSubscribeNewsletterMutation(baseOptions?: Apollo.MutationHookOptions<SubscribeNewsletterMutation, SubscribeNewsletterMutationVariables>) {
+        return Apollo.useMutation<SubscribeNewsletterMutation, SubscribeNewsletterMutationVariables>(SubscribeNewsletterDocument, baseOptions);
+      }
+export type SubscribeNewsletterMutationHookResult = ReturnType<typeof useSubscribeNewsletterMutation>;
+export type SubscribeNewsletterMutationResult = Apollo.MutationResult<SubscribeNewsletterMutation>;
+export type SubscribeNewsletterMutationOptions = Apollo.BaseMutationOptions<SubscribeNewsletterMutation, SubscribeNewsletterMutationVariables>;
 export const UpdateItemDocument = gql`
     mutation UpdateItem($id: Int!, $category: String!, $title: String!, $description: String!, $price: String!) {
   updateItem(

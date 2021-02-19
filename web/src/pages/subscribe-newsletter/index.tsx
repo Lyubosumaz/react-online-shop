@@ -1,6 +1,7 @@
 import { Box, Button, Flex, FormControl, FormErrorMessage, Heading, Image, Input } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import React from 'react';
+import { useSubscribeNewsletterMutation } from '../../generated/graphql';
 import MainLayout from '../../layouts/MainLayout';
 import { subscribeValidations } from '../../utils/formValidations';
 import { withApollo } from '../../utils/withApollo';
@@ -12,6 +13,8 @@ const Column: React.FC<{}> = ({ children }) => (
 );
 
 const SubscribeNewsletter: React.FC<{}> = ({}) => {
+    const [subscribeNewsletter] = useSubscribeNewsletterMutation();
+
     return (
         <Box backgroundColor="#fdebcb">
             <MainLayout>
@@ -30,6 +33,7 @@ const SubscribeNewsletter: React.FC<{}> = ({}) => {
                                 validationSchema={subscribeValidations}
                                 onSubmit={async (values, { setErrors }) => {
                                     console.log(values);
+                                    await subscribeNewsletter({ variables: values });
                                     // const response = await changePassword({
                                     //     variables: values,
                                     //     // update: (cache, { data }) => {

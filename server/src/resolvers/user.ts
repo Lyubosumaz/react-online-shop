@@ -514,4 +514,22 @@ export class UserResolver {
 
         return { user };
     }
+
+    @Mutation(() => Boolean)
+    async subscribeNewsletter(
+        @Arg('email')
+        email: string,
+        @Ctx()
+        { redis }: MyContext
+    ) {
+        if (!email) return true;
+
+        const user = await User.findOne({ where: { email } });
+        // the email is not in the db
+        if (!user) return true;
+
+        console.log('email: ', email, user);
+
+        return true;
+    }
 }
