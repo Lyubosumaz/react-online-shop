@@ -520,7 +520,7 @@ export class UserResolver {
         @Arg('email')
         email: string,
         @Ctx()
-        { redis }: MyContext
+        { req }: MyContext
     ) {
         if (!email) return true;
 
@@ -528,7 +528,31 @@ export class UserResolver {
         // the email is not in the db
         if (!user) return true;
 
-        console.log('email: ', email, user);
+        const userId = req.session.userId;
+        if (user.id === userId) {
+            await User.update({ id: user.id }, { emailStatus: 1 });
+        }
+
+        return true;
+    }
+
+    @Mutation(() => Boolean)
+    async unsubscribeNewsletter(
+        @Arg('email')
+        email: string,
+        @Ctx()
+        { req }: MyContext
+    ) {
+        if (!email) return true;
+
+        const user = await User.findOne({ where: { email } });
+        // the email is not in the db
+        if (!user) return true;
+
+        const userId = req.session.userId;
+        if (user.id === userId) {
+            await User.update({ id: user.id }, { emailStatus: -1 });
+        }
 
         return true;
     }
