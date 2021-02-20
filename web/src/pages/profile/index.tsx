@@ -76,16 +76,17 @@ const Profile: React.FC<{}> = ({}) => {
                                 onClick={async () =>
                                     await subscribeNewsletter({
                                         update: (cache, { data }) => {
-                                            if (data?.subscribeNewsletter?.errors) return;
+                                            console.log(data);
+                                            // if (data?.subscribeNewsletter?.errors) return;1
 
-                                            cache.writeQuery<MeQuery>({
-                                                query: MeDocument,
-                                                data: {
-                                                    __typename: 'Query',
-                                                    me: data?.subscribeNewsletter?.user,
-                                                },
-                                            });
-                                            cache.evict({});
+                                            // cache.writeQuery<MeQuery>({
+                                            //     query: MeDocument,
+                                            //     data: {
+                                            //         __typename: 'Query',
+                                            //         me: data?.subscribeNewsletter?.user,
+                                            //     },
+                                            // });
+                                            // cache.evict({});
                                         },
                                     })
                                 }
@@ -97,23 +98,23 @@ const Profile: React.FC<{}> = ({}) => {
                             <IconButton
                                 icon={<FaBellSlash />}
                                 fontSize="1.5rem"
-                                onClick={async () =>
-                                    await subscribeNewsletter({
-                                        update: (cache, { data }) => {
-                                            if (typeof data?.subscribeNewsletter === 'boolean') return;
-                                            if (data?.subscribeNewsletter?.errors) return;
+                                // onClick={async () =>
+                                //     await subscribeNewsletter({
+                                //         update: (cache, { data }) => {
+                                //             if (typeof data?.subscribeNewsletter === 'boolean') return;
+                                //             if (data?.subscribeNewsletter?.errors) return;
 
-                                            cache.writeQuery<MeQuery>({
-                                                query: MeDocument,
-                                                data: {
-                                                    __typename: 'Query',
-                                                    me: data?.subscribeNewsletter?.user,
-                                                },
-                                            });
-                                            cache.evict({});
-                                        },
-                                    })
-                                }
+                                //             cache.writeQuery<MeQuery>({
+                                //                 query: MeDocument,
+                                //                 data: {
+                                //                     __typename: 'Query',
+                                //                     me: data?.subscribeNewsletter?.user,
+                                //                 },
+                                //             });
+                                //             cache.evict({});
+                                //         },
+                                //     })
+                                // }
                                 aria-label="Unsubscribe"
                             />
                         </Tooltip>
