@@ -81,8 +81,8 @@ export type Mutation = {
   deleteAccount: UserResponse;
   changeEmail: UserResponse;
   changeUsername: UserResponse;
-  subscribeNewsletter: Scalars['Boolean'];
-  unsubscribeNewsletter: Scalars['Boolean'];
+  subscribeNewsletter: UserResponse;
+  unsubscribeNewsletter: UserResponse;
 };
 
 
@@ -389,7 +389,10 @@ export type SubscribeNewsletterMutationVariables = Exact<{
 
 export type SubscribeNewsletterMutation = (
   { __typename?: 'Mutation' }
-  & Pick<Mutation, 'subscribeNewsletter'>
+  & { subscribeNewsletter: (
+    { __typename?: 'UserResponse' }
+    & RegularUserResponseFragment
+  ) }
 );
 
 export type UnsubscribeNewsletterMutationVariables = Exact<{
@@ -399,7 +402,10 @@ export type UnsubscribeNewsletterMutationVariables = Exact<{
 
 export type UnsubscribeNewsletterMutation = (
   { __typename?: 'Mutation' }
-  & Pick<Mutation, 'unsubscribeNewsletter'>
+  & { unsubscribeNewsletter: (
+    { __typename?: 'UserResponse' }
+    & RegularUserResponseFragment
+  ) }
 );
 
 export type UpdateItemMutationVariables = Exact<{
@@ -924,9 +930,11 @@ export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
 export const SubscribeNewsletterDocument = gql`
     mutation SubscribeNewsletter($email: String!) {
-  subscribeNewsletter(email: $email)
+  subscribeNewsletter(email: $email) {
+    ...RegularUserResponse
+  }
 }
-    `;
+    ${RegularUserResponseFragmentDoc}`;
 export type SubscribeNewsletterMutationFn = Apollo.MutationFunction<SubscribeNewsletterMutation, SubscribeNewsletterMutationVariables>;
 
 /**
@@ -954,9 +962,11 @@ export type SubscribeNewsletterMutationResult = Apollo.MutationResult<SubscribeN
 export type SubscribeNewsletterMutationOptions = Apollo.BaseMutationOptions<SubscribeNewsletterMutation, SubscribeNewsletterMutationVariables>;
 export const UnsubscribeNewsletterDocument = gql`
     mutation UnsubscribeNewsletter($email: String!) {
-  unsubscribeNewsletter(email: $email)
+  unsubscribeNewsletter(email: $email) {
+    ...RegularUserResponse
+  }
 }
-    `;
+    ${RegularUserResponseFragmentDoc}`;
 export type UnsubscribeNewsletterMutationFn = Apollo.MutationFunction<UnsubscribeNewsletterMutation, UnsubscribeNewsletterMutationVariables>;
 
 /**

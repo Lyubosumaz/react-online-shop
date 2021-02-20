@@ -2,7 +2,7 @@ import { Button, Icon, IconButton, List, ListItem, Text, Tooltip } from '@chakra
 import NextLink from 'next/link';
 import React, { useState } from 'react';
 import { FaAddressCard, FaBell, FaBellSlash, FaEdit, FaEnvelope, FaLock, FaLockOpen, FaTrashAlt, FaUser } from 'react-icons/fa';
-import { useConfirmEmailMessageMutation, useMeQuery, useSubscribeNewsletterMutation, useUnsubscribeNewsletterMutation } from '../../generated/graphql';
+import { MeDocument, MeQuery, useConfirmEmailMessageMutation, useMeQuery, useSubscribeNewsletterMutation, useUnsubscribeNewsletterMutation } from '../../generated/graphql';
 import MainLayout from '../../layouts/MainLayout';
 import { isServer } from '../../utils/isServer';
 import { withApollo } from '../../utils/withApollo';
@@ -75,18 +75,22 @@ const Profile: React.FC<{}> = ({}) => {
                                 icon={<FaBell />}
                                 onClick={async () =>
                                     await subscribeNewsletter({
+                                        variables: {
+                                            email: typeof data?.me?.email === 'string' ? data?.me?.email : '-1',
+                                        },
                                         update: (cache, { data }) => {
-                                            console.log(data);
-                                            // if (data?.subscribeNewsletter?.errors) return;1
+                                            if (typeof data?.subscribeNewsletter === 'boolean') return;
 
-                                            // cache.writeQuery<MeQuery>({
-                                            //     query: MeDocument,
-                                            //     data: {
-                                            //         __typename: 'Query',
-                                            //         me: data?.subscribeNewsletter?.user,
-                                            //     },
-                                            // });
-                                            // cache.evict({});
+                                            if (data?.subscribeNewsletter?.errors) return;
+
+                                            cache.writeQuery<MeQuery>({
+                                                query: MeDocument,
+                                                data: {
+                                                    __typename: 'Query',
+                                                    me: data?.subscribeNewsletter?.user,
+                                                },
+                                            });
+                                            cache.evict({});
                                         },
                                     })
                                 }
@@ -97,24 +101,28 @@ const Profile: React.FC<{}> = ({}) => {
                         <Tooltip label="Unsubscribe">
                             <IconButton
                                 icon={<FaBellSlash />}
-                                fontSize="1.5rem"
-                                // onClick={async () =>
-                                //     await subscribeNewsletter({
-                                //         update: (cache, { data }) => {
-                                //             if (typeof data?.subscribeNewsletter === 'boolean') return;
-                                //             if (data?.subscribeNewsletter?.errors) return;
+                                fontSize="1.2rem"
+                                onClick={async () =>
+                                    await unsubscribeNewsletter({
+                                        variables: {
+                                            email: typeof data?.me?.email === 'string' ? data?.me?.email : '-1',
+                                        },
+                                        update: (cache, { data }) => {
+                                            if (typeof data?.unsubscribeNewsletter === 'boolean') return;
 
-                                //             cache.writeQuery<MeQuery>({
-                                //                 query: MeDocument,
-                                //                 data: {
-                                //                     __typename: 'Query',
-                                //                     me: data?.subscribeNewsletter?.user,
-                                //                 },
-                                //             });
-                                //             cache.evict({});
-                                //         },
-                                //     })
-                                // }
+                                            if (data?.unsubscribeNewsletter?.errors) return;
+
+                                            cache.writeQuery<MeQuery>({
+                                                query: MeDocument,
+                                                data: {
+                                                    __typename: 'Query',
+                                                    me: data?.unsubscribeNewsletter?.user,
+                                                },
+                                            });
+                                            cache.evict({});
+                                        },
+                                    })
+                                }
                                 aria-label="Unsubscribe"
                             />
                         </Tooltip>

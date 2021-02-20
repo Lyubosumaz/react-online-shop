@@ -1,3 +1,5 @@
 mutation SubscribeNewsletter($email: String!) {
-    subscribeNewsletter(email: $email)
+    subscribeNewsletter(email: $email) {
+        ...RegularUserResponse
+    }
 }

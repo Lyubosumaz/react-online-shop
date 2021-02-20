@@ -1,3 +1,5 @@
 mutation UnsubscribeNewsletter($email: String!) {
-    unsubscribeNewsletter(email: $email)
+    unsubscribeNewsletter(email: $email) {
+        ...RegularUserResponse
+    }
 }
