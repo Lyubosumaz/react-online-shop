@@ -515,13 +515,13 @@ export class UserResolver {
         return { user };
     }
 
-    @Mutation(() => Boolean)
+    @Mutation(() => UserResponse || Boolean)
     async subscribeNewsletter(
         @Arg('email')
         email: string,
         @Ctx()
         { req }: MyContext
-    ) {
+    ): Promise<UserResponse | boolean> {
         if (!email) return true;
 
         const user = await User.findOne({ where: { email } });
@@ -533,16 +533,16 @@ export class UserResolver {
             await User.update({ id: user.id }, { newsletterSub: 1 });
         }
 
-        return true;
+        return { user };
     }
 
-    @Mutation(() => Boolean)
+    @Mutation(() => UserResponse || Boolean)
     async unsubscribeNewsletter(
         @Arg('email')
         email: string,
         @Ctx()
         { req }: MyContext
-    ) {
+    ): Promise<UserResponse | boolean> {
         if (!email) return true;
 
         const user = await User.findOne({ where: { email } });
@@ -554,6 +554,6 @@ export class UserResolver {
             await User.update({ id: user.id }, { newsletterSub: -1 });
         }
 
-        return true;
+        return { user };
     }
 }
