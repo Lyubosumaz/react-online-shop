@@ -71,11 +71,51 @@ const Profile: React.FC<{}> = ({}) => {
                     <TextHolder>Newsletter:</TextHolder>
                     {data?.me?.newsletterSub === -1 ? (
                         <Tooltip label="Subscribe">
-                            <IconButton icon={<FaBell />} onClick={() => subscribeNewsletter()} aria-label="Subscribe" />
+                            <IconButton
+                                icon={<FaBell />}
+                                onClick={async () =>
+                                    await subscribeNewsletter({
+                                        update: (cache, { data }) => {
+                                            if (data?.subscribeNewsletter?.errors) return;
+
+                                            cache.writeQuery<MeQuery>({
+                                                query: MeDocument,
+                                                data: {
+                                                    __typename: 'Query',
+                                                    me: data?.subscribeNewsletter?.user,
+                                                },
+                                            });
+                                            cache.evict({});
+                                        },
+                                    })
+                                }
+                                aria-label="Subscribe"
+                            />
                         </Tooltip>
                     ) : (
                         <Tooltip label="Unsubscribe">
-                            <IconButton icon={<FaBellSlash />} fontSize="1.5rem" aria-label="Unsubscribe" />
+                            <IconButton
+                                icon={<FaBellSlash />}
+                                fontSize="1.5rem"
+                                onClick={async () =>
+                                    await subscribeNewsletter({
+                                        update: (cache, { data }) => {
+                                            if (typeof data?.subscribeNewsletter === 'boolean') return;
+                                            if (data?.subscribeNewsletter?.errors) return;
+
+                                            cache.writeQuery<MeQuery>({
+                                                query: MeDocument,
+                                                data: {
+                                                    __typename: 'Query',
+                                                    me: data?.subscribeNewsletter?.user,
+                                                },
+                                            });
+                                            cache.evict({});
+                                        },
+                                    })
+                                }
+                                aria-label="Unsubscribe"
+                            />
                         </Tooltip>
                     )}
                 </ListItem>
