@@ -1,8 +1,8 @@
 import { Button, Icon, IconButton, List, ListItem, Text, Tooltip } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import React, { ReactElement, useState } from 'react';
+import React, { useState } from 'react';
 import { FaAddressCard, FaBell, FaBellSlash, FaEdit, FaEnvelope, FaLock, FaLockOpen, FaTrashAlt, FaUser } from 'react-icons/fa';
-import { useConfirmEmailMessageMutation, useMeQuery } from '../../generated/graphql';
+import { useConfirmEmailMessageMutation, useMeQuery, useSubscribeNewsletterMutation, useUnsubscribeNewsletterMutation } from '../../generated/graphql';
 import MainLayout from '../../layouts/MainLayout';
 import { isServer } from '../../utils/isServer';
 import { withApollo } from '../../utils/withApollo';
@@ -13,18 +13,12 @@ const TextHolder: React.FC<{}> = ({ children }) => (
     </Text>
 );
 
-const Buttons: React.FC<{ href: string; label: string; icon: ReactElement }> = ({ href, label, icon }) => (
-    <NextLink href={href}>
-        <Tooltip label={label}>
-            <IconButton icon={icon} aria-label={label} />
-        </Tooltip>
-    </NextLink>
-);
-
 const Profile: React.FC<{}> = ({}) => {
     const { data } = useMeQuery({
         skip: isServer(),
     });
+    const [subscribeNewsletter] = useSubscribeNewsletterMutation();
+    const [unsubscribeNewsletter] = useUnsubscribeNewsletterMutation();
     const [confirmEmailMessage] = useConfirmEmailMessageMutation();
     const [confirmEmailClick, setConfirmEmailClick] = useState(false);
 
@@ -35,12 +29,9 @@ const Profile: React.FC<{}> = ({}) => {
                     <Icon as={FaUser} w={8} h={8} mr={2} />
                     <TextHolder>Username:</TextHolder>
                     <Text mr={2}>{data?.me?.username}</Text>
-                    <Buttons href="/user/change-username" label="Reset Password" icon={<FaEdit />} />
-                    <Tooltip label="Reset Password">
-                        <NextLink href="/user/change-username">
-                            <IconButton icon={<FaEdit />} aria-label="Reset Password" />
-                        </NextLink>
-                    </Tooltip>
+                    <NextLink href="/user/change-username">
+                        <IconButton icon={<FaEdit />} aria-label="Reset Password" />
+                    </NextLink>
                 </ListItem>
 
                 <ListItem m="0.5rem 0" d="flex" alignItems="center">
@@ -78,8 +69,15 @@ const Profile: React.FC<{}> = ({}) => {
                 <ListItem m="0.5rem 0" d="flex" alignItems="center">
                     <Icon as={FaAddressCard} w={8} h={8} mr={2} />
                     <TextHolder>Newsletter:</TextHolder>
-                    {/* <Tooltip label="Subscribe"></Tooltip> */}
-                    <IconButton icon={data?.me?.newsletterSub === 1 ? <FaBell /> : <FaBellSlash />} fontSize="1.5rem" aria-label="Newsletter" />
+                    {data?.me?.newsletterSub === -1 ? (
+                        <Tooltip label="Subscribe">
+                            <IconButton icon={<FaBell />} onClick={() => subscribeNewsletter()} aria-label="Subscribe" />
+                        </Tooltip>
+                    ) : (
+                        <Tooltip label="Unsubscribe">
+                            <IconButton icon={<FaBellSlash />} fontSize="1.5rem" aria-label="Unsubscribe" />
+                        </Tooltip>
+                    )}
                 </ListItem>
 
                 <ListItem m="0.5rem 0" d="flex" alignItems="center">
