@@ -82,6 +82,7 @@ export type Mutation = {
   changeEmail: UserResponse;
   changeUsername: UserResponse;
   subscribeNewsletter: Scalars['Boolean'];
+  unsubscribeNewsletter: Scalars['Boolean'];
 };
 
 
@@ -169,6 +170,11 @@ export type MutationSubscribeNewsletterArgs = {
   email: Scalars['String'];
 };
 
+
+export type MutationUnsubscribeNewsletterArgs = {
+  email: Scalars['String'];
+};
+
 export type ItemInput = {
   category: Scalars['String'];
   title: Scalars['String'];
@@ -210,7 +216,7 @@ export type RegularErrorFragment = (
 
 export type RegularUserFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'id' | 'username' | 'email' | 'emailStatus'>
+  & Pick<User, 'id' | 'username' | 'email' | 'emailStatus' | 'newsletterSub'>
 );
 
 export type RegularUserResponseFragment = (
@@ -386,6 +392,16 @@ export type SubscribeNewsletterMutation = (
   & Pick<Mutation, 'subscribeNewsletter'>
 );
 
+export type UnsubscribeNewsletterMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type UnsubscribeNewsletterMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'unsubscribeNewsletter'>
+);
+
 export type UpdateItemMutationVariables = Exact<{
   id: Scalars['Int'];
   category: Scalars['String'];
@@ -489,6 +505,7 @@ export const RegularUserFragmentDoc = gql`
   username
   email
   emailStatus
+  newsletterSub
 }
     `;
 export const RegularUserResponseFragmentDoc = gql`
@@ -935,6 +952,36 @@ export function useSubscribeNewsletterMutation(baseOptions?: Apollo.MutationHook
 export type SubscribeNewsletterMutationHookResult = ReturnType<typeof useSubscribeNewsletterMutation>;
 export type SubscribeNewsletterMutationResult = Apollo.MutationResult<SubscribeNewsletterMutation>;
 export type SubscribeNewsletterMutationOptions = Apollo.BaseMutationOptions<SubscribeNewsletterMutation, SubscribeNewsletterMutationVariables>;
+export const UnsubscribeNewsletterDocument = gql`
+    mutation UnsubscribeNewsletter($email: String!) {
+  unsubscribeNewsletter(email: $email)
+}
+    `;
+export type UnsubscribeNewsletterMutationFn = Apollo.MutationFunction<UnsubscribeNewsletterMutation, UnsubscribeNewsletterMutationVariables>;
+
+/**
+ * __useUnsubscribeNewsletterMutation__
+ *
+ * To run a mutation, you first call `useUnsubscribeNewsletterMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUnsubscribeNewsletterMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [unsubscribeNewsletterMutation, { data, loading, error }] = useUnsubscribeNewsletterMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useUnsubscribeNewsletterMutation(baseOptions?: Apollo.MutationHookOptions<UnsubscribeNewsletterMutation, UnsubscribeNewsletterMutationVariables>) {
+        return Apollo.useMutation<UnsubscribeNewsletterMutation, UnsubscribeNewsletterMutationVariables>(UnsubscribeNewsletterDocument, baseOptions);
+      }
+export type UnsubscribeNewsletterMutationHookResult = ReturnType<typeof useUnsubscribeNewsletterMutation>;
+export type UnsubscribeNewsletterMutationResult = Apollo.MutationResult<UnsubscribeNewsletterMutation>;
+export type UnsubscribeNewsletterMutationOptions = Apollo.BaseMutationOptions<UnsubscribeNewsletterMutation, UnsubscribeNewsletterMutationVariables>;
 export const UpdateItemDocument = gql`
     mutation UpdateItem($id: Int!, $category: String!, $title: String!, $description: String!, $price: String!) {
   updateItem(

@@ -1,7 +1,7 @@
-import { Button, Icon, IconButton, List, ListItem, Text } from '@chakra-ui/react';
+import { Button, Icon, IconButton, List, ListItem, Text, Tooltip } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import React, { useState } from 'react';
-import { FaEdit, FaEnvelope, FaIdCard, FaLock, FaLockOpen, FaTrashAlt, FaUser } from 'react-icons/fa';
+import React, { ReactElement, useState } from 'react';
+import { FaAddressCard, FaBell, FaBellSlash, FaEdit, FaEnvelope, FaLock, FaLockOpen, FaTrashAlt, FaUser } from 'react-icons/fa';
 import { useConfirmEmailMessageMutation, useMeQuery } from '../../generated/graphql';
 import MainLayout from '../../layouts/MainLayout';
 import { isServer } from '../../utils/isServer';
@@ -11,6 +11,14 @@ const TextHolder: React.FC<{}> = ({ children }) => (
     <Text mr={2} minW="9.5rem">
         {children}
     </Text>
+);
+
+const Buttons: React.FC<{ href: string; label: string; icon: ReactElement }> = ({ href, label, icon }) => (
+    <NextLink href={href}>
+        <Tooltip label={label}>
+            <IconButton icon={icon} aria-label={label} />
+        </Tooltip>
+    </NextLink>
 );
 
 const Profile: React.FC<{}> = ({}) => {
@@ -27,9 +35,12 @@ const Profile: React.FC<{}> = ({}) => {
                     <Icon as={FaUser} w={8} h={8} mr={2} />
                     <TextHolder>Username:</TextHolder>
                     <Text mr={2}>{data?.me?.username}</Text>
-                    <NextLink href="/user/change-username">
-                        <IconButton icon={<FaEdit />} aria-label="Reset Password" />
-                    </NextLink>
+                    <Buttons href="/user/change-username" label="Reset Password" icon={<FaEdit />} />
+                    <Tooltip label="Reset Password">
+                        <NextLink href="/user/change-username">
+                            <IconButton icon={<FaEdit />} aria-label="Reset Password" />
+                        </NextLink>
+                    </Tooltip>
                 </ListItem>
 
                 <ListItem m="0.5rem 0" d="flex" alignItems="center">
@@ -65,6 +76,13 @@ const Profile: React.FC<{}> = ({}) => {
                 </ListItem>
 
                 <ListItem m="0.5rem 0" d="flex" alignItems="center">
+                    <Icon as={FaAddressCard} w={8} h={8} mr={2} />
+                    <TextHolder>Newsletter:</TextHolder>
+                    {/* <Tooltip label="Subscribe"></Tooltip> */}
+                    <IconButton icon={data?.me?.newsletterSub === 1 ? <FaBell /> : <FaBellSlash />} fontSize="1.5rem" aria-label="Newsletter" />
+                </ListItem>
+
+                <ListItem m="0.5rem 0" d="flex" alignItems="center">
                     <Icon as={FaLock} w={8} h={8} mr={2} />
                     <TextHolder>Change Password:</TextHolder>
                     <NextLink href="/user/forgotten-password">
@@ -73,7 +91,7 @@ const Profile: React.FC<{}> = ({}) => {
                 </ListItem>
 
                 <ListItem m="0.5rem 0" d="flex" alignItems="center">
-                    <Icon as={FaIdCard} w={8} h={8} mr={2} />
+                    <Icon as={FaAddressCard} w={8} h={8} mr={2} />
                     <TextHolder>Delete Account:</TextHolder>
                     <NextLink href="/user/delete-account">
                         <IconButton icon={<FaTrashAlt />} aria-label="Delete Account" />
