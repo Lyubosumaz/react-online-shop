@@ -30,7 +30,7 @@ const Profile: React.FC<{}> = ({}) => {
                     <TextHolder>Username:</TextHolder>
                     <Text mr={2}>{data?.me?.username}</Text>
                     <NextLink href="/user/change-username">
-                        <IconButton icon={<FaEdit />} aria-label="Reset Password" />
+                        <IconButton icon={<FaEdit />} aria-label="Change Username" />
                     </NextLink>
                 </ListItem>
 
@@ -40,7 +40,7 @@ const Profile: React.FC<{}> = ({}) => {
                     <Text mr={4}>{data?.me?.email}</Text>
                     {data?.me?.emailStatus && data.me.emailStatus > 0 ? (
                         <NextLink href="/user/change-email">
-                            <IconButton icon={<FaEdit />} aria-label="Reset Password" />
+                            <IconButton icon={<FaEdit />} aria-label="Change Email" />
                         </NextLink>
                     ) : data?.me?.emailStatus && data.me.emailStatus < 0 ? (
                         !confirmEmailClick ? (
