@@ -18,8 +18,9 @@ const FooterNavItem: React.FC<{ href: string }> = ({ children, href, ...rest }) 
 );
 
 const Header: React.FC<{}> = ({ }) => {
-    const [lightColor, darkColor] = useToken("colors", ["brand.200", "brand.900"]);
-    const bgColor = useColorModeValue(lightColor, darkColor);
+    const [lightBgColor, darkBgColor, lightTxColor, darkTxColor] = useToken("colors", ["rosHeader.200", "rosHeader.900", "rosHeader.100", "rosHeader.800"]);
+    const bgColor = useColorModeValue(lightBgColor, darkBgColor);
+    const txColor = useColorModeValue(lightTxColor, darkTxColor);
     const [logout, { loading: logoutFetching }] = useLogoutMutation();
     const apolloClient = useApolloClient();
     const { data } = useMeQuery({
@@ -30,9 +31,9 @@ const Header: React.FC<{}> = ({ }) => {
 
     return (
         // <header style={{ padding: '0.5rem 0', position: 'static', top: 0, backgroundColor: '#7c2c0c', color: '#efe4d1', borderTop: '1rem solid #efe4d1', borderBottom: '1rem solid #efe4d1', zIndex: 1 }}>
-        <Box bgColor={bgColor}>
+        <Box bgColor={bgColor} color={txColor}>
             <MainWrapper>
-                <Flex flex={1} align="center" backgroundColor="#7c2c0c">
+                <Flex flex={1} align="center" >
                     <Logo />
 
                     <Flex ml={'auto'} alignItems="center">
