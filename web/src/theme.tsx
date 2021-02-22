@@ -5,6 +5,12 @@ const customTheme = {
     useSystemColorMode: false,
     colors: {
         black: '#16161D',
+        brand: {
+            100: "#efe4d1",
+            200: "#7c2c0c",
+            800: "#a5517f",
+            900: "#3f559f",
+        },
     },
     fonts: {
         heading: 'Poppins,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
