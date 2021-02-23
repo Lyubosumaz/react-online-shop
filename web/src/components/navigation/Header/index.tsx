@@ -11,7 +11,13 @@ import Logo from '../../Logo';
 
 const FooterNavItem: React.FC<{ href: string }> = ({ children, href, ...rest }) => (
     <NextLink href={href}>
-        <Button as={Link} mr={4} textTransform="uppercase" backgroundColor="#7c2c0c" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c' }}>
+        <Button
+            as={Link}
+            mr={4}
+            textTransform="uppercase"
+            backgroundColor="#7c2c0c"
+            _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c' }}
+        >
             {children}
         </Button>
     </NextLink>
