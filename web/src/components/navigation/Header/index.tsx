@@ -7,7 +7,7 @@ import NavBar from '../NavBar';
 
 
 const Header: React.FC<{}> = ({ }) => {
-    const [lightColor, darkColor, txColor,] = useToken("colors", ["rosHeader.200", "rosHeader.900", "rosHeader.100", "rosHeader.800"]);
+    const [lightColor, darkColor, txColor,] = useToken("colors", ["rosHeader.200", "rosHeader.900", "rosHeader.100"]);
     const bgColor = useColorModeValue(lightColor, darkColor);
 
     return (

@@ -25,25 +25,52 @@ import ColorMode from '../../buttons/ColorMode';
 
 interface NavItemProps {
     href: string,
-
+    variant?: "regular" | "profile" | "cart";
 }
+{/* <NextLink href="/cart">
+    <IconButton
+        mr={4}
+        aria-label="Cart"
+        icon={<FaShoppingCart />}
+        backgroundColor="primaryL.700"
+        _hover={{
+            backgroundColor: 'secondaryL.100',
+            color: 'primaryL.700'
+        }}
+    />
+</NextLink> */}
 
-const NavItem: React.FC<NavItemProps> = ({ children, href }) => {
+const NavItem: React.FC<NavItemProps> = ({ children, href, variant = "regular" }) => {
     return (
-        <ListItem>
+        <ListItem mr={4} d="flex" alignItems="center" >
+            {variant === "profile" ? <Text mr={2} fontWeight="bold">Welcome:</Text> : null}
             <NextLink href={href}>
-                <Button
-                    as={Link}
-                    mr={4}
-                    textTransform="uppercase"
-                    bgColor="inherit"
-                    _hover={{
-                        backgroundColor: 'secondaryL.200',
-                        color: 'primaryL.700'
-                    }}
-                >
-                    {children}
-                </Button>
+                {variant === "cart"
+                    ? (
+                        < IconButton
+                            aria-label="Cart"
+                            icon={<FaShoppingCart />}
+                            bgColor="inherit"
+                            _hover={{
+                                backgroundColor: 'secondaryL.100',
+                                color: 'primaryL.700'
+                            }}
+                        />
+                    ) : (
+                        <Button
+                            p={variant === "profile" ? "0 0.75rem" : "0 1rem"}
+                            as={Link}
+                            textTransform="uppercase"
+                            bgColor="inherit"
+                            _hover={{
+                                backgroundColor: 'secondaryL.100',
+                                color: 'primaryL.700'
+                            }}
+                        >
+                            {children}
+                        </Button>
+                    )
+                }
             </NextLink>
         </ListItem>
     )
@@ -69,40 +96,10 @@ const NavBar: React.FC<{}> = ({ }) => {
                 ) : (
                         <List d="flex">
                             <NavItem href="/create-item">Create Item</NavItem>
-
-                            <Flex mr={4} alignItems="center">
-                                <Text mr={2} fontWeight="bold">Welcome:</Text>
-
-                                <NextLink href="/profile">
-                                    <Button as={Link}
-                                        p="0 0.75em"
-                                        textTransform="uppercase"
-                                        backgroundColor="primaryL.700"
-                                        _hover={{
-                                            backgroundColor: 'secondaryL.100',
-                                            color: 'primaryL.700'
-                                        }}
-                                    >
-                                        {data.me.username}
-                                    </Button>
-                                </NextLink>
-                            </Flex>
-
-                            <NextLink href="/cart">
-                                <IconButton
-                                    mr={4}
-                                    aria-label="Cart"
-                                    icon={<FaShoppingCart />}
-                                    backgroundColor="primaryL.700"
-                                    _hover={{
-                                        backgroundColor: 'secondaryL.100',
-                                        color: 'primaryL.700'
-                                    }}
-                                />
-                            </NextLink>
+                            <NavItem href="/profile" variant="profile">{data.me.username}</NavItem>
+                            <NavItem href="/cart" variant="cart" />
 
                             <Button
-
                                 height="2.5rem"
                                 padding="0 1rem"
                                 textTransform="uppercase"
