@@ -51,7 +51,17 @@ const Header: React.FC<{}> = ({ }) => {
         //         zIndex: 1
         //     }}
         // >
-        <Box bgColor={bgColor} color={txColor}>
+        <Box
+            p=".5rem 0"
+            position="static"
+            top="0"
+            bgColor={bgColor}
+            color={txColor}
+            borderTop="1rem solid"
+            borderBottom="1rem solid"
+            borderColor=""
+        >
+                
             <MainWrapper>
                 <Flex flex={1} align="center" >
                     <Logo />
