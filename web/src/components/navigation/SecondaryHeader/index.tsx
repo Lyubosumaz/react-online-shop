@@ -1,8 +1,10 @@
-import { List, ListItem, Select } from '@chakra-ui/react';
+import { List, ListItem } from '@chakra-ui/react';
 import React from 'react';
 import MainWrapper from '../../../layouts/MainWrapper';
 import ColorMode from '../../buttons/ColorMode';
 import GoBack from '../../buttons/GoBack';
+import LangSelect from '../../buttons/LangSelect';
+
 
 export type goBackButtonStatus = 'visible' | 'hidden';
 interface SecondaryHeaderProps {
@@ -19,11 +21,7 @@ const SecondaryHeader: React.FC<SecondaryHeaderProps> = ({ goBackButton = 'visib
                     <ListItem>
                         <List display="flex" justifyContent="space-between">
                             <ListItem>
-                                {/* TODO adding multiple languages */}
-                                <Select placeholder="Language">
-                                    <option value="english">English</option>
-                                    <option value="bulgarian">Bulgarian</option>
-                                </Select>
+                                <LangSelect />
                             </ListItem>
 
                             <ListItem ml={4}>
