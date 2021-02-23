@@ -11,13 +11,16 @@ const ColorMode: React.FC<ColorModeProps> = ({ control = 'regular' }) => {
 
     return (
         <IconButton
+            ml={4}
             aria-label="Color Mode"
             icon={colorMode === 'light' ? <FaSun /> : <FaMoon />}
             onClick={toggleColorMode}
-            // custom styles
-            color={control === 'regular' ? (colorMode === 'light' ? '#fff' : '#1A202C') : '#efe4d1'}
-            backgroundColor={control === 'regular' ? (colorMode === 'light' ? 'teal.500' : 'teal.200') : '#7c2c0c'}
-            _hover={control === 'regular' ? { backgroundColor: colorMode === 'light' ? 'teal.600' : 'teal.300' } : { backgroundColor: '#efe4d1', color: '#7c2c0c' }}
+            color="inherit"
+            bgColor="inherit"
+            _hover={control === 'regular'
+                ? { bgColor: colorMode === 'light' ? 'teal.600' : 'teal.300' }
+                : { bgColor: '#efe4d1', color: '#7c2c0c' }
+            }
         />
     );
 };
