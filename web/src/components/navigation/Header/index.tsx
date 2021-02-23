@@ -9,14 +9,17 @@ import { isServer } from '../../../utils/isServer';
 import ColorMode from '../../buttons/ColorMode';
 import Logo from '../../Logo';
 
-const FooterNavItem: React.FC<{ href: string }> = ({ children, href, ...rest }) => (
+const HeaderNavItem: React.FC<{ href: string }> = ({ children, href }) => (
     <NextLink href={href}>
         <Button
             as={Link}
             mr={4}
             textTransform="uppercase"
-            backgroundColor="#7c2c0c"
-            _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c' }}
+            backgroundColor="primaryL.700"
+            _hover={{
+                backgroundColor: 'secondaryL.200',
+                color: 'primaryL.700'
+            }}
         >
             {children}
         </Button>
@@ -45,29 +48,66 @@ const Header: React.FC<{}> = ({ }) => {
                     <Flex ml={'auto'} alignItems="center">
                         {!data?.me ? (
                             <>
-                                <FooterNavItem href="/login">Login</FooterNavItem>
-                                <FooterNavItem href="/register">Register</FooterNavItem>
+                                <HeaderNavItem href="/login">Login</HeaderNavItem>
+                                <HeaderNavItem href="/register">Register</HeaderNavItem>
                             </>
                         ) : (
                                 <Flex align="center">
-                                    <FooterNavItem href="/create-item">Create Item</FooterNavItem>
+                                    <HeaderNavItem href="/create-item">Create Item</HeaderNavItem>
                                     <Flex mr={4} alignItems="center">
-                                        <Text mr={2} fontWeight="bold">
-                                            Welcome:
-                                    </Text>
+                                        <Text mr={2} fontWeight="bold">Welcome:</Text>
+
                                         <NextLink href="/profile">
-                                            <Button as={Link} p="0 0.75em" textTransform="uppercase" backgroundColor="#7c2c0c" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c' }}>
+                                            <Button as={Link}
+                                                p="0 0.75em"
+                                                textTransform="uppercase"
+                                                backgroundColor="primaryL.700"
+                                                _hover={{
+                                                    backgroundColor: '#efe4d1',
+                                                    color: 'primaryL.700'
+                                                }}
+                                            >
                                                 {data.me.username}
                                             </Button>
                                         </NextLink>
                                     </Flex>
+
                                     <NextLink href="/cart">
-                                        <IconButton mr={4} aria-label="Cart" icon={<FaShoppingCart />} backgroundColor="#7c2c0c" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c' }} />
+                                        <IconButton
+                                            mr={4}
+                                            aria-label="Cart"
+                                            icon={<FaShoppingCart />}
+                                            backgroundColor="primaryL.700"
+                                            _hover={{
+                                                backgroundColor: '#efe4d1',
+                                                color: 'primaryL.700'
+                                            }}
+                                        />
                                     </NextLink>
-                                    <Button mr={4} height="2.5rem" padding="0 1rem" textTransform="uppercase" backgroundColor="#7c2c0c" color="#efe4d1" _hover={{ backgroundColor: '#efe4d1', color: '#7c2c0c', textDecoration: 'underline' }} onClick={onOpen} isLoading={logoutFetching} variant="link">
+
+                                    <Button
+                                        mr={4}
+                                        height="2.5rem"
+                                        padding="0 1rem"
+                                        textTransform="uppercase"
+                                        backgroundColor="primaryL.700"
+                                        color="#efe4d1"
+                                        _hover={{
+                                            backgroundColor: '#efe4d1',
+                                            color: 'primaryL.700',
+                                            textDecoration: 'underline'
+                                        }}
+                                        onClick={onOpen} isLoading={logoutFetching} variant="link">
                                         Logout
-                                </Button>
-                                    <AlertDialog motionPreset="slideInBottom" leastDestructiveRef={cancelRef} onClose={onClose} isOpen={isOpen} isCentered>
+                                    </Button>
+
+                                    <AlertDialog
+                                        motionPreset="slideInBottom"
+                                        leastDestructiveRef={cancelRef}
+                                        onClose={onClose}
+                                        isOpen={isOpen}
+                                        isCentered
+                                    >
                                         <AlertDialogOverlay />
 
                                         <AlertDialogContent>
@@ -77,7 +117,8 @@ const Header: React.FC<{}> = ({ }) => {
                                             <AlertDialogFooter>
                                                 <Button ref={cancelRef} onClick={onClose}>
                                                     No
-                                            </Button>
+                                                </Button>
+
                                                 <Button
                                                     colorScheme="red"
                                                     ml={3}
@@ -87,13 +128,12 @@ const Header: React.FC<{}> = ({ }) => {
                                                     }}
                                                 >
                                                     Yes
-                                            </Button>
+                                                </Button>
                                             </AlertDialogFooter>
                                         </AlertDialogContent>
                                     </AlertDialog>
                                 </Flex>
                             )}
-
                         <ColorMode control="custom" />
                         {/* TODO button for translate site */}
                     </Flex>
