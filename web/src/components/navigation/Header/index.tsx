@@ -39,7 +39,18 @@ const Header: React.FC<{}> = ({ }) => {
     const cancelRef = React.useRef<HTMLButtonElement>(null);
 
     return (
-        // <header style={{ padding: '0.5rem 0', position: 'static', top: 0, backgroundColor: '#7c2c0c', color: '#efe4d1', borderTop: '1rem solid #efe4d1', borderBottom: '1rem solid #efe4d1', zIndex: 1 }}>
+        // <header
+        //     style={{
+        //         padding: '0.5rem 0',
+        //         position: 'static',
+        //         top: 0,
+        //         backgroundColor: '#7c2c0c',
+        //         color: '#efe4d1',
+        //         borderTop: '1rem solid #efe4d1',
+        //         borderBottom: '1rem solid #efe4d1',
+        //         zIndex: 1
+        //     }}
+        // >
         <Box bgColor={bgColor} color={txColor}>
             <MainWrapper>
                 <Flex flex={1} align="center" >
@@ -63,7 +74,7 @@ const Header: React.FC<{}> = ({ }) => {
                                                 textTransform="uppercase"
                                                 backgroundColor="primaryL.700"
                                                 _hover={{
-                                                    backgroundColor: '#efe4d1',
+                                                    backgroundColor: 'secondaryL.100',
                                                     color: 'primaryL.700'
                                                 }}
                                             >
@@ -79,7 +90,7 @@ const Header: React.FC<{}> = ({ }) => {
                                             icon={<FaShoppingCart />}
                                             backgroundColor="primaryL.700"
                                             _hover={{
-                                                backgroundColor: '#efe4d1',
+                                                backgroundColor: 'secondaryL.100',
                                                 color: 'primaryL.700'
                                             }}
                                         />
@@ -91,9 +102,9 @@ const Header: React.FC<{}> = ({ }) => {
                                         padding="0 1rem"
                                         textTransform="uppercase"
                                         backgroundColor="primaryL.700"
-                                        color="#efe4d1"
+                                        color="secondaryL.100"
                                         _hover={{
-                                            backgroundColor: '#efe4d1',
+                                            backgroundColor: 'secondaryL.100',
                                             color: 'primaryL.700',
                                             textDecoration: 'underline'
                                         }}
@@ -111,7 +122,7 @@ const Header: React.FC<{}> = ({ }) => {
                                         <AlertDialogOverlay />
 
                                         <AlertDialogContent>
-                                            <AlertDialogHeader>Want to logout?</AlertDialogHeader>
+                                            <AlertDialogHeader>Logout?</AlertDialogHeader>
                                             <AlertDialogCloseButton />
                                             <AlertDialogBody>Are you sure you want to logout?</AlertDialogBody>
                                             <AlertDialogFooter>
