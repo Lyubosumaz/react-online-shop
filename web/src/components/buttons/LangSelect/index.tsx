@@ -4,11 +4,22 @@ import React, { useState } from 'react';
 const LangSelect: React.FC<{}> = ({ }) => {
     const [language, setLanguage] = useState("us")
 
+    const langIcon = (lang) => {
+        switch (lang) {
+            case "us":
+                return "🇺🇸";
+            case "bg":
+                return '🇧🇬';
+            default:
+                break;
+        }
+    }
+
     return (
         <Menu >
             <Tooltip label="Language">
                 <MenuButton as={Button} variant="ghost">
-                    <span role="img">{language === "us" ? '🇺🇸' : '🇧🇬'}</span>
+                    <span role="img">{langIcon(language)}</span>
                 </MenuButton>
             </Tooltip>
 
