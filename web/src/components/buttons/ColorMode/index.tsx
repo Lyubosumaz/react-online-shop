@@ -20,7 +20,6 @@ const ColorMode: React.FC<ColorModeProps> = ({ control = 'regular' }) => {
             _hover={control === 'regular'
                 ? { bgColor: colorMode === 'light' ? 'teal.600' : 'teal.300' }
                 : { bgColor: 'secondaryL.100', color: 'primaryL.700' }
-
             }
         />
     );

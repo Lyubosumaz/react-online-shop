@@ -1,18 +1,13 @@
-export const getFlagIcon = (input: string) => {
-    switch (input) {
-        case dataLanguages.us.value:
-            return dataLanguages.us.icon;
-        case dataLanguages.bg.value:
-            return dataLanguages.bg.icon;
-        case dataLanguages.en.value:
-            return dataLanguages.en.icon;
-        default:
-            return;
-    }
+interface Languages {
+    [key: string]: { name: string, value: string, icon: string }
 }
 
-export const dataLanguages = {
+export const _languages: Languages = {
     bg: { name: "Bulgarian", value: "bg", icon: "🇧🇬" },
     en: { name: "English", value: "en", icon: "🇬🇧" },
     us: { name: "USA", value: "us", icon: "🇺🇸" },
+}
+
+export const getLanguageIcon = (lang: string) => {
+    return _languages[lang].icon
 }
