@@ -3,19 +3,19 @@ import React, { useState } from 'react';
 
 const LangSelect: React.FC<{}> = ({ }) => {
     const [language, setLanguage] = useState("us")
-    {/* TODO adding multiple languages */ }
+
     return (
         <Menu >
-            <Tooltip label="Акаунт" fontSize="1.5rem">
+            <Tooltip label="Language">
                 <MenuButton as={Button} variant="ghost">
-                    <span role="img">🇺🇸</span>
+                    <span role="img">{language === "us" ? '🇺🇸' : '🇧🇬'}</span>
                 </MenuButton>
             </Tooltip>
 
             <MenuList p={0} rounded={0} boxShadow="0px 0.2rem 1.35rem rgb(0 0 0 / 25%)">
                 <MenuGroup title="Language/Език">
-                    <MenuItem _hover={{ textDecoration: "underline" }}>English</MenuItem>
-                    <MenuItem _hover={{ textDecoration: "underline" }}>Bulgarian</MenuItem>
+                    <MenuItem onClick={() => setLanguage("us")}>English</MenuItem>
+                    <MenuItem onClick={() => setLanguage("bg")}>Bulgarian</MenuItem>
                 </MenuGroup>
             </MenuList>
         </Menu>
