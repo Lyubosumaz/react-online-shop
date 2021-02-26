@@ -1,5 +1,5 @@
+import SecondaryHeader, { goBackButtonStatus } from '@/components/navigation/SecondaryHeader';
 import React from 'react';
-import SecondaryHeader, { goBackButtonStatus } from '../../components/navigation/SecondaryHeader';
 import Main from '../MainBody';
 
 interface SecondaryLayoutProps {

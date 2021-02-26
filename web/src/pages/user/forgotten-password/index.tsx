@@ -1,11 +1,11 @@
+import { useForgottenPasswordMutation } from '@/generated/graphql';
+import SecondaryLayout from '@/layouts/SecondaryLayout';
+import { forgottenPasswordValidations } from '@/utils/formValidations';
+import { withApollo } from '@/utils/withApollo';
 import { Box, Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
-import InputField from '../../../components/form/InputField';
-import { useForgottenPasswordMutation } from '../../../generated/graphql';
-import SecondaryLayout from '../../../layouts/SecondaryLayout';
-import { forgottenPasswordValidations } from '../../../utils/formValidations';
-import { withApollo } from '../../../utils/withApollo';
+import InputField from '../@/components/form/InputField';
 
 const ForgottenPassword: React.FC<{}> = ({}) => {
     const [complete, setComplete] = useState(false);

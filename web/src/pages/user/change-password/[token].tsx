@@ -1,15 +1,15 @@
+import { MeDocument, MeQuery, useChangePasswordMutation } from '@/generated/graphql';
+import SecondaryLayout from '@/layouts/SecondaryLayout';
+import { changePasswordValidations } from '@/utils/formValidations';
+import { toErrorMap } from '@/utils/toErrorMap';
+import { withApollo } from '@/utils/withApollo';
 import { Box, Button, Flex, Link } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { NextPage } from 'next';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import InputField from '../../../components/form/InputField';
-import { MeDocument, MeQuery, useChangePasswordMutation } from '../../../generated/graphql';
-import SecondaryLayout from '../../../layouts/SecondaryLayout';
-import { changePasswordValidations } from '../../../utils/formValidations';
-import { toErrorMap } from '../../../utils/toErrorMap';
-import { withApollo } from '../../../utils/withApollo';
+import InputField from '../@/components/form/InputField';
 
 const ChangePassword: NextPage = () => {
     const router = useRouter();

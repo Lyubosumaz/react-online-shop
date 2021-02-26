@@ -1,11 +1,11 @@
+import { ItemActionButtons } from '@/components/cards/item/ItemActionButtons';
+import { RatingSection } from '@/components/cards/item/RatingSection';
+import { useItemsQuery } from '@/generated/graphql';
+import MainLayout from '@/layouts/MainLayout';
+import { usePriceRound } from '@/utils/usePriceRound';
+import { withApollo } from '@/utils/withApollo';
 import { Box, Button, Flex, Heading, Link, Stack, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { ItemActionButtons } from '../../components/cards/item/ItemActionButtons';
-import { RatingSection } from '../../components/cards/item/RatingSection';
-import { useItemsQuery } from '../../generated/graphql';
-import MainLayout from '../../layouts/MainLayout';
-import { usePriceRound } from '../../utils/usePriceRound';
-import { withApollo } from '../../utils/withApollo';
 
 const Home = () => {
     const { data, error, loading, fetchMore, variables } = useItemsQuery({

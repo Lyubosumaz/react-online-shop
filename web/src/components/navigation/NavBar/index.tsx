@@ -1,12 +1,12 @@
+import ColorMode from '@/components/buttons/ColorMode';
+import LangSelect from "@/components/buttons/LangSelect";
+import Logout from "@/components/buttons/Logout";
+import { useMeQuery } from '@/generated/graphql';
+import { isServer } from '@/utils/isServer';
 import { Button, Flex, IconButton, Link, List, ListItem, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
-import { useMeQuery } from '../../../generated/graphql';
-import { isServer } from '../../../utils/isServer';
-import ColorMode from '../../buttons/ColorMode';
-import LangSelect from "../../buttons/LangSelect";
-import Logout from "../../buttons/Logout";
 
 interface NavItemProps {
     href: string,

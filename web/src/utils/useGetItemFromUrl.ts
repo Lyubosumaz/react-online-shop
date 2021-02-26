@@ -1,4 +1,4 @@
-import { useItemQuery } from '../generated/graphql';
+import { useItemQuery } from '@/generated/graphql';
 import { useGetIntId } from './useGetIntId';
 
 export const useGetItemFromUrl = () => {

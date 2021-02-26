@@ -1,10 +1,10 @@
+import { useSubscribeNewsletterMutation } from '@/generated/graphql';
+import MainLayout from '@/layouts/MainLayout';
+import { subscribeValidations } from '@/utils/formValidations';
+import { withApollo } from '@/utils/withApollo';
 import { Box, Button, Flex, FormControl, FormErrorMessage, Heading, Image, Input } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import React from 'react';
-import { useSubscribeNewsletterMutation } from '../../generated/graphql';
-import MainLayout from '../../layouts/MainLayout';
-import { subscribeValidations } from '../../utils/formValidations';
-import { withApollo } from '../../utils/withApollo';
 
 const Column: React.FC<{}> = ({ children }) => (
     <Flex padding="0 1rem" justifyContent="center" alignItems="center" flexBasis="50%">
@@ -20,7 +20,7 @@ const SubscribeNewsletter: React.FC<{}> = ({}) => {
             <MainLayout>
                 <Flex p="6rem 0">
                     <Column>
-                        <Image w="100%" h="auto" src={require('../../images/img-6.png')} alt="Garden Sofa" />
+                        <Image w="100%" h="auto" src={require('@/images/img-6.png')} alt="Garden Sofa" />
                     </Column>
 
                     <Column>

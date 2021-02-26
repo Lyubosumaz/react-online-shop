@@ -1,8 +1,8 @@
+import { useDeleteItemMutation, useMeQuery } from '@/generated/graphql';
 import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Box, Button, IconButton, Link } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-import { useDeleteItemMutation, useMeQuery } from '../../../../generated/graphql';
 interface ItemActionButtonsProps {
     id: number;
     creatorId: number;

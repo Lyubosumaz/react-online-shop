@@ -1,14 +1,14 @@
+import { MeDocument, MeQuery, useChangeEmailMutation, useMeQuery } from '@/generated/graphql';
+import SecondaryLayout from '@/layouts/SecondaryLayout';
+import { changeEmailValidations } from '@/utils/formValidations';
+import { isServer } from '@/utils/isServer';
+import { toErrorMap } from '@/utils/toErrorMap';
+import { withApollo } from '@/utils/withApollo';
 import { Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
-import InputField from '../../../components/form/InputField';
-import { MeDocument, MeQuery, useChangeEmailMutation, useMeQuery } from '../../../generated/graphql';
-import SecondaryLayout from '../../../layouts/SecondaryLayout';
-import { changeEmailValidations } from '../../../utils/formValidations';
-import { isServer } from '../../../utils/isServer';
-import { toErrorMap } from '../../../utils/toErrorMap';
-import { withApollo } from '../../../utils/withApollo';
+import InputField from '../@/components/form/InputField';
 
 const ChangeEmail: React.FC<{}> = ({}) => {
     const router = useRouter();

@@ -1,9 +1,9 @@
+import { ItemActionButtons } from '@/components/cards/item/ItemActionButtons';
+import MainLayout from '@/layouts/MainLayout';
+import { useGetItemFromUrl } from '@/utils/useGetItemFromUrl';
+import { withApollo } from '@/utils/withApollo';
 import { Box, Heading } from '@chakra-ui/react';
 import React from 'react';
-import { ItemActionButtons } from '../../components/cards/item/ItemActionButtons';
-import MainLayout from '../../layouts/MainLayout';
-import { useGetItemFromUrl } from '../../utils/useGetItemFromUrl';
-import { withApollo } from '../../utils/withApollo';
 
 const Item = ({}) => {
     const { data, error, loading } = useGetItemFromUrl();

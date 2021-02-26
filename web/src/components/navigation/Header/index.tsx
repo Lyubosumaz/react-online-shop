@@ -1,10 +1,8 @@
+import Logo from '@/components/Logo';
+import MainWrapper from '@/layouts/MainWrapper';
 import { Box, Flex, useColorModeValue, useToken } from '@chakra-ui/react';
 import React from 'react';
-import MainWrapper from '../../../layouts/MainWrapper';
-import Logo from '../../Logo';
 import NavBar from '../NavBar';
-
-
 
 const Header: React.FC<{}> = ({ }) => {
     const [lightColor, darkColor, txColor,] = useToken("colors", ["rosHeader.200", "rosHeader.900", "rosHeader.100"]);

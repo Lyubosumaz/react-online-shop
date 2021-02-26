@@ -1,11 +1,11 @@
+import { MeDocument, MeQuery, useConfirmEmailMessageMutation, useMeQuery, useSubscribeNewsletterMutation, useUnsubscribeNewsletterMutation } from '@/generated/graphql';
+import MainLayout from '@/layouts/MainLayout';
+import { isServer } from '@/utils/isServer';
+import { withApollo } from '@/utils/withApollo';
 import { Button, Icon, IconButton, List, ListItem, Text, Tooltip } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React, { useState } from 'react';
 import { FaAddressCard, FaBell, FaBellSlash, FaEdit, FaEnvelope, FaLock, FaLockOpen, FaTrashAlt, FaUser } from 'react-icons/fa';
-import { MeDocument, MeQuery, useConfirmEmailMessageMutation, useMeQuery, useSubscribeNewsletterMutation, useUnsubscribeNewsletterMutation } from '../../generated/graphql';
-import MainLayout from '../../layouts/MainLayout';
-import { isServer } from '../../utils/isServer';
-import { withApollo } from '../../utils/withApollo';
 
 const TextHolder: React.FC<{}> = ({ children }) => (
     <Text mr={2} minW="9.5rem">

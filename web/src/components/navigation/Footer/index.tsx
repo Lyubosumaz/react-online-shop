@@ -1,5 +1,5 @@
+import MainWrapper from '@/layouts/MainWrapper';
 import React from 'react';
-import MainWrapper from '../../../layouts/MainWrapper';
 import CopyRights from './CopyRights';
 import ShopDetails from './ShopDetails';
 import UtilityLinks from './UtilityLinks';

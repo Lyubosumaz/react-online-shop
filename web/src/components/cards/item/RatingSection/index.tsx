@@ -1,9 +1,9 @@
+import { ItemSnippetFragment, useVoteMutation, VoteMutation } from '@/generated/graphql';
 import { ApolloCache } from '@apollo/client';
 import { Flex, IconButton, Text } from '@chakra-ui/react';
 import gql from 'graphql-tag';
 import React, { useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import { ItemSnippetFragment, useVoteMutation, VoteMutation } from '../../../../generated/graphql';
 
 interface RatingSectionProps {
     item: ItemSnippetFragment;

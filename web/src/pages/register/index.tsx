@@ -1,13 +1,13 @@
+import InputField from '@/components/form/InputField';
+import { MeDocument, MeQuery, useRegisterMutation } from '@/generated/graphql';
+import SecondaryLayout from '@/layouts/SecondaryLayout';
+import { registerValidations } from '@/utils/formValidations';
+import { toErrorMap } from '@/utils/toErrorMap';
+import { withApollo } from '@/utils/withApollo';
 import { Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
-import InputField from '../../components/form/InputField';
-import { MeDocument, MeQuery, useRegisterMutation } from '../../generated/graphql';
-import SecondaryLayout from '../../layouts/SecondaryLayout';
-import { registerValidations } from '../../utils/formValidations';
-import { toErrorMap } from '../../utils/toErrorMap';
-import { withApollo } from '../../utils/withApollo';
 
 const Register: React.FC<{}> = ({}) => {
     const router = useRouter();

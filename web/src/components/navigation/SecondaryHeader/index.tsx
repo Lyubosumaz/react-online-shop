@@ -1,9 +1,9 @@
+import ColorMode from '@/components/buttons/ColorMode';
+import GoBack from '@/components/buttons/GoBack';
+import LangSelect from '@/components/buttons/LangSelect';
+import MainWrapper from '@/layouts/MainWrapper';
 import { List, ListItem } from '@chakra-ui/react';
 import React from 'react';
-import MainWrapper from '../../../layouts/MainWrapper';
-import ColorMode from '../../buttons/ColorMode';
-import GoBack from '../../buttons/GoBack';
-import LangSelect from '../../buttons/LangSelect';
 
 
 export type goBackButtonStatus = 'visible' | 'hidden';

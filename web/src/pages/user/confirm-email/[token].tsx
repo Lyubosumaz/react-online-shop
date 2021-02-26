@@ -1,9 +1,9 @@
+import { MeDocument, MeQuery, useConfirmEmailAcceptMutation } from '@/generated/graphql';
+import SecondaryLayout from '@/layouts/SecondaryLayout';
+import { withApollo } from '@/utils/withApollo';
 import { Button, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { MeDocument, MeQuery, useConfirmEmailAcceptMutation } from '../../../generated/graphql';
-import SecondaryLayout from '../../../layouts/SecondaryLayout';
-import { withApollo } from '../../../utils/withApollo';
 
 const ConfirmEmail: React.FC<{}> = ({}) => {
     const router = useRouter();

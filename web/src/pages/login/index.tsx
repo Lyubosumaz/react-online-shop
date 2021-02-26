@@ -1,14 +1,14 @@
+import InputField from '@/components/form/InputField';
+import { MeDocument, MeQuery, useLoginMutation } from '@/generated/graphql';
+import SecondaryLayout from '@/layouts/SecondaryLayout';
+import { loginValidations } from '@/utils/formValidations';
+import { toErrorMap } from '@/utils/toErrorMap';
+import { withApollo } from '@/utils/withApollo';
 import { Button, Flex, Link } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import InputField from '../../components/form/InputField';
-import { MeDocument, MeQuery, useLoginMutation } from '../../generated/graphql';
-import SecondaryLayout from '../../layouts/SecondaryLayout';
-import { loginValidations } from '../../utils/formValidations';
-import { toErrorMap } from '../../utils/toErrorMap';
-import { withApollo } from '../../utils/withApollo';
 
 const Login: React.FC<{}> = ({}) => {
     const router = useRouter();

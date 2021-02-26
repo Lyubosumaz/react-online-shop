@@ -1,6 +1,6 @@
+import { withApollo } from '@/utils/withApollo';
 import NextLink from 'next/link';
 import React from 'react';
-import { withApollo } from '../../utils/withApollo';
 
 const FourOhFour: React.FC<{}> = ({}) => {
     return (

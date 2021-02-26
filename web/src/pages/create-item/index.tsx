@@ -1,15 +1,15 @@
+import { categoryList } from '@/category-list.json'; // TODO create huge categories and sub categories
+import InputField from '@/components/form/InputField';
+import SelectField from '@/components/form/SelectField';
+import { useCreateItemMutation } from '@/generated/graphql';
+import SecondaryLayout from '@/layouts/SecondaryLayout';
+import { createValidations } from '@/utils/formValidations';
+import { useIsAuth } from '@/utils/useIsAuth';
+import { withApollo } from '@/utils/withApollo';
 import { Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { categoryList } from '../../category-list.json'; // TODO create huge categories and sub categories
-import InputField from '../../components/form/InputField';
-import SelectField from '../../components/form/SelectField';
-import { useCreateItemMutation } from '../../generated/graphql';
-import SecondaryLayout from '../../layouts/SecondaryLayout';
-import { createValidations } from '../../utils/formValidations';
-import { useIsAuth } from '../../utils/useIsAuth';
-import { withApollo } from '../../utils/withApollo';
 
 interface CreateItemFields {
     category: string;

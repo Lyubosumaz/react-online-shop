@@ -1,8 +1,8 @@
+import theme from '@/theme';
 import { ColorModeScript } from '@chakra-ui/react';
 import { NextPageContext } from 'next';
 import { RenderPage } from 'next/dist/next-server/lib/utils';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
-import theme from '../../theme';
 
 interface Context extends NextPageContext {
     renderPage: RenderPage;

@@ -1,5 +1,5 @@
+import { withApollo } from '@/utils/withApollo';
 import React from 'react';
-import { withApollo } from '../../utils/withApollo';
 
 const Cart: React.FC<{}> = ({}) => {
     return (
