@@ -5,7 +5,7 @@ import { Button, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
-const ConfirmEmail: React.FC<{}> = ({}) => {
+const ConfirmEmail: React.FC<{}> = ({ }) => {
     const router = useRouter();
     const [confirmEmailAccept] = useConfirmEmailAcceptMutation();
     const [errMessage, setErrMessage] = useState<string>('');

@@ -17,16 +17,16 @@ const GoBack: React.FC<GoBackProps> = ({ control = 'regular' }) => {
             icon={<FaArrowLeft />}
             onClick={() => router.back()}
             color={control === 'regular'
-                ? (colorMode === 'light' ? '#fff' : '#1A202C')
-                : '#efe4d1'
+                ? (colorMode === 'light' ? 'primaryD.50' : 'primaryD.900')
+                : 'secondaryL.100'
             }
             backgroundColor={control === 'regular'
                 ? (colorMode === 'light' ? 'teal.500' : 'teal.200')
-                : '#7c2c0c'
+                : 'primaryL.700'
             }
             _hover={control === 'regular'
                 ? { backgroundColor: colorMode === 'light' ? 'teal.600' : 'teal.300' }
-                : { backgroundColor: '#efe4d1', color: '#7c2c0c' }
+                : { backgroundColor: 'secondaryL.100', color: 'primaryL.700' }
             }
         />
     );

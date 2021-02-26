@@ -1,4 +1,6 @@
 import { categoryList } from '@/category-list.json';
+import InputField from '@/components/form/InputField';
+import SelectField from '@/components/form/SelectField';
 import { useItemQuery, useUpdateItemMutation } from '@/generated/graphql';
 import MainLayout from '@/layouts/MainLayout';
 import SecondaryLayout from '@/layouts/SecondaryLayout';
@@ -9,10 +11,8 @@ import { Box, Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
-import InputField from '../@/components/form/InputField';
-import SelectField from '../@/components/form/SelectField';
 
-const EditItem = ({}) => {
+const EditItem = ({ }) => {
     const router = useRouter();
     const intId = useGetIntId();
     const { data, loading } = useItemQuery({

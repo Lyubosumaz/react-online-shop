@@ -2,7 +2,16 @@ import { useSubscribeNewsletterMutation } from '@/generated/graphql';
 import MainLayout from '@/layouts/MainLayout';
 import { subscribeValidations } from '@/utils/formValidations';
 import { withApollo } from '@/utils/withApollo';
-import { Box, Button, Flex, FormControl, FormErrorMessage, Heading, Image, Input } from '@chakra-ui/react';
+import {
+    Box,
+    Button,
+    Flex,
+    FormControl,
+    FormErrorMessage,
+    Heading,
+    Image,
+    Input
+} from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import React from 'react';
 
@@ -12,7 +21,7 @@ const Column: React.FC<{}> = ({ children }) => (
     </Flex>
 );
 
-const SubscribeNewsletter: React.FC<{}> = ({}) => {
+const SubscribeNewsletter: React.FC<{}> = ({ }) => {
     const [subscribeNewsletter] = useSubscribeNewsletterMutation();
 
     return (
@@ -57,10 +66,10 @@ const SubscribeNewsletter: React.FC<{}> = ({}) => {
                                                     {form.errors.email ? (
                                                         <FormErrorMessage fontSize="1.1rem">Email {form.errors.email}</FormErrorMessage>
                                                     ) : (
-                                                        <Box mt={2} fontSize="1.1rem" visibility="hidden" color="transparent">
-                                                            placeholder
-                                                        </Box>
-                                                    )}
+                                                            <Box mt={2} fontSize="1.1rem" visibility="hidden" color="transparent">
+                                                                placeholder
+                                                            </Box>
+                                                        )}
                                                 </FormControl>
                                             )}
                                         </Field>

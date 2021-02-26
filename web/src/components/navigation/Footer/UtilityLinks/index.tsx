@@ -1,7 +1,20 @@
-import { CSSWithMultiValues, Heading, IconButton, Link, List, ListItem, Text } from '@chakra-ui/react';
+import {
+    CSSWithMultiValues,
+    Heading,
+    IconButton,
+    Link,
+    List,
+    ListItem,
+    Text
+} from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
-import { FaFacebookF, FaGoogle, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
+import {
+    FaFacebookF,
+    FaGoogle,
+    FaLinkedinIn,
+    FaTwitter
+} from 'react-icons/fa';
 
 const SectionHeading: React.FC<{}> = ({ children, ...props }) => (
     <Heading as="h4" pb={8} fontSize="1.5rem" textTransform="uppercase" whiteSpace="nowrap" {...props}>
@@ -33,7 +46,7 @@ const MediaLinksItem: React.FC<MediaLinksItemProps> = ({ href, icon, label, back
     </ListItem>
 );
 
-const UtilityLinks: React.FC<{}> = ({}) => {
+const UtilityLinks: React.FC<{}> = ({ }) => {
     return (
         <List pb="4rem" display="flex" justifyContent="space-between">
             <ListItem maxWidth="9.5rem">

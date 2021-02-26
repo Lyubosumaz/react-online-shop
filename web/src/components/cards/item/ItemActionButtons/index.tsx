@@ -1,5 +1,16 @@
 import { useDeleteItemMutation, useMeQuery } from '@/generated/graphql';
-import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Box, Button, IconButton, Link } from '@chakra-ui/react';
+import {
+    AlertDialog,
+    AlertDialogBody,
+    AlertDialogContent,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogOverlay,
+    Box,
+    Button,
+    IconButton,
+    Link
+} from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';

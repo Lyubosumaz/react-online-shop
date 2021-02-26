@@ -1,6 +1,16 @@
 import { useLogoutMutation } from '@/generated/graphql';
 import { useApolloClient } from '@apollo/client';
-import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, useDisclosure } from '@chakra-ui/react';
+import {
+    AlertDialog,
+    AlertDialogBody,
+    AlertDialogCloseButton,
+    AlertDialogContent,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogOverlay,
+    Button,
+    useDisclosure
+} from '@chakra-ui/react';
 import React from 'react';
 
 const Logout: React.FC<{}> = ({ }) => {

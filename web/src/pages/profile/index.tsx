@@ -1,11 +1,28 @@
-import { MeDocument, MeQuery, useConfirmEmailMessageMutation, useMeQuery, useSubscribeNewsletterMutation, useUnsubscribeNewsletterMutation } from '@/generated/graphql';
+import {
+    MeDocument,
+    MeQuery,
+    useConfirmEmailMessageMutation,
+    useMeQuery,
+    useSubscribeNewsletterMutation,
+    useUnsubscribeNewsletterMutation
+} from '@/generated/graphql';
 import MainLayout from '@/layouts/MainLayout';
 import { isServer } from '@/utils/isServer';
 import { withApollo } from '@/utils/withApollo';
 import { Button, Icon, IconButton, List, ListItem, Text, Tooltip } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React, { useState } from 'react';
-import { FaAddressCard, FaBell, FaBellSlash, FaEdit, FaEnvelope, FaLock, FaLockOpen, FaTrashAlt, FaUser } from 'react-icons/fa';
+import {
+    FaAddressCard,
+    FaBell,
+    FaBellSlash,
+    FaEdit,
+    FaEnvelope,
+    FaLock,
+    FaLockOpen,
+    FaTrashAlt,
+    FaUser
+} from 'react-icons/fa';
 
 const TextHolder: React.FC<{}> = ({ children }) => (
     <Text mr={2} minW="9.5rem">
@@ -13,7 +30,7 @@ const TextHolder: React.FC<{}> = ({ children }) => (
     </Text>
 );
 
-const Profile: React.FC<{}> = ({}) => {
+const Profile: React.FC<{}> = ({ }) => {
     const { data } = useMeQuery({
         skip: isServer(),
     });
@@ -59,11 +76,11 @@ const Profile: React.FC<{}> = ({}) => {
                                 confirm email
                             </Button>
                         ) : (
-                            <Text color="teal">Message to your email has been sent</Text>
-                        )
+                                <Text color="teal">Message to your email has been sent</Text>
+                            )
                     ) : (
-                        <Text color="teal">Your mail has been confirm</Text>
-                    )}
+                                <Text color="teal">Your mail has been confirm</Text>
+                            )}
                 </ListItem>
 
                 <ListItem m="0.5rem 0" d="flex" alignItems="center">
@@ -98,35 +115,35 @@ const Profile: React.FC<{}> = ({}) => {
                             />
                         </Tooltip>
                     ) : (
-                        <Tooltip label="Unsubscribe">
-                            <IconButton
-                                icon={<FaBellSlash />}
-                                fontSize="1.2rem"
-                                onClick={async () =>
-                                    await unsubscribeNewsletter({
-                                        variables: {
-                                            email: typeof data?.me?.email === 'string' ? data?.me?.email : '-1',
-                                        },
-                                        update: (cache, { data }) => {
-                                            if (typeof data?.unsubscribeNewsletter === 'boolean') return;
+                            <Tooltip label="Unsubscribe">
+                                <IconButton
+                                    icon={<FaBellSlash />}
+                                    fontSize="1.2rem"
+                                    onClick={async () =>
+                                        await unsubscribeNewsletter({
+                                            variables: {
+                                                email: typeof data?.me?.email === 'string' ? data?.me?.email : '-1',
+                                            },
+                                            update: (cache, { data }) => {
+                                                if (typeof data?.unsubscribeNewsletter === 'boolean') return;
 
-                                            if (data?.unsubscribeNewsletter?.errors) return;
+                                                if (data?.unsubscribeNewsletter?.errors) return;
 
-                                            cache.writeQuery<MeQuery>({
-                                                query: MeDocument,
-                                                data: {
-                                                    __typename: 'Query',
-                                                    me: data?.unsubscribeNewsletter?.user,
-                                                },
-                                            });
-                                            cache.evict({});
-                                        },
-                                    })
-                                }
-                                aria-label="Unsubscribe"
-                            />
-                        </Tooltip>
-                    )}
+                                                cache.writeQuery<MeQuery>({
+                                                    query: MeDocument,
+                                                    data: {
+                                                        __typename: 'Query',
+                                                        me: data?.unsubscribeNewsletter?.user,
+                                                    },
+                                                });
+                                                cache.evict({});
+                                            },
+                                        })
+                                    }
+                                    aria-label="Unsubscribe"
+                                />
+                            </Tooltip>
+                        )}
                 </ListItem>
 
                 <ListItem m="0.5rem 0" d="flex" alignItems="center">

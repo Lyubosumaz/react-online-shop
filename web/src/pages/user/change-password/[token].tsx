@@ -1,3 +1,4 @@
+import InputField from '@/components/form/InputField';
 import { MeDocument, MeQuery, useChangePasswordMutation } from '@/generated/graphql';
 import SecondaryLayout from '@/layouts/SecondaryLayout';
 import { changePasswordValidations } from '@/utils/formValidations';
@@ -9,7 +10,6 @@ import { NextPage } from 'next';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import InputField from '../@/components/form/InputField';
 
 const ChangePassword: NextPage = () => {
     const router = useRouter();

@@ -1,3 +1,4 @@
+import InputField from '@/components/form/InputField';
 import { MeDocument, MeQuery, useChangeEmailMutation, useMeQuery } from '@/generated/graphql';
 import SecondaryLayout from '@/layouts/SecondaryLayout';
 import { changeEmailValidations } from '@/utils/formValidations';
@@ -8,9 +9,8 @@ import { Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
-import InputField from '../@/components/form/InputField';
 
-const ChangeEmail: React.FC<{}> = ({}) => {
+const ChangeEmail: React.FC<{}> = ({ }) => {
     const router = useRouter();
     const [changeEmail] = useChangeEmailMutation();
     const { data } = useMeQuery({
