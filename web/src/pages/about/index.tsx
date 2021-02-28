@@ -1,11 +1,24 @@
+import ColumnWrapper from '@/layouts/ColumnWrapper';
+import MainLayout from '@/layouts/MainLayout';
+import { Box, Image } from '@chakra-ui/react';
 import React from 'react';
 
-const About: React.FC<{}> = ({}) => {
+const AboutBody: React.FC<{}> = ({ }) => {
     return (
-        <>
-            <h1>About</h1>
-            <div>About</div>
-        </>
+        <Box>AboutBody</Box>
+    );
+}
+
+const About: React.FC<{}> = ({ }) => {
+    return (
+        <Box backgroundColor="secondaryL.100">
+            <MainLayout>
+                <ColumnWrapper
+                    left={<Image w="100%" h="auto" src={require('@/images/img-2.png')} alt="Garden Sofa" />}
+                    right={<AboutBody />}
+                />
+            </MainLayout>
+        </Box>
     );
 };
 
