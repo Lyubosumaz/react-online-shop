@@ -9,7 +9,7 @@ module.exports = withImages({
         return [
             {
                 source: '/',
-                destination: '/home',
+                destination: '/shop',
                 permanent: true,
             },
         ];

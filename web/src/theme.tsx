@@ -4,7 +4,7 @@ const customTheme = {
     initialColorMode: 'light',
     useSystemColorMode: false,
     colors: {
-        black: '#16161D',
+        black: '#16161d',
         primaryL: {
             50: "#fdeee8",
             100: "#f8cbb9",
@@ -52,12 +52,6 @@ const customTheme = {
             700: "#67324f",
             800: "#442235",
             900: "#22111a",
-        },
-        rosHeader: {
-            100: "#efe4d1",
-            200: "#7c2c0c",
-            800: "#a5517f",
-            900: "#3f559f",
         },
     },
     fonts: {
