@@ -1,11 +1,15 @@
 import ColumnWrapper from '@/layouts/ColumnWrapper';
 import MainLayout from '@/layouts/MainLayout';
-import { Box, Image } from '@chakra-ui/react';
+import { withApollo } from '@/utils/withApollo';
+import { Box, Heading, Image, Text } from '@chakra-ui/react';
 import React from 'react';
 
 const AboutBody: React.FC<{}> = ({ }) => {
     return (
-        <Box>AboutBody</Box>
+        <Box>
+            <Heading>About Us</Heading>
+            <Text>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised</Text>
+        </Box>
     );
 }
 
@@ -14,7 +18,7 @@ const About: React.FC<{}> = ({ }) => {
         <Box backgroundColor="secondaryL.100">
             <MainLayout>
                 <ColumnWrapper
-                    left={<Image w="100%" h="auto" src={require('@/images/img-2.png')} alt="Garden Sofa" />}
+                    left={<Image w="auto" h="100%" src={require('@/images/img-2.png')} alt="Fancy Chair" />}
                     right={<AboutBody />}
                 />
             </MainLayout>
@@ -22,4 +26,4 @@ const About: React.FC<{}> = ({ }) => {
     );
 };
 
-export default About;
+export default withApollo({ ssr: true })(About);
