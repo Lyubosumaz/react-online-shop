@@ -1,14 +1,25 @@
 import { withApollo } from '@/utils/withApollo';
-import NextLink from 'next/link';
+import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 
-const FourOhFour: React.FC<{}> = ({}) => {
+const FourOhFour: React.FC<{}> = ({ }) => {
     return (
         <>
-            <h1>404 - Page Not Found</h1>
-            <NextLink href="/">
-                <a>Go back home</a>
-            </NextLink>
+            <Box h="100vh" bgColor="teal" >
+                <Box>
+                    <Flex>
+                        <Box>
+                            <Text fontSize="5rem">404</Text>
+                        </Box>
+                        <Box>
+                            <Heading>Sorry!</Heading>
+                            <Text>The Page You're Looking For Was Not Found</Text>
+                            <Button>Go Back</Button>
+                        </Box>
+                    </Flex>
+                    <Box>Input field</Box>
+                </Box>
+            </Box>
         </>
     );
 };
