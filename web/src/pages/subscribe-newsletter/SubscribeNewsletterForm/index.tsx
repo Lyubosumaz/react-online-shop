@@ -11,7 +11,7 @@ const SubscribeNewsletterForm: React.FC<{}> = ({ }) => {
         <Box w="100%">
             <Heading mb={10} color="primaryL.700" fontSize="2.5rem">
                 Subscribe Newsletter
-                            </Heading>
+            </Heading>
             <Formik
                 initialValues={{ email: '' }}
                 validationSchema={subscribeValidations}
