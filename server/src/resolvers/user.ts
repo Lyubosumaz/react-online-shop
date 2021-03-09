@@ -522,6 +522,7 @@ export class UserResolver {
         @Ctx()
         { req }: MyContext
     ): Promise<UserResponse | boolean> {
+        console.log(email)
         if (!email) return true;
 
         const user = await User.findOne({ where: { email } });
@@ -543,6 +544,7 @@ export class UserResolver {
         @Ctx()
         { req }: MyContext
     ): Promise<UserResponse | boolean> {
+        console.log(email)
         if (!email) return true;
 
         const user = await User.findOne({ where: { email } });

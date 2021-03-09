@@ -1,4 +1,4 @@
-import { useMeQuery, useSubscribeNewsletterMutation } from '@/generated/graphql';
+import { MeDocument, MeQuery, useMeQuery, useSubscribeNewsletterMutation, useUnsubscribeNewsletterMutation } from '@/generated/graphql';
 import { subscribeValidations } from '@/utils/formValidations';
 import { isServer } from '@/utils/isServer';
 import { Box, Button, FormControl, FormErrorMessage, Heading, Input, Text } from '@chakra-ui/react';
@@ -8,6 +8,7 @@ import React from 'react';
 const SubscribeNewsletterForm: React.FC<{}> = ({ }) => {
     const { data } = useMeQuery({ skip: isServer() });
     const [subscribeNewsletter] = useSubscribeNewsletterMutation();
+    const [unsubscribeNewsletter] = useUnsubscribeNewsletterMutation();
 
     return (
         <Box as="section" w="100%">
@@ -28,10 +29,31 @@ const SubscribeNewsletterForm: React.FC<{}> = ({ }) => {
                                 borderWidth="0.1rem"
                                 borderRadius={0}
                                 backgroundColor="primaryL.700"
-                                color="#fff"
+                                color="white"
                                 fontWeight="normal"
                                 textTransform="uppercase"
                                 _hover={{ backgroundColor: 'transparent', color: 'primaryL.700', borderColor: 'primaryL.700' }}
+                                onClick={async () =>
+                                    await unsubscribeNewsletter({
+                                        variables: {
+                                            email: typeof data?.me?.email === 'string' ? data?.me?.email : '-1',
+                                        },
+                                        update: (cache, { data }) => {
+                                            if (typeof data?.unsubscribeNewsletter === 'boolean') return;
+
+                                            if (data?.unsubscribeNewsletter?.errors) return;
+
+                                            cache.writeQuery<MeQuery>({
+                                                query: MeDocument,
+                                                data: {
+                                                    __typename: 'Query',
+                                                    me: data?.unsubscribeNewsletter?.user,
+                                                },
+                                            });
+                                            cache.evict({});
+                                        },
+                                    })
+                                }
                             >
                                 unsubscribe
                             </Button>
@@ -43,7 +65,26 @@ const SubscribeNewsletterForm: React.FC<{}> = ({ }) => {
                         initialValues={{ email: '' }}
                         validationSchema={subscribeValidations}
                         onSubmit={async (values, { resetForm }) => {
-                            await subscribeNewsletter({ variables: values });
+                            async () =>
+                                await subscribeNewsletter({
+                                    variables: values,
+                                    update: (cache, { data }) => {
+                                        if (typeof data?.subscribeNewsletter === 'boolean') return;
+
+                                        if (data?.subscribeNewsletter?.errors) return;
+
+                                        cache.writeQuery<MeQuery>({
+                                            query: MeDocument,
+                                            data: {
+                                                __typename: 'Query',
+                                                me: data?.subscribeNewsletter?.user,
+                                            },
+                                        });
+                                        cache.evict({});
+                                    },
+                                })
+
+                            // await subscribeNewsletter({ variables: values });
                             resetForm();
                         }}
                     >
@@ -51,7 +92,7 @@ const SubscribeNewsletterForm: React.FC<{}> = ({ }) => {
                             <Form style={{ width: '100%' }}>
                                 <Field name="email">
                                     {({ field, form }: any) => (
-                                        <FormControl mb={8} isInvalid={!!form.errors.email || !!form.touched.email}>
+                                        <FormControl mb={8} isInvalid={!!form.errors.email}>
                                             <Input
                                                 {...field}
                                                 placeholder="Enter Your Email"
