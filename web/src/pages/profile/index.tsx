@@ -31,9 +31,7 @@ const TextHolder: React.FC<{}> = ({ children }) => (
 );
 
 const Profile: React.FC<{}> = ({ }) => {
-    const { data } = useMeQuery({
-        skip: isServer(),
-    });
+    const { data } = useMeQuery({ skip: isServer() });
     const [subscribeNewsletter] = useSubscribeNewsletterMutation();
     const [unsubscribeNewsletter] = useUnsubscribeNewsletterMutation();
     const [confirmEmailMessage] = useConfirmEmailMessageMutation();
@@ -76,11 +74,11 @@ const Profile: React.FC<{}> = ({ }) => {
                                 confirm email
                             </Button>
                         ) : (
-                                <Text color="teal">Message to your email has been sent</Text>
-                            )
+                            <Text color="teal">Message to your email has been sent</Text>
+                        )
                     ) : (
-                                <Text color="teal">Your mail has been confirm</Text>
-                            )}
+                        <Text color="teal">Your mail has been confirm</Text>
+                    )}
                 </ListItem>
 
                 <ListItem m="0.5rem 0" d="flex" alignItems="center">
@@ -115,35 +113,35 @@ const Profile: React.FC<{}> = ({ }) => {
                             />
                         </Tooltip>
                     ) : (
-                            <Tooltip label="Unsubscribe">
-                                <IconButton
-                                    icon={<FaBellSlash />}
-                                    fontSize="1.2rem"
-                                    onClick={async () =>
-                                        await unsubscribeNewsletter({
-                                            variables: {
-                                                email: typeof data?.me?.email === 'string' ? data?.me?.email : '-1',
-                                            },
-                                            update: (cache, { data }) => {
-                                                if (typeof data?.unsubscribeNewsletter === 'boolean') return;
+                        <Tooltip label="Unsubscribe">
+                            <IconButton
+                                icon={<FaBellSlash />}
+                                fontSize="1.2rem"
+                                onClick={async () =>
+                                    await unsubscribeNewsletter({
+                                        variables: {
+                                            email: typeof data?.me?.email === 'string' ? data?.me?.email : '-1',
+                                        },
+                                        update: (cache, { data }) => {
+                                            if (typeof data?.unsubscribeNewsletter === 'boolean') return;
 
-                                                if (data?.unsubscribeNewsletter?.errors) return;
+                                            if (data?.unsubscribeNewsletter?.errors) return;
 
-                                                cache.writeQuery<MeQuery>({
-                                                    query: MeDocument,
-                                                    data: {
-                                                        __typename: 'Query',
-                                                        me: data?.unsubscribeNewsletter?.user,
-                                                    },
-                                                });
-                                                cache.evict({});
-                                            },
-                                        })
-                                    }
-                                    aria-label="Unsubscribe"
-                                />
-                            </Tooltip>
-                        )}
+                                            cache.writeQuery<MeQuery>({
+                                                query: MeDocument,
+                                                data: {
+                                                    __typename: 'Query',
+                                                    me: data?.unsubscribeNewsletter?.user,
+                                                },
+                                            });
+                                            cache.evict({});
+                                        },
+                                    })
+                                }
+                                aria-label="Unsubscribe"
+                            />
+                        </Tooltip>
+                    )}
                 </ListItem>
 
                 <ListItem m="0.5rem 0" d="flex" alignItems="center">
