@@ -54,7 +54,7 @@ const UtilityLinks: React.FC<{}> = ({ }) => {
 
                 <List spacing={2} opacity="0.5">
                     <SiteLinksItem href="/">Shop</SiteLinksItem>
-                    <SiteLinksItem href="/about">About</SiteLinksItem>
+                    <SiteLinksItem href="/about-us">About</SiteLinksItem>
                     <SiteLinksItem href="/contact-us">Contact Us</SiteLinksItem>
                     <SiteLinksItem href="/subscribe-newsletter">Subscribe</SiteLinksItem>
                 </List>

@@ -13,7 +13,7 @@ const AboutBody: React.FC<{}> = ({ }) => {
     );
 }
 
-const About: React.FC<{}> = ({ }) => {
+const AboutUs: React.FC<{}> = ({ }) => {
     return (
         <Box backgroundColor="secondaryL.100">
             <MainLayout>
@@ -26,4 +26,4 @@ const About: React.FC<{}> = ({ }) => {
     );
 };
 
-export default withApollo({ ssr: true })(About);
+export default withApollo({ ssr: true })(AboutUs);
