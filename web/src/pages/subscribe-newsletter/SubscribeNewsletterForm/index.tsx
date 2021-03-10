@@ -65,24 +65,23 @@ const SubscribeNewsletterForm: React.FC<{}> = ({ }) => {
                         initialValues={{ email: '' }}
                         validationSchema={subscribeValidations}
                         onSubmit={async (values, { resetForm }) => {
-                            async () =>
-                                await subscribeNewsletter({
-                                    variables: values,
-                                    update: (cache, { data }) => {
-                                        if (typeof data?.subscribeNewsletter === 'boolean') return;
+                            await subscribeNewsletter({
+                                variables: values,
+                                update: (cache, { data }) => {
+                                    if (typeof data?.subscribeNewsletter === 'boolean') return;
 
-                                        if (data?.subscribeNewsletter?.errors) return;
+                                    if (data?.subscribeNewsletter?.errors) return;
 
-                                        cache.writeQuery<MeQuery>({
-                                            query: MeDocument,
-                                            data: {
-                                                __typename: 'Query',
-                                                me: data?.subscribeNewsletter?.user,
-                                            },
-                                        });
-                                        cache.evict({});
-                                    },
-                                })
+                                    cache.writeQuery<MeQuery>({
+                                        query: MeDocument,
+                                        data: {
+                                            __typename: 'Query',
+                                            me: data?.subscribeNewsletter?.user,
+                                        },
+                                    });
+                                    cache.evict({});
+                                },
+                            })
 
                             // await subscribeNewsletter({ variables: values });
                             resetForm();

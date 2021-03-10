@@ -522,16 +522,16 @@ export class UserResolver {
         @Ctx()
         { req }: MyContext
     ): Promise<UserResponse | boolean> {
-        console.log(email)
         if (!email) return true;
 
-        const user = await User.findOne({ where: { email } });
+        let user = await User.findOne({ where: { email } });
         // the email is not in the db
         if (!user) return true;
 
         const userId = req.session.userId;
         if (user.id === userId) {
             await User.update({ id: user.id }, { newsletterSub: 1 });
+            user = await User.findOne({ id: user.id });
         }
 
         return { user };
@@ -544,16 +544,16 @@ export class UserResolver {
         @Ctx()
         { req }: MyContext
     ): Promise<UserResponse | boolean> {
-        console.log(email)
         if (!email) return true;
 
-        const user = await User.findOne({ where: { email } });
+        let user = await User.findOne({ where: { email } });
         // the email is not in the db
         if (!user) return true;
 
         const userId = req.session.userId;
         if (user.id === userId) {
             await User.update({ id: user.id }, { newsletterSub: -1 });
+            user = await User.findOne({ id: user.id });
         }
 
         return { user };
