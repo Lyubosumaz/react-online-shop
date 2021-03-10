@@ -15,7 +15,7 @@ const AboutBody: React.FC<{}> = ({ }) => {
 
 const AboutUs: React.FC<{}> = ({ }) => {
     return (
-        <Box backgroundColor="secondaryL.100">
+        <Box>
             <MainLayout>
                 <ColumnWrapper
                     left={<Image w="auto" h="100%" src={require('@/images/img-2.png')} alt="Fancy Chair" />}

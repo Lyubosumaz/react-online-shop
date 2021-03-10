@@ -1,10 +1,12 @@
 import { Flex } from '@chakra-ui/react';
 import React, { ReactNode } from 'react';
-
+import styles from './column-wrapper.module.css';
 
 const Column: React.FC<{}> = ({ children }) => (
     <Flex padding="0 1rem" justifyContent="center" alignItems="center" flexBasis="50%">
-        {children}
+        <div className={styles.angles}>
+            {children}
+        </div>
     </Flex>
 );
 
