@@ -1,3 +1,18 @@
 .angles {
+    position: relative;
     background: red;
+}
+
+.angles::before,
+.angles::after {
+    position: absolute;
+    content: 'a';
+    width: 5rem;
+    height: 5rem;
+}
+
+.angles::before {
+}
+
+.angles::after {
 }

@@ -2,9 +2,14 @@ import { Flex } from '@chakra-ui/react';
 import React, { ReactNode } from 'react';
 import styles from './column-wrapper.module.css';
 
-const Column: React.FC<{}> = ({ children }) => (
+export type ColumnVariant = 'angles' | 'regular';
+interface ColumnProps {
+    variant?: ColumnVariant;
+}
+
+const Column: React.FC<ColumnProps> = ({ children, variant = 'regular' }) => (
     <Flex padding="0 1rem" justifyContent="center" alignItems="center" flexBasis="50%">
-        <div className={styles.angles}>
+        <div className={variant === "angles" ? styles.angles : ""}>
             {children}
         </div>
     </Flex>
@@ -13,7 +18,7 @@ const Column: React.FC<{}> = ({ children }) => (
 const ColumnWrapper: React.FC<{ left: ReactNode, right: ReactNode }> = ({ left, right }) => {
     return (
         <Flex p="6rem 0">
-            <Column>{left}</Column>
+            <Column variant="angles">{left}</Column>
             <Column>{right}</Column>
         </Flex>
     );
