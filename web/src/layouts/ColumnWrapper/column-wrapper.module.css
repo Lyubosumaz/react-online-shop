@@ -1,18 +1,29 @@
 .angles {
+    margin: 2.75rem;
+    padding: 2.75rem;
     position: relative;
-    background: red;
+    border: 0.1rem solid #7c2c0c;
 }
 
 .angles::before,
 .angles::after {
+    display: block;
     position: absolute;
-    content: 'a';
+    content: '';
     width: 5rem;
     height: 5rem;
 }
 
 .angles::before {
+    top: -2.75rem;
+    left: -2.75rem;
+    border-top: 0.5rem solid #7c2c0c;
+    border-left: 0.5rem solid #7c2c0c;
 }
 
 .angles::after {
+    right: -2.75rem;
+    bottom: -2.75rem;
+    border-right: 0.5rem solid #7c2c0c;
+    border-bottom: 0.5rem solid #7c2c0c;
 }
