@@ -32,7 +32,8 @@ const Logout: React.FC<{}> = ({ }) => {
                     color: 'primaryL.700',
                     textDecoration: 'underline'
                 }}
-                onClick={onOpen} isLoading={logoutFetching} variant="link"
+                onClick={onOpen} isLoading={logoutFetching}
+                variant="link"
             >
                 Logout
             </Button>

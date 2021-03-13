@@ -12,11 +12,10 @@ const Logo: React.FC<{}> = ({ }) => {
                 alignItems="center"
                 border="0.175rem solid transparent"
                 borderRadius={8}
-                _hover={{ borderColor: '#secondaryL.100' }}>
+                _hover={{ borderColor: '#secondaryL.100' }}
+            >
                 <Icon as={FaStore} w={8} h={8} />
-                <Text fontSize="2.5rem" fontWeight="700" lineHeight={1}>
-                    ROS
-                </Text>
+                <Text fontSize="2.5rem" fontWeight="700" lineHeight={1}>ROS</Text>
             </Link>
         </NextLink>
     );

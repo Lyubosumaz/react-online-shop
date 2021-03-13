@@ -76,7 +76,7 @@ const NavBar: React.FC<{}> = ({ }) => {
                             <ListItemWrapper><NavItem href="/cart" variant="cart" /></ListItemWrapper>
                         </>
                     }
-                    <ListItemWrapper ><Logout /></ListItemWrapper>
+                    <ListItemWrapper><Logout /></ListItemWrapper>
                     {/* TODO button for translate site */}
                     <ListItemWrapper isLast><LangSelect /></ListItemWrapper>
                     <ListItemWrapper isLast><ColorMode control="custom" /></ListItemWrapper>
