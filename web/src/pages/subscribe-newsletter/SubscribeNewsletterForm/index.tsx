@@ -1,7 +1,7 @@
 import { MeDocument, MeQuery, useMeQuery, useSubscribeNewsletterMutation, useUnsubscribeNewsletterMutation } from '@/generated/graphql';
 import { subscribeValidations } from '@/utils/formValidations';
 import { isServer } from '@/utils/isServer';
-import { Box, Button, FormControl, FormErrorMessage, Heading, Input, Text } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormErrorMessage, Heading, Input, Text, useColorModeValue, useToken } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import React from 'react';
 
@@ -9,30 +9,36 @@ const SubscribeNewsletterForm: React.FC<{}> = ({ }) => {
     const { data } = useMeQuery({ skip: isServer() });
     const [subscribeNewsletter] = useSubscribeNewsletterMutation();
     const [unsubscribeNewsletter] = useUnsubscribeNewsletterMutation();
+    const [lightColor, darkColor] = useToken("colors", ["primaryL.700", "primaryD.500"]);
+    const mainColor = useColorModeValue(lightColor, darkColor);
 
     return (
         <Box as="section" w="100%">
-            <Heading mb={10} color="primaryL.700" fontSize="2.5rem">
+            <Heading mb={10} color={mainColor} fontSize="2.5rem">
                 Subscribe Newsletter
             </Heading>
 
             {data?.me?.newsletterSub === 1
                 ? (
                     <>
-                        <Text mb="1.5rem">You are already subscribed and would reserve newsletter updates on your email address</Text>
-                        <Text mb="1.5rem">If you don't want to receive the newsletter you can unsubscribe:</Text>
+                        <Text mb="0.75rem" color="black">You are already subscribed and would reserve newsletter updates on your email address</Text>
+                        <Text mb="2rem" color="black">If you don't want to receive the newsletter you can unsubscribe:</Text>
 
                         <Box d="flex" justifyContent="center">
                             <Button
                                 ml="0.5rem"
                                 p="0 4rem"
                                 borderWidth="0.1rem"
+                                backgroundColor={mainColor}
                                 borderRadius={0}
-                                backgroundColor="primaryL.700"
                                 color="white"
                                 fontWeight="normal"
                                 textTransform="uppercase"
-                                _hover={{ backgroundColor: 'transparent', color: 'primaryL.700', borderColor: 'primaryL.700' }}
+                                _hover={{
+                                    backgroundColor: 'transparent',
+                                    color: mainColor,
+                                    borderColor: mainColor
+                                }}
                                 onClick={async () =>
                                     await unsubscribeNewsletter({
                                         variables: {
@@ -40,9 +46,7 @@ const SubscribeNewsletterForm: React.FC<{}> = ({ }) => {
                                         },
                                         update: (cache, { data }) => {
                                             if (typeof data?.unsubscribeNewsletter === 'boolean') return;
-
                                             if (data?.unsubscribeNewsletter?.errors) return;
-
                                             cache.writeQuery<MeQuery>({
                                                 query: MeDocument,
                                                 data: {
@@ -69,9 +73,7 @@ const SubscribeNewsletterForm: React.FC<{}> = ({ }) => {
                                 variables: values,
                                 update: (cache, { data }) => {
                                     if (typeof data?.subscribeNewsletter === 'boolean') return;
-
                                     if (data?.subscribeNewsletter?.errors) return;
-
                                     cache.writeQuery<MeQuery>({
                                         query: MeDocument,
                                         data: {
@@ -82,8 +84,6 @@ const SubscribeNewsletterForm: React.FC<{}> = ({ }) => {
                                     cache.evict({});
                                 },
                             })
-
-                            // await subscribeNewsletter({ variables: values });
                             resetForm();
                         }}
                     >
@@ -97,12 +97,14 @@ const SubscribeNewsletterForm: React.FC<{}> = ({ }) => {
                                                 placeholder="Enter Your Email"
                                                 fontSize="xl"
                                                 p="1.6rem 1rem"
+                                                borderColor={mainColor}
                                                 borderRadius={0}
-                                                borderColor="#8b4222"
-                                                color="primaryL.700"
-                                                _placeholder={{ color: 'primaryL.700' }}
-                                                _hover={{ borderColor: '#8b4222' }}
-                                                _focus={{ borderColor: '#8b4222' }}
+                                                color={mainColor}
+                                                _placeholder={{ color: mainColor }}
+                                                _hover={{ borderColor: mainColor }}
+                                                _focus={{
+                                                    borderColor: form.errors.email ? "red" : mainColor
+                                                }}
                                             />
                                             {form.errors.email ? (
                                                 <FormErrorMessage pl="1.1rem" fontSize="1.1rem">Email {form.errors.email}</FormErrorMessage>
@@ -121,12 +123,16 @@ const SubscribeNewsletterForm: React.FC<{}> = ({ }) => {
                                         isLoading={isSubmitting}
                                         p="0 4rem"
                                         borderWidth="0.1rem"
+                                        backgroundColor={mainColor}
                                         borderRadius={0}
-                                        backgroundColor="primaryL.700"
-                                        color="#fff"
+                                        color="white"
                                         fontWeight="normal"
                                         textTransform="uppercase"
-                                        _hover={{ backgroundColor: 'transparent', color: 'primaryL.700', borderColor: 'primaryL.700' }}
+                                        _hover={{
+                                            backgroundColor: 'transparent',
+                                            color: mainColor,
+                                            borderColor: mainColor
+                                        }}
                                     >
                                         subscribe now
                                     </Button>
