@@ -1,6 +1,5 @@
-import { Flex } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import React, { ReactNode } from 'react';
-import styles from './column-wrapper.module.css';
 
 export type ColumnVariant = 'angles' | 'regular';
 interface ColumnProps {
@@ -9,9 +8,39 @@ interface ColumnProps {
 
 const Column: React.FC<ColumnProps> = ({ children, variant = 'regular' }) => (
     <Flex padding="0 1rem" justifyContent="center" alignItems="center" flexBasis="50%">
-        <div className={variant === "angles" ? styles.angles : ""}>
+        <Box
+            margin="2.15rem"
+            padding="2rem 3.5rem"
+            position="relative"
+            border="0.1rem solid"
+            borderColor="#7c2c0c"
+            _before={{
+                width: "6.5rem",
+                height: "6.5rem",
+                content: '""',
+                display: "block",
+                position: "absolute",
+                top: "-2.15rem",
+                left: "-2.15rem",
+                borderTop: "0.85rem solid",
+                borderLeft: "0.85rem solid",
+                borderColor: "#7c2c0c"
+            }}
+            _after={{
+                width: "6.5rem",
+                height: "6.5rem",
+                content: '""',
+                display: "block",
+                position: "absolute",
+                right: "-2.15rem",
+                bottom: "-2.15rem",
+                borderRight: "0.85rem solid",
+                borderBottom: "0.85rem solid",
+                borderColor: "#7c2c0c"
+            }}
+        >
             {children}
-        </div>
+        </Box>
     </Flex>
 );
 
