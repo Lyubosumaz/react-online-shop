@@ -33,6 +33,7 @@ const AboutUs: React.FC<{}> = ({ }) => {
                 <ColumnWrapper
                     left={<Image w="auto" h="100%" src={require('@/images/img-2.png')} alt="Fancy Chair" />}
                     right={<AboutBody />}
+                    borderLocation="left"
                 />
             </MainLayout>
         </Box>

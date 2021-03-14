@@ -2,11 +2,19 @@ import { Box, Flex, useColorModeValue, useToken } from '@chakra-ui/react';
 import React, { ReactNode } from 'react';
 
 export type ColumnVariant = 'angles' | 'regular';
+export type ColumnWrapperVariant = 'left' | 'right' | "both";
+
 interface ColumnProps {
     variant?: ColumnVariant;
 }
 
-const BorderedColumn: React.FC<ColumnProps> = ({ children }) => {
+interface ColumnWrapperProps {
+    left: ReactNode;
+    right: ReactNode;
+    borderLocation?: ColumnWrapperVariant;
+}
+
+const BorderedColumn: React.FC<{}> = ({ children }) => {
     const [lightColor, darkColor] = useToken("colors", ["primaryL.700", "primaryD.500"]);
     const boColor = useColorModeValue(lightColor, darkColor);
     const sharedStyles = {
@@ -46,7 +54,7 @@ const BorderedColumn: React.FC<ColumnProps> = ({ children }) => {
         </Box>);
 }
 
-const Column: React.FC<ColumnProps> = ({ children, variant = 'regular' }) => {
+const Column: React.FC<ColumnProps> = ({ children, variant }) => {
     return (
         <Flex padding="0 1rem" justifyContent="center" alignItems="center" flexBasis="50%">
             {variant === "regular" ?
@@ -58,11 +66,11 @@ const Column: React.FC<ColumnProps> = ({ children, variant = 'regular' }) => {
     )
 }
 
-const ColumnWrapper: React.FC<{ left: ReactNode, right: ReactNode }> = ({ left, right }) => {
+const ColumnWrapper: React.FC<ColumnWrapperProps> = ({ left, right, borderLocation }) => {
     return (
         <Flex p="6rem 0">
-            <Column variant="angles">{left}</Column>
-            <Column>{right}</Column>
+            <Column variant={borderLocation === "left" || borderLocation === "both" ? "angles" : "regular"}>{left}</Column>
+            <Column variant={borderLocation === "right" || borderLocation === "both" ? "angles" : "regular"}>{right}</Column>
         </Flex>
     );
 };
