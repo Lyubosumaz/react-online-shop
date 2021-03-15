@@ -50,3 +50,10 @@ export const deleteAccountValidations = Yup.object().shape({
     email: Yup.string().required('is required'),
     password: Yup.string().required('is required'),
 });
+
+export const contactUsValidations = Yup.object().shape({
+    name: Yup.string().required('is required'),
+    email: Yup.string().required('is required'),
+    phoneNumber: Yup.string().required('is required'),
+    massage: Yup.string().required('is required'),
+});

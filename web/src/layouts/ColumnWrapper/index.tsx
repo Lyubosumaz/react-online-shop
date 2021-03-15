@@ -58,7 +58,7 @@ const Column: React.FC<ColumnProps> = ({ children, variant }) => {
     return (
         <Flex padding="0 1rem" justifyContent="center" alignItems="center" flexBasis="50%">
             {variant === "regular" ?
-                <Box as="section">{children}</Box>
+                <Box as="section" w="100%">{children}</Box>
                 :
                 <BorderedColumn>{children}</BorderedColumn>
             }
