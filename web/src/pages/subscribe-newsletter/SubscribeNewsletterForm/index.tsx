@@ -10,7 +10,10 @@ const SubscribeNewsletterForm: React.FC<{}> = ({ }) => {
     const [subscribeNewsletter] = useSubscribeNewsletterMutation();
     const [unsubscribeNewsletter] = useUnsubscribeNewsletterMutation();
     const [lightColor, darkColor] = useToken("colors", ["primaryL.700", "primaryD.500"]);
+    const [lightSColor, darkSColor] = useToken("colors", ["secondaryL.200", "primaryD.100"]);
+    const [lightAutofillColor] = useToken("colors", ["secondaryL.100"]);
     const mainColor = useColorModeValue(lightColor, darkColor);
+    const secondaryColor = useColorModeValue(lightSColor, darkSColor);
 
     return (
         <Box as="section" w="100%">
@@ -103,7 +106,14 @@ const SubscribeNewsletterForm: React.FC<{}> = ({ }) => {
                                                 _placeholder={{ color: mainColor }}
                                                 _hover={{ borderColor: mainColor }}
                                                 _focus={{
-                                                    borderColor: form.errors.email ? "red" : mainColor
+                                                    borderColor: form.errors.email ? "red" : mainColor,
+                                                    _autofill: {
+                                                        WebkitBoxShadow: `0 0 0 5rem ${secondaryColor} inset`,
+                                                    }
+                                                }}
+                                                _autofill={{
+                                                    WebkitBoxShadow: `0 0 0 5rem ${lightAutofillColor} inset`,
+                                                    WebkitTextFillColor: mainColor,
                                                 }}
                                             />
                                             {form.errors.email ? (
