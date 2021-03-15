@@ -47,6 +47,17 @@ const ContactUsForm: React.FC<{}> = ({ }) => {
                             )}
                         </Field>
 
+                        {/* <Button
+                            p="1.5rem 2rem"
+                            border="0.1rem solid"
+                            borderColor={headerColor}
+                            background="transparent"
+                            rounded={0}
+                            color={headerColor}
+                        >
+                            Read More
+                        </Button> */}
+
                         <Box mt={8} d="flex" justifyContent="center">
                             <Button
                                 type="submit"
