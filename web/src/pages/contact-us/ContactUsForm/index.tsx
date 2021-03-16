@@ -1,5 +1,5 @@
 import { contactUsValidations } from '@/utils/formValidations';
-import { Box, Button, FormControl, FormErrorMessage, Heading, Input, useColorModeValue, useToken } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormErrorMessage, Heading, Input, Textarea, useColorModeValue, useToken } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import React from 'react';
 
@@ -79,7 +79,7 @@ const ContactUsForm: React.FC<{}> = ({ }) => {
                                 <FormControl mb={2} isInvalid={!!form.errors.phoneNumber && !!form.touched.phoneNumber}>
                                     <Input
                                         {...field}
-                                        placeholder="Massage"
+                                        placeholder="Phone Number"
                                         fontSize="md"
                                         p="2rem 1rem"
                                         borderColor={mainColor}
@@ -102,9 +102,9 @@ const ContactUsForm: React.FC<{}> = ({ }) => {
                         <Field name="massage">
                             {({ field, form }: any) => (
                                 <FormControl mb={2} isInvalid={!!form.errors.massage && !!form.touched.massage}>
-                                    <Input
+                                    <Textarea
                                         {...field}
-                                        placeholder="Phone Number"
+                                        placeholder="Massage"
                                         fontSize="md"
                                         p="2rem 1rem"
                                         borderColor={mainColor}
