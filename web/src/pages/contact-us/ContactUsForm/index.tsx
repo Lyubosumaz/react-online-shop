@@ -106,6 +106,7 @@ const ContactUsForm: React.FC<{}> = ({ }) => {
                                         {...field}
                                         placeholder="Massage"
                                         fontSize="md"
+                                        h="2rem"
                                         p="2rem 1rem"
                                         borderColor={mainColor}
                                         color={mainColor}
