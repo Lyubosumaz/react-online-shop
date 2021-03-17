@@ -1,5 +1,5 @@
 import { contactUsValidations } from '@/utils/formValidations';
-import { Box, Button, FormControl, FormErrorMessage, Heading, Input, Textarea, useColorModeValue, useToken } from '@chakra-ui/react';
+import { Box, Button, FormControl, Heading, Input, Textarea, useColorModeValue, useToken } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import React from 'react';
 
@@ -26,7 +26,7 @@ const ContactUsForm: React.FC<{}> = ({ }) => {
                     <Form style={{ width: '100%' }}>
                         <Field name="name">
                             {({ field, form }: any) => (
-                                <FormControl mb={2} isInvalid={!!form.errors.name && !!form.touched.name}>
+                                <FormControl mb={6} isInvalid={!!form.errors.name && !!form.touched.name}>
                                     <Input
                                         {...field}
                                         placeholder="Name"
@@ -38,20 +38,13 @@ const ContactUsForm: React.FC<{}> = ({ }) => {
                                         _hover={{ borderColor: mainColor }}
                                         _focus={{ borderColor: mainColor }}
                                     />
-                                    {form.errors.name ? (
-                                        <FormErrorMessage fontSize="1.1rem">Name {form.errors.name}</FormErrorMessage>
-                                    ) : (
-                                        <Box mt={2} fontSize="1.1rem" visibility="hidden" color="transparent">
-                                            placeholder
-                                        </Box>
-                                    )}
                                 </FormControl>
                             )}
                         </Field>
 
                         <Field name="email">
                             {({ field, form }: any) => (
-                                <FormControl mb={2} isInvalid={!!form.errors.email && !!form.touched.email}>
+                                <FormControl mb={6} isInvalid={!!form.errors.email && !!form.touched.email}>
                                     <Input
                                         {...field}
                                         placeholder="Email"
@@ -63,20 +56,13 @@ const ContactUsForm: React.FC<{}> = ({ }) => {
                                         _hover={{ borderColor: mainColor }}
                                         _focus={{ borderColor: mainColor }}
                                     />
-                                    {form.errors.email ? (
-                                        <FormErrorMessage fontSize="1.1rem">Email {form.errors.email}</FormErrorMessage>
-                                    ) : (
-                                        <Box mt={2} fontSize="1.1rem" visibility="hidden" color="transparent">
-                                            placeholder
-                                        </Box>
-                                    )}
                                 </FormControl>
                             )}
                         </Field>
 
                         <Field name="phoneNumber">
                             {({ field, form }: any) => (
-                                <FormControl mb={2} isInvalid={!!form.errors.phoneNumber && !!form.touched.phoneNumber}>
+                                <FormControl mb={6} isInvalid={!!form.errors.phoneNumber && !!form.touched.phoneNumber}>
                                     <Input
                                         {...field}
                                         placeholder="Phone Number"
@@ -88,25 +74,18 @@ const ContactUsForm: React.FC<{}> = ({ }) => {
                                         _hover={{ borderColor: mainColor }}
                                         _focus={{ borderColor: mainColor }}
                                     />
-                                    {form.errors.phoneNumber ? (
-                                        <FormErrorMessage fontSize="1.1rem">Email {form.errors.phoneNumber}</FormErrorMessage>
-                                    ) : (
-                                        <Box mt={2} fontSize="1.1rem" visibility="hidden" color="transparent">
-                                            placeholder
-                                        </Box>
-                                    )}
                                 </FormControl>
                             )}
                         </Field>
 
                         <Field name="massage">
                             {({ field, form }: any) => (
-                                <FormControl mb={2} isInvalid={!!form.errors.massage && !!form.touched.massage}>
+                                <FormControl isInvalid={!!form.errors.massage && !!form.touched.massage}>
                                     <Textarea
                                         {...field}
                                         placeholder="Massage"
                                         fontSize="md"
-                                        h="2rem"
+                                        h="5%"
                                         p="2rem 1rem"
                                         borderColor={mainColor}
                                         color={mainColor}
@@ -114,18 +93,11 @@ const ContactUsForm: React.FC<{}> = ({ }) => {
                                         _hover={{ borderColor: mainColor }}
                                         _focus={{ borderColor: mainColor }}
                                     />
-                                    {form.errors.massage ? (
-                                        <FormErrorMessage fontSize="1.1rem">Email {form.errors.massage}</FormErrorMessage>
-                                    ) : (
-                                        <Box mt={2} fontSize="1.1rem" visibility="hidden" color="transparent">
-                                            placeholder
-                                        </Box>
-                                    )}
                                 </FormControl>
                             )}
                         </Field>
 
-                        <Box mt="4rem" d="flex" justifyContent="center">
+                        <Box mt="3rem" d="flex" justifyContent="center">
                             <Button
                                 type="submit"
                                 isLoading={isSubmitting}
