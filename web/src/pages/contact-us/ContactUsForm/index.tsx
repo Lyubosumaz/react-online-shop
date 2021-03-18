@@ -8,7 +8,7 @@ const ContactUsForm: React.FC<{}> = ({ }) => {
     const mainColor = useColorModeValue(lightColor, darkColor);
 
     return (
-        <div>
+        <>
             <Heading mb={10} color={mainColor} fontSize="2.5rem">
                 Contact Us*
             </Heading>
@@ -29,12 +29,12 @@ const ContactUsForm: React.FC<{}> = ({ }) => {
                                 <FormControl mb={6} isInvalid={!!form.errors.name && !!form.touched.name}>
                                     <Input
                                         {...field}
-                                        placeholder="Name"
+                                        placeholder={form.errors.name ? `Name ${form.errors.name}` : "Name"}
                                         fontSize="md"
                                         p="2rem 1rem"
                                         borderColor={mainColor}
                                         color={mainColor}
-                                        _placeholder={{ color: mainColor }}
+                                        _placeholder={{ color: form.errors.name ? "red" : mainColor }}
                                         _hover={{ borderColor: mainColor }}
                                         _focus={{ borderColor: mainColor }}
                                     />
@@ -52,7 +52,7 @@ const ContactUsForm: React.FC<{}> = ({ }) => {
                                         p="2rem 1rem"
                                         borderColor={mainColor}
                                         color={mainColor}
-                                        _placeholder={{ color: mainColor }}
+                                        _placeholder={{ color: form.errors.email ? "red" : mainColor }}
                                         _hover={{ borderColor: mainColor }}
                                         _focus={{ borderColor: mainColor }}
                                     />
@@ -70,7 +70,7 @@ const ContactUsForm: React.FC<{}> = ({ }) => {
                                         p="2rem 1rem"
                                         borderColor={mainColor}
                                         color={mainColor}
-                                        _placeholder={{ color: mainColor }}
+                                        _placeholder={{ color: form.errors.phoneNumber ? "red" : mainColor }}
                                         _hover={{ borderColor: mainColor }}
                                         _focus={{ borderColor: mainColor }}
                                     />
@@ -85,11 +85,11 @@ const ContactUsForm: React.FC<{}> = ({ }) => {
                                         {...field}
                                         placeholder="Massage"
                                         fontSize="md"
-                                        h="5%"
+                                        h="2%"
                                         p="2rem 1rem"
                                         borderColor={mainColor}
                                         color={mainColor}
-                                        _placeholder={{ color: mainColor }}
+                                        _placeholder={{ color: form.errors.massage ? "red" : mainColor }}
                                         _hover={{ borderColor: mainColor }}
                                         _focus={{ borderColor: mainColor }}
                                     />
@@ -119,7 +119,7 @@ const ContactUsForm: React.FC<{}> = ({ }) => {
                     </Form>
                 )}
             </Formik>
-        </div>
+        </>
     );
 };
 
