@@ -34,7 +34,7 @@ const ContactUsForm: React.FC<{}> = ({ }) => {
                                         p="2rem 1rem"
                                         borderColor={mainColor}
                                         color={mainColor}
-                                        _placeholder={{ color: form.errors.name ? "red" : mainColor }}
+                                        _placeholder={{ color: mainColor }}
                                         _hover={{ borderColor: mainColor }}
                                         _focus={{ borderColor: mainColor }}
                                     />
@@ -52,7 +52,7 @@ const ContactUsForm: React.FC<{}> = ({ }) => {
                                         p="2rem 1rem"
                                         borderColor={mainColor}
                                         color={mainColor}
-                                        _placeholder={{ color: form.errors.email ? "red" : mainColor }}
+                                        _placeholder={{ color: mainColor }}
                                         _hover={{ borderColor: mainColor }}
                                         _focus={{ borderColor: mainColor }}
                                     />
@@ -70,7 +70,7 @@ const ContactUsForm: React.FC<{}> = ({ }) => {
                                         p="2rem 1rem"
                                         borderColor={mainColor}
                                         color={mainColor}
-                                        _placeholder={{ color: form.errors.phoneNumber ? "red" : mainColor }}
+                                        _placeholder={{ color: mainColor }}
                                         _hover={{ borderColor: mainColor }}
                                         _focus={{ borderColor: mainColor }}
                                     />
@@ -89,7 +89,7 @@ const ContactUsForm: React.FC<{}> = ({ }) => {
                                         p="2rem 1rem"
                                         borderColor={mainColor}
                                         color={mainColor}
-                                        _placeholder={{ color: form.errors.massage ? "red" : mainColor }}
+                                        _placeholder={{ color: mainColor }}
                                         _hover={{ borderColor: mainColor }}
                                         _focus={{ borderColor: mainColor }}
                                     />
