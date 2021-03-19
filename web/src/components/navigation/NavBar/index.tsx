@@ -2,7 +2,7 @@ import Logout from '@/components/buttons/Logout';
 import SiteUtilities from '@/components/navigation/SiteUtilities';
 import { useMeQuery } from '@/generated/graphql';
 import { isServer } from '@/utils/isServer';
-import { Button, IconButton, Link, List, ListItem } from '@chakra-ui/react';
+import { Button, Flex, IconButton, Link, List, ListItem, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -17,11 +17,10 @@ const NavItem: React.FC<NavItemProps> = ({ children, href, variant = "regular", 
     const item = (variant: string) => {
         switch (variant) {
             case "regular":
-            case "profile":
                 return (
                     <NextLink href={href}>
                         <Button
-                            p={variant === "profile" ? "0 0.75rem" : "0 1rem"}
+                            p="0 1rem"
                             as={Link}
                             textTransform="uppercase"
                             bgColor="inherit"
@@ -31,6 +30,24 @@ const NavItem: React.FC<NavItemProps> = ({ children, href, variant = "regular", 
                             }}
                         >{children}</Button>
                     </NextLink>
+                );
+            case "profile":
+                return (
+                    <Flex align="center">
+                        { variant === "profile" ? <Text mr={2} fontWeight="bold">Welcome:</Text> : null}
+                        <NextLink href={href}>
+                            <Button
+                                p="0 0.75rem"
+                                as={Link}
+                                textTransform="uppercase"
+                                bgColor="inherit"
+                                _hover={{
+                                    bgColor: 'secondaryL.100',
+                                    color: 'primaryL.700'
+                                }}
+                            >{children}</Button>
+                        </NextLink>
+                    </Flex>
                 );
             case "cart":
                 return (
