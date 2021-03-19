@@ -17,20 +17,6 @@ const NavItem: React.FC<NavItemProps> = ({ children, href, variant = "regular", 
     const item = (variant: string) => {
         switch (variant) {
             case "regular":
-                return (
-                    <NextLink href={href}>
-                        <Button
-                            p={"0 1rem"}
-                            as={Link}
-                            textTransform="uppercase"
-                            bgColor="inherit"
-                            _hover={{
-                                bgColor: 'secondaryL.100',
-                                color: 'primaryL.700'
-                            }}
-                        >{children}</Button>
-                    </NextLink>
-                );
             case "profile":
                 return (
                     <NextLink href={href}>
@@ -69,6 +55,7 @@ const NavItem: React.FC<NavItemProps> = ({ children, href, variant = "regular", 
 
     return (
         <ListItem mr={isLast ? 0 : 2}>
+            {console.log(variant)}
             {item(variant)}
         </ListItem>
     )
@@ -83,16 +70,15 @@ const NavBar: React.FC<{}> = ({ }) => {
                 ? <>
                     <NavItem href="/login">Login</NavItem>
                     <NavItem href="/register">Register</NavItem>
-                    <SiteUtilities />
                 </>
                 : <>
                     <NavItem key={0} href="/profile" variant="profile">{data.me.username}</NavItem>
                     <NavItem key={1} href="/cart" variant="cart" />
                     <NavItem key={2} href="/create-item">Create Item</NavItem>
                     <NavItem key={3} href="#" variant="wrap"><Logout /></NavItem>
-                    <SiteUtilities />
                 </>
             }
+            <NavItem href="#" variant="wrap" isLast><SiteUtilities distance={2} /></NavItem>
         </List>
     );
 };
