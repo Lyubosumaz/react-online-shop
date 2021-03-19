@@ -2,6 +2,7 @@ import { getLanguageIcon, _languages } from "@/utils/flagIconController";
 import { Button, Menu, MenuButton, MenuGroup, MenuItem, MenuList, Tooltip, useColorModeValue, useToken } from '@chakra-ui/react';
 import React, { useState } from 'react';
 
+// TODO button for translate site
 const LangSelect: React.FC<{}> = ({ }) => {
     const [lang, setLanguage] = useState("en")
     const [lightColor, darkColor] = useToken("colors", ["secondaryL.100", "primaryD.900"]);

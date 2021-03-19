@@ -22,6 +22,7 @@ const Logout: React.FC<{}> = ({ }) => {
     return (
         <>
             <Button
+                key="logout_button"
                 height="2.5rem"
                 padding="0 1rem"
                 textTransform="uppercase"

@@ -1,36 +1,39 @@
-import ColorMode from '@/components/buttons/ColorMode';
-import LangSelect from "@/components/buttons/LangSelect";
-import Logout from "@/components/buttons/Logout";
+import Logout from '@/components/buttons/Logout';
+import SiteUtilities from '@/components/navigation/SiteUtilities';
 import { useMeQuery } from '@/generated/graphql';
 import { isServer } from '@/utils/isServer';
-import { Button, IconButton, Link, List, ListItem, Text } from '@chakra-ui/react';
+import { Button, IconButton, Link, List, ListItem } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 
 interface NavItemProps {
     href: string;
-    variant?: "regular" | "profile" | "cart";
+    variant?: "regular" | "profile" | "cart" | "wrap";
     isLast?: boolean;
 }
 
 const NavItem: React.FC<NavItemProps> = ({ children, href, variant = "regular", isLast }) => {
-    return (
-        <NextLink href={href}>
-            <ListItem mr={isLast ? 0 : 2} d="flex" alignItems="center">
-                {variant === "profile" ? <Text mr={2} fontWeight="bold">Welcome:</Text> : null}
-                {variant === "cart"
-                    ? (
-                        < IconButton
-                            aria-label="Cart"
-                            icon={<FaShoppingCart />}
+    const item = (variant: string) => {
+        switch (variant) {
+            case "regular":
+                return (
+                    <NextLink href={href}>
+                        <Button
+                            p={"0 1rem"}
+                            as={Link}
+                            textTransform="uppercase"
                             bgColor="inherit"
                             _hover={{
                                 bgColor: 'secondaryL.100',
                                 color: 'primaryL.700'
                             }}
-                        />
-                    ) : (
+                        >{children}</Button>
+                    </NextLink>
+                );
+            case "profile":
+                return (
+                    <NextLink href={href}>
                         <Button
                             p={variant === "profile" ? "0 0.75rem" : "0 1rem"}
                             as={Link}
@@ -40,13 +43,34 @@ const NavItem: React.FC<NavItemProps> = ({ children, href, variant = "regular", 
                                 bgColor: 'secondaryL.100',
                                 color: 'primaryL.700'
                             }}
-                        >
-                            {children}
-                        </Button>
-                    )
-                }
-            </ListItem>
-        </NextLink>
+                        >{children}</Button>
+                    </NextLink>
+                );
+            case "cart":
+                return (
+                    <NextLink href={href}>
+                        <IconButton
+                            aria-label="Cart"
+                            icon={<FaShoppingCart />}
+                            bgColor="inherit"
+                            _hover={{
+                                bgColor: 'secondaryL.100',
+                                color: 'primaryL.700'
+                            }}
+                        />
+                    </NextLink>
+                );
+            case "wrap":
+                return (children);
+            default:
+                return (<p>There is a Problem</p>);
+        }
+    }
+
+    return (
+        <ListItem mr={isLast ? 0 : 2}>
+            {item(variant)}
+        </ListItem>
     )
 };
 
@@ -59,17 +83,16 @@ const NavBar: React.FC<{}> = ({ }) => {
                 ? <>
                     <NavItem href="/login">Login</NavItem>
                     <NavItem href="/register">Register</NavItem>
+                    <SiteUtilities />
                 </>
                 : <>
-                    <NavItem href="/profile" variant="profile">{data.me.username}</NavItem>
-                    <NavItem href="/create-item">Create Item</NavItem>
-                    <NavItem href="/cart" variant="cart" />
-                    <ListItem mr={2}><Logout /></ListItem>
+                    <NavItem key={0} href="/profile" variant="profile">{data.me.username}</NavItem>
+                    <NavItem key={1} href="/cart" variant="cart" />
+                    <NavItem key={2} href="/create-item">Create Item</NavItem>
+                    <NavItem key={3} href="#" variant="wrap"><Logout /></NavItem>
+                    <SiteUtilities />
                 </>
             }
-            {/* TODO button for translate site */}
-            <ListItem mr={2}><LangSelect /></ListItem>
-            <ListItem><ColorMode control="custom" /></ListItem>
         </List>
     );
 };
