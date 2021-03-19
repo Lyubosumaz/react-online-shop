@@ -55,7 +55,6 @@ const NavItem: React.FC<NavItemProps> = ({ children, href, variant = "regular", 
 
     return (
         <ListItem mr={isLast ? 0 : 2}>
-            {console.log(variant)}
             {item(variant)}
         </ListItem>
     )
@@ -63,21 +62,24 @@ const NavItem: React.FC<NavItemProps> = ({ children, href, variant = "regular", 
 
 const NavBar: React.FC<{}> = ({ }) => {
     const { data } = useMeQuery({ skip: isServer() });
+    const items = !data?.me
+        ? (
+            <>
+                <NavItem key="1" href="/login">Login</NavItem>
+                <NavItem key="2" href="/register">Register</NavItem>
+            </>
+        ) : (
+            <>
+                <NavItem key="3" href="/profile" variant="profile">{data.me.username}</NavItem>
+                <NavItem key="4" href="/cart" variant="cart" />
+                <NavItem key="5" href="/create-item">Create Item</NavItem>
+                <NavItem key="6" href="#" variant="wrap"><Logout /></NavItem>
+            </>
+        );
 
     return (
         <List d="flex">
-            {!data?.me
-                ? <>
-                    <NavItem href="/login">Login</NavItem>
-                    <NavItem href="/register">Register</NavItem>
-                </>
-                : <>
-                    <NavItem key={0} href="/profile" variant="profile">{data.me.username}</NavItem>
-                    <NavItem key={1} href="/cart" variant="cart" />
-                    <NavItem key={2} href="/create-item">Create Item</NavItem>
-                    <NavItem key={3} href="#" variant="wrap"><Logout /></NavItem>
-                </>
-            }
+            {items}
             <NavItem href="#" variant="wrap" isLast><SiteUtilities distance={2} /></NavItem>
         </List>
     );
