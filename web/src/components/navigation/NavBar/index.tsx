@@ -3,29 +3,22 @@ import LangSelect from "@/components/buttons/LangSelect";
 import Logout from "@/components/buttons/Logout";
 import { useMeQuery } from '@/generated/graphql';
 import { isServer } from '@/utils/isServer';
-import { Button, Flex, IconButton, Link, List, ListItem, Text } from '@chakra-ui/react';
+import { Button, IconButton, Link, List, ListItem, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 
 interface NavItemProps {
-    href: string,
+    href: string;
     variant?: "regular" | "profile" | "cart";
+    isLast?: boolean;
 }
 
-const ListItemWrapper: React.FC<{ isLast?: boolean }> = ({ children, isLast }) => {
+const NavItem: React.FC<NavItemProps> = ({ children, href, variant = "regular", isLast }) => {
     return (
-        <ListItem mr={isLast ? 0 : 4} d="flex" alignItems="center" >
-            {children}
-        </ListItem>
-
-    )
-}
-const NavItem: React.FC<NavItemProps> = ({ children, href, variant = "regular" }) => {
-    return (
-        <>
-            { variant === "profile" ? <Text mr={2} fontWeight="bold">Welcome:</Text> : null}
-            <NextLink href={href}>
+        <NextLink href={href}>
+            <ListItem mr={isLast ? 0 : 2} d="flex" alignItems="center">
+                {variant === "profile" ? <Text mr={2} fontWeight="bold">Welcome:</Text> : null}
                 {variant === "cart"
                     ? (
                         < IconButton
@@ -52,36 +45,31 @@ const NavItem: React.FC<NavItemProps> = ({ children, href, variant = "regular" }
                         </Button>
                     )
                 }
-            </NextLink>
-        </>
+            </ListItem>
+        </NextLink>
     )
 };
 
 const NavBar: React.FC<{}> = ({ }) => {
     const { data } = useMeQuery({ skip: isServer() });
 
-
     return (
-        <List>
-            <Flex ml={'auto'} alignItems="center">
-                <List d="flex">
-                    {!data?.me
-                        ? <>
-                            <ListItemWrapper><NavItem href="/login">Login</NavItem></ListItemWrapper>
-                            <ListItemWrapper><NavItem href="/register">Register</NavItem></ListItemWrapper>
-                        </>
-                        : <>
-                            <ListItemWrapper><NavItem href="/create-item">Create Item</NavItem></ListItemWrapper>
-                            <ListItemWrapper><NavItem href="/profile" variant="profile">{data.me.username}</NavItem></ListItemWrapper>
-                            <ListItemWrapper><NavItem href="/cart" variant="cart" /></ListItemWrapper>
-                        </>
-                    }
-                    <ListItemWrapper><Logout /></ListItemWrapper>
-                    {/* TODO button for translate site */}
-                    <ListItemWrapper isLast><LangSelect /></ListItemWrapper>
-                    <ListItemWrapper isLast><ColorMode control="custom" /></ListItemWrapper>
-                </List>
-            </Flex>
+        <List d="flex">
+            {!data?.me
+                ? <>
+                    <NavItem href="/login">Login</NavItem>
+                    <NavItem href="/register">Register</NavItem>
+                </>
+                : <>
+                    <NavItem href="/profile" variant="profile">{data.me.username}</NavItem>
+                    <NavItem href="/create-item">Create Item</NavItem>
+                    <NavItem href="/cart" variant="cart" />
+                    <ListItem mr={2}><Logout /></ListItem>
+                </>
+            }
+            {/* TODO button for translate site */}
+            <ListItem mr={2}><LangSelect /></ListItem>
+            <ListItem><ColorMode control="custom" /></ListItem>
         </List>
     );
 };

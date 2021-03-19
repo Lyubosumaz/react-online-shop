@@ -11,7 +11,6 @@ const ColorMode: React.FC<ColorModeProps> = ({ control = 'regular' }) => {
 
     return (
         <IconButton
-            ml={4}
             aria-label="Color Mode"
             fontSize="1.5rem"
             icon={colorMode === 'light' ? <FaSun /> : <FaMoon />}

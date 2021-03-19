@@ -34,9 +34,7 @@ const Logout: React.FC<{}> = ({ }) => {
                 }}
                 onClick={onOpen} isLoading={logoutFetching}
                 variant="link"
-            >
-                Logout
-            </Button>
+            >Logout</Button>
 
             <AlertDialog
                 motionPreset="slideInBottom"
