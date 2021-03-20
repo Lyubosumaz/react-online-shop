@@ -30,7 +30,7 @@ const Home = () => {
             {!data && loading ? (
                 <div>loading...</div>
             ) : (
-                <Stack spacing={8}>
+                <Stack spacing={8} p="4rem 0">
                     {data?.items.items.length ? (
                         data!.items.items.map((p) =>
                             !p ? null : (
