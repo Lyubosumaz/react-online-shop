@@ -6,36 +6,46 @@ import React from 'react';
 const Cart: React.FC<{}> = ({ }) => {
     return (
         <MainLayout>
-            <Table size="sm" m="4rem 0" border="0.1rem solid" borderColor="gray.400">
+            <Table size="lg" m="4rem 0" border="0.1rem solid" borderColor="gray.400">
                 <Thead>
                     <Tr>
-                        <Th>To convert</Th>
-                        <Th>into</Th>
-                        <Th isNumeric>multiply by</Th>
+                        <Th>Product</Th>
+                        <Th isNumeric>Unit Price</Th>
+                        <Th isNumeric>Quantity</Th>
+                        <Th isNumeric>Total</Th>
+                        <Th>x</Th>
                     </Tr>
                 </Thead>
                 <Tbody>
                     <Tr>
                         <Td>inches</Td>
                         <Td>millimetres (mm)</Td>
-                        <Td isNumeric>25.4</Td>
+                        <Td>25.4</Td>
+                        <Td>25.4</Td>
+                        <Td>x</Td>
                     </Tr>
                     <Tr>
                         <Td>feet</Td>
                         <Td>centimetres (cm)</Td>
-                        <Td isNumeric>30.48</Td>
+                        <Td>30.48</Td>
+                        <Td>25.4</Td>
+                        <Td>x</Td>
                     </Tr>
                     <Tr>
                         <Td>yards</Td>
                         <Td>metres (m)</Td>
-                        <Td isNumeric>0.91444</Td>
+                        <Td>30.48</Td>
+                        <Td>0.91444</Td>
+                        <Td>x</Td>
                     </Tr>
                 </Tbody>
                 <Tfoot>
                     <Tr>
                         <Th>To convert</Th>
                         <Th>into</Th>
-                        <Th isNumeric>multiply by</Th>
+                        <Th>multiply by</Th>
+                        <Td>0.91444</Td>
+                        <Td>x</Td>
                     </Tr>
                 </Tfoot>
             </Table>
