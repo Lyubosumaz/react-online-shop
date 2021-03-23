@@ -1,3 +1,4 @@
+import Quantity from '@/components/form/Quantity';
 import MainLayout from '@/layouts/MainLayout';
 import { withApollo } from '@/utils/withApollo';
 import { Table, Tbody, Td, Tfoot, Th, Thead, Tr } from '@chakra-ui/react';
@@ -21,7 +22,7 @@ const Cart: React.FC<{}> = ({ }) => {
                         <Td>inches</Td>
                         <Td>millimetres (mm)</Td>
                         <Td>25.4</Td>
-                        <Td>25.4</Td>
+                        <Td><Quantity /></Td>
                         <Td>x</Td>
                     </Tr>
                     <Tr>
