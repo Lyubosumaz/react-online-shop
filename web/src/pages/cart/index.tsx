@@ -10,10 +10,10 @@ const Cart: React.FC<{}> = ({ }) => {
                 <Thead>
                     <Tr>
                         <Th>Product</Th>
-                        <Th isNumeric>Unit Price</Th>
-                        <Th isNumeric>Quantity</Th>
-                        <Th isNumeric>Total</Th>
-                        <Th>x</Th>
+                        <Th>Unit Price</Th>
+                        <Th>Quantity</Th>
+                        <Th>Total</Th>
+                        <Th></Th>
                     </Tr>
                 </Thead>
                 <Tbody>
@@ -44,8 +44,8 @@ const Cart: React.FC<{}> = ({ }) => {
                         <Th>To convert</Th>
                         <Th>into</Th>
                         <Th>multiply by</Th>
-                        <Td>0.91444</Td>
-                        <Td>x</Td>
+                        <Th>0.91444</Th>
+                        <Th>x</Th>
                     </Tr>
                 </Tfoot>
             </Table>
