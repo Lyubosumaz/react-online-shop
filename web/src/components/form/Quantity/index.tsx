@@ -12,7 +12,7 @@ const Quantity: React.FC<{}> = ({ }) => {
                 aria-label="decrement"
                 icon={<FaMinus />}
                 rounded={0}
-                _focus={{ outline: "0.1rem solid" }}
+                _focus={{ outline: "0.1rem solid", zIndex: "1" }}
                 onClick={() => setValueQuantity((prevState): number => prevState - 1)}
             />
             <Input
@@ -20,14 +20,15 @@ const Quantity: React.FC<{}> = ({ }) => {
                 p="0 0.2rem"
                 textAlign="center"
                 rounded={0}
-                _focus={{ outline: "0.1rem solid" }}
                 value={valueQuantity}
+                disabled
+                _disabled={{}}
             />
             <IconButton
                 aria-label="increment"
                 icon={<FaPlus />}
                 rounded={0}
-                _focus={{ outline: "0.1rem solid" }}
+                _focus={{ outline: "0.1rem solid", zIndex: "1" }}
                 onClick={() => setValueQuantity((prevState): number => prevState + 1)}
             />
         </Flex>
