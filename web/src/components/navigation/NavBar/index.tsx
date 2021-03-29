@@ -2,7 +2,7 @@ import Logout from '@/components/buttons/Logout';
 import SiteUtilities from '@/components/SiteUtilities';
 import { useMeQuery } from '@/generated/graphql';
 import { isServer } from '@/utils/isServer';
-import { Button, Flex, IconButton, Link, List, ListItem, Text } from '@chakra-ui/react';
+import { Button, IconButton, Link, List, ListItem, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -33,7 +33,8 @@ const NavItem: React.FC<NavItemProps> = ({ children, href, variant = "regular", 
                 );
             case "profile":
                 return (
-                    <Flex align="center">
+                    // <Flex align="center">
+                    <>
                         { variant === "profile" ? <Text mr={2} fontWeight="bold">Welcome:</Text> : null}
                         <NextLink href={href}>
                             <Button
@@ -47,7 +48,8 @@ const NavItem: React.FC<NavItemProps> = ({ children, href, variant = "regular", 
                                 }}
                             >{children}</Button>
                         </NextLink>
-                    </Flex>
+                    </>
+                    // </Flex>
                 );
             case "cart":
                 return (
