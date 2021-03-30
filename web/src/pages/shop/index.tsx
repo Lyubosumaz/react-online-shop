@@ -1,11 +1,8 @@
-import { ItemActionButtons } from '@/components/cards/item/ItemActionButtons';
-import { RatingSection } from '@/components/cards/item/RatingSection';
 import Product from "@/components/Product";
 import { useItemsQuery } from '@/generated/graphql';
 import MainLayout from '@/layouts/MainLayout';
-import { usePriceRound } from '@/utils/usePriceRound';
 import { withApollo } from '@/utils/withApollo';
-import { Box, Button, Flex, Heading, Link, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Link, Stack } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
 const Home = () => {
@@ -32,47 +29,18 @@ const Home = () => {
                 <div>loading...</div>
             ) : (
                 <Stack spacing={8} p="4rem 0">
-                    {data?.items.items.length ? (
-                        data!.items.items.map((p) =>
-                            !p ? null : (
-                                <>
-                                    <Product p={p} />
-                                    <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
-                                        <RatingSection item={p} />
-                                        <Box flex={1}>
-                                            <Flex>
-                                                <NextLink href="/item/[id]" as={`/item/${p.id}`}>
-                                                    <Link flexGrow={1}>
-                                                        <Heading fontSize="2xl">{p.title}</Heading>
-                                                    </Link>
-                                                </NextLink>
-                                                <Text>${usePriceRound(p.price)}</Text>
-                                            </Flex>
-                                            <Flex justify="space-between" mb={4}>
-                                                <Text>categories: {p.category}</Text>
-                                                <Text>added by {p.creator.username}</Text>
-                                            </Flex>
-                                            <Flex align="center">
-                                                <Text flex={1} mt={4}>
-                                                    {p.descriptionSnippet}
-                                                </Text>
-                                                <Box ml="auto">
-                                                    <ItemActionButtons id={p.id} creatorId={p.creator.id} />
-                                                </Box>
-                                            </Flex>
-                                        </Box>
-                                    </Flex>
-                                </>
-                            )
+                    {data?.items.items.length
+                        ? (
+                            data!.items.items.map((p) => !p ? null : <Product data={p} />)
+                        ) : (
+                            <Flex alignItems="center">
+                                <Box mr={5}>Nothing was created so far!</Box>
+                                <NextLink href="/create-item">
+                                    <Button as={Link} mr={4}>create item</Button>
+                                </NextLink>
+                            </Flex>
                         )
-                    ) : (
-                        <Flex alignItems="center">
-                            <Box mr={5}>Nothing was created so far!</Box>
-                            <NextLink href="/create-item">
-                                <Button as={Link} mr={4}>create item</Button>
-                            </NextLink>
-                        </Flex>
-                    )}
+                    }
                 </Stack>
             )}
             {data && data.items.hasMore ? (
