@@ -1,10 +1,10 @@
+import { ItemActionButtons } from '@/components/cards/item/ItemActionButtons';
+import { RatingSection } from '@/components/cards/item/RatingSection';
 import { ItemSnippetFragment } from '@/generated/graphql';
 import { usePriceRound } from '@/utils/usePriceRound';
 import { Box, Flex, Heading, Link, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
-import { ItemActionButtons } from '../cards/item/ItemActionButtons';
-import { RatingSection } from '../cards/item/RatingSection';
 
 interface ProductProps {
     data: ItemSnippetFragment;
