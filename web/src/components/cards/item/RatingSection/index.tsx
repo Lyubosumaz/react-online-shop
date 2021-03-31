@@ -52,7 +52,7 @@ export const RatingSection: React.FC<RatingSectionProps> = ({ item }) => {
     const [vote] = useVoteMutation();
 
     return (
-        <Flex direction="column" justifyContent="center" alignItems="center" mr={4}>
+        <Flex justify="center" alignItems="center" mr={4}>
             <IconButton
                 onClick={async () => {
                     if (item.voteStatus === 1) return;

@@ -34,6 +34,7 @@ const Product: React.FC<ProductProps> = ({ data }) => {
             <Flex justify="center">
                 <RatingSection item={data} />
             </Flex>
+
             <Flex>
                 <NextLink href="/item/[id]" as={`/item/${data.id}`}>
                     <Link flexGrow={1}>
