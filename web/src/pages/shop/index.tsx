@@ -1,4 +1,4 @@
-import Product from "@/components/Product";
+import Product from "@/components/cards/Product";
 import { useItemsQuery } from '@/generated/graphql';
 import MainLayout from '@/layouts/MainLayout';
 import { withApollo } from '@/utils/withApollo';
