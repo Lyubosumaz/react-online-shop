@@ -2,8 +2,9 @@ import Product from "@/components/cards/Product";
 import { useItemsQuery } from '@/generated/graphql';
 import MainLayout from '@/layouts/MainLayout';
 import { withApollo } from '@/utils/withApollo';
-import { Box, Button, Flex, Link, Stack } from '@chakra-ui/react';
+import { Box, Button, Flex, Link, List } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import React from "react";
 
 const Home = () => {
     const { data, error, loading, fetchMore, variables } = useItemsQuery({
@@ -28,7 +29,9 @@ const Home = () => {
             {!data && loading ? (
                 <div>loading...</div>
             ) : (
-                <Stack spacing={8} p="4rem 0">
+                <List
+                    d="flex"
+                >
                     {data?.items.items.length
                         ? (
                             data!.items.items.map((p) => !p ? null : <Product data={p} />)
@@ -41,7 +44,7 @@ const Home = () => {
                             </Flex>
                         )
                     }
-                </Stack>
+                </List>
             )}
             {data && data.items.hasMore ? (
                 <Flex>

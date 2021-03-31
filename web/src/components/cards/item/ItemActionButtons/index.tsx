@@ -47,9 +47,7 @@ export const ItemActionButtons: React.FC<ItemActionButtonsProps> = ({ id, creato
                         <AlertDialogBody>Are you sure? You can't undo this action afterwards.</AlertDialogBody>
 
                         <AlertDialogFooter>
-                            <Button ref={cancelRef} onClick={onClose}>
-                                Cancel
-                            </Button>
+                            <Button ref={cancelRef} onClick={onClose}>Cancel</Button>
                             <Button
                                 ml={3}
                                 colorScheme="red"
@@ -61,9 +59,7 @@ export const ItemActionButtons: React.FC<ItemActionButtonsProps> = ({ id, creato
                                         },
                                     });
                                 }}
-                            >
-                                Delete
-                            </Button>
+                            >Delete</Button>
                         </AlertDialogFooter>
                     </AlertDialogContent>
                 </AlertDialogOverlay>
