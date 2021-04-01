@@ -26,9 +26,8 @@ const updateAfterVote = (value: number, postId: number, cache: ApolloCache<VoteM
     });
 
     if (data) {
-        if (data.voteStatus === value) {
-            return;
-        }
+        if (data.voteStatus === value) return;
+
         const newPoints = (data.rating as number) + (!data.voteStatus ? 1 : 2) * value;
         cache.writeFragment({
             id: 'Item:' + postId,
@@ -52,7 +51,11 @@ export const RatingSection: React.FC<RatingSectionProps> = ({ item }) => {
     const [vote] = useVoteMutation();
 
     return (
-        <Flex justify="center" alignItems="center" mr={4}>
+        <Flex
+            mr={4}
+            justify="center"
+            alignItems="center"
+        >
             <IconButton
                 onClick={async () => {
                     if (item.voteStatus === 1) return;
@@ -73,15 +76,23 @@ export const RatingSection: React.FC<RatingSectionProps> = ({ item }) => {
                 icon={<FaChevronUp />}
             />
 
-            <Text boxSize={10} margin="0.5rem 0" display="flex" justifyContent="center" alignItems="center" border="1px solid #E2E8F0" borderRadius="0.375rem">
+            <Text
+                boxSize={10}
+                margin="0.5rem 0"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                border="1px solid"
+                borderColor="#E2E8F0"
+                borderRadius="0.375rem"
+            >
                 {item.rating}
             </Text>
 
             <IconButton
                 onClick={async () => {
-                    if (item.voteStatus === -1) {
-                        return;
-                    }
+                    if (item.voteStatus === -1) return;
+
                     setLoadingState('down-vote-loading');
                     await vote({
                         variables: {
