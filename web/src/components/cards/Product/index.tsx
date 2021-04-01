@@ -26,6 +26,7 @@ const Product: React.FC<ProductProps> = ({ data }) => {
     return (
         <ListItem
             key={data.id}
+            w="28%"
             p={5}
             shadow="md"
             border="0.1rem solid"

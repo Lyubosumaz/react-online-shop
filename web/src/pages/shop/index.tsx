@@ -31,10 +31,13 @@ const Home = () => {
             ) : (
                 <List
                     d="flex"
+                    justifyContent="space-evenly"
                 >
                     {data?.items.items.length
                         ? (
-                            data!.items.items.map((p) => !p ? null : <Product data={p} />)
+                            data!.items.items.map((p) => !p
+                                ? null
+                                : <Product data={p} />)
                         ) : (
                             <Flex alignItems="center">
                                 <Box mr={5}>Nothing was created so far!</Box>
