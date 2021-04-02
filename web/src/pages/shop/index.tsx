@@ -2,7 +2,7 @@ import Product from "@/components/cards/Product";
 import { useItemsQuery } from '@/generated/graphql';
 import MainLayout from '@/layouts/MainLayout';
 import { withApollo } from '@/utils/withApollo';
-import { Box, Button, Flex, Link, List, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Link, List, ListItem, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from "react";
 
@@ -17,10 +17,10 @@ const Shop = () => {
 
     if (!loading && !data) {
         return (
-            <div>
-                <div>you got query failed for some reason</div>
-                <div>{error?.message}</div>
-            </div>
+            <Box>
+                <Text>you got query failed for some reason</Text>
+                <Text>{error?.message}</Text>
+            </Box>
         );
     }
 
@@ -30,6 +30,7 @@ const Shop = () => {
                 ? <Text>loading...</Text>
                 :
                 <List
+                    my={8}
                     d="flex"
                     justifyContent="space-evenly"
                 >
@@ -38,18 +39,20 @@ const Shop = () => {
                             ? null
                             : <Product data={p} />)
                         :
-                        <Flex alignItems="center">
+                        <ListItem d="flex" alignItems="center">
                             <Box mr={5}>Nothing was created so far!</Box>
                             <NextLink href="/create-item">
                                 <Button as={Link} mr={4}>create item</Button>
                             </NextLink>
-                        </Flex>
+                        </ListItem>
                     }
                 </List>
             }
             {data && data.items.hasMore
                 ?
-                <Flex>
+                <Flex
+                    justify="center"
+                >
                     <Button
                         onClick={() => {
                             fetchMore({
@@ -57,30 +60,9 @@ const Shop = () => {
                                     limit: variables?.limit,
                                     cursor: data.items.items[data.items.items.length - 1].createdAt,
                                 },
-                                // updateQuery: (
-                                //   previousValue,
-                                //   { fetchMoreResult }
-                                // ): ItemsQuery => {
-                                //   if (!fetchMoreResult) {
-                                //     return previousValue as ItemsQuery;
-                                //   }
-
-                                //   return {
-                                //     __typename: "Query",
-                                //     items: {
-                                //       __typename: "PaginatedItems",
-                                //       hasMore: (fetchMoreResult as ItemsQuery).items.hasMore,
-                                //       items: [
-                                //         ...(previousValue as ItemsQuery).items.items,
-                                //         ...(fetchMoreResult as ItemsQuery).items.items,
-                                //       ],
-                                //     },
-                                //   };
-                                // },
                             });
                         }}
                         isLoading={loading}
-                        m="auto"
                         my={8}
                     >load more</Button>
                 </Flex>
