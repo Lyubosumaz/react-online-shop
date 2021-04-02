@@ -33,6 +33,14 @@ const Shop = () => {
                     my={8}
                     d="flex"
                     justifyContent="space-evenly"
+                    _before={{
+                        content: '"1"',
+                        // display: "block",
+                    }}
+                    _after={{
+                        content: '"2"',
+                        // display: "block",
+                    }}
                 >
                     {data?.items.items.length
                         ? data!.items.items.map((p) => !p
