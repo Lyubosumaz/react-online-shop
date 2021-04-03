@@ -14,6 +14,8 @@ const Shop = () => {
         },
         notifyOnNetworkStatusChange: true,
     });
+    const gridWidth = ["48%", "32%"];
+    const gridHeight = ["2%", "1%"];
 
     if (!loading && !data) {
         return (
@@ -30,21 +32,19 @@ const Shop = () => {
                 ? <Text>loading...</Text>
                 :
                 <List
-                    my={8}
+                    px={6}
+                    py={3}
                     d="flex"
                     flexWrap="wrap"
-                    justifyContent="space-evenly"
-                    border="1px solid black"
+                    justifyContent="space-between"
                     _before={{
-                        w: "28%",
+                        w: gridWidth,
                         content: '""',
                         order: "999",
-                        border: "1px solid black"
                     }}
                     _after={{
-                        w: "28%",
+                        w: gridWidth,
                         content: '""',
-                        border: "1px solid black"
                     }}
                 >
                     {data?.items.items.length
@@ -53,7 +53,8 @@ const Shop = () => {
                             :
                             <ListItem
                                 key={p.id}
-                                w="28%"
+                                w={gridWidth}
+                                my={gridHeight}
                                 p={5}
                                 shadow="md"
                                 border="0.1rem solid"
@@ -73,9 +74,7 @@ const Shop = () => {
             }
             {data && data.items.hasMore
                 ?
-                <Flex
-                    justify="center"
-                >
+                <Flex justify="center">
                     <Button
                         onClick={() => {
                             fetchMore({

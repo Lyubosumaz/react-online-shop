@@ -2,7 +2,7 @@ import { ItemActionButtons } from '@/components/cards/item/ItemActionButtons';
 import { RatingSection } from '@/components/cards/item/RatingSection';
 import { ItemSnippetFragment } from '@/generated/graphql';
 import { usePriceRound } from '@/utils/usePriceRound';
-import { Box, Flex, Heading, Link, Text } from '@chakra-ui/react';
+import { Button, Flex, Heading, Link, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 
@@ -25,10 +25,6 @@ const ProductImage: React.FC<{}> = ({ }) => {
 const Product: React.FC<ProductProps> = ({ data }) => {
     return (
         <>
-            <Flex justify="center">
-                <RatingSection item={data} />
-            </Flex>
-
             <Flex>
                 <NextLink href="/item/[id]" as={`/item/${data.id}`}>
                     <Link flexGrow={1}>
@@ -40,6 +36,7 @@ const Product: React.FC<ProductProps> = ({ data }) => {
             <Flex flexDirection="column" justify="center" align="center">
                 <ProductImage />
                 <Text>${usePriceRound(data.price)}</Text>
+                <Button>Add to Cart</Button>
             </Flex>
 
             <Flex flexDirection="column" justify="space-between">
@@ -50,9 +47,10 @@ const Product: React.FC<ProductProps> = ({ data }) => {
             <Flex flexDirection="column">
                 <Text>{data.descriptionSnippet}</Text>
 
-                <Box alignSelf="flex-end">
+                <Flex justify="space-between" align="center">
+                    <RatingSection item={data} />
                     <ItemActionButtons id={data.id} creatorId={data.creator.id} />
-                </Box>
+                </Flex>
             </Flex>
         </>
     );
