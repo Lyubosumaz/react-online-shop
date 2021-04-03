@@ -1,5 +1,5 @@
-import { ItemActionButtons } from '@/components/cards/item/ItemActionButtons';
 import { RatingSection } from '@/components/cards/item/RatingSection';
+import { ProductActionButtons } from '@/components/cards/ProductActionButtons';
 import { ItemSnippetFragment } from '@/generated/graphql';
 import { usePriceRound } from '@/utils/usePriceRound';
 import { Button, Flex, Heading, Link, Text } from '@chakra-ui/react';
@@ -49,7 +49,7 @@ const Product: React.FC<ProductProps> = ({ data }) => {
 
                 <Flex justify="space-between" align="center">
                     <RatingSection item={data} />
-                    <ItemActionButtons id={data.id} creatorId={data.creator.id} />
+                    <ProductActionButtons id={data.id} creatorId={data.creator.id} />
                 </Flex>
             </Flex>
         </>
