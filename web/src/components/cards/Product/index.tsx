@@ -1,5 +1,5 @@
-import { RatingSection } from '@/components/cards/item/RatingSection';
 import { ProductActionButtons } from '@/components/cards/ProductActionButtons';
+import { ProductRatingSection } from '@/components/cards/ProductRatingSection';
 import { ItemSnippetFragment } from '@/generated/graphql';
 import { usePriceRound } from '@/utils/usePriceRound';
 import { Button, Flex, Heading, Link, Text } from '@chakra-ui/react';
@@ -25,21 +25,21 @@ const ProductImage: React.FC<{}> = ({ }) => {
 const Product: React.FC<ProductProps> = ({ data }) => {
     return (
         <>
-            <Flex>
+            <Flex my={6} justify="center">
                 <NextLink href="/item/[id]" as={`/item/${data.id}`}>
-                    <Link flexGrow={1}>
-                        <Heading textAlign="center" fontSize="2xl">{data.title}</Heading>
+                    <Link>
+                        <Heading as="h3" fontSize="2.2rem">{data.title}</Heading>
                     </Link>
                 </NextLink>
             </Flex>
 
-            <Flex flexDirection="column" justify="center" align="center">
+            <Flex mb={6} flexDirection="column" justify="center" align="center">
                 <ProductImage />
-                <Text>${usePriceRound(data.price)}</Text>
-                <Button>Add to Cart</Button>
+                <Text mt={4}>${usePriceRound(data.price)}</Text>
+                <Button mt={4}>Add to Cart</Button>
             </Flex>
 
-            <Flex flexDirection="column" justify="space-between">
+            <Flex mb={4} flexDirection="column" justify="space-between">
                 <Text alignSelf="flex-start">categories: {data.category}</Text>
                 <Text alignSelf="flex-end">added by {data.creator.username}</Text>
             </Flex>
@@ -47,8 +47,8 @@ const Product: React.FC<ProductProps> = ({ data }) => {
             <Flex flexDirection="column">
                 <Text>{data.descriptionSnippet}</Text>
 
-                <Flex justify="space-between" align="center">
-                    <RatingSection item={data} />
+                <Flex mt={4} justify="space-between" align="center">
+                    <ProductRatingSection item={data} />
                     <ProductActionButtons id={data.id} creatorId={data.creator.id} />
                 </Flex>
             </Flex>

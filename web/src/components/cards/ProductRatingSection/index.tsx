@@ -1,11 +1,11 @@
 import { ItemSnippetFragment, useVoteMutation, VoteMutation } from '@/generated/graphql';
 import { ApolloCache } from '@apollo/client';
-import { Flex, IconButton, Text } from '@chakra-ui/react';
+import { Box, IconButton, Text } from '@chakra-ui/react';
 import gql from 'graphql-tag';
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
-interface RatingSectionProps {
+interface ProductRatingSectionProps {
     item: ItemSnippetFragment;
 }
 
@@ -46,16 +46,12 @@ const updateAfterVote = (value: number, postId: number, cache: ApolloCache<VoteM
 // useVoteMutation should be for users
 // an new useRatingMutation should be for items
 // using the reworked Star entity
-export const RatingSection: React.FC<RatingSectionProps> = ({ item }) => {
+export const ProductRatingSection: FC<ProductRatingSectionProps> = ({ item }) => {
     const [loadingState, setLoadingState] = useState<'up-vote-loading' | 'down-vote-loading' | 'not-loading'>('not-loading');
     const [vote] = useVoteMutation();
 
     return (
-        <Flex
-            mr={4}
-            justify="center"
-            alignItems="center"
-        >
+        <Box>
             <IconButton
                 onClick={async () => {
                     if (item.voteStatus === 1) return;
@@ -78,12 +74,12 @@ export const RatingSection: React.FC<RatingSectionProps> = ({ item }) => {
 
             <Text
                 boxSize={10}
-                margin="0.5rem 0"
-                display="flex"
+                mx={1}
+                display="inline-flex"
                 justifyContent="center"
                 alignItems="center"
-                border="1px solid"
-                borderColor="#E2E8F0"
+                border="0.175rem solid"
+                borderColor="gray.200"
                 borderRadius="0.375rem"
             >
                 {item.rating}
@@ -108,6 +104,6 @@ export const RatingSection: React.FC<RatingSectionProps> = ({ item }) => {
                 aria-label="Negative Vote"
                 icon={<FaChevronDown />}
             />
-        </Flex>
+        </Box>
     );
 };

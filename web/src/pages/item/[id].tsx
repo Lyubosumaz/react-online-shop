@@ -1,11 +1,11 @@
-import { ItemActionButtons } from '@/components/cards/item/ItemActionButtons';
+import { ProductActionButtons } from '@/components/cards/ProductActionButtons';
 import MainLayout from '@/layouts/MainLayout';
 import { useGetItemFromUrl } from '@/utils/useGetItemFromUrl';
 import { withApollo } from '@/utils/withApollo';
 import { Box, Heading } from '@chakra-ui/react';
 import React from 'react';
 
-const Item = ({}) => {
+const Item = ({ }) => {
     const { data, error, loading } = useGetItemFromUrl();
 
     if (loading) {
@@ -32,7 +32,7 @@ const Item = ({}) => {
         <MainLayout>
             <Heading mb={4}>{data.item.title}</Heading>
             <Box mb={4}>{data.item.description}</Box>
-            <ItemActionButtons id={data.item.id} creatorId={data.item.creator.id} />
+            <ProductActionButtons id={data.item.id} creatorId={data.item.creator.id} />
         </MainLayout>
     );
 };
