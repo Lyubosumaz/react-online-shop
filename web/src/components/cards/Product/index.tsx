@@ -2,7 +2,7 @@ import { ItemActionButtons } from '@/components/cards/item/ItemActionButtons';
 import { RatingSection } from '@/components/cards/item/RatingSection';
 import { ItemSnippetFragment } from '@/generated/graphql';
 import { usePriceRound } from '@/utils/usePriceRound';
-import { Box, Flex, Heading, Link, ListItem, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, Link, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 
@@ -24,14 +24,7 @@ const ProductImage: React.FC<{}> = ({ }) => {
 
 const Product: React.FC<ProductProps> = ({ data }) => {
     return (
-        <ListItem
-            key={data.id}
-            w="28%"
-            p={5}
-            shadow="md"
-            border="0.1rem solid"
-            borderColor="primaryL.600"
-        >
+        <>
             <Flex justify="center">
                 <RatingSection item={data} />
             </Flex>
@@ -61,7 +54,7 @@ const Product: React.FC<ProductProps> = ({ data }) => {
                     <ItemActionButtons id={data.id} creatorId={data.creator.id} />
                 </Box>
             </Flex>
-        </ListItem>
+        </>
     );
 };
 

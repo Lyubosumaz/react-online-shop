@@ -32,20 +32,35 @@ const Shop = () => {
                 <List
                     my={8}
                     d="flex"
+                    flexWrap="wrap"
                     justifyContent="space-evenly"
+                    border="1px solid black"
                     _before={{
-                        content: '"1"',
-                        // display: "block",
+                        w: "28%",
+                        content: '""',
+                        order: "999",
+                        border: "1px solid black"
                     }}
                     _after={{
-                        content: '"2"',
-                        // display: "block",
+                        w: "28%",
+                        content: '""',
+                        border: "1px solid black"
                     }}
                 >
                     {data?.items.items.length
                         ? data!.items.items.map((p) => !p
                             ? null
-                            : <Product data={p} />)
+                            :
+                            <ListItem
+                                key={p.id}
+                                w="28%"
+                                p={5}
+                                shadow="md"
+                                border="0.1rem solid"
+                                borderColor="primaryL.600"
+                            >
+                                <Product data={p} />
+                            </ListItem>)
                         :
                         <ListItem d="flex" alignItems="center">
                             <Box mr={5}>Nothing was created so far!</Box>
