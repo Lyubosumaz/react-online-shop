@@ -23,7 +23,12 @@ const SectionHeading: React.FC<{}> = ({ children, ...props }) => (
 );
 
 const SiteLinksItem: React.FC<{ href: string }> = ({ children, href }) => (
-    <ListItem>
+    <ListItem
+        _hover={{
+            color: "primaryL.500",
+            transition: "0.5s ease-in-out"
+        }}
+    >
         <NextLink href={href}>
             <Link>{children}</Link>
         </NextLink>
