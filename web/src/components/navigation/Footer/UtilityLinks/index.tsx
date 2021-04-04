@@ -1,20 +1,7 @@
-import {
-    CSSWithMultiValues,
-    Heading,
-    IconButton,
-    Link,
-    List,
-    ListItem,
-    Text
-} from '@chakra-ui/react';
+import { CSSWithMultiValues, Heading, IconButton, Link, List, ListItem, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
-import {
-    FaFacebookF,
-    FaGoogle,
-    FaLinkedinIn,
-    FaTwitter
-} from 'react-icons/fa';
+import { FaFacebookF, FaGoogle, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 
 const SectionHeading: React.FC<{}> = ({ children, ...props }) => (
     <Heading as="h4" pb={8} fontSize="1.5rem" textTransform="uppercase" whiteSpace="nowrap" {...props}>
@@ -46,7 +33,15 @@ interface MediaLinksItemProps {
 const MediaLinksItem: React.FC<MediaLinksItemProps> = ({ href, icon, label, backgroundColor, hover, isLast }) => (
     <ListItem mr={isLast ? 0 : 1}>
         <Link href={href}>
-            <IconButton size="lg" fontSize="1.5rem" icon={icon} aria-label={label} borderRadius="full" backgroundColor={!backgroundColor ? '#171717' : backgroundColor} _hover={!hover ? { backgroundColor: '#555' } : hover} />
+            <IconButton
+                size="lg"
+                fontSize="1.5rem"
+                icon={icon}
+                aria-label={label}
+                borderRadius="full"
+                backgroundColor={!backgroundColor ? '#171717' : backgroundColor}
+                _hover={!hover ? { backgroundColor: '#555' } : hover}
+            />
         </Link>
     </ListItem>
 );
