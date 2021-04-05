@@ -13,6 +13,9 @@ const SectionWrapper: React.FC<{ sectionWidth: string }> = ({ children, sectionW
             border="0.175rem solid"
             borderColor={borderToggle ? "white" : "transparent"}
             rounded="1rem"
+            _hover={{
+                borderColor: "white"
+            }}
             onClick={() => setBorderToggle(!borderToggle)}
         >
             {children}

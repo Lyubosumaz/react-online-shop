@@ -1,11 +1,13 @@
 import { Box, List, ListIcon, ListItem } from '@chakra-ui/react';
-import React from 'react';
+import { FC } from 'react';
 import { IconType } from 'react-icons';
 import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
+import styles from "./keyframes-shake.module.css";
 
-const SiteInformationItem: React.FC<{ icon: IconType }> = ({ children, icon }) => (
-    <ListItem>
-        <ListIcon as={icon} boxSize={6} mr={3} />
+const SiteInformationItem: FC<{ icon: IconType }> = ({ children, icon }) => (
+    <ListItem className={styles.icon}>
+        <ListIcon
+            as={icon} boxSize={6} mr={3} />
         <Box
             as="span"
             cursor="pointer"
@@ -13,13 +15,15 @@ const SiteInformationItem: React.FC<{ icon: IconType }> = ({ children, icon }) =
                 color: "primaryL.700",
                 transition: "0.375s ease-in-out"
             }}
-        >{children}</Box>
+        >
+            {children}
+        </Box>
     </ListItem>
 );
 
-const ShopDetails: React.FC<{}> = ({ }) => {
+const ShopDetails: FC<{}> = ({ }) => {
     return (
-        <List padding="8rem 0 4rem 0" display="flex" justifyContent="space-around">
+        <List p="7.5rem 0 2.75rem 0" display="flex" justifyContent="space-around">
             {/* TODO these items should link: map, call, email */}
             <SiteInformationItem icon={FaMapMarkerAlt}>Lorem lpusm hosting web</SiteInformationItem>
             <SiteInformationItem icon={FaPhoneAlt}>Call: +7586656566</SiteInformationItem>
