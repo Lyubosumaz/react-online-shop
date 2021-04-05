@@ -1,7 +1,24 @@
 import { CSSWithMultiValues, Heading, IconButton, Link, List, ListItem, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaFacebookF, FaGoogle, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
+
+const SectionWrapper: React.FC<{ sectionWidth: string }> = ({ children, sectionWidth }) => {
+    const [borderToggle, setBorderToggle] = useState(false);
+
+    return (
+        <ListItem
+            maxWidth={sectionWidth}
+            p="0.75rem"
+            border="0.175rem solid"
+            borderColor={borderToggle ? "white" : "transparent"}
+            rounded="1rem"
+            onClick={() => setBorderToggle(!borderToggle)}
+        >
+            {children}
+        </ListItem>
+    )
+}
 
 const SectionHeading: React.FC<{}> = ({ children, ...props }) => (
     <Heading as="h4" pb={8} fontSize="1.5rem" textTransform="uppercase" whiteSpace="nowrap" {...props}>
@@ -13,7 +30,7 @@ const SiteLinksItem: React.FC<{ href: string }> = ({ children, href }) => (
     <ListItem
         _hover={{
             color: "primaryL.500",
-            transition: "0.5s ease-in-out"
+            transition: "0.375s ease-in-out"
         }}
     >
         <NextLink href={href}>
@@ -49,7 +66,7 @@ const MediaLinksItem: React.FC<MediaLinksItemProps> = ({ href, icon, label, back
 const UtilityLinks: React.FC<{}> = ({ }) => {
     return (
         <List pb="4rem" display="flex" justifyContent="space-between">
-            <ListItem maxWidth="9.5rem">
+            <SectionWrapper sectionWidth="11rem">
                 <SectionHeading>Useful Link</SectionHeading>
 
                 <List spacing={2} opacity="0.5">
@@ -58,14 +75,14 @@ const UtilityLinks: React.FC<{}> = ({ }) => {
                     <SiteLinksItem href="/contact-us">Contact Us</SiteLinksItem>
                     <SiteLinksItem href="/subscribe-newsletter">Subscribe</SiteLinksItem>
                 </List>
-            </ListItem>
+            </SectionWrapper>
 
-            <ListItem maxWidth="8rem">
+            <SectionWrapper sectionWidth="10rem">
                 <SectionHeading>Repair</SectionHeading>
                 <Text opacity="0.5">Lorem ipsum dolor sit, amet conse ctet ur adipi sicing elit 30Levcamsamoajajahavlove.</Text>
-            </ListItem>
+            </SectionWrapper>
 
-            <ListItem maxWidth="13rem">
+            <SectionWrapper sectionWidth="14.75rem">
                 <SectionHeading>Social Media</SectionHeading>
 
                 <List display="flex">
@@ -74,12 +91,12 @@ const UtilityLinks: React.FC<{}> = ({ }) => {
                     <MediaLinksItem href="https://www.google.com/" icon={<FaGoogle />} label="Google" />
                     <MediaLinksItem href="https://www.linkedin.com/" icon={<FaLinkedinIn />} label="Linkedin" isLast />
                 </List>
-            </ListItem>
+            </SectionWrapper>
 
-            <ListItem maxWidth="15rem">
+            <SectionWrapper sectionWidth="17rem">
                 <SectionHeading>Our Repair Center</SectionHeading>
                 <Text opacity="0.5">Lorem ipsum dolor sit, amet conse ctet ur adipi sicing elit 30Levcamsamoajajahavlovemorethenthatajaj.</Text>
-            </ListItem>
+            </SectionWrapper>
         </List>
     );
 };

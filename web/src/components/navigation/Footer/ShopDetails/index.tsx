@@ -11,7 +11,7 @@ const SiteInformationItem: React.FC<{ icon: IconType }> = ({ children, icon }) =
             cursor="pointer"
             _hover={{
                 color: "primaryL.700",
-                transition: "0.5s ease-in-out"
+                transition: "0.375s ease-in-out"
             }}
         >{children}</Box>
     </ListItem>
