@@ -37,6 +37,7 @@ const Shop = () => {
                     d="flex"
                     flexWrap="wrap"
                     justifyContent="space-between"
+                    color="primaryL.600"
                     _before={{
                         w: gridWidth,
                         content: '""',
@@ -59,6 +60,10 @@ const Shop = () => {
                                 shadow="md"
                                 border="0.1rem solid"
                                 borderColor="primaryL.600"
+                                _hover={{
+                                    bgColor: "secondaryL.100",
+                                    borderColor: "secondaryL.100",
+                                }}
                             >
                                 <Product data={p} />
                             </ListItem>)
