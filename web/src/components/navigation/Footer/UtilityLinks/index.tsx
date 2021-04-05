@@ -17,7 +17,7 @@ const SiteLinksItem: React.FC<{ href: string }> = ({ children, href }) => (
         }}
     >
         <NextLink href={href}>
-            <Link>{children}</Link>
+            <Link style={{ textDecoration: "none" }}>{children}</Link>
         </NextLink>
     </ListItem>
 );
