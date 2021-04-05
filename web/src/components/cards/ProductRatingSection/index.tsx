@@ -1,6 +1,6 @@
 import { ItemSnippetFragment, useVoteMutation, VoteMutation } from '@/generated/graphql';
 import { ApolloCache } from '@apollo/client';
-import { Box, IconButton, Text } from '@chakra-ui/react';
+import { Flex, IconButton, Text } from '@chakra-ui/react';
 import gql from 'graphql-tag';
 import { FC, useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
@@ -51,7 +51,7 @@ export const ProductRatingSection: FC<ProductRatingSectionProps> = ({ item }) =>
     const [vote] = useVoteMutation();
 
     return (
-        <Box>
+        <Flex>
             <IconButton
                 onClick={async () => {
                     if (item.voteStatus === 1) return;
@@ -75,12 +75,13 @@ export const ProductRatingSection: FC<ProductRatingSectionProps> = ({ item }) =>
             <Text
                 boxSize={10}
                 mx={1}
-                display="inline-flex"
+                display="flex"
                 justifyContent="center"
                 alignItems="center"
                 border="0.175rem solid"
                 borderColor="gray.200"
                 borderRadius="0.375rem"
+                lineHeight="0"
             >
                 {item.rating}
             </Text>
@@ -104,6 +105,6 @@ export const ProductRatingSection: FC<ProductRatingSectionProps> = ({ item }) =>
                 aria-label="Negative Vote"
                 icon={<FaChevronDown />}
             />
-        </Box>
+        </Flex>
     );
 };
