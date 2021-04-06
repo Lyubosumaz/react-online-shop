@@ -3,7 +3,7 @@ import SiteUtilities from '@/components/SiteUtilities';
 import { useMeQuery } from '@/generated/graphql';
 import { Button, Flex, IconButton, Link, List, ListItem, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import React from 'react';
+import { FC } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 
 interface NavItemProps {
@@ -12,7 +12,7 @@ interface NavItemProps {
     isLast?: boolean;
 }
 
-const NavItem: React.FC<NavItemProps> = ({ children, href, variant = "regular", isLast }) => {
+const NavItem: FC<NavItemProps> = ({ children, href, variant = "regular", isLast }) => {
     const item = (variant: string) => {
         switch (variant) {
             case "regular":
@@ -76,7 +76,7 @@ const NavItem: React.FC<NavItemProps> = ({ children, href, variant = "regular", 
     )
 };
 
-const NavBar: React.FC<{}> = ({ }) => {
+const NavBar: FC<{}> = ({ }) => {
     const { data } = useMeQuery();
     const items = !data?.me
         ? (

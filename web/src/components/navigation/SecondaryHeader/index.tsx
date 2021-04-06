@@ -15,7 +15,8 @@ const SecondaryHeader: FC<SecondaryHeaderProps> = ({ goBackButton = 'visible' })
         <header
             style={{
                 padding: '1rem 0',
-                borderBottom: '0.15rem solid #2C7A7B'
+                borderBottom: '0.15rem solid',
+                borderColor: "#2C7A7B"
             }}
         >
             <MainWrapper size="medium">

@@ -1,10 +1,10 @@
 import Logo from '@/components/Logo';
 import MainWrapper from '@/layouts/MainWrapper';
 import { Box, Flex, useColorModeValue, useToken } from '@chakra-ui/react';
-import React from 'react';
+import { FC } from 'react';
 import NavBar from '../NavBar';
 
-const Header: React.FC<{}> = ({ }) => {
+const Header: FC<{}> = ({ }) => {
     const [lightColor, darkColor, txColor,] = useToken("colors", ["primaryL.700", "primaryD.500", "secondaryL.100"]);
     const bgColor = useColorModeValue(lightColor, darkColor);
 
