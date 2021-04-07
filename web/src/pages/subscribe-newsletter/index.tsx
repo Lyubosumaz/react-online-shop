@@ -2,10 +2,10 @@ import ColumnWrapper from "@/layouts/ColumnWrapper";
 import MainLayout from '@/layouts/MainLayout';
 import { withApollo } from '@/utils/withApollo';
 import { Box, Image } from '@chakra-ui/react';
-import React from 'react';
+import { FC } from 'react';
 import SubscribeNewsletterForm from "./SubscribeNewsletterForm";
 
-const SubscribeNewsletter: React.FC<{}> = ({ }) => {
+const SubscribeNewsletter: FC<{}> = ({ }) => {
     return (
         <Box backgroundColor="secondaryL.100">
             <MainLayout>

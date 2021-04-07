@@ -3,7 +3,7 @@ import { subscribeValidations } from '@/utils/formValidations';
 import { isServer } from '@/utils/isServer';
 import { Box, Button, Flex, FormControl, FormErrorMessage, Heading, Input, Text, useColorModeValue, useToken } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
-import React from 'react';
+import { FC } from 'react';
 
 interface NewsletterView {
     mainColor: {
@@ -16,7 +16,7 @@ interface SubNewsletterView extends NewsletterView {
     email: string;
 }
 
-const SubscribeNewsletterView: React.FC<NewsletterView> = ({ mainColor }) => {
+const SubscribeNewsletterView: FC<NewsletterView> = ({ mainColor }) => {
     const [subscribeNewsletter] = useSubscribeNewsletterMutation();
     const [lightSColor, darkSColor] = useToken("colors", ["secondaryL.200", "primaryD.100"]);
     const secondaryColor = useColorModeValue(lightSColor, darkSColor);
@@ -107,7 +107,7 @@ const SubscribeNewsletterView: React.FC<NewsletterView> = ({ mainColor }) => {
     );
 }
 
-const UnsubscribeNewsletterView: React.FC<SubNewsletterView> = ({ mainColor, email }) => {
+const UnsubscribeNewsletterView: FC<SubNewsletterView> = ({ mainColor, email }) => {
     const [unsubscribeNewsletter] = useUnsubscribeNewsletterMutation();
 
     return (
@@ -155,7 +155,7 @@ const UnsubscribeNewsletterView: React.FC<SubNewsletterView> = ({ mainColor, ema
     );
 }
 
-const SubscribeNewsletterForm: React.FC<{}> = ({ }) => {
+const SubscribeNewsletterForm: FC<{}> = ({ }) => {
     const { data } = useMeQuery({ skip: isServer() });
     const isUserSubscribed = data?.me?.newsletterSub === 1
     const [lightColor, darkColor] = useToken("colors", ["primaryL.700", "primaryD.500"]);
