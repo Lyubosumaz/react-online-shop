@@ -1,9 +1,9 @@
 import { Icon, Link, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import React from 'react';
+import { FC } from 'react';
 import { FaStore } from 'react-icons/fa';
 
-const Logo: React.FC<{}> = ({ }) => {
+const Logo: FC<{}> = ({ }) => {
     return (
         <NextLink href="/">
             <Link
