@@ -26,7 +26,7 @@ const Product: React.FC<ProductProps> = ({ data }) => {
     return (
         <>
             <Flex my={6} justify="center">
-                <NextLink href="/item/[id]" as={`/item/${data.id}`}>
+                <NextLink href="/product/[id]" as={`/product/${data.id}`}>
                     <Link>
                         <Heading as="h3" fontSize="2.2rem">{data.title}</Heading>
                     </Link>
