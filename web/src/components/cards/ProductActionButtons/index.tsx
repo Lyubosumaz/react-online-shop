@@ -20,7 +20,7 @@ export const ProductActionButtons: FC<ProductActionButtonsProps> = ({ id, creato
 
     return (
         <Box>
-            <NextLink href="/item/edit/[id]" as={`/item/edit/${id}`}>
+            <NextLink href="/product/edit/[id]" as={`/product/edit/${id}`}>
                 <IconButton
                     as={Link}
                     mr={4}
