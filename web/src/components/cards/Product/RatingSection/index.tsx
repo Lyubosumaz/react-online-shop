@@ -5,50 +5,49 @@ import gql from 'graphql-tag';
 import { FC, useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
-interface ProductRatingSectionProps {
+interface RatingSectionProps {
     item: ItemSnippetFragment;
 }
+// TODO this needs to be reworked
+// useVoteMutation should be for users
+// an new useRatingMutation should be for items
+// using the reworked Star entity
+export const RatingSection: FC<RatingSectionProps> = ({ item }) => {
+    const [loadingState, setLoadingState] = useState<'up-vote-loading' | 'down-vote-loading' | 'not-loading'>('not-loading');
+    const [vote] = useVoteMutation();
 
-const updateAfterVote = (value: number, postId: number, cache: ApolloCache<VoteMutation>) => {
-    const data = cache.readFragment<{
-        id: number;
-        rating: number;
-        voteStatus: number | null;
-    }>({
-        id: 'Item:' + postId,
-        fragment: gql`
+    const updateAfterVote = (value: number, postId: number, cache: ApolloCache<VoteMutation>) => {
+        const data = cache.readFragment<{
+            id: number;
+            rating: number;
+            voteStatus: number | null;
+        }>({
+            id: 'Item:' + postId,
+            fragment: gql`
             fragment _ on Item {
                 id
                 rating
                 voteStatus
             }
         `,
-    });
+        });
 
-    if (data) {
-        if (data.voteStatus === value) return;
+        if (data) {
+            if (data.voteStatus === value) return;
 
-        const newPoints = (data.rating as number) + (!data.voteStatus ? 1 : 2) * value;
-        cache.writeFragment({
-            id: 'Item:' + postId,
-            fragment: gql`
+            const newPoints = (data.rating as number) + (!data.voteStatus ? 1 : 2) * value;
+            cache.writeFragment({
+                id: 'Item:' + postId,
+                fragment: gql`
                 fragment __ on Item {
                     rating
                     voteStatus
                 }
             `,
-            data: { rating: newPoints, voteStatus: value },
-        });
-    }
-};
-
-// TODO this needs to be reworked
-// useVoteMutation should be for users
-// an new useRatingMutation should be for items
-// using the reworked Star entity
-export const ProductRatingSection: FC<ProductRatingSectionProps> = ({ item }) => {
-    const [loadingState, setLoadingState] = useState<'up-vote-loading' | 'down-vote-loading' | 'not-loading'>('not-loading');
-    const [vote] = useVoteMutation();
+                data: { rating: newPoints, voteStatus: value },
+            });
+        }
+    };
 
     return (
         <Flex>
