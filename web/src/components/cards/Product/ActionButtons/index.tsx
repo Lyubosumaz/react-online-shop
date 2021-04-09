@@ -4,12 +4,12 @@ import NextLink from 'next/link';
 import { FC, useRef, useState } from 'react';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 
-interface ProductActionButtonsProps {
+interface ActionButtonsProps {
     id: number;
     creatorId: number;
 }
 
-export const ProductActionButtons: FC<ProductActionButtonsProps> = ({ id, creatorId }) => {
+export const ActionButtons: FC<ActionButtonsProps> = ({ id, creatorId }) => {
     const { data: meData } = useMeQuery();
     const [deleteItem] = useDeleteItemMutation();
     const [isOpen, setIsOpen] = useState(false);

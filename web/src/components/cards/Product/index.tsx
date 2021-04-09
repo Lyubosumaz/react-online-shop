@@ -1,4 +1,4 @@
-import { ProductActionButtons } from '@/components/cards/ProductActionButtons';
+import { ActionButtons } from '@/components/cards/Product/ActionButtons';
 import { ProductRatingSection } from '@/components/cards/ProductRatingSection';
 import { ItemSnippetFragment } from '@/generated/graphql';
 import { usePriceRound } from '@/utils/usePriceRound';
@@ -49,7 +49,7 @@ const Product: React.FC<ProductProps> = ({ data }) => {
 
                 <Flex mt={4} justify="space-between" align="center">
                     <ProductRatingSection item={data} />
-                    <ProductActionButtons id={data.id} creatorId={data.creator.id} />
+                    <ActionButtons id={data.id} creatorId={data.creator.id} />
                 </Flex>
             </Flex>
         </>

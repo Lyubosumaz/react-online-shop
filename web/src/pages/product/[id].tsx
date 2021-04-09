@@ -1,4 +1,4 @@
-import { ProductActionButtons } from '@/components/cards/ProductActionButtons';
+import { ActionButtons } from '@/components/cards/Product/ActionButtons';
 import MainLayout from '@/layouts/MainLayout';
 import { useGetItemFromUrl } from '@/utils/useGetItemFromUrl';
 import { withApollo } from '@/utils/withApollo';
@@ -32,7 +32,7 @@ const Item = ({ }) => {
         <MainLayout>
             <Heading mb={4}>{data.item.title}</Heading>
             <Box mb={4}>{data.item.description}</Box>
-            <ProductActionButtons id={data.item.id} creatorId={data.item.creator.id} />
+            <ActionButtons id={data.item.id} creatorId={data.item.creator.id} />
         </MainLayout>
     );
 };
