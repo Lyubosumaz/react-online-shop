@@ -28,7 +28,7 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ id, creatorId }) => {
                     as={Link}
                     icon={<FaEdit />}
                     aria-label="Edit Item"
-                    border="1px solid"
+                    border="0.1rem solid"
                     borderColor={color}
                 />
             </NextLink>
@@ -36,7 +36,7 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ id, creatorId }) => {
             <IconButton
                 icon={<FaTrashAlt />}
                 aria-label="Delete Item"
-                border="1px solid"
+                border="0.1rem solid"
                 borderColor={color}
                 onClick={() => setIsOpen(true)}
             />

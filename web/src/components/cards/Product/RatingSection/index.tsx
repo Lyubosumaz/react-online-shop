@@ -1,6 +1,6 @@
 import { ItemSnippetFragment, useVoteMutation, VoteMutation } from '@/generated/graphql';
 import { ApolloCache } from '@apollo/client';
-import { Flex, IconButton, Text } from '@chakra-ui/react';
+import { Flex, IconButton, Text, useColorModeValue, useToken } from '@chakra-ui/react';
 import gql from 'graphql-tag';
 import { FC, useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
@@ -15,6 +15,8 @@ interface RatingSectionProps {
 export const RatingSection: FC<RatingSectionProps> = ({ item }) => {
     const [loadingState, setLoadingState] = useState<'up-vote-loading' | 'down-vote-loading' | 'not-loading'>('not-loading');
     const [vote] = useVoteMutation();
+    const [lightColor, darkColor] = useToken("colors", ["primaryL.600", "primaryD.500"]);
+    const color = useColorModeValue(lightColor, darkColor);
 
     const updateAfterVote = (value: number, postId: number, cache: ApolloCache<VoteMutation>) => {
         const data = cache.readFragment<{
@@ -69,6 +71,8 @@ export const RatingSection: FC<RatingSectionProps> = ({ item }) => {
                 isLoading={loadingState === 'up-vote-loading'}
                 aria-label="Positive Vote"
                 icon={<FaChevronUp />}
+                border="0.1rem solid"
+                borderColor={color}
             />
 
             <Text
@@ -77,8 +81,8 @@ export const RatingSection: FC<RatingSectionProps> = ({ item }) => {
                 display="flex"
                 justifyContent="center"
                 alignItems="center"
-                border="0.175rem solid"
-                borderColor="gray.200"
+                border="0.1rem solid"
+                borderColor={color}
                 borderRadius="0.375rem"
                 lineHeight="0"
             >
@@ -103,6 +107,8 @@ export const RatingSection: FC<RatingSectionProps> = ({ item }) => {
                 isLoading={loadingState === 'down-vote-loading'}
                 aria-label="Negative Vote"
                 icon={<FaChevronDown />}
+                border="0.1rem solid"
+                borderColor={color}
             />
         </Flex>
     );
