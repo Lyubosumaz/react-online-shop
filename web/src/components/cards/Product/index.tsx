@@ -2,7 +2,7 @@ import { ActionButtons } from '@/components/cards/Product/ActionButtons';
 import { RatingSection } from '@/components/cards/Product/RatingSection';
 import { ItemSnippetFragment } from '@/generated/graphql';
 import { usePriceRound } from '@/utils/usePriceRound';
-import { Button, Flex, Heading, Link, Text } from '@chakra-ui/react';
+import { Button, Flex, Heading, Link, Text, useColorModeValue, useToken } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 
@@ -23,6 +23,9 @@ const ProductImage: React.FC<{}> = ({ }) => {
 }
 
 const Product: React.FC<ProductProps> = ({ data }) => {
+    const [lightColor, darkColor] = useToken("colors", ["primaryL.600", "primaryD.500"]);
+    const color = useColorModeValue(lightColor, darkColor);
+
     return (
         <>
             <Flex my={6} justify="center">
@@ -36,7 +39,11 @@ const Product: React.FC<ProductProps> = ({ data }) => {
             <Flex mb={6} flexDirection="column" justify="center" align="center">
                 <ProductImage />
                 <Text mt={4} fontSize="1.5rem">${usePriceRound(data.price)}</Text>
-                <Button mt={4}>Add to Cart</Button>
+                <Button
+                    mt={4}
+                    border="1px solid"
+                    borderColor={color}
+                >Add to Cart</Button>
             </Flex>
 
             <Flex mb={4} flexDirection="column" justify="space-between">
