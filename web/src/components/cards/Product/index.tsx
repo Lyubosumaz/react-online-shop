@@ -35,7 +35,7 @@ const Product: React.FC<ProductProps> = ({ data }) => {
 
             <Flex mb={6} flexDirection="column" justify="center" align="center">
                 <ProductImage />
-                <Text mt={4}>${usePriceRound(data.price)}</Text>
+                <Text mt={4} fontSize="1.5rem">${usePriceRound(data.price)}</Text>
                 <Button mt={4}>Add to Cart</Button>
             </Flex>
 

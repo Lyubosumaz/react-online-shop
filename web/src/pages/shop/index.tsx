@@ -2,7 +2,7 @@ import Product from "@/components/cards/Product";
 import { useItemsQuery } from '@/generated/graphql';
 import MainLayout from '@/layouts/MainLayout';
 import { withApollo } from '@/utils/withApollo';
-import { Box, Button, Flex, Link, List, ListItem, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Link, List, ListItem, Text, useColorModeValue, useToken } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from "react";
 
@@ -16,6 +16,8 @@ const Shop = () => {
     });
     const gridWidth = ["48%", "32%"];
     const gridHeight = ["2%", "1%"];
+    const [lightColor, darkColor] = useToken("colors", ["primaryL.600", "primaryD.500"]);
+    const color = useColorModeValue(lightColor, darkColor);
 
     if (!loading && !data) {
         return (
@@ -37,11 +39,11 @@ const Shop = () => {
                     d="flex"
                     flexWrap="wrap"
                     justifyContent="space-between"
-                    color="primaryL.600"
+                    color={color}
                     _before={{
                         w: gridWidth,
                         content: '""',
-                        order: "999",
+                        order: "2147483647", // maximum possible number
                     }}
                     _after={{
                         w: gridWidth,
@@ -59,7 +61,7 @@ const Shop = () => {
                                 p={5}
                                 shadow="md"
                                 border="0.1rem solid"
-                                borderColor="primaryL.600"
+                                borderColor={color}
                                 _hover={{
                                     bgColor: "secondaryL.100",
                                     borderColor: "secondaryL.100",
