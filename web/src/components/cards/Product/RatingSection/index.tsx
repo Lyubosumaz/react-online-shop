@@ -17,6 +17,8 @@ export const RatingSection: FC<RatingSectionProps> = ({ item }) => {
     const [vote] = useVoteMutation();
     const [lightColor, darkColor] = useToken("colors", ["primaryL.600", "primaryD.500"]);
     const color = useColorModeValue(lightColor, darkColor);
+    const [lightColorTxt, darkColorTxt] = useToken("colors", ["white", "black"]);
+    const colorTxt = useColorModeValue(lightColorTxt, darkColorTxt);
 
     const updateAfterVote = (value: number, postId: number, cache: ApolloCache<VoteMutation>) => {
         const data = cache.readFragment<{
@@ -67,12 +69,13 @@ export const RatingSection: FC<RatingSectionProps> = ({ item }) => {
                     });
                     setLoadingState('not-loading');
                 }}
-                colorScheme={item.voteStatus === 1 ? 'green' : undefined}
-                isLoading={loadingState === 'up-vote-loading'}
-                aria-label="Positive Vote"
                 icon={<FaChevronUp />}
+                aria-label="Positive Vote"
+                isLoading={loadingState === 'up-vote-loading'}
                 border="0.1rem solid"
-                borderColor={color}
+                color={item.voteStatus === 1 ? colorTxt : undefined}
+                bgColor={item.voteStatus === 1 ? 'successColor' : undefined}
+                borderColor={item.voteStatus === 1 ? 'successColor' : undefined}
             />
 
             <Text
@@ -103,12 +106,13 @@ export const RatingSection: FC<RatingSectionProps> = ({ item }) => {
                     });
                     setLoadingState('not-loading');
                 }}
-                colorScheme={item.voteStatus === -1 ? 'red' : undefined}
-                isLoading={loadingState === 'down-vote-loading'}
-                aria-label="Negative Vote"
                 icon={<FaChevronDown />}
+                aria-label="Negative Vote"
+                isLoading={loadingState === 'down-vote-loading'}
                 border="0.1rem solid"
-                borderColor={color}
+                color={item.voteStatus === -1 ? colorTxt : undefined}
+                bgColor={item.voteStatus === -1 ? 'errorColor' : undefined}
+                borderColor={item.voteStatus === -1 ? 'errorColor' : undefined}
             />
         </Flex>
     );

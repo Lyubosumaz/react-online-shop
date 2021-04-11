@@ -5,6 +5,8 @@ const customTheme = {
     useSystemColorMode: false,
     colors: {
         black: '#16161d',
+        errorColor: '#E53E3E',
+        successColor: '#38A169',
         primaryL: {
             50: "#fdeee8",
             100: "#f8cbb9",

@@ -7,7 +7,12 @@ import React from 'react';
 const Cart: React.FC<{}> = ({ }) => {
     return (
         <MainLayout>
-            <Table size="lg" m="4rem 0" border="0.1rem solid" borderColor="gray.400">
+            <Table
+                size="lg"
+                m="4rem 0"
+                border="0.1rem solid"
+                borderColor="gray.400"
+            >
                 <Thead>
                     <Tr>
                         <Th>Product</Th>
