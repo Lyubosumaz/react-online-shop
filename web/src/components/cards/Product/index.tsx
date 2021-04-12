@@ -2,7 +2,7 @@ import { ActionButtons } from '@/components/cards/Product/ActionButtons';
 import { RatingSection } from '@/components/cards/Product/RatingSection';
 import { ItemSnippetFragment } from '@/generated/graphql';
 import { usePriceRound } from '@/utils/usePriceRound';
-import { Button, Flex, Heading, Link, Text, useColorModeValue, useToken } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Link, Text, useColorModeValue, useToken } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -52,8 +52,20 @@ const Product: React.FC<ProductProps> = ({ data }) => {
             </Flex>
 
             <Flex mb={4} flexDirection="column" justify="space-between">
-                <Text alignSelf="flex-start">categories: {data.category}</Text>
-                <Text alignSelf="flex-end">added by {data.creator.username}</Text>
+                <Text alignSelf="flex-start">
+                    <Box as="span" mr="0.5rem">categories:</Box>
+                    {/* TODO categories need to be added */}
+                    <NextLink href="#">
+                        <Link>{data.category}</Link>
+                    </NextLink>
+                </Text>
+                <Text alignSelf="flex-end">
+                    <Box as="span" mr="0.5rem">added by:</Box>
+                    {/* TODO only admins can see profiles */}
+                    <NextLink href="#">
+                        <Link>{data.creator.username}</Link>
+                    </NextLink>
+                </Text>
             </Flex>
 
             <Flex flexDirection="column">
