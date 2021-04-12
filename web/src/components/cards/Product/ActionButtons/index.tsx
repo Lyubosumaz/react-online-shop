@@ -17,6 +17,8 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ id, creatorId }) => {
     const cancelRef = useRef<HTMLButtonElement>(null);
     const [lightColor, darkColor] = useToken("colors", ["primaryL.600", "primaryD.500"]);
     const color = useColorModeValue(lightColor, darkColor);
+    const [lightColorTxt, darkColorTxt] = useToken("colors", ["primaryL.800", "secondaryL.100",]);
+    const colorTxt = useColorModeValue(lightColorTxt, darkColorTxt);
 
     if (meData?.me?.id !== creatorId) return null;
 
@@ -30,6 +32,7 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ id, creatorId }) => {
                     aria-label="Edit Item"
                     border="0.1rem solid"
                     borderColor={color}
+                    _hover={{ color: colorTxt, bgColor: color }}
                 />
             </NextLink>
 
@@ -38,6 +41,7 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ id, creatorId }) => {
                 aria-label="Delete Item"
                 border="0.1rem solid"
                 borderColor={color}
+                _hover={{ color: colorTxt, bgColor: color }}
                 onClick={() => setIsOpen(true)}
             />
             <AlertDialog

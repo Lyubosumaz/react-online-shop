@@ -5,6 +5,7 @@ import { usePriceRound } from '@/utils/usePriceRound';
 import { Button, Flex, Heading, Link, Text, useColorModeValue, useToken } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
+import { FaShoppingCart } from 'react-icons/fa';
 
 interface ProductProps {
     data: ItemSnippetFragment;
@@ -25,6 +26,8 @@ const ProductImage: React.FC<{}> = ({ }) => {
 const Product: React.FC<ProductProps> = ({ data }) => {
     const [lightColor, darkColor] = useToken("colors", ["primaryL.600", "primaryD.500"]);
     const color = useColorModeValue(lightColor, darkColor);
+    const [lightColorTxt, darkColorTxt] = useToken("colors", ["primaryL.800", "secondaryL.100",]);
+    const colorTxt = useColorModeValue(lightColorTxt, darkColorTxt);
 
     return (
         <>
@@ -41,8 +44,10 @@ const Product: React.FC<ProductProps> = ({ data }) => {
                 <Text mt={4} fontSize="1.5rem">${usePriceRound(data.price)}</Text>
                 <Button
                     mt={4}
+                    leftIcon={<FaShoppingCart size="1.4rem" />}
                     border="0.1rem solid"
                     borderColor={color}
+                    _hover={{ color: colorTxt, bgColor: color }}
                 >Add to Cart</Button>
             </Flex>
 

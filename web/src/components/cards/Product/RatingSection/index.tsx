@@ -17,7 +17,7 @@ export const RatingSection: FC<RatingSectionProps> = ({ item }) => {
     const [vote] = useVoteMutation();
     const [lightColor, darkColor] = useToken("colors", ["primaryL.600", "primaryD.500"]);
     const color = useColorModeValue(lightColor, darkColor);
-    const [lightColorTxt, darkColorTxt] = useToken("colors", ["white", "black"]);
+    const [lightColorTxt, darkColorTxt] = useToken("colors", ["primaryL.800", "secondaryL.100",]);
     const colorTxt = useColorModeValue(lightColorTxt, darkColorTxt);
 
     const updateAfterVote = (value: number, postId: number, cache: ApolloCache<VoteMutation>) => {
@@ -54,7 +54,7 @@ export const RatingSection: FC<RatingSectionProps> = ({ item }) => {
     };
 
     return (
-        <Flex>
+        <Flex >
             <IconButton
                 onClick={async () => {
                     if (item.voteStatus === 1) return;
@@ -72,10 +72,12 @@ export const RatingSection: FC<RatingSectionProps> = ({ item }) => {
                 icon={<FaChevronUp />}
                 aria-label="Positive Vote"
                 isLoading={loadingState === 'up-vote-loading'}
+                color={color}
                 border="0.1rem solid"
-                color={item.voteStatus === 1 ? colorTxt : undefined}
                 bgColor={item.voteStatus === 1 ? 'successColor' : undefined}
                 borderColor={item.voteStatus === 1 ? 'successColor' : undefined}
+                _hover={{ color: colorTxt, bgColor: item.voteStatus === 1 ? 'successColor' : color }}
+
             />
 
             <Text
@@ -87,7 +89,9 @@ export const RatingSection: FC<RatingSectionProps> = ({ item }) => {
                 border="0.1rem solid"
                 borderColor={color}
                 borderRadius="0.375rem"
+                color={color}
                 lineHeight="0"
+                _hover={{ color: colorTxt, bgColor: color }}
             >
                 {item.rating}
             </Text>
@@ -109,10 +113,11 @@ export const RatingSection: FC<RatingSectionProps> = ({ item }) => {
                 icon={<FaChevronDown />}
                 aria-label="Negative Vote"
                 isLoading={loadingState === 'down-vote-loading'}
+                color={color}
                 border="0.1rem solid"
-                color={item.voteStatus === -1 ? colorTxt : undefined}
                 bgColor={item.voteStatus === -1 ? 'errorColor' : undefined}
                 borderColor={item.voteStatus === -1 ? 'errorColor' : undefined}
+                _hover={{ color: colorTxt, bgColor: item.voteStatus === -1 ? 'errorColor' : color }}
             />
         </Flex>
     );
