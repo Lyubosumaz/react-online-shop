@@ -2,7 +2,7 @@ import { ActionButtons } from '@/components/cards/Product/ActionButtons';
 import MainLayout from '@/layouts/MainLayout';
 import { useGetItemFromUrl } from '@/utils/useGetItemFromUrl';
 import { withApollo } from '@/utils/withApollo';
-import { Box, Heading, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 
 const Item = ({ }) => {
@@ -32,15 +32,18 @@ const Item = ({ }) => {
         <MainLayout>
             <Box
                 as="section"
+                my="2rem"
                 display="flex"
                 alignItems="center"
                 flexDirection="column"
             >
-                <Heading as="h1" mb={4}>{data.item.title}</Heading>
-                <Text mb={4}>{data.item.description}</Text>
-                <Box alignSelf="flex-end">
+                <Heading as="h1" mb={6}>{data.item.title}</Heading>
+                <Flex alignSelf="flex-start">
+                    <Text mb={6}>{data.item.description}</Text>
+                </Flex>
+                <Flex w="20%" justifyContent="center" alignSelf="flex-end">
                     <ActionButtons id={data.item.id} creatorId={data.item.creator.id} />
-                </Box>
+                </Flex>
             </Box>
         </MainLayout>
     );
