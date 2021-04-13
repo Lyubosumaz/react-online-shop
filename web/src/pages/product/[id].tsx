@@ -2,7 +2,7 @@ import { ActionButtons } from '@/components/cards/Product/ActionButtons';
 import MainLayout from '@/layouts/MainLayout';
 import { useGetItemFromUrl } from '@/utils/useGetItemFromUrl';
 import { withApollo } from '@/utils/withApollo';
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 
 const Item = ({ }) => {
@@ -30,9 +30,18 @@ const Item = ({ }) => {
 
     return (
         <MainLayout>
-            <Heading mb={4}>{data.item.title}</Heading>
-            <Box mb={4}>{data.item.description}</Box>
-            <ActionButtons id={data.item.id} creatorId={data.item.creator.id} />
+            <Box
+                as="section"
+                display="flex"
+                alignItems="center"
+                flexDirection="column"
+            >
+                <Heading as="h1" mb={4}>{data.item.title}</Heading>
+                <Text mb={4}>{data.item.description}</Text>
+                <Box alignSelf="flex-end">
+                    <ActionButtons id={data.item.id} creatorId={data.item.creator.id} />
+                </Box>
+            </Box>
         </MainLayout>
     );
 };
