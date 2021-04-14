@@ -59,8 +59,8 @@ const MediaLinksItem: React.FC<MediaLinksItemProps> = ({ href, icon, label, back
                 icon={icon}
                 aria-label={label}
                 borderRadius="full"
-                backgroundColor={!backgroundColor ? '#171717' : backgroundColor}
-                _hover={!hover ? { backgroundColor: '#555' } : hover}
+                bgColor={!backgroundColor ? '#171717' : backgroundColor}
+                _hover={!hover ? { bgColor: '#555' } : hover}
             />
         </Link>
     </ListItem>
@@ -89,7 +89,7 @@ const UtilityLinks: React.FC<{}> = ({ }) => {
                 <SectionHeading>Social Media</SectionHeading>
 
                 <List display="flex">
-                    <MediaLinksItem href="https://www.facebook.com/" icon={<FaFacebookF />} label="Facebook" backgroundColor="#7c2c0c" hover={{ backgroundColor: '#efe4d1', color: '#3b5998' }} />
+                    <MediaLinksItem href="https://www.facebook.com/" icon={<FaFacebookF />} label="Facebook" backgroundColor="#7c2c0c" hover={{ bgColor: '#efe4d1', color: '#3b5998' }} />
                     <MediaLinksItem href="https://twitter.com/" icon={<FaTwitter />} label="Twitter" />
                     <MediaLinksItem href="https://www.google.com/" icon={<FaGoogle />} label="Google" />
                     <MediaLinksItem href="https://www.linkedin.com/" icon={<FaLinkedinIn />} label="Linkedin" isLast />

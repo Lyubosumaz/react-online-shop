@@ -7,7 +7,7 @@ import SubscribeNewsletterForm from "./SubscribeNewsletterForm";
 
 const SubscribeNewsletter: FC<{}> = ({ }) => {
     return (
-        <Box backgroundColor="secondaryL.100">
+        <Box bgColor="secondaryL.100">
             <MainLayout>
                 <ColumnWrapper
                     left={<Image w="100%" h="auto" src={require('@/images/img-6.png')} alt="Garden Sofa" />}

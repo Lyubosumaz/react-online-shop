@@ -25,7 +25,7 @@ const FourOhFour: React.FC<{}> = ({ }) => {
                             leftIcon={<FaChevronLeft />}
                             alignSelf="flex-start"
                             bgColor="transparent"
-                            _hover={{ color: "teal.900", backgroundColor: "teal.400" }}
+                            _hover={{ color: "teal.900", bgColor: "teal.400" }}
                             onClick={() => router.back()}
                         >
                             Go Back

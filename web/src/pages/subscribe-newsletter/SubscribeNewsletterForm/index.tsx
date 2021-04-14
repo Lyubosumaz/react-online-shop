@@ -89,13 +89,13 @@ const SubscribeNewsletterView: FC<NewsletterView> = ({ mainColor }) => {
                             isLoading={isSubmitting}
                             p="0 4rem"
                             borderWidth="0.1rem"
-                            backgroundColor={mainColor}
+                            bgColor={mainColor}
                             borderRadius={0}
                             color="white"
                             fontWeight="normal"
                             textTransform="uppercase"
                             _hover={{
-                                backgroundColor: 'transparent',
+                                bgColor: 'transparent',
                                 color: mainColor,
                                 borderColor: mainColor
                             }}
@@ -120,13 +120,13 @@ const UnsubscribeNewsletterView: FC<SubNewsletterView> = ({ mainColor, email }) 
                     ml="0.5rem"
                     p="0 4rem"
                     borderWidth="0.1rem"
-                    backgroundColor={mainColor}
+                    bgColor={mainColor}
                     borderRadius={0}
                     color="white"
                     fontWeight="normal"
                     textTransform="uppercase"
                     _hover={{
-                        backgroundColor: 'transparent',
+                        bgColor: 'transparent',
                         color: mainColor,
                         borderColor: mainColor
                     }}

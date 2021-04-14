@@ -18,7 +18,7 @@ const ProductImage: React.FC<{}> = ({ }) => {
             h="270px"
             justify="center"
             align="center"
-            backgroundColor="gray.400"
+            bgColor="gray.400"
         >Image</Flex>
     )
 }

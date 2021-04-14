@@ -21,7 +21,7 @@ const SecondaryHeader: FC<SecondaryHeaderProps> = ({ goBackButton = 'visible' })
         >
             <MainWrapper size="medium">
                 <List display="flex" justifyContent="space-between">
-                    <ListItem>{goBackButton === 'visible' ? <GoBack /> : null}</ListItem>
+                    <ListItem>{goBackButton === 'visible' ? <GoBack control="custom" /> : null}</ListItem>
 
                     <ListItem>
                         <List display="flex" justifyContent="space-between">
