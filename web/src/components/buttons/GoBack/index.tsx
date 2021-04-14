@@ -2,12 +2,11 @@ import { IconButton, useColorMode } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
-
 interface GoBackProps {
     control?: 'custom' | 'regular';
 }
 
-const GoBack: React.FC<GoBackProps> = ({ control = 'regular' }) => {
+export const GoBack: React.FC<GoBackProps> = ({ control = 'regular' }) => {
     const router = useRouter();
     const { colorMode } = useColorMode();
 
@@ -31,5 +30,3 @@ const GoBack: React.FC<GoBackProps> = ({ control = 'regular' }) => {
         />
     );
 };
-
-export default GoBack;
