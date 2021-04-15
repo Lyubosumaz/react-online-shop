@@ -38,13 +38,15 @@ const Product = ({ }) => {
                 alignItems="center"
                 flexDirection="column"
             >
-                <Flex >
-                    <GoBack control="custom" />
-                    <Heading as="h1" mb={6} ml={6}>{data.item.title}</Heading>
+                <Flex mb={6} align="center">
+                    <GoBack control="product" />
+                    <Heading as="h1" ml={6}>{data.item.title}</Heading>
                 </Flex>
-                <Flex alignSelf="flex-start">
-                    <Text mb={6}>{data.item.description}</Text>
+
+                <Flex mb={6} alignSelf="flex-start">
+                    <Text>{data.item.description}</Text>
                 </Flex>
+
                 <Flex w="20%" justifyContent="center" alignSelf="flex-end">
                     <ActionButtons id={data.item.id} creatorId={data.item.creator.id} />
                 </Flex>
