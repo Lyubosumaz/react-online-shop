@@ -1,5 +1,33 @@
 import { extendTheme } from '@chakra-ui/react';
 
+const Card = {
+    // The styles all Cards have in common
+    baseStyle: {
+        display: "flex",
+        flexDirection: "column",
+        background: "white",
+        alignItems: "center",
+        gap: 6,
+    },
+    // Two variants: rounded and smooth
+    variants: {
+        rounded: {
+            padding: 8,
+            borderRadius: "xl",
+            boxShadow: "xl",
+        },
+        smooth: {
+            padding: 6,
+            borderRadius: "base",
+            boxShadow: "md",
+        },
+    },
+    // The default variant value
+    defaultProps: {
+        variant: "smooth",
+    },
+}
+
 const customTheme = {
     initialColorMode: 'light',
     useSystemColorMode: false,
@@ -72,6 +100,9 @@ const customTheme = {
             ),
             viewBox: '0 0 3000 3163',
         },
+    },
+    components: {
+        Card,
     },
 };
 

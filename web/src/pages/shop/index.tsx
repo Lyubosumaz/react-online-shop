@@ -2,11 +2,12 @@ import Product from "@/components/cards/Product";
 import { useItemsQuery } from '@/generated/graphql';
 import MainLayout from '@/layouts/MainLayout';
 import { withApollo } from '@/utils/withApollo';
-import { Box, Button, Flex, Link, List, ListItem, Text, useColorModeValue, useToken } from '@chakra-ui/react';
+import { Box, Button, Flex, Link, List, ListItem, Text, useColorModeValue, useStyleConfig, useToken } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from "react";
 
 const Shop = () => {
+    const styles = useStyleConfig("Card")
     const { data, error, loading, fetchMore, variables } = useItemsQuery({
         variables: {
             limit: 15,
@@ -30,6 +31,7 @@ const Shop = () => {
 
     return (
         <MainLayout>
+            <Box __css={styles} />
             {!data && loading
                 ? <Text>loading...</Text>
                 :

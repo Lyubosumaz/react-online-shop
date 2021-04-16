@@ -69,7 +69,11 @@ const Product: React.FC<ProductProps> = ({ data }) => {
             <Flex flexDirection="column">
                 <Text>{data.descriptionSnippet}</Text>
 
-                <Flex mt={4} justify="space-between" align="center">
+                <Flex mt={4}
+                    // justify="space-between"
+                    // align="center"
+                    justifySelf="flex-end"
+                >
                     <RatingSection item={data} />
                     <ActionButtons id={data.id} creatorId={data.creator.id} />
                 </Flex>
