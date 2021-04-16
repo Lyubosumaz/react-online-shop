@@ -1,4 +1,4 @@
-import theme from '@/theme';
+import theme from '@/lib/chakra-ui/theme';
 import { ColorModeScript } from '@chakra-ui/react';
 import { NextPageContext } from 'next';
 import { RenderPage } from 'next/dist/next-server/lib/utils';
