@@ -17,8 +17,8 @@ export const RatingSection: FC<RatingSectionProps> = ({ item }) => {
     const [vote] = useVoteMutation();
     const [lightColor, darkColor] = useToken("colors", ["primaryL.600", "primaryD.500"]);
     const color = useColorModeValue(lightColor, darkColor);
-    const [lightColorTxt, darkColorTxt] = useToken("colors", ["primaryL.800", "secondaryL.100",]);
-    const colorTxt = useColorModeValue(lightColorTxt, darkColorTxt);
+    const [textLightColor, textDarkColor] = useToken("colors", ["gray.100", "whiteAlpha.200"]);
+    const textBackgroundColor = useColorModeValue(textLightColor, textDarkColor);
 
     const updateAfterVote = (value: number, postId: number, cache: ApolloCache<VoteMutation>) => {
         const data = cache.readFragment<{
@@ -72,12 +72,15 @@ export const RatingSection: FC<RatingSectionProps> = ({ item }) => {
                 icon={<FaChevronUp />}
                 aria-label="Positive Vote"
                 isLoading={loadingState === 'up-vote-loading'}
-                color={color}
+                color={item.voteStatus === 1 ? 'white' : color}
                 border="0.1rem solid"
                 bgColor={item.voteStatus === 1 ? 'successColor' : undefined}
                 borderColor={item.voteStatus === 1 ? 'successColor' : undefined}
-                _hover={{ color: colorTxt, bgColor: item.voteStatus === 1 ? 'successColor' : color }}
-
+                _hover={{
+                    color: "white",
+                    bgColor: item.voteStatus === 1 ? 'green.400' : color,
+                    borderColor: item.voteStatus === 1 ? 'successColor' : color,
+                }}
             />
 
             <Text
@@ -86,12 +89,17 @@ export const RatingSection: FC<RatingSectionProps> = ({ item }) => {
                 display="flex"
                 justifyContent="center"
                 alignItems="center"
+                fontWeight="bold"
+                bgColor={textBackgroundColor}
                 border="0.1rem solid"
                 borderColor={color}
                 borderRadius="0.375rem"
                 color={color}
                 lineHeight="0"
-                _hover={{ color: colorTxt, bgColor: color }}
+                _hover={{
+                    color: "white",
+                    bgColor: color,
+                }}
             >
                 {item.rating}
             </Text>
@@ -113,11 +121,15 @@ export const RatingSection: FC<RatingSectionProps> = ({ item }) => {
                 icon={<FaChevronDown />}
                 aria-label="Negative Vote"
                 isLoading={loadingState === 'down-vote-loading'}
-                color={color}
+                color={item.voteStatus === -1 ? 'white' : color}
                 border="0.1rem solid"
                 bgColor={item.voteStatus === -1 ? 'errorColor' : undefined}
                 borderColor={item.voteStatus === -1 ? 'errorColor' : undefined}
-                _hover={{ color: colorTxt, bgColor: item.voteStatus === -1 ? 'errorColor' : color }}
+                _hover={{
+                    color: "white",
+                    bgColor: item.voteStatus === -1 ? 'red.600' : color,
+                    borderColor: item.voteStatus === -1 ? 'errorColor' : color,
+                }}
             />
         </Flex>
     );

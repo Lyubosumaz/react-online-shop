@@ -38,7 +38,7 @@ export const GoBack: FC<GoBackProps> = ({ control = 'default' }) => {
                     size: "sm",
                     border: "0.1rem solid",
                     borderColor: bgColor,
-                    _hover: { bgColor: bgColor },
+                    _hover: { bgColor: bgColor, color: "white", },
                 }
                 break;
             case "custom":

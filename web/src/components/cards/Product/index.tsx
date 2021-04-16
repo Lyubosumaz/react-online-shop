@@ -24,10 +24,8 @@ const ProductImage: React.FC<{}> = ({ }) => {
 }
 
 const Product: React.FC<ProductProps> = ({ data }) => {
-    const [lightColor, darkColor] = useToken("colors", ["primaryL.600", "primaryD.500"]);
-    const color = useColorModeValue(lightColor, darkColor);
-    const [lightColorTxt, darkColorTxt] = useToken("colors", ["primaryL.800", "secondaryL.100",]);
-    const colorTxt = useColorModeValue(lightColorTxt, darkColorTxt);
+    const [bgLightColor, bgDarkColor] = useToken("colors", ["primaryL.600", "primaryD.500"]);
+    const bgColor = useColorModeValue(bgLightColor, bgDarkColor);
 
     return (
         <>
@@ -46,8 +44,8 @@ const Product: React.FC<ProductProps> = ({ data }) => {
                     mt={4}
                     leftIcon={<FaShoppingCart size="1.4rem" />}
                     border="0.1rem solid"
-                    borderColor={color}
-                    _hover={{ color: colorTxt, bgColor: color }}
+                    borderColor={bgColor}
+                    _hover={{ color: "white", bgColor: bgColor }}
                 >Add to Cart</Button>
             </Flex>
 
