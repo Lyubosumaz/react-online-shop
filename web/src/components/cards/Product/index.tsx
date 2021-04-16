@@ -49,7 +49,7 @@ const Product: React.FC<ProductProps> = ({ data }) => {
                 >Add to Cart</Button>
             </Flex>
 
-            <Flex mb={4} flexDirection="column" justify="space-between">
+            <Flex mb={6} flexDirection="column" justify="space-between">
                 <Text alignSelf="flex-start">
                     <Box as="span" mr="0.5rem">categories:</Box>
                     {/* TODO categories need to be added */}
@@ -66,14 +66,10 @@ const Product: React.FC<ProductProps> = ({ data }) => {
                 </Text>
             </Flex>
 
-            <Flex flexDirection="column">
+            <Flex mt="auto" flexDirection="column">
                 <Text>{data.descriptionSnippet}</Text>
 
-                <Flex mt={4}
-                    // justify="space-between"
-                    // align="center"
-                    justifySelf="flex-end"
-                >
+                <Flex mt={6} justify="space-between">
                     <RatingSection item={data} />
                     <ActionButtons id={data.id} creatorId={data.creator.id} />
                 </Flex>

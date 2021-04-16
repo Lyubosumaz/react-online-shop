@@ -61,6 +61,8 @@ const Shop = () => {
                                 w={gridWidth}
                                 my={gridHeight}
                                 p={5}
+                                display="flex"
+                                flexDirection="column"
                                 shadow="md"
                                 border="0.1rem solid"
                                 borderColor={color}
