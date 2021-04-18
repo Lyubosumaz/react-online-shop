@@ -13,14 +13,22 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ id, creatorId }) => {
     const { data: meData } = useMeQuery();
     const [deleteItem] = useDeleteItemMutation();
     const [isOpen, setIsOpen] = useState(false);
-    const onClose = () => setIsOpen(false);
     const cancelRef = useRef<HTMLButtonElement>(null);
-
-    const styles = useStyleConfig("ActionButtons");
+    const actionButtonStyles = useStyleConfig("ActionButtons");
 
     if (meData?.me?.id !== creatorId) return null;
 
-    console.log(styles)
+    const onClose = () => setIsOpen(false);
+
+    const handleDeleteProduct = () => {
+        deleteItem({
+            variables: { id },
+            update: (cache) => {
+                cache.evict({ id: 'Item:' + id });
+            },
+        });
+    }
+
     return (
         <Box>
             <NextLink href="/product/edit/[id]" as={`/product/edit/${id}`}>
@@ -28,7 +36,7 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ id, creatorId }) => {
                     as={Link}
                     icon={<FaEdit style={{ marginLeft: "0.275rem" }} />}
                     aria-label="Edit Item"
-                    {...{ ...styles, mr: "1.25rem" }}
+                    sx={{ ...actionButtonStyles, mr: "1rem" }}
                 />
             </NextLink>
 
@@ -36,7 +44,7 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ id, creatorId }) => {
                 icon={<FaTrashAlt />}
                 aria-label="Delete Item"
                 onClick={() => setIsOpen(true)}
-                {...styles}
+                sx={{ ...actionButtonStyles }}
             />
 
             <AlertDialog
@@ -47,10 +55,12 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ id, creatorId }) => {
                 <AlertDialogOverlay>
                     <AlertDialogContent>
                         <AlertDialogHeader>Deleting Item</AlertDialogHeader>
+
                         <AlertDialogBody px={6} py={4}>
                             <Text>Are you sure about that?</Text>
                             <Text>You would never undo this action afterwards.</Text>
                         </AlertDialogBody>
+
                         <AlertDialogFooter>
                             <Button
                                 mr={4}
@@ -60,14 +70,7 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ id, creatorId }) => {
 
                             <Button
                                 colorScheme="red"
-                                onClick={() => {
-                                    deleteItem({
-                                        variables: { id },
-                                        update: (cache) => {
-                                            cache.evict({ id: 'Item:' + id });
-                                        },
-                                    });
-                                }}
+                                onClick={() => handleDeleteProduct()}
                             >Delete</Button>
                         </AlertDialogFooter>
                     </AlertDialogContent>
