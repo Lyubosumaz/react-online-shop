@@ -1,27 +1,12 @@
 export const Card = {
-    // The styles all Cards have in common
-    baseStyle: {
-        display: "flex",
-        flexDirection: "column",
-        background: "white",
-        alignItems: "center",
-        gap: 6,
-    },
-    // Two variants: rounded and smooth
-    variants: {
-        rounded: {
-            padding: 8,
-            borderRadius: "xl",
-            boxShadow: "xl",
-        },
-        smooth: {
-            padding: 6,
-            borderRadius: "base",
-            boxShadow: "md",
-        },
-    },
-    // The default variant value
-    defaultProps: {
-        variant: "smooth",
-    },
+    baseStyle: ({ colorMode }: any) => ({
+        bg: colorMode === "dark" ? "green.300" : "red",
+        color: colorMode === "dark" ? "gray.800" : "white",
+        textTransform: "uppercase",
+        fontWeight: "semibold",
+        letterSpacing: "0.02em",
+        padding: "4px",
+        borderRadius: "2px",
+        fontSize: "12px",
+    }),
 }

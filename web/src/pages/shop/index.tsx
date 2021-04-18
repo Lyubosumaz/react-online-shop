@@ -6,8 +6,13 @@ import { Box, Button, Flex, Link, List, ListItem, Text, useColorModeValue, useSt
 import NextLink from 'next/link';
 import React from "react";
 
+function CustomBadge(props: any) {
+    const { size, variant, ...rest } = props
+    const styles = useStyleConfig("Card", { size, variant })
+    return <Box as="span" sx={styles} {...rest} />
+}
+
 const Shop = () => {
-    const styles = useStyleConfig("Card")
     const { data, error, loading, fetchMore, variables } = useItemsQuery({
         variables: {
             limit: 15,
@@ -31,7 +36,8 @@ const Shop = () => {
 
     return (
         <MainLayout>
-            <Box __css={styles} />
+            <CustomBadge>i'm here</CustomBadge>
+
             {!data && loading
                 ? <Text>loading...</Text>
                 :
