@@ -1,13 +1,14 @@
 import { useLogoutMutation } from '@/generated/graphql';
 import { useApolloClient } from '@apollo/client';
-import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, useDisclosure } from '@chakra-ui/react';
-import React, { FC, useRef } from 'react';
+import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, useDisclosure, useStyleConfig } from '@chakra-ui/react';
+import { FC, useRef } from 'react';
 
 const Logout: FC<{}> = ({ }) => {
     const [logout, { loading: logoutFetching }] = useLogoutMutation();
     const apolloClient = useApolloClient();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const cancelRef = useRef<HTMLButtonElement>(null);
+    const logoutButtonStyles = useStyleConfig("LogoutButtons");
 
     const handleLogout = async () => {
         await logout();
@@ -17,19 +18,9 @@ const Logout: FC<{}> = ({ }) => {
     return (
         <>
             <Button
-                key="logout_button"
-                height="2.5rem"
-                padding="0 1rem"
-                textTransform="uppercase"
-                bgColor="inherit"
-                color="secondaryL.100"
-                _hover={{
-                    bgColor: 'secondaryL.100',
-                    color: 'primaryL.700',
-                    textDecoration: 'underline'
-                }}
-                onClick={onOpen} isLoading={logoutFetching}
-                variant="link"
+                onClick={onOpen}
+                isLoading={logoutFetching}
+                sx={logoutButtonStyles}
             >Logout</Button>
 
             <AlertDialog

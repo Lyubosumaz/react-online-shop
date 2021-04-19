@@ -1,4 +1,5 @@
 import { ActionButtons } from '@/lib/chakra-ui/component-styles/ActionButtons';
+import { LogoutButtons } from '@/lib/chakra-ui/component-styles/LogoutButtons';
 import { Card } from '@/lib/chakra-ui/component-styles/NavBarButton';
 import { customizeTheme } from '@/lib/chakra-ui/customize-theme/customizeTheme';
 import { extendTheme } from '@chakra-ui/react';
@@ -20,6 +21,7 @@ const theme = extendTheme({
     components: {
         Card,
         ActionButtons,
+        LogoutButtons,
     },
 } as any);
 
