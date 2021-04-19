@@ -1,23 +1,18 @@
 import { useLogoutMutation } from '@/generated/graphql';
 import { useApolloClient } from '@apollo/client';
-import {
-    AlertDialog,
-    AlertDialogBody,
-    AlertDialogCloseButton,
-    AlertDialogContent,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogOverlay,
-    Button,
-    useDisclosure
-} from '@chakra-ui/react';
-import React from 'react';
+import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, useDisclosure } from '@chakra-ui/react';
+import React, { FC, useRef } from 'react';
 
-const Logout: React.FC<{}> = ({ }) => {
+const Logout: FC<{}> = ({ }) => {
     const [logout, { loading: logoutFetching }] = useLogoutMutation();
     const apolloClient = useApolloClient();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const cancelRef = React.useRef<HTMLButtonElement>(null);
+    const cancelRef = useRef<HTMLButtonElement>(null);
+
+    const handleLogout = async () => {
+        await logout();
+        await apolloClient.resetStore();
+    }
 
     return (
         <>
@@ -40,8 +35,8 @@ const Logout: React.FC<{}> = ({ }) => {
             <AlertDialog
                 motionPreset="slideInBottom"
                 leastDestructiveRef={cancelRef}
-                onClose={onClose}
                 isOpen={isOpen}
+                onClose={onClose}
                 isCentered
             >
                 <AlertDialogOverlay />
@@ -50,21 +45,18 @@ const Logout: React.FC<{}> = ({ }) => {
                     <AlertDialogHeader>Logout?</AlertDialogHeader>
                     <AlertDialogCloseButton />
                     <AlertDialogBody>Are you sure you want to logout?</AlertDialogBody>
+
                     <AlertDialogFooter>
-                        <Button ref={cancelRef} onClick={onClose}>
-                            No
-                        </Button>
+                        <Button
+                            ref={cancelRef}
+                            onClick={onClose}
+                        >No</Button>
 
                         <Button
-                            colorScheme="red"
                             ml={3}
-                            onClick={async () => {
-                                await logout();
-                                await apolloClient.resetStore();
-                            }}
-                        >
-                            Yes
-                        </Button>
+                            colorScheme="red"
+                            onClick={() => handleLogout()}
+                        >Yes</Button>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
