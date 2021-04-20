@@ -1,6 +1,6 @@
 import Logout from '@/components/buttons/Logout';
-import SiteUtilities from '@/components/SiteUtilities';
 import { useMeQuery } from '@/generated/graphql';
+import { SiteUtilities } from '@/layouts/SiteUtilities';
 import { Button, Flex, IconButton, Link, List, ListItem, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { FC } from 'react';
