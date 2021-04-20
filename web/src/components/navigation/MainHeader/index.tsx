@@ -4,7 +4,7 @@ import { Box, Flex, useColorModeValue, useToken } from '@chakra-ui/react';
 import { FC } from 'react';
 import NavBar from '../NavBar';
 
-const Header: FC<{}> = ({ }) => {
+export const MainHeader: FC<{}> = ({ }) => {
     const [lightColor, darkColor, txColor,] = useToken("colors", ["primaryL.700", "primaryD.500", "secondaryL.100"]);
     const bgColor = useColorModeValue(lightColor, darkColor);
 
@@ -31,5 +31,3 @@ const Header: FC<{}> = ({ }) => {
         </header>
     );
 };
-
-export default Header;
