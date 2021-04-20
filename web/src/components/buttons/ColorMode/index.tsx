@@ -1,11 +1,12 @@
+import { SiteUtilitiesVariants } from "@/layouts/SiteUtilities";
 import { IconButton, useColorMode } from '@chakra-ui/react';
 import { FC } from 'react';
 import { FaMoon, FaSun } from 'react-icons/fa';
 interface ColorModeProps {
-    control?: 'custom' | 'regular';
+    appearance: SiteUtilitiesVariants;
 }
 
-export const ColorMode: FC<ColorModeProps> = ({ control = 'regular' }) => {
+export const ColorMode: FC<ColorModeProps> = ({ appearance }) => {
     const { colorMode, toggleColorMode } = useColorMode();
 
     return (
@@ -17,7 +18,7 @@ export const ColorMode: FC<ColorModeProps> = ({ control = 'regular' }) => {
             onClick={toggleColorMode}
             color="inherit"
             bgColor="inherit"
-            _hover={control === 'regular'
+            _hover={appearance === 'secondaryHeader'
                 ? { bgColor: colorMode === 'light' ? 'teal.600' : 'teal.300' }
                 : { bgColor: 'secondaryL.100', color: 'primaryL.700' }
             }

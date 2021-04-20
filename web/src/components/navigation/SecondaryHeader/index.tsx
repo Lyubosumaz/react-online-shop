@@ -31,7 +31,7 @@ export const SecondaryHeader: FC<SecondaryHeaderProps> = ({ goBackButton = 'visi
                     </ListItem>
 
                     <ListItem>
-                        <SiteUtilities distance={4} />
+                        <SiteUtilities distance={4} variant='secondaryHeader' />
                     </ListItem>
                 </List>
             </MainWrapper>

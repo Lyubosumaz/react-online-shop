@@ -1,4 +1,4 @@
-import Logout from '@/components/buttons/Logout';
+import { Logout } from '@/components/buttons/Logout';
 import { useMeQuery } from '@/generated/graphql';
 import { SiteUtilities } from '@/layouts/SiteUtilities';
 import { Button, Flex, IconButton, Link, List, ListItem, Text } from '@chakra-ui/react';
@@ -96,7 +96,9 @@ const NavBar: FC<{}> = ({ }) => {
     return (
         <List d="flex">
             {items}
-            <NavItem href="#" variant="wrap" isLast><SiteUtilities distance={2} /></NavItem>
+            <NavItem href="#" variant="wrap" isLast>
+                <SiteUtilities distance={2} />
+            </NavItem>
         </List>
     );
 };

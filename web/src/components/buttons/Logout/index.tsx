@@ -3,7 +3,7 @@ import { useApolloClient } from '@apollo/client';
 import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, useDisclosure, useStyleConfig } from '@chakra-ui/react';
 import { FC, useRef } from 'react';
 
-const Logout: FC<{}> = ({ }) => {
+export const Logout: FC<{}> = ({ }) => {
     const [logout, { loading: logoutFetching }] = useLogoutMutation();
     const apolloClient = useApolloClient();
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -54,5 +54,3 @@ const Logout: FC<{}> = ({ }) => {
         </>
     );
 };
-
-export default Logout;

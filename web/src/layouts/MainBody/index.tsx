@@ -1,9 +1,9 @@
 import React from 'react';
-import MainWrapper, { WrapperSize, WrapperVarian } from '../MainWrapper';
+import MainWrapper, { WrapperSize, WrapperVariant } from '../MainWrapper';
 
 interface LayoutProps {
     size?: WrapperSize;
-    variant?: WrapperVarian;
+    variant?: WrapperVariant;
 }
 
 const MainBody: React.FC<LayoutProps> = ({ children, size, variant }) => {

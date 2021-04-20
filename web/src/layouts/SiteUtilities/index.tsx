@@ -3,14 +3,17 @@ import { LangSelect } from '@/components/buttons/LangSelect';
 import { ListItem } from '@chakra-ui/layout';
 import { List } from '@chakra-ui/react';
 import { FC } from 'react';
+
+export type SiteUtilitiesVariants = 'secondaryHeader' | 'default';
 interface SiteUtilitiesProps {
-    distance: number
+    distance: number;
+    variant?: SiteUtilitiesVariants;
 }
 
-export const SiteUtilities: FC<SiteUtilitiesProps> = ({ distance }) => {
+export const SiteUtilities: FC<SiteUtilitiesProps> = ({ distance, variant = "default" }) => {
     const components = [
         <LangSelect />,
-        <ColorMode control="custom" />,
+        <ColorMode appearance={variant} />,
     ]; // holds the different components 
 
     return (
@@ -24,7 +27,7 @@ export const SiteUtilities: FC<SiteUtilitiesProps> = ({ distance }) => {
                         >
                             {component}
                         </ListItem>
-                    )
+                    );
                 })
                 : null
             }
