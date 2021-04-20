@@ -1,16 +1,15 @@
-import ColorMode from '@/components/buttons/ColorMode';
 import { GoBack } from '@/components/buttons/GoBack';
-import { LangSelect } from '@/components/buttons/LangSelect';
 import MainWrapper from '@/layouts/MainWrapper';
+import { SiteUtilities } from '@/layouts/SiteUtilities';
 import { List, ListItem } from '@chakra-ui/react';
 import { FC } from 'react';
 
-export type goBackButtonStatus = 'visible' | 'hidden';
+export type variantGoBackButton = 'visible' | 'hidden';
 interface SecondaryHeaderProps {
-    goBackButton?: goBackButtonStatus;
+    goBackButton?: variantGoBackButton;
 }
 
-const SecondaryHeader: FC<SecondaryHeaderProps> = ({ goBackButton = 'visible' }) => {
+export const SecondaryHeader: FC<SecondaryHeaderProps> = ({ goBackButton = 'visible' }) => {
     return (
         <header
             style={{
@@ -20,19 +19,19 @@ const SecondaryHeader: FC<SecondaryHeaderProps> = ({ goBackButton = 'visible' })
             }}
         >
             <MainWrapper size="medium">
-                <List display="flex" justifyContent="space-between">
-                    <ListItem>{goBackButton === 'visible' ? <GoBack control="custom" /> : null}</ListItem>
+                <List
+                    display="flex"
+                    justifyContent="space-between"
+                >
+                    <ListItem>
+                        {goBackButton === 'visible'
+                            ? <GoBack control="custom" />
+                            : null
+                        }
+                    </ListItem>
 
                     <ListItem>
-                        <List display="flex" justifyContent="space-between">
-                            <ListItem>
-                                <LangSelect />
-                            </ListItem>
-
-                            <ListItem ml={4}>
-                                <ColorMode />
-                            </ListItem>
-                        </List>
+                        <SiteUtilities distance={4} />
                     </ListItem>
                 </List>
             </MainWrapper>
@@ -40,4 +39,3 @@ const SecondaryHeader: FC<SecondaryHeaderProps> = ({ goBackButton = 'visible' })
     );
 };
 
-export default SecondaryHeader;

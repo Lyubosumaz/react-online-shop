@@ -1,4 +1,4 @@
-import ColorMode from '@/components/buttons/ColorMode';
+import { ColorMode } from '@/components/buttons/ColorMode';
 import { LangSelect } from '@/components/buttons/LangSelect';
 import { ListItem } from '@chakra-ui/layout';
 import { List } from '@chakra-ui/react';

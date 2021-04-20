@@ -1,12 +1,11 @@
 import { IconButton, useColorMode } from '@chakra-ui/react';
-import React from 'react';
+import { FC } from 'react';
 import { FaMoon, FaSun } from 'react-icons/fa';
-
 interface ColorModeProps {
     control?: 'custom' | 'regular';
 }
 
-const ColorMode: React.FC<ColorModeProps> = ({ control = 'regular' }) => {
+export const ColorMode: FC<ColorModeProps> = ({ control = 'regular' }) => {
     const { colorMode, toggleColorMode } = useColorMode();
 
     return (
@@ -25,5 +24,3 @@ const ColorMode: React.FC<ColorModeProps> = ({ control = 'regular' }) => {
         />
     );
 };
-
-export default ColorMode;
