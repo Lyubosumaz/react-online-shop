@@ -1,10 +1,14 @@
+import { SiteUtilitiesVariants } from "@/layouts/SiteUtilities";
 import { getLanguageIcon, _languages } from "@/utils/flagIconController";
-import { Button, Menu, MenuButton, MenuGroup, MenuItem, MenuList, Tooltip, useColorModeValue, useToken } from '@chakra-ui/react';
+import { Button, Menu, MenuButton, MenuGroup, MenuItem, MenuList, Tooltip, useColorMode, useColorModeValue, useToken } from '@chakra-ui/react';
 import { FC, useState } from 'react';
-
+interface LangSelectProps {
+    appearance: SiteUtilitiesVariants;
+}
 // TODO button for translate site
-export const LangSelect: FC<{}> = ({ }) => {
+export const LangSelect: FC<LangSelectProps> = ({ appearance }) => {
     const [lang, setLanguage] = useState("en")
+    const { colorMode } = useColorMode();
     const [lightColor, darkColor] = useToken("colors", ["secondaryL.100", "primaryD.900"]);
     const txColor = useColorModeValue(darkColor, lightColor);
 
@@ -16,8 +20,14 @@ export const LangSelect: FC<{}> = ({ }) => {
                     p="0 0.75rem"
                     variant="ghost"
                     fontSize="1.5rem"
-                    _hover={{ bg: 'secondaryL.100' }}
-                    _active={{ bg: 'secondaryL.100' }}
+                    _hover={appearance === 'secondaryHeader'
+                        ? { bg: colorMode === 'light' ? 'teal.600' : 'teal.300' }
+                        : { bg: 'secondaryL.100', color: 'primaryL.700' }
+                    }
+                    _active={appearance === 'secondaryHeader'
+                        ? { bg: colorMode === 'light' ? 'teal.600' : 'teal.300' }
+                        : { bg: 'secondaryL.100', color: 'primaryL.700' }
+                    }
                 >
                     <span role="img">{getLanguageIcon(lang)}</span>
                 </MenuButton>

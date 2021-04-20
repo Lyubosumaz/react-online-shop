@@ -12,7 +12,7 @@ interface SiteUtilitiesProps {
 
 export const SiteUtilities: FC<SiteUtilitiesProps> = ({ distance, variant = "default" }) => {
     const components = [
-        <LangSelect />,
+        <LangSelect appearance={variant} />,
         <ColorMode appearance={variant} />,
     ]; // holds the different components 
 
