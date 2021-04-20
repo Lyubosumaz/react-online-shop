@@ -1,4 +1,5 @@
 import { ActionButtons } from '@/lib/chakra-ui/component-styles/ActionButtons';
+import { ColorModeButtonMain, ColorModeButtonSecondary } from '@/lib/chakra-ui/component-styles/ColorModeButton';
 import { LogoutButtons } from '@/lib/chakra-ui/component-styles/LogoutButtons';
 import { Card } from '@/lib/chakra-ui/component-styles/NavBarButton';
 import { customizeTheme } from '@/lib/chakra-ui/customize-theme/customizeTheme';
@@ -22,6 +23,8 @@ const theme = extendTheme({
         Card,
         ActionButtons,
         LogoutButtons,
+        ColorModeButtonMain,
+        ColorModeButtonSecondary,
     },
 } as any);
 
