@@ -19,7 +19,7 @@ export const GoBackButtonSecondary = {
 }
 
 export const GoBackButtonDefault = {
-    baseStyle: ({ colorMode }: any) => ({
+    baseStyle: () => ({
         color: "secondaryL.100",
         bg: 'primaryL.700',
         _hover: {

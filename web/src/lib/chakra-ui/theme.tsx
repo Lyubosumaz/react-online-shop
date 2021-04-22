@@ -1,6 +1,7 @@
 import { ActionButtons } from '@/lib/chakra-ui/component-styles/ActionButtons';
-import { ColorModeButtonMain, ColorModeButtonSecondary } from '@/lib/chakra-ui/component-styles/ColorModeButton';
-import { GoBackButtonDefault, GoBackButtonProduct, GoBackButtonSecondary } from '@/lib/chakra-ui/component-styles/GoBackButton';
+import { ColorModeButtonMain, ColorModeButtonSecondary } from '@/lib/chakra-ui/component-styles/ColorModeButtons';
+import { GoBackButtonDefault, GoBackButtonProduct, GoBackButtonSecondary } from '@/lib/chakra-ui/component-styles/GoBackButtons';
+import { LangSelectButtonDefault, LangSelectButtonSecondary } from '@/lib/chakra-ui/component-styles/LangSelectButtons';
 import { LogoutButtons } from '@/lib/chakra-ui/component-styles/LogoutButtons';
 import { Card } from '@/lib/chakra-ui/component-styles/NavBarButton';
 import { customizeTheme } from '@/lib/chakra-ui/customize-theme/customizeTheme';
@@ -29,6 +30,8 @@ const theme = extendTheme({
         GoBackButtonDefault,
         GoBackButtonSecondary,
         GoBackButtonProduct,
+        LangSelectButtonSecondary,
+        LangSelectButtonDefault,
     },
 } as any);
 

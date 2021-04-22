@@ -1,5 +1,5 @@
 export const ColorModeButtonMain = {
-    baseStyle: ({ colorMode }: any) => ({
+    baseStyle: () => ({
         fontSize: "1.5rem",
         color: "inherit",
         bg: "inherit",
@@ -13,8 +13,8 @@ export const ColorModeButtonMain = {
 export const ColorModeButtonSecondary = {
     baseStyle: ({ colorMode }: any) => ({
         fontSize: "1.5rem",
-        color: "inherit",
-        bg: "inherit",
+        color: colorMode === 'light' ? 'primaryD.50' : 'primaryD.900',
+        bg: colorMode === 'light' ? 'teal.500' : 'teal.200',
         _hover: {
             bg: colorMode === 'light' ? 'teal.600' : 'teal.300'
         }

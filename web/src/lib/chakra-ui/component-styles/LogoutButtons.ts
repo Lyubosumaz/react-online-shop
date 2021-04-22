@@ -1,5 +1,5 @@
 export const LogoutButtons = {
-    baseStyle: ({ colorMode }: any) => ({
+    baseStyle: () => ({
         height: "2.5rem",
         padding: "0 1rem",
         bg: "inherit",

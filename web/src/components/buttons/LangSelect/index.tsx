@@ -1,6 +1,6 @@
 import { SiteUtilitiesVariants } from "@/layouts/SiteUtilities";
 import { getLanguageIcon, _languages } from "@/utils/flagIconController";
-import { Button, Menu, MenuButton, MenuGroup, MenuItem, MenuList, Tooltip, useColorMode, useColorModeValue, useToken } from '@chakra-ui/react';
+import { Button, Menu, MenuButton, MenuGroup, MenuItem, MenuList, Tooltip, useColorMode, useColorModeValue, useStyleConfig, useToken } from '@chakra-ui/react';
 import { FC, useState } from 'react';
 interface LangSelectProps {
     appearance: SiteUtilitiesVariants;
@@ -12,22 +12,30 @@ export const LangSelect: FC<LangSelectProps> = ({ appearance }) => {
     const [lightColor, darkColor] = useToken("colors", ["secondaryL.100", "primaryD.900"]);
     const txColor = useColorModeValue(darkColor, lightColor);
 
+    const secondaryLangSelectButton = useStyleConfig("LangSelectButtonSecondary");
+    const defaultLangSelectButton = useStyleConfig("LangSelectButtonDefault");
+
+    const stylesState = (key: string) => {
+        let styles;
+        switch (key) {
+            case "secondaryHeader":
+                styles = secondaryLangSelectButton;
+                break;
+            default:
+            case "default":
+                styles = defaultLangSelectButton;
+                break;
+        }
+
+        return styles;
+    }
+
     return (
         <Menu>
             <Tooltip label="Language">
                 <MenuButton
                     as={Button}
-                    p="0 0.75rem"
-                    variant="ghost"
-                    fontSize="1.5rem"
-                    _hover={appearance === 'secondaryHeader'
-                        ? { bg: colorMode === 'light' ? 'teal.600' : 'teal.300' }
-                        : { bg: 'secondaryL.100', color: 'primaryL.700' }
-                    }
-                    _active={appearance === 'secondaryHeader'
-                        ? { bg: colorMode === 'light' ? 'teal.600' : 'teal.300' }
-                        : { bg: 'secondaryL.100', color: 'primaryL.700' }
-                    }
+                    sx={stylesState(appearance)}
                 >
                     <span role="img">{getLanguageIcon(lang)}</span>
                 </MenuButton>
