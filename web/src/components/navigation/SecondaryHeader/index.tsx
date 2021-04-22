@@ -25,7 +25,7 @@ export const SecondaryHeader: FC<SecondaryHeaderProps> = ({ goBackButton = 'visi
                 >
                     <ListItem>
                         {goBackButton === 'visible'
-                            ? <GoBack control="custom" />
+                            ? <GoBack control="secondaryHeader" />
                             : null
                         }
                     </ListItem>

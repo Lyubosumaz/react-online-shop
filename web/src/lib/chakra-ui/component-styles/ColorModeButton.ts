@@ -16,9 +16,7 @@ export const ColorModeButtonSecondary = {
         color: "inherit",
         bg: "inherit",
         _hover: {
-            bg: colorMode === 'light'
-                ? 'teal.600'
-                : 'teal.300'
+            bg: colorMode === 'light' ? 'teal.600' : 'teal.300'
         }
     }),
 }
