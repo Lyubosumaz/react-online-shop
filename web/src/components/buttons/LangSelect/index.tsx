@@ -1,6 +1,6 @@
 import { SiteUtilitiesVariants } from "@/layouts/SiteUtilities";
 import { getLanguageIcon, _languages } from "@/utils/flagIconController";
-import { Button, Menu, MenuButton, MenuGroup, MenuItem, MenuList, Tooltip, useColorMode, useColorModeValue, useStyleConfig, useToken } from '@chakra-ui/react';
+import { Button, Menu, MenuButton, MenuGroup, MenuItem, MenuList, Tooltip, useColorModeValue, useStyleConfig, useToken } from '@chakra-ui/react';
 import { FC, useState } from 'react';
 interface LangSelectProps {
     appearance: SiteUtilitiesVariants;
@@ -8,10 +8,8 @@ interface LangSelectProps {
 // TODO button for translate site
 export const LangSelect: FC<LangSelectProps> = ({ appearance }) => {
     const [lang, setLanguage] = useState("en")
-    const { colorMode } = useColorMode();
     const [lightColor, darkColor] = useToken("colors", ["secondaryL.100", "primaryD.900"]);
     const txColor = useColorModeValue(darkColor, lightColor);
-
     const secondaryLangSelectButton = useStyleConfig("LangSelectButtonSecondary");
     const defaultLangSelectButton = useStyleConfig("LangSelectButtonDefault");
 
