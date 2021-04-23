@@ -12,6 +12,7 @@ export const LangSelect: FC<LangSelectProps> = ({ appearance }) => {
     const txColor = useColorModeValue(darkColor, lightColor);
     const secondaryLangSelectButton = useStyleConfig("LangSelectButtonSecondary");
     const defaultLangSelectButton = useStyleConfig("LangSelectButtonDefault");
+    const langSelectDropdown = useStyleConfig("LangSelectDropdown");
 
     const stylesState = (key: string) => {
         let styles;
@@ -40,10 +41,11 @@ export const LangSelect: FC<LangSelectProps> = ({ appearance }) => {
             </Tooltip>
 
             <MenuList
-                p={0}
-                rounded={0}
-                color={txColor}
-                boxShadow="0px 0.2rem 1.35rem rgb(0 0 0 / 25%)"
+                sx={langSelectDropdown}
+            // p={0}
+            // rounded={0}
+            // color={txColor}
+            // boxShadow="0px 0.2rem 1.35rem rgb(0 0 0 / 25%)"
             >
                 <MenuGroup title="Language/Език">
                     <MenuItem onClick={() => setLanguage(_languages.en.value)}>{_languages.en.name}</MenuItem>
