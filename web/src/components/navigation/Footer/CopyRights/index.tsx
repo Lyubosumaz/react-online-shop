@@ -1,10 +1,25 @@
-import { Flex, Text } from '@chakra-ui/react';
-import React from 'react';
+import { Flex, Link, Text } from '@chakra-ui/react';
+import { FC } from 'react';
 
-const CopyRights: React.FC<{}> = ({ }) => {
+const CopyRights: FC<{}> = () => {
     return (
-        <Flex p="1.5rem 0" justifyContent="center" alignItems="center" bgColor="#fff" color="#100703">
-            <Text fontWeight="bold">&copy;2020-{new Date().getFullYear()} All Rights Restricted. Design by Free html Templates</Text>
+        <Flex
+            p="1.5rem 0"
+            justify="center"
+            align="center"
+            bg="white"
+            color="black"
+            fontWeight="bold"
+        >
+            <Text mr="0.3rem">&copy;2020-{new Date().getFullYear()} All Rights Restricted. Design by</Text>
+            <Link
+                href="https://html.design/"
+                target="_blank"
+                _hover={{
+                    color: "primaryL.700",
+                    transition: "0.375s ease-in-out",
+                }}
+            >Free html Templates</Link>
         </Flex>
     );
 };

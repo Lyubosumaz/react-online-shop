@@ -2,6 +2,7 @@ export const customizeTheme = {
     initialColorMode: 'light',
     useSystemColorMode: false,
     colors: {
+        white: '#fafafa',
         black: '#16161d',
         errorColor: '#E53E3E',
         successColor: '#38A169',
