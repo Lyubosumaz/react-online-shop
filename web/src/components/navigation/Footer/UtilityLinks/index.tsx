@@ -1,9 +1,9 @@
 import { CSSWithMultiValues, Heading, IconButton, Link, List, ListItem, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import { FaFacebookF, FaGoogle, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 
-const SectionWrapper: React.FC<{ sectionWidth: string }> = ({ children, sectionWidth }) => {
+const SectionWrapper: FC<{ sectionWidth: string }> = ({ children, sectionWidth }) => {
     const [borderToggle, setBorderToggle] = useState(false);
 
     return (
@@ -23,13 +23,20 @@ const SectionWrapper: React.FC<{ sectionWidth: string }> = ({ children, sectionW
     )
 }
 
-const SectionHeading: React.FC<{}> = ({ children, ...props }) => (
-    <Heading as="h4" pb={8} fontSize="1.5rem" textTransform="uppercase" whiteSpace="nowrap" {...props}>
+const SectionHeading: FC<{}> = ({ children, ...props }) => (
+    <Heading
+        as="h4"
+        pb={8}
+        fontSize="1.5rem"
+        textTransform="uppercase"
+        whiteSpace="nowrap"
+        {...props}
+    >
         {children}
     </Heading>
 );
 
-const SiteLinksItem: React.FC<{ href: string }> = ({ children, href }) => (
+const SiteLinksItem: FC<{ href: string }> = ({ children, href }) => (
     <ListItem
         _hover={{
             color: "primaryL.500",
@@ -50,7 +57,7 @@ interface MediaLinksItemProps {
     isLast?: boolean;
 }
 
-const MediaLinksItem: React.FC<MediaLinksItemProps> = ({ href, icon, label, backgroundColor, hover, isLast }) => (
+const MediaLinksItem: FC<MediaLinksItemProps> = ({ href, icon, label, backgroundColor, hover, isLast }) => (
     <ListItem mr={isLast ? 0 : 1}>
         <Link href={href}>
             <IconButton
@@ -59,14 +66,14 @@ const MediaLinksItem: React.FC<MediaLinksItemProps> = ({ href, icon, label, back
                 icon={icon}
                 aria-label={label}
                 borderRadius="full"
-                bgColor={!backgroundColor ? '#171717' : backgroundColor}
-                _hover={!hover ? { bgColor: '#555' } : hover}
+                bg={!backgroundColor ? 'black' : backgroundColor}
+                _hover={!hover ? { bg: '#555' } : hover}
             />
         </Link>
     </ListItem>
 );
 
-const UtilityLinks: React.FC<{}> = ({ }) => {
+export const UtilityLinks: FC<{}> = ({ }) => {
     return (
         <List pb="4rem" display="flex" justifyContent="space-between">
             <SectionWrapper sectionWidth="11rem">
@@ -89,7 +96,7 @@ const UtilityLinks: React.FC<{}> = ({ }) => {
                 <SectionHeading>Social Media</SectionHeading>
 
                 <List display="flex">
-                    <MediaLinksItem href="https://www.facebook.com/" icon={<FaFacebookF />} label="Facebook" backgroundColor="#7c2c0c" hover={{ bgColor: '#efe4d1', color: '#3b5998' }} />
+                    <MediaLinksItem href="https://www.facebook.com/" icon={<FaFacebookF />} label="Facebook" backgroundColor="#7c2c0c" hover={{ bg: '#efe4d1', color: '#3b5998' }} />
                     <MediaLinksItem href="https://twitter.com/" icon={<FaTwitter />} label="Twitter" />
                     <MediaLinksItem href="https://www.google.com/" icon={<FaGoogle />} label="Google" />
                     <MediaLinksItem href="https://www.linkedin.com/" icon={<FaLinkedinIn />} label="Linkedin" isLast />
@@ -103,5 +110,3 @@ const UtilityLinks: React.FC<{}> = ({ }) => {
         </List>
     );
 };
-
-export default UtilityLinks;
