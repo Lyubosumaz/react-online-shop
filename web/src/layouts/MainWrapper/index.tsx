@@ -9,12 +9,18 @@ interface WrapperProps {
     variant?: WrapperVariant;
 }
 
-const MainWrapper: React.FC<WrapperProps> = ({ children, size = 'regular', variant = 'element' }) => {
+export const MainWrapper: React.FC<WrapperProps> = ({ children, size = 'regular', variant = 'element' }) => {
     return (
-        <Box maxW={size === 'regular' ? '72rem' : size === 'medium' ? '50rem' : '34rem'} m="0 auto" p={variant === 'element' ? '0' : '4em 0'}>
+        <Box
+            maxW={
+                size === 'regular'
+                    ? '72rem'
+                    : size === 'medium' ? '50rem' : '34rem'
+            }
+            m="0 auto"
+            p={variant === 'element' ? '0' : '4em 0'}
+        >
             {children}
         </Box>
     );
 };
-
-export default MainWrapper;

@@ -1,19 +1,15 @@
 import { SecondaryHeader, variantGoBackButton } from '@/components/navigation/SecondaryHeader';
-import Main from '@/layouts/MainBody';
+import { MainBody } from '@/layouts/MainBody';
 import React from 'react';
 interface SecondaryLayoutProps {
     goBackButton?: variantGoBackButton;
 }
 
-const SecondaryLayout: React.FC<SecondaryLayoutProps> = ({ children, goBackButton }) => {
+export const SecondaryLayout: React.FC<SecondaryLayoutProps> = ({ children, goBackButton }) => {
     return (
         <>
             <SecondaryHeader goBackButton={goBackButton} />
-            <Main size="small" variant="form">
-                {children}
-            </Main>
+            <MainBody size="small" variant="form">{children}</MainBody>
         </>
     );
 };
-
-export default SecondaryLayout;

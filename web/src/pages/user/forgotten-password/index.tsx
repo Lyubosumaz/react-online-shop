@@ -1,6 +1,6 @@
 import InputField from '@/components/form/InputField';
 import { useForgottenPasswordMutation } from '@/generated/graphql';
-import SecondaryLayout from '@/layouts/SecondaryLayout';
+import { SecondaryLayout } from '@/layouts/SecondaryLayout';
 import { forgottenPasswordValidations } from '@/utils/formValidations';
 import { withApollo } from '@/utils/withApollo';
 import { Box, Button } from '@chakra-ui/react';
@@ -25,13 +25,13 @@ const ForgottenPassword: React.FC<{}> = ({ }) => {
                     complete ? (
                         <Box>if an account with that email exists, we sent you can email</Box>
                     ) : (
-                            <Form>
-                                <InputField name="email" placeholder="email" label="Email" />
-                                <Button mt={4} type="submit" isLoading={isSubmitting} colorScheme="teal">
-                                    forgot password
+                        <Form>
+                            <InputField name="email" placeholder="email" label="Email" />
+                            <Button mt={4} type="submit" isLoading={isSubmitting} colorScheme="teal">
+                                forgot password
                             </Button>
-                            </Form>
-                        )
+                        </Form>
+                    )
                 }
             </Formik>
         </SecondaryLayout>

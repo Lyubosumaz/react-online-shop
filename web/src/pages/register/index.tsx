@@ -1,6 +1,6 @@
 import InputField from '@/components/form/InputField';
 import { MeDocument, MeQuery, useRegisterMutation } from '@/generated/graphql';
-import SecondaryLayout from '@/layouts/SecondaryLayout';
+import { SecondaryLayout } from '@/layouts/SecondaryLayout';
 import { registerValidations } from '@/utils/formValidations';
 import { toErrorMap } from '@/utils/toErrorMap';
 import { withApollo } from '@/utils/withApollo';
@@ -9,9 +9,10 @@ import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-const Register: React.FC<{}> = ({}) => {
+const Register: React.FC<{}> = ({ }) => {
     const router = useRouter();
     const [register] = useRegisterMutation();
+
     return (
         <SecondaryLayout>
             <Formik

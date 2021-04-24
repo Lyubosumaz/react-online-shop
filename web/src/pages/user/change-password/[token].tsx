@@ -1,6 +1,6 @@
 import InputField from '@/components/form/InputField';
 import { MeDocument, MeQuery, useChangePasswordMutation } from '@/generated/graphql';
-import SecondaryLayout from '@/layouts/SecondaryLayout';
+import { SecondaryLayout } from '@/layouts/SecondaryLayout';
 import { changePasswordValidations } from '@/utils/formValidations';
 import { toErrorMap } from '@/utils/toErrorMap';
 import { withApollo } from '@/utils/withApollo';

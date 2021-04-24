@@ -1,5 +1,5 @@
 import { GoBack } from '@/components/buttons/GoBack';
-import MainWrapper from '@/layouts/MainWrapper';
+import { MainWrapper } from '@/layouts/MainWrapper';
 import { SiteUtilities } from '@/layouts/SiteUtilities';
 import { List, ListItem } from '@chakra-ui/react';
 import { FC } from 'react';

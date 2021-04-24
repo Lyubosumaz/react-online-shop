@@ -1,5 +1,5 @@
 import { MeDocument, MeQuery, useConfirmEmailAcceptMutation } from '@/generated/graphql';
-import SecondaryLayout from '@/layouts/SecondaryLayout';
+import { SecondaryLayout } from '@/layouts/SecondaryLayout';
 import { withApollo } from '@/utils/withApollo';
 import { Button, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';

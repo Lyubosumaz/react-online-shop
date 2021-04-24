@@ -66,7 +66,7 @@ const Column: React.FC<ColumnProps> = ({ children, variant }) => {
     )
 }
 
-const ColumnWrapper: React.FC<ColumnWrapperProps> = ({ left, right, borderLocation }) => {
+export const ColumnWrapper: React.FC<ColumnWrapperProps> = ({ left, right, borderLocation }) => {
     return (
         <Flex p="6rem 0">
             <Column variant={borderLocation === "left" || borderLocation === "both" ? "angles" : "regular"}>{left}</Column>
@@ -74,5 +74,3 @@ const ColumnWrapper: React.FC<ColumnWrapperProps> = ({ left, right, borderLocati
         </Flex>
     );
 };
-
-export default ColumnWrapper;

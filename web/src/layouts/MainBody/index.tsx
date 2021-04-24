@@ -1,4 +1,4 @@
-import MainWrapper, { WrapperSize, WrapperVariant } from '@/layouts/MainWrapper';
+import { MainWrapper, WrapperSize, WrapperVariant } from '@/layouts/MainWrapper';
 import React from 'react';
 
 interface LayoutProps {
@@ -6,7 +6,7 @@ interface LayoutProps {
     variant?: WrapperVariant;
 }
 
-const MainBody: React.FC<LayoutProps> = ({ children, size, variant }) => {
+export const MainBody: React.FC<LayoutProps> = ({ children, size, variant }) => {
     return (
         <main>
             <MainWrapper size={size} variant={variant}>
@@ -15,5 +15,3 @@ const MainBody: React.FC<LayoutProps> = ({ children, size, variant }) => {
         </main>
     );
 };
-
-export default MainBody;

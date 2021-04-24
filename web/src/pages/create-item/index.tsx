@@ -2,7 +2,7 @@ import { categoryList } from '@/category-list.json'; // TODO create huge categor
 import InputField from '@/components/form/InputField';
 import SelectField from '@/components/form/SelectField';
 import { useCreateItemMutation } from '@/generated/graphql';
-import SecondaryLayout from '@/layouts/SecondaryLayout';
+import { SecondaryLayout } from '@/layouts/SecondaryLayout';
 import { createValidations } from '@/utils/formValidations';
 import { useIsAuth } from '@/utils/useIsAuth';
 import { withApollo } from '@/utils/withApollo';
@@ -18,7 +18,7 @@ interface CreateItemFields {
     price: string;
 }
 
-const CreateItem: React.FC<{}> = ({}) => {
+const CreateItem: React.FC<{}> = ({ }) => {
     const router = useRouter();
     useIsAuth();
     const [createItem] = useCreateItemMutation();

@@ -1,4 +1,4 @@
-import ColumnWrapper from '@/layouts/ColumnWrapper';
+import { ColumnWrapper } from '@/layouts/ColumnWrapper';
 import MainLayout from '@/layouts/MainLayout';
 import { withApollo } from '@/utils/withApollo';
 import { Box, Button, Heading, Image, Text, useColorModeValue, useToken } from '@chakra-ui/react';

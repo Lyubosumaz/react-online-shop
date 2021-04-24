@@ -1,4 +1,4 @@
-import MainWrapper from '@/layouts/MainWrapper';
+import { MainWrapper } from '@/layouts/MainWrapper';
 import { useColorModeValue, useToken } from '@chakra-ui/react';
 import { FC } from 'react';
 import CopyRights from './CopyRights';
