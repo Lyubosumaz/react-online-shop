@@ -76,7 +76,7 @@ const NavItem: FC<NavItemProps> = ({ children, href, variant = "regular", isLast
     )
 };
 
-const NavBar: FC<{}> = ({ }) => {
+export const NavBar: FC<{}> = ({ }) => {
     const { data } = useMeQuery();
     const items = !data?.me
         ? (
@@ -102,5 +102,3 @@ const NavBar: FC<{}> = ({ }) => {
         </List>
     );
 };
-
-export default NavBar;

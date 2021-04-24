@@ -1,5 +1,5 @@
+import MainWrapper, { WrapperSize, WrapperVariant } from '@/layouts/MainWrapper';
 import React from 'react';
-import MainWrapper, { WrapperSize, WrapperVariant } from '../MainWrapper';
 
 interface LayoutProps {
     size?: WrapperSize;

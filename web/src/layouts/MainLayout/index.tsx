@@ -1,7 +1,7 @@
 import { Footer } from '@/components/navigation/Footer';
 import { MainHeader } from '@/components/navigation/MainHeader';
+import Main from '@/layouts/MainBody';
 import React from 'react';
-import Main from '../MainBody';
 
 const MainLayout: React.FC<{}> = ({ children }) => {
     return (

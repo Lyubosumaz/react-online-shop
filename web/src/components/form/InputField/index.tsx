@@ -1,7 +1,7 @@
+import ErrorField from '@/components/form/ErrorField';
 import { ComponentWithAs, FormControl, FormLabel, Input, Textarea } from '@chakra-ui/react';
 import { useField } from 'formik';
 import React, { InputHTMLAttributes } from 'react';
-import ErrorField from '../ErrorField';
 
 type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
     name: string;

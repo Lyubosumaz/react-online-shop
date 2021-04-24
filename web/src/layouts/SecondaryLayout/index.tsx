@@ -1,6 +1,6 @@
 import { SecondaryHeader, variantGoBackButton } from '@/components/navigation/SecondaryHeader';
+import Main from '@/layouts/MainBody';
 import React from 'react';
-import Main from '../MainBody';
 interface SecondaryLayoutProps {
     goBackButton?: variantGoBackButton;
 }
