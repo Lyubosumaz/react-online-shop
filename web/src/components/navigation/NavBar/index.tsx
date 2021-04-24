@@ -55,6 +55,7 @@ const NavItem: FC<NavItemProps> = ({ children, href, variant = "regular", isLast
                             aria-label="Cart"
                             icon={<FaShoppingCart />}
                             bgColor="inherit"
+                            fontSize="1.5rem"
                             _hover={{
                                 bgColor: 'secondaryL.100',
                                 color: 'primaryL.700'
