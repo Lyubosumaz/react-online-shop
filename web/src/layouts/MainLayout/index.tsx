@@ -1,9 +1,9 @@
 import { Footer } from '@/components/navigation/Footer';
 import { MainHeader } from '@/components/navigation/MainHeader';
 import { MainBody } from '@/layouts/MainBody';
-import React from 'react';
+import { FC } from 'react';
 
-const MainLayout: React.FC<{}> = ({ children }) => {
+const MainLayout: FC<{}> = ({ children }) => {
     return (
         <>
             <MainHeader />
