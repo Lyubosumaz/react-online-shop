@@ -75,7 +75,12 @@ const MediaLinksItem: FC<MediaLinksItemProps> = ({ href, icon, label, background
 
 export const UtilityLinks: FC<{}> = ({ }) => {
     return (
-        <List pb="4rem" display="flex" justifyContent="space-between">
+        <List
+            pb="4rem"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="flex-start"
+        >
             <SectionWrapper sectionWidth="11rem">
                 <SectionHeading>Useful Link</SectionHeading>
 

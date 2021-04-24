@@ -29,6 +29,6 @@ export const LangSelectDropdown = {
         p: 0,
         rounded: 0,
         color: colorMode === 'light' ? 'primaryD.900' : 'secondaryL.100',
-        boxShadow: "0px 0.2rem 1.35rem rgb(0 0 0 / 25%)",
+        boxShadow: "0 0.2rem 1.35rem rgb(0 0 0 / 25%)",
     }),
 }

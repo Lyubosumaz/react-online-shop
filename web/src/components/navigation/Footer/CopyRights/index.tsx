@@ -10,6 +10,7 @@ const CopyRights: FC<{}> = () => {
             bg="white"
             color="black"
             fontWeight="bold"
+            boxShadow="inset 0 0.5rem 0.75rem rgb(0 0 0 / 25%)"
         >
             <Text mr="0.3rem">&copy;2020-{new Date().getFullYear()} All Rights Restricted. Design by</Text>
             <Link
