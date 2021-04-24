@@ -1,4 +1,4 @@
-import Logo from '@/components/Logo';
+import { Logo } from '@/components/Logo';
 import { NavBar } from '@/components/navigation/NavBar';
 import { MainWrapper } from '@/layouts/MainWrapper';
 import { Box, Flex, useColorModeValue, useToken } from '@chakra-ui/react';

@@ -3,7 +3,7 @@ import NextLink from 'next/link';
 import { FC } from 'react';
 import { FaStore } from 'react-icons/fa';
 
-const Logo: FC<{}> = ({ }) => {
+export const Logo: FC<{}> = ({ }) => {
     return (
         <NextLink href="/">
             <Link
@@ -20,5 +20,3 @@ const Logo: FC<{}> = ({ }) => {
         </NextLink>
     );
 };
-
-export default Logo;
