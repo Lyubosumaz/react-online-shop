@@ -1,4 +1,5 @@
 import { ActionButtons } from '@/lib/chakra-ui/component-styles/ActionButtons';
+import { BorderedColumn } from '@/lib/chakra-ui/component-styles/BorderedColumn';
 import { ColorModeButtonMain, ColorModeButtonSecondary } from '@/lib/chakra-ui/component-styles/ColorModeButtons';
 import { GoBackButtonDefault, GoBackButtonProduct, GoBackButtonSecondary } from '@/lib/chakra-ui/component-styles/GoBackButtons';
 import { LangSelectButtonDefault, LangSelectButtonSecondary, LangSelectDropdown } from '@/lib/chakra-ui/component-styles/LangSelectButtons';
@@ -33,6 +34,7 @@ const theme = extendTheme({
         LangSelectButtonSecondary,
         LangSelectButtonDefault,
         LangSelectDropdown,
+        BorderedColumn,
     },
 } as any);
 
