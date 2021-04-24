@@ -1,8 +1,8 @@
+import ErrorField from '@/components/form/ErrorField';
 import { FormControl, FormLabel, Select } from '@chakra-ui/react';
 import { useField } from 'formik';
 import React, { InputHTMLAttributes } from 'react';
 import { FaCaretDown, FaExclamation } from 'react-icons/fa';
-import ErrorField from '../ErrorField';
 
 type OptionsType = {
     value: string;
