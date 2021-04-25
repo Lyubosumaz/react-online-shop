@@ -1,9 +1,10 @@
 import { Logout } from '@/components/buttons/Logout';
+import { SiteTooltip } from '@/components/Tooltip';
 import { useMeQuery } from '@/generated/graphql';
 import { SiteUtilities } from '@/layouts/SiteUtilities';
 import { Button, Flex, IconButton, Link, List, ListItem, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 
 interface NavItemProps {
@@ -50,18 +51,20 @@ const NavItem: FC<NavItemProps> = ({ children, href, variant = "regular", isLast
                 );
             case "cart":
                 return (
-                    <NextLink href={href}>
-                        <IconButton
-                            aria-label="Cart"
-                            icon={<FaShoppingCart />}
-                            bgColor="inherit"
-                            fontSize="1.5rem"
-                            _hover={{
-                                bgColor: 'secondaryL.100',
-                                color: 'primaryL.700'
-                            }}
-                        />
-                    </NextLink>
+                    <SiteTooltip label="Your Cart" variants="link">
+                        <NextLink href={href}>
+                            <IconButton
+                                aria-label="Cart"
+                                icon={<FaShoppingCart />}
+                                bgColor="inherit"
+                                fontSize="1.5rem"
+                                _hover={{
+                                    bgColor: 'secondaryL.100',
+                                    color: 'primaryL.700'
+                                }}
+                            />
+                        </NextLink>
+                    </SiteTooltip>
                 );
             case "wrap":
                 return (children);
