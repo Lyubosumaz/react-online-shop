@@ -1,7 +1,9 @@
+import { SiteTooltip } from "@/components/SiteTooltip";
 import { SiteUtilitiesVariants } from "@/layouts/SiteUtilities";
 import { getLanguageIcon, _languages } from "@/utils/flagIconController";
-import { Box, Button, Menu, MenuButton, MenuGroup, MenuItem, MenuList, Tooltip, useStyleConfig } from '@chakra-ui/react';
+import { Box, Button, Menu, MenuButton, MenuGroup, MenuItem, MenuList, useStyleConfig } from '@chakra-ui/react';
 import React, { FC, useState } from 'react';
+
 interface LangSelectProps {
     appearance: SiteUtilitiesVariants;
 }
@@ -29,14 +31,14 @@ export const LangSelect: FC<LangSelectProps> = ({ appearance }) => {
 
     return (
         <Menu>
-            <Tooltip label="Language">
+            <SiteTooltip label="Language">
                 <MenuButton
                     as={Button}
                     sx={stylesState(appearance)}
                 >
                     <Box as="span" role="img">{getLanguageIcon(lang)}</Box>
                 </MenuButton>
-            </Tooltip>
+            </SiteTooltip>
 
             <MenuList sx={langSelectDropdown}>
                 <MenuGroup title="Language/Език">

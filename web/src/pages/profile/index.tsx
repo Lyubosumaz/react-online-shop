@@ -1,28 +1,12 @@
-import {
-    MeDocument,
-    MeQuery,
-    useConfirmEmailMessageMutation,
-    useMeQuery,
-    useSubscribeNewsletterMutation,
-    useUnsubscribeNewsletterMutation
-} from '@/generated/graphql';
+import { SiteTooltip } from '@/components/SiteTooltip';
+import { MeDocument, MeQuery, useConfirmEmailMessageMutation, useMeQuery, useSubscribeNewsletterMutation, useUnsubscribeNewsletterMutation } from '@/generated/graphql';
 import MainLayout from '@/layouts/MainLayout';
 import { isServer } from '@/utils/isServer';
 import { withApollo } from '@/utils/withApollo';
-import { Button, Icon, IconButton, List, ListItem, Text, Tooltip } from '@chakra-ui/react';
+import { Button, Icon, IconButton, List, ListItem, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React, { useState } from 'react';
-import {
-    FaAddressCard,
-    FaBell,
-    FaBellSlash,
-    FaEdit,
-    FaEnvelope,
-    FaLock,
-    FaLockOpen,
-    FaTrashAlt,
-    FaUser
-} from 'react-icons/fa';
+import { FaAddressCard, FaBell, FaBellSlash, FaEdit, FaEnvelope, FaLock, FaLockOpen, FaTrashAlt, FaUser } from 'react-icons/fa';
 
 const TextHolder: React.FC<{}> = ({ children }) => (
     <Text mr={2} minW="9.5rem">
@@ -85,7 +69,7 @@ const Profile: React.FC<{}> = ({ }) => {
                     <Icon as={FaAddressCard} w={8} h={8} mr={2} />
                     <TextHolder>Newsletter:</TextHolder>
                     {data?.me?.newsletterSub === -1 ? (
-                        <Tooltip label="Subscribe">
+                        <SiteTooltip label="Subscribe">
                             <IconButton
                                 icon={<FaBell />}
                                 onClick={async () =>
@@ -111,9 +95,9 @@ const Profile: React.FC<{}> = ({ }) => {
                                 }
                                 aria-label="Subscribe"
                             />
-                        </Tooltip>
+                        </SiteTooltip>
                     ) : (
-                        <Tooltip label="Unsubscribe">
+                        <SiteTooltip label="Unsubscribe">
                             <IconButton
                                 icon={<FaBellSlash />}
                                 fontSize="1.2rem"
@@ -140,7 +124,7 @@ const Profile: React.FC<{}> = ({ }) => {
                                 }
                                 aria-label="Unsubscribe"
                             />
-                        </Tooltip>
+                        </SiteTooltip>
                     )}
                 </ListItem>
 
