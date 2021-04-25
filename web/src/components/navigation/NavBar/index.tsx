@@ -1,5 +1,5 @@
 import { Logout } from '@/components/buttons/Logout';
-import { SiteTooltip } from '@/components/Tooltip';
+import { SiteTooltip } from '@/components/SiteTooltip';
 import { useMeQuery } from '@/generated/graphql';
 import { SiteUtilities } from '@/layouts/SiteUtilities';
 import { Button, Flex, IconButton, Link, List, ListItem, Text } from '@chakra-ui/react';
