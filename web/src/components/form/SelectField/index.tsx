@@ -32,7 +32,7 @@ const SelectField: FC<any> = ({ placeholder, label, options, ...props }) => {
                         {...field}
                         {...props}
                     >
-                        {options.map((el: any, i: any) => (
+                        {options.map((el: { value: "string", text: "string" }, i: number) => (
                             <option key={i} value={el.value}>
                                 {el.text}
                             </option>
