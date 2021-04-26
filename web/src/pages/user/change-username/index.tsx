@@ -8,14 +8,12 @@ import { withApollo } from '@/utils/withApollo';
 import { Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
-import React from 'react';
+import { FC } from 'react';
 
-const ChangeUsername: React.FC<{}> = ({ }) => {
+const ChangeUsername: FC<{}> = ({ }) => {
     const router = useRouter();
     const [changeUsername] = useChangeUsernameMutation();
-    const { data } = useMeQuery({
-        skip: isServer(),
-    });
+    const { data } = useMeQuery({ skip: isServer() });
 
     return (
         <SecondaryLayout>
@@ -55,9 +53,13 @@ const ChangeUsername: React.FC<{}> = ({ }) => {
                         <InputField name="oldUsername" placeholder="Old Username" label="Old Username" />
                         <InputField name="newUsername" placeholder="New Username" label="New Username" />
                         <InputField name="password" placeholder="password" label="Password" type="password" />
-                        <Button mt={4} type="submit" isLoading={isSubmitting} colorScheme="teal">
-                            change username
-                        </Button>
+
+                        <Button
+                            mt={4}
+                            type="submit"
+                            isLoading={isSubmitting}
+                            colorScheme="teal"
+                        >change username</Button>
                     </Form>
                 )}
             </Formik>

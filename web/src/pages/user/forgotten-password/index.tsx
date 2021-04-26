@@ -5,9 +5,9 @@ import { forgottenPasswordValidations } from '@/utils/formValidations';
 import { withApollo } from '@/utils/withApollo';
 import { Box, Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 
-const ForgottenPassword: React.FC<{}> = ({ }) => {
+const ForgottenPassword: FC<{}> = ({ }) => {
     const [complete, setComplete] = useState(false);
     const [forgottenPassword] = useForgottenPasswordMutation();
 
@@ -22,16 +22,22 @@ const ForgottenPassword: React.FC<{}> = ({ }) => {
                 }}
             >
                 {({ isSubmitting }) =>
-                    complete ? (
-                        <Box>if an account with that email exists, we sent you can email</Box>
-                    ) : (
-                        <Form>
-                            <InputField name="email" placeholder="email" label="Email" />
-                            <Button mt={4} type="submit" isLoading={isSubmitting} colorScheme="teal">
-                                forgot password
-                            </Button>
-                        </Form>
-                    )
+                    complete
+                        ? (
+                            <Box>if an account with that email exists, we sent you can email</Box>
+                        )
+                        : (
+                            <Form>
+                                <InputField name="email" placeholder="email" label="Email" />
+
+                                <Button
+                                    mt={4}
+                                    type="submit"
+                                    isLoading={isSubmitting}
+                                    colorScheme="teal"
+                                >forgot password</Button>
+                            </Form>
+                        )
                 }
             </Formik>
         </SecondaryLayout>

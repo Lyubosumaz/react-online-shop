@@ -8,17 +8,15 @@ import { withApollo } from '@/utils/withApollo';
 import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, useDisclosure } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
-import React, { useRef } from 'react';
+import { FC, useRef } from 'react';
 
-const DeleteAccount: React.FC<{}> = ({ }) => {
+const DeleteAccount: FC<{}> = ({ }) => {
     const formRef = useRef<any>(null);
     const router = useRouter();
-    const { data } = useMeQuery({
-        skip: isServer(),
-    });
+    const { data } = useMeQuery({ skip: isServer() });
     const [deleteAccount] = useDeleteAccountMutation();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const cancelRef = React.useRef<HTMLButtonElement>(null);
+    const cancelRef = useRef<HTMLButtonElement>(null);
 
     const handleSubmit = () => {
         if (formRef.current) {
@@ -63,13 +61,18 @@ const DeleteAccount: React.FC<{}> = ({ }) => {
                                 <AlertDialogHeader>Delete your account?</AlertDialogHeader>
                                 <AlertDialogCloseButton />
                                 <AlertDialogBody>Do you really want to delete your account?</AlertDialogBody>
+
                                 <AlertDialogFooter>
-                                    <Button ref={cancelRef} onClick={onClose}>
-                                        No
-                                    </Button>
-                                    <Button colorScheme="red" ml={3} onClick={handleSubmit}>
-                                        Yes
-                                    </Button>
+                                    <Button
+                                        ref={cancelRef}
+                                        onClick={onClose}
+                                    >No</Button>
+
+                                    <Button
+                                        ml={3}
+                                        colorScheme="red"
+                                        onClick={handleSubmit}
+                                    >Yes</Button>
                                 </AlertDialogFooter>
                             </AlertDialogContent>
                         </AlertDialog>

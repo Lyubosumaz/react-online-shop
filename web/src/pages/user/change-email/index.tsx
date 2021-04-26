@@ -8,14 +8,12 @@ import { withApollo } from '@/utils/withApollo';
 import { Button } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
-import React from 'react';
+import { FC } from 'react';
 
-const ChangeEmail: React.FC<{}> = ({ }) => {
+const ChangeEmail: FC<{}> = ({ }) => {
     const router = useRouter();
     const [changeEmail] = useChangeEmailMutation();
-    const { data } = useMeQuery({
-        skip: isServer(),
-    });
+    const { data } = useMeQuery({ skip: isServer() });
 
     return (
         <SecondaryLayout>
@@ -55,9 +53,13 @@ const ChangeEmail: React.FC<{}> = ({ }) => {
                         <InputField name="oldEmail" placeholder="Old Email" label="Old Email" />
                         <InputField name="newEmail" placeholder="New Email" label="New Email" />
                         <InputField name="password" placeholder="password" label="Password" type="password" />
-                        <Button mt={4} type="submit" isLoading={isSubmitting} colorScheme="teal">
-                            change email
-                        </Button>
+
+                        <Button
+                            mt={4}
+                            type="submit"
+                            isLoading={isSubmitting}
+                            colorScheme="teal"
+                        >change email</Button>
                     </Form>
                 )}
             </Formik>
