@@ -1,4 +1,4 @@
-import InputField from '@/components/form/InputField';
+import { InputField } from '@/components/form/InputField';
 import { MeDocument, MeQuery, useLoginMutation } from '@/generated/graphql';
 import { SecondaryLayout } from '@/layouts/SecondaryLayout';
 import { loginValidations } from '@/utils/formValidations';

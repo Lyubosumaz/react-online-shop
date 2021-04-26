@@ -1,5 +1,5 @@
 import { categoryList } from '@/category-list.json'; // TODO create huge categories and sub categories
-import InputField from '@/components/form/InputField';
+import { InputField } from '@/components/form/InputField';
 import SelectField from '@/components/form/SelectField';
 import { useCreateItemMutation } from '@/generated/graphql';
 import { SecondaryLayout } from '@/layouts/SecondaryLayout';

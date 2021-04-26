@@ -1,4 +1,4 @@
-import InputField from '@/components/form/InputField';
+import { InputField } from '@/components/form/InputField';
 import { useDeleteAccountMutation, useMeQuery } from '@/generated/graphql';
 import { SecondaryLayout } from '@/layouts/SecondaryLayout';
 import { deleteAccountValidations } from '@/utils/formValidations';

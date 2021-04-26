@@ -12,10 +12,10 @@ export const SiteTooltip: FC<SiteTooltipProps> = ({ children, label, variants = 
     return (
         variants === "default"
             ? (
-                <Tooltip label={label} fontSize="1.2rem" hasArrow>{children}</Tooltip >
+                <Tooltip label={label} fontSize="1.1rem" hasArrow>{children}</Tooltip >
             )
             : (
-                <Tooltip label={label} fontSize="1.2rem" hasArrow>
+                <Tooltip label={label} fontSize="1.1rem" hasArrow>
                     <Box>{children}</Box>
                 </Tooltip >
             )

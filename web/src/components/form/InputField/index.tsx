@@ -1,7 +1,7 @@
-import ErrorField from '@/components/form/ErrorField';
+import { ErrorField } from '@/components/form/ErrorField';
 import { ComponentWithAs, FormControl, FormLabel, Input, Textarea } from '@chakra-ui/react';
 import { useField } from 'formik';
-import React, { InputHTMLAttributes } from 'react';
+import { ElementType, FC, InputHTMLAttributes } from 'react';
 
 type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
     name: string;
@@ -9,8 +9,8 @@ type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
     isTextarea?: boolean;
 };
 
-const InputField: React.FC<InputFieldProps> = ({ label, isTextarea, ...props }) => {
-    let InputOrTextarea = (isTextarea ? Textarea : Input) as ComponentWithAs<React.ElementType<any>>;
+export const InputField: FC<InputFieldProps> = ({ label, isTextarea, ...props }) => {
+    let InputOrTextarea = (isTextarea ? Textarea : Input) as ComponentWithAs<ElementType<any>>;
     const [field, { touched, error }] = useField(props);
 
     return (
@@ -21,5 +21,3 @@ const InputField: React.FC<InputFieldProps> = ({ label, isTextarea, ...props }) 
         </FormControl>
     );
 };
-
-export default InputField;

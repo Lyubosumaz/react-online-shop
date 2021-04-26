@@ -1,5 +1,5 @@
 import { categoryList } from '@/category-list.json';
-import InputField from '@/components/form/InputField';
+import { InputField } from '@/components/form/InputField';
 import SelectField from '@/components/form/SelectField';
 import { useItemQuery, useUpdateItemMutation } from '@/generated/graphql';
 import MainLayout from '@/layouts/MainLayout';

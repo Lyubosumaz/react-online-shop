@@ -1,4 +1,4 @@
-import ErrorField from '@/components/form/ErrorField';
+import { ErrorField } from '@/components/form/ErrorField';
 import { FormControl, FormLabel, Select } from '@chakra-ui/react';
 import { useField } from 'formik';
 import React, { InputHTMLAttributes } from 'react';

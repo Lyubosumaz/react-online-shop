@@ -1,4 +1,4 @@
-import InputField from '@/components/form/InputField';
+import { InputField } from '@/components/form/InputField';
 import { useForgottenPasswordMutation } from '@/generated/graphql';
 import { SecondaryLayout } from '@/layouts/SecondaryLayout';
 import { forgottenPasswordValidations } from '@/utils/formValidations';
