@@ -1,4 +1,4 @@
-import Quantity from '@/components/form/Quantity';
+import { Quantity } from '@/components/form/Quantity';
 import MainLayout from '@/layouts/MainLayout';
 import { withApollo } from '@/utils/withApollo';
 import { Table, Tbody, Td, Tfoot, Th, Thead, Tr } from '@chakra-ui/react';
