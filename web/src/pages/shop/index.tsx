@@ -32,58 +32,58 @@ const Shop = () => {
         <MainLayout>
             {!data && loading
                 ? <Text>loading...</Text>
-                :
-                <List
-                    px={6}
-                    py={3}
-                    d="flex"
-                    flexWrap="wrap"
-                    justifyContent="space-between"
-                    color={color}
-                    _before={{
-                        w: gridWidth,
-                        content: '""',
-                        order: "2147483647", // maximum possible number
-                    }}
-                    _after={{
-                        w: gridWidth,
-                        content: '""',
-                    }}
-                >
-                    {data?.items.items.length
-                        ? data!.items.items.map((p) => !p
-                            ? null
+                : (
+                    <List
+                        px={6}
+                        py={3}
+                        d="flex"
+                        flexWrap="wrap"
+                        justifyContent="space-between"
+                        color={color}
+                        _before={{
+                            w: gridWidth,
+                            content: '""',
+                            order: "2147483647", // maximum possible number
+                        }}
+                        _after={{
+                            w: gridWidth,
+                            content: '""',
+                        }}
+                    >
+                        {data?.items.items.length
+                            ? data!.items.items.map((p) => !p
+                                ? null
+                                : (
+                                    <ListItem
+                                        key={p.id}
+                                        w={gridWidth}
+                                        my={gridHeight}
+                                        p={5}
+                                        display="flex"
+                                        flexDirection="column"
+                                        shadow="md"
+                                        border="0.1rem solid"
+                                        borderColor={color}
+                                        _hover={{
+                                            bgColor: "secondaryL.100",
+                                            borderColor: "secondaryL.100",
+                                        }}
+                                    >
+                                        <Product data={p} />
+                                    </ListItem>
+                                )
+                            )
                             : (
-                                <ListItem
-                                    key={p.id}
-                                    w={gridWidth}
-                                    my={gridHeight}
-                                    p={5}
-                                    display="flex"
-                                    flexDirection="column"
-                                    shadow="md"
-                                    border="0.1rem solid"
-                                    borderColor={color}
-                                    _hover={{
-                                        bgColor: "secondaryL.100",
-                                        borderColor: "secondaryL.100",
-                                    }}
-                                >
-                                    <Product data={p} />
+                                <ListItem d="flex" alignItems="center">
+                                    <Box mr={5}>Nothing was created so far!</Box>
+                                    <NextLink href="/create-item">
+                                        <Button as={Link} mr={4}>create item</Button>
+                                    </NextLink>
                                 </ListItem>
                             )
-                        )
-                        : (
-
-                            <ListItem d="flex" alignItems="center">
-                                <Box mr={5}>Nothing was created so far!</Box>
-                                <NextLink href="/create-item">
-                                    <Button as={Link} mr={4}>create item</Button>
-                                </NextLink>
-                            </ListItem>
-                        )
-                    }
-                </List>
+                        }
+                    </List>
+                )
             }
             {data && data.items.hasMore
                 ? (
