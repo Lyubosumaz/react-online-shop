@@ -50,7 +50,7 @@ const Cart: React.FC<{}> = ({ }) => {
             >
                 <Thead>
                     <Tr>
-                        <Th>Product</Th>
+                        <Th w="37%">Product</Th>
                         <Th>Unit Price</Th>
                         <Th>Quantity</Th>
                         <Th>Total</Th>
@@ -63,9 +63,9 @@ const Cart: React.FC<{}> = ({ }) => {
                         return (
                             <Tr key={product.id}>
                                 <ProductInCartTable productInfo={product} />
-                                <Td>{product.price}</Td>
+                                <Td>{product.price}$</Td>
                                 <Td><Quantity /></Td>
-                                <Td>pseudoProduct.price * Quantity</Td>
+                                <Td>{Number(product.price) * Number(product.quantity)}$</Td>
                                 <Td>x</Td>
                             </Tr>
                         );

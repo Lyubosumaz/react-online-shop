@@ -12,7 +12,8 @@ interface ProductInCartTableProps {
 const InfoWrapper: FC<{}> = ({ children }) => {
     return (
         <Box
-            ml="1rem"
+            ml="1.5rem"
+            mb="1rem"
             flexBasis="100%"
         >{children}</Box>
     );
@@ -21,9 +22,9 @@ const InfoWrapper: FC<{}> = ({ children }) => {
 export const ProductInCartTable: FC<ProductInCartTableProps> = ({ productInfo }) => {
     return (
         <Td display="flex">
-            <Box>
+            <Flex justify="center" align="center">
                 <Flex w="100px" h="125px" justify="center" align="center" bg="gray.200">Image</Flex>
-            </Box>
+            </Flex>
 
             <Flex flexWrap="wrap" alignContent="space-between">
                 <InfoWrapper>{productInfo.title}</InfoWrapper>
