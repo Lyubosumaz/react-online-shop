@@ -39,6 +39,11 @@ const Cart: FC<{}> = ({ }) => {
         },
     ];
 
+    // TODO: should receive data from db
+    const userTotalAmount = pseudoProducts.reduce((accumulator, product) => {
+        return accumulator + Number(product.price) * Number(product.quantity);
+    }, 0);
+
     return (
         <MainLayout>
             <Table
@@ -49,10 +54,10 @@ const Cart: FC<{}> = ({ }) => {
             >
                 <Thead>
                     <Tr>
-                        <Th w="37%">Product</Th>
-                        <Th>Unit Price</Th>
-                        <Th>Quantity</Th>
-                        <Th w="17%">Total</Th>
+                        <Th w="37%" textAlign="center">Product</Th>
+                        <Th textAlign="center">Unit Price</Th>
+                        <Th textAlign="center">Quantity</Th>
+                        <Th w="17%" textAlign="center">Selected Total</Th>
                         <Th></Th>
                     </Tr>
                 </Thead>
@@ -62,11 +67,11 @@ const Cart: FC<{}> = ({ }) => {
                 </Tbody>
                 <Tfoot>
                     <Tr>
-                        <Th>To convert</Th>
-                        <Th>into</Th>
-                        <Th>multiply by</Th>
-                        <Th>0.91444</Th>
-                        <Th>x</Th>
+                        <Th></Th>
+                        <Th></Th>
+                        <Th></Th>
+                        <Th>Your total:</Th>
+                        <Th>{userTotalAmount}</Th>
                     </Tr>
                 </Tfoot>
             </Table>
