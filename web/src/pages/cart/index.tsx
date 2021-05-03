@@ -1,10 +1,13 @@
 import { ProductInCartTable } from "@/components/cards/Product/ProductInCartTable";
 import MainLayout from '@/layouts/MainLayout';
 import { withApollo } from '@/utils/withApollo';
-import { Table, Tbody, Tfoot, Th, Thead, Tr } from '@chakra-ui/react';
-import { FC } from 'react';
+import { Button, Table, Tbody, Tfoot, Th, Thead, Tr } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import React, { FC } from 'react';
 
 const Cart: FC<{}> = ({ }) => {
+    const router = useRouter();
+
     const pseudoProducts = [
         {
             id: "32131",
@@ -48,7 +51,8 @@ const Cart: FC<{}> = ({ }) => {
         <MainLayout>
             <Table
                 size="lg"
-                m="4rem 0"
+                mt="4rem"
+                mb="2rem"
                 border="0.1rem solid"
                 borderColor="gray.400"
             >
@@ -75,6 +79,8 @@ const Cart: FC<{}> = ({ }) => {
                     </Tr>
                 </Tfoot>
             </Table>
+
+            <Button mb="4rem" onClick={() => router.push('/')}>Back shopping</Button>
         </MainLayout>
     );
 };
