@@ -1,11 +1,10 @@
 import { ProductInCartTable } from "@/components/cards/Product/ProductInCartTable";
-import { Quantity } from '@/components/form/Quantity';
 import MainLayout from '@/layouts/MainLayout';
 import { withApollo } from '@/utils/withApollo';
-import { Table, Tbody, Td, Tfoot, Th, Thead, Tr } from '@chakra-ui/react';
-import React from 'react';
+import { Table, Tbody, Tfoot, Th, Thead, Tr } from '@chakra-ui/react';
+import { FC } from 'react';
 
-const Cart: React.FC<{}> = ({ }) => {
+const Cart: FC<{}> = ({ }) => {
     const pseudoProducts = [
         {
             id: "32131",
@@ -38,7 +37,7 @@ const Cart: React.FC<{}> = ({ }) => {
             descriptionSnippet: "something that get used many more times then one time",
             quantity: "2",
         },
-    ]
+    ];
 
     return (
         <MainLayout>
@@ -53,23 +52,13 @@ const Cart: React.FC<{}> = ({ }) => {
                         <Th w="37%">Product</Th>
                         <Th>Unit Price</Th>
                         <Th>Quantity</Th>
-                        <Th>Total</Th>
+                        <Th w="17%">Total</Th>
                         <Th></Th>
                     </Tr>
                 </Thead>
                 <Tbody>
                     {/* TODO: after fetching from the db */}
-                    {pseudoProducts.map((product) => {
-                        return (
-                            <Tr key={product.id}>
-                                <ProductInCartTable productInfo={product} />
-                                <Td>{product.price}$</Td>
-                                <Td><Quantity /></Td>
-                                <Td>{Number(product.price) * Number(product.quantity)}$</Td>
-                                <Td>x</Td>
-                            </Tr>
-                        );
-                    })}
+                    {pseudoProducts.map((product) => <ProductInCartTable key={product.id} productInfo={product} />)}
                 </Tbody>
                 <Tfoot>
                     <Tr>

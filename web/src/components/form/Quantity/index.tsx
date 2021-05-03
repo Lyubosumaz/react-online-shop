@@ -1,10 +1,14 @@
 import { Flex } from '@chakra-ui/layout';
 import { IconButton, Input } from '@chakra-ui/react';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 
-export const Quantity: FC<{}> = ({ }) => {
-    const [valueQuantity, setValueQuantity] = useState(-1)
+export const Quantity: FC<{ value: string | number, callback: any }> = ({ value, callback }) => {
+    const [valueQuantity, setValueQuantity] = useState(Number(value));
+
+    useEffect(() => {
+        callback(valueQuantity)
+    }, [valueQuantity])
 
     return (
         <Flex rounded={0}>
