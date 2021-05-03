@@ -1,10 +1,26 @@
 import { Quantity } from '@/components/form/Quantity';
 import MainLayout from '@/layouts/MainLayout';
 import { withApollo } from '@/utils/withApollo';
-import { Table, Tbody, Td, Tfoot, Th, Thead, Tr } from '@chakra-ui/react';
+import { Box, Flex, Table, Tbody, Td, Text, Tfoot, Th, Thead, Tr } from '@chakra-ui/react';
 import React from 'react';
 
 const Cart: React.FC<{}> = ({ }) => {
+    const pseudoProduct =
+    {
+        id: "number",
+        category: "string", // categories []
+        title: "string",
+        description: "string",
+        price: "number",
+        rating: "number",
+        voteStatus: "int",
+        creatorId: "number",
+        creator: { id: "number", username: "string", },
+        createdAt: "string",
+        updatedAt: "string",
+        descriptionSnippet: "string",
+    };
+
     return (
         <MainLayout>
             <Table
@@ -23,6 +39,27 @@ const Cart: React.FC<{}> = ({ }) => {
                     </Tr>
                 </Thead>
                 <Tbody>
+                    <Tr key={pseudoProduct.id}>
+                        <Td display="flex">
+                            <Box>
+                                <Flex w="100px" h="125px" justify="center" align="center" bg="gray.200">Image</Flex>
+                            </Box>
+
+                            <Flex flexWrap="wrap" alignContent="space-between">
+                                <Box flexBasis="100%">{pseudoProduct.title}</Box>
+                                <Box flexBasis="100%">{pseudoProduct.description}</Box>
+                                <Box flexBasis="100%">{pseudoProduct.category}</Box>
+                                <Box flexBasis="100%">
+                                    <Text>Модел процесор:   A22</Text>
+                                    <Text>Доставка до 13.05.2021</Text>
+                                </Box>
+                            </Flex>
+                        </Td>
+                        <Td>{pseudoProduct.price}</Td>
+                        <Td><Quantity /></Td>
+                        <Td>pseudoProduct.price * Quantity</Td>
+                        <Td>x</Td>
+                    </Tr>
                     <Tr>
                         <Td>inches</Td>
                         <Td>millimetres (mm)</Td>
