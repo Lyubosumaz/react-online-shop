@@ -1,25 +1,44 @@
+import { ProductInCartTable } from "@/components/cards/Product/ProductInCartTable";
 import { Quantity } from '@/components/form/Quantity';
 import MainLayout from '@/layouts/MainLayout';
 import { withApollo } from '@/utils/withApollo';
-import { Box, Flex, Table, Tbody, Td, Text, Tfoot, Th, Thead, Tr } from '@chakra-ui/react';
+import { Table, Tbody, Td, Tfoot, Th, Thead, Tr } from '@chakra-ui/react';
 import React from 'react';
 
 const Cart: React.FC<{}> = ({ }) => {
-    const pseudoProduct =
-    {
-        id: "number",
-        category: "string", // categories []
-        title: "string",
-        description: "string",
-        price: "number",
-        rating: "number",
-        voteStatus: "int",
-        creatorId: "number",
-        creator: { id: "number", username: "string", },
-        createdAt: "string",
-        updatedAt: "string",
-        descriptionSnippet: "string",
-    };
+    const pseudoProducts = [
+        {
+            id: "32131",
+            category: ["boots", "clothing"],
+            title: "Some great product waiting to be bought",
+            description: "best thing ever",
+            price: "20.33",
+            rating: "number",
+            voteStatus: "int",
+            creatorId: "number",
+            creator: { id: "number", username: "string", },
+            createdAt: "string",
+            updatedAt: "string",
+            descriptionSnippet: "best thing ever",
+            // needed
+            quantity: "1",
+        },
+        {
+            id: "98951",
+            category: ["shirt"],
+            title: "Best product",
+            description: "something that get used many more times then one time",
+            price: "99.99",
+            rating: "number",
+            voteStatus: "int",
+            creatorId: "number",
+            creator: { id: "number", username: "string", },
+            createdAt: "string",
+            updatedAt: "string",
+            descriptionSnippet: "something that get used many more times then one time",
+            quantity: "2",
+        },
+    ]
 
     return (
         <MainLayout>
@@ -39,48 +58,18 @@ const Cart: React.FC<{}> = ({ }) => {
                     </Tr>
                 </Thead>
                 <Tbody>
-                    <Tr key={pseudoProduct.id}>
-                        <Td display="flex">
-                            <Box>
-                                <Flex w="100px" h="125px" justify="center" align="center" bg="gray.200">Image</Flex>
-                            </Box>
-
-                            <Flex flexWrap="wrap" alignContent="space-between">
-                                <Box flexBasis="100%">{pseudoProduct.title}</Box>
-                                <Box flexBasis="100%">{pseudoProduct.description}</Box>
-                                <Box flexBasis="100%">{pseudoProduct.category}</Box>
-                                <Box flexBasis="100%">
-                                    <Text>Модел процесор:   A22</Text>
-                                    <Text>Доставка до 13.05.2021</Text>
-                                </Box>
-                            </Flex>
-                        </Td>
-                        <Td>{pseudoProduct.price}</Td>
-                        <Td><Quantity /></Td>
-                        <Td>pseudoProduct.price * Quantity</Td>
-                        <Td>x</Td>
-                    </Tr>
-                    <Tr>
-                        <Td>inches</Td>
-                        <Td>millimetres (mm)</Td>
-                        <Td>25.4</Td>
-                        <Td><Quantity /></Td>
-                        <Td>x</Td>
-                    </Tr>
-                    <Tr>
-                        <Td>feet</Td>
-                        <Td>centimetres (cm)</Td>
-                        <Td>30.48</Td>
-                        <Td>25.4</Td>
-                        <Td>x</Td>
-                    </Tr>
-                    <Tr>
-                        <Td>yards</Td>
-                        <Td>metres (m)</Td>
-                        <Td>30.48</Td>
-                        <Td>0.91444</Td>
-                        <Td>x</Td>
-                    </Tr>
+                    {/* TODO: after fetching from the db */}
+                    {pseudoProducts.map((product) => {
+                        return (
+                            <Tr key={product.id}>
+                                <ProductInCartTable productInfo={product} />
+                                <Td>{product.price}</Td>
+                                <Td><Quantity /></Td>
+                                <Td>pseudoProduct.price * Quantity</Td>
+                                <Td>x</Td>
+                            </Tr>
+                        );
+                    })}
                 </Tbody>
                 <Tfoot>
                     <Tr>
