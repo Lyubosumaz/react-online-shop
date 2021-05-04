@@ -1,7 +1,8 @@
 import { Quantity } from '@/components/form/Quantity';
-import { Box, Flex, Td, Text, Tr } from '@chakra-ui/react';
+import { Box, Flex, IconButton, Td, Text, Tr } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { FC, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
+import { FaTimes } from 'react-icons/fa';
 
 interface ProductInCartTableProps {
     productInfo: {
@@ -28,13 +29,20 @@ const InfoWrapper: FC<{}> = ({ children }) => {
 
 export const ProductInCartTable: FC<ProductInCartTableProps> = ({ productInfo }) => {
     const [valueQuantity, setValueQuantity] = useState();
+    const pseudoRemove = useRef<HTMLTableRowElement>(null); // TODO: removal should be on the BE
 
     const handleQuantity = (quantity: any) => {
         setValueQuantity(quantity);
     };
 
+    // TODO: should be removed from db user cart table and force reload
+    const handleRemoveProduct = () => {
+        if (null === pseudoRemove.current) return;
+        pseudoRemove.current.remove();
+    }
+
     return (
-        <Tr>
+        <Tr ref={pseudoRemove}>
             <NextLink href="/product/[id]" as={`/product/${productInfo.id}`}>
                 <Td display="flex">
                     <Flex justify="center" align="center">
@@ -59,7 +67,15 @@ export const ProductInCartTable: FC<ProductInCartTableProps> = ({ productInfo })
             <Td textAlign="center">{productInfo.price}$</Td>
             <Td textAlign="center"><Quantity value={Number(productInfo.quantity)} callback={handleQuantity} /></Td>
             <Td textAlign="center">{(Number(productInfo.price) * Number(valueQuantity)).toFixed(2)}$</Td>
-            <Td>x</Td>
+            <Td>
+                <IconButton
+                    colorScheme="red"
+                    aria-label="Remove product from cart"
+                    size="sm"
+                    icon={<FaTimes />}
+                    onClick={() => handleRemoveProduct()}
+                />
+            </Td>
         </Tr>
     );
 };

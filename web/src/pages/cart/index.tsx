@@ -74,7 +74,7 @@ const Cart: FC<{}> = ({ }) => {
                         <Th></Th>
                         <Th></Th>
                         <Th></Th>
-                        <Th>Your total:</Th>
+                        <Th>Your total:*</Th>
                         <Th>{userTotalAmount}</Th>
                     </Tr>
                 </Tfoot>
