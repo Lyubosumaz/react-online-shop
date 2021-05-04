@@ -34,8 +34,8 @@ export const ProductInCartTable: FC<ProductInCartTableProps> = ({ productInfo })
     };
 
     return (
-        <NextLink href="/product/[id]" as={`/product/${productInfo.id}`}>
-            <Tr>
+        <Tr>
+            <NextLink href="/product/[id]" as={`/product/${productInfo.id}`}>
                 <Td display="flex">
                     <Flex justify="center" align="center">
                         <Flex w="100px" h="125px" justify="center" align="center" bg="gray.200">Image</Flex>
@@ -54,12 +54,12 @@ export const ProductInCartTable: FC<ProductInCartTableProps> = ({ productInfo })
                         </InfoWrapper>
                     </Flex>
                 </Td>
+            </NextLink>
 
-                <Td textAlign="center">{productInfo.price}$</Td>
-                <Td textAlign="center"><Quantity value={Number(productInfo.quantity)} callback={handleQuantity} /></Td>
-                <Td textAlign="center">{(Number(productInfo.price) * Number(valueQuantity)).toFixed(2)}$</Td>
-                <Td>x</Td>
-            </Tr>
-        </NextLink>
+            <Td textAlign="center">{productInfo.price}$</Td>
+            <Td textAlign="center"><Quantity value={Number(productInfo.quantity)} callback={handleQuantity} /></Td>
+            <Td textAlign="center">{(Number(productInfo.price) * Number(valueQuantity)).toFixed(2)}$</Td>
+            <Td>x</Td>
+        </Tr>
     );
 };
